@@ -64,7 +64,7 @@ h1 {
   font-size: 2.5rem;
   line-height: 2.5rem;
   font-weight: normal;
-  margin-top: 10em;
+  margin-top: 5em;
 }
 h2 {
   font-size: 1.5rem;
@@ -73,7 +73,8 @@ h2 {
   text-transform: uppercase;
   margin: 0;
   text-align: center;
-  color: var(--clr-accent);
+  color: var(--clr-light);
+  border-bottom: 2px solid var(--clr-light);
 }
 h3 {
   font-size: 1.2rem;
@@ -133,7 +134,8 @@ section {
   width: 80%;
   max-width: 800px;
   margin: 3rem auto;
-  gap: 20px;
+  padding: 20vh 0;
+  gap: 50px;
 }
 
 #title {
@@ -148,10 +150,15 @@ section {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  gap: 50px;
+  gap: 15%;
   /* flex-wrap: wrap; */
+  margin: 5% 0;
 }
 .rows > div {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 20px;
   width: 50%;
 }
 
@@ -190,8 +197,6 @@ header {
   cursor: pointer;
 }
 
-
-
 /** Menu **/
 nav, .nav {
   display: flex;
@@ -203,10 +208,10 @@ nav, .nav {
   font-size: 1.4rem;
 }
 
-
-@media (max-width: 800px) {
+@media (max-width: 640px) {
   header {
     justify-content: center;
+    gap: 20px;
   }
   nav, .nav {
     font-size: 1.2rem;
@@ -215,21 +220,7 @@ nav, .nav {
 }
 
 
-#features {
-  flex-direction: row;
-  gap: 5rem;
-  flex-wrap: wrap;
-  margin: 5rem 2rem;
-  max-width: 720px;
-}
-.feature {
-  flex: 40%;
-  text-align: center;
-}
-.feature img {
-  height: 100px;
-  margin-bottom: 20px;
-}
+
 
 /* Footer */
 footer {
@@ -240,12 +231,16 @@ footer {
   flex-wrap: wrap;
   padding: 2rem;
   gap: 20px;
+  z-index: 2000;
 }
 footer > div {
   display: flex;
   gap: 25px;
   align-items: center;
   text-align: center;
+}
+footer > .logo {
+  margin: 0;
 }
 footer > .logo > a {
   display: flex;
@@ -264,15 +259,20 @@ footer > .logo > a:hover {
 
 
 
+
 /* Buttons */
 .buttons {
+  display: flex;
+  gap: 20px;
   text-align: center;
+  justify-content: center;
 }
 .btn {
   font-family: var(--font);
   text-decoration: none;
+  text-align: center;
   padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
+  margin: 0;
   position: relative;
   font-size: 1.25rem;
   line-height: 2rem;
@@ -295,22 +295,37 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
 #container { width: 100%; height: 100%; position: relative; }
 
 
+#mesh {
+  position: fixed;
+  z-index: -2000;
+  width: 100%;
+  height: 100%;
+}
+#mesh img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  object-fit: cover;
+}
+
 #hand {
   position: absolute;
-  top: -100px;
   z-index: 1;
+  width: 100%;
 }
 #hand img {
   width: 65%;
   max-width: 860px;
   display: block;
   margin: 0 auto;
-  margin-left: 10%;
+  margin-top: -35%;
+  margin-left: 15%;
 }
 #globe {
   position: absolute;
   top: 220px;
   z-index: 0;
+  width: 100%;
 }
 #globe img {
   max-width: 160px;
@@ -319,10 +334,18 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
 }
 
 
+@media (min-width: 1600px) {
+  #hand img {
+    margin-left: 20%;
+    margin-top: -20%;
+  }
+}
+
 @media (max-width: 800px) {
   #hand img {
     width: 100%;
     margin-left: -15%;
+    margin-top: -30%;
   }
   #globe {
     top: 180px;
