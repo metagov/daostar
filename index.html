@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DAO*1</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+	<link rel="preload" href="./scene.json" as="fetch">
+</head>
+
+<body data-spy="scroll" data-offset="0">
+
+	<header>
+		<a href="index.html"><img src="img/logo_dao.png" class="logo" /></a>
+		
+		<nav class="menu">
+			<img src="img/globe.svg" height="22px" />
+			<a href="#standard">Standard</a>
+			<a href="#upgrade">Upgrade</a>
+			<img src="img/slash.svg" height="21px" />
+			<a href="#intro">DAO*1</a>
+			<a href="#join">Join</a>
+			<img src="img/M.svg" height="21px" />
+		</nav>
+	</header>
+
+
+	<div class="wrapper">
+
+		<div id="hand"><img src="img/hand.png" /></div>
+		<div id="globe"><img src="img/eye.png" /></div>
+
+		<section id="title">
+			<div>
+				<h1 class="title">The DAO standard, built by 
+					<span
+					class="txt-rotate"
+					data-period="2000"
+					data-rotate='[ "Metagov", "Aragon", "Gnosis" ]'></span></h1>
+
+				<div class="buttons">
+					<a href="#standard" class="btn">The Standard</a>
+					<a href="#daos" class="btn">The DAOs</a>
+				</div>
+			</div>
+		</section>
+	
+		<div id="container">
+			<canvas id="canvas3d"></canvas>
+		</div>
+
+
+		<section id="intro" class="rows">
+			<div>
+				<p><em>A DAO is people, and a DAO is code.</em></p>
+					
+				<p>DAOs represent one possible future for the internet. But that future is fragile. Use-cases are still being imagined. Business models have yet to be tested. And for all our collective wealth, it only takes one hedge fund manager to outbid us. We are far, far from disrupting the deathstars of Web2.</p>
+			</div>
+			<div>
+				<p>Our greatest strength is our ability to act, <em>collectively</em>. That’s why we’ve built the DAO* standard. Imagine if you could use Aragon contracts in a Moloch DAO, or Gnosis Zodiac on top of Compound Governor Bravo. By interoperating with each other (and with Web2), we can realize the promise of Web3 for all communities on the internet.</p>
+			</div>
+		</section>
+
+		<section id="standard">
+				<h2>The DAO Standard</h2>
+
+				<h3>Simple Summary</h3>
+
+				<p>Standardized interfaces and behaviors for decentralized autonomous organizations (DAOs).</p>
+				
+				<h3>Abstract</h3>
+				
+				<p>Standardized interfaces and behaviors for decentralized autonomous organizations (DAOs) and related contracts, focusing on relating on-chain and off-chain representations of membership and proposals.</p>
+
+				<p>Link to Github/source + Ethereum magicians forum post</p>
+	</section>
+
+		<section id="upgrade">
+			<h2>Upgrade to DAO*</h2>
+
+			<div class="rows">
+				<div>
+					<a href="#" class="btn">Create Endpoint</a>
+
+					<p class="small">You can create a DAO* endpoint here or set up your own.</p>
+				</div>
+				<div>
+					<a href="#" class="btn">Upgrade Contract</a>
+					<p class="small">We do not recommend modifying your contract until the standard is finalized.</p>
+				</div>
+			</div>
+
+			<h3>Sample Implementations</h3>
+			</div>
+		</section>
+
+
+		<section id="about">
+			<h2>Governed by DAO*1</h2>
+
+			
+			</div>
+		</section>
+
+
+		<section id="join">
+			<h2>The Next DAO*</h2>
+
+			<div>
+				<p><em>A DAO is people, and a DAO is code.</em></p>
+					
+				<p>DAOs represent one possible future for the internet. But that future is fragile. Use-cases are still being imagined. Business models have yet to be tested. And for all our collective wealth, it only takes one hedge fund manager to outbid us. We are far, far from disrupting the deathstars of Web2.</p>
+			</div>
+
+			<a href="#" class="btn">Join the Buidlers</a>
+		</section>
+	</div>
+
+
+	<footer>
+		<div class="logo">
+			Powered by <a href="https://metagov.org" target="_blank"><img src="img/metagov.svg" alt="Metagovernance Project" height="48px" /> Metagov</a>
+		</div>
+
+		<div>
+			<a href="https://metagov.slack.com" target="_blank">Slack</a>
+			<a href="" target="_blank">Discord</a>
+			<a href="https://github.com/metagov" target="_blank">Github</a>
+		</div>
+	</footer>
+
+	<script type="module">
+		import { Application } from './js/runtime.js';
+		const app = new Application();
+		app.load('./js/scene.json');
+	</script>
+
+	<script src="js/main.js"></script>
+
+</body>
+</html>
