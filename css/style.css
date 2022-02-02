@@ -45,13 +45,13 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  position; fixed;
   background-color: var(--clr-dark);
   color: var(--clr-light);
   font-family: var(--font);
   font-size: 20px;
   line-height: 24px;
   font-weight: normal;
+  overflow-x: hidden;
   background-image: url('../img/stars.jpg');
   background-repeat: repeat;
   background-attachment: fixed;
@@ -96,7 +96,7 @@ p {
   line-height: 2rem;
   font-weight: normal;
   color: var(--clr-light);
-  margin-top: 0;
+  margin: 0;
 }
 p.small {
   font-size: 1rem;
@@ -122,13 +122,37 @@ a:hover {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-items: center;
-  overflow-x: hidden;
+  /* position: absolute;
+  top: 0; */
 }
+.parallax--wrapper {
+  height: 100vh;
+  perspective: 1px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.parallax {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.parallax--base {
+  transform: translateZ(0px);
+  z-index: 1;
+}
+.parallax--minus1 {
+  transform: translateZ(-4px) scale(5);
+  z-index: 0;
+}
+.parallax--minus2 {
+  transform: translateZ(-100px) scale(101);
+  z-index: 0;
+}
+
 section {
   max-width: 1280px;
-  min-height: 60vh;
+  min-height: 80vh;
+  position: relative;
+  transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,9 +178,9 @@ section {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  gap: 15%;
+  gap: 12%;
   /* flex-wrap: wrap; */
-  margin: 5% 0;
+  margin: 5% auto;
 }
 .rows > div {
   display: flex;
@@ -189,7 +213,7 @@ header {
   flex-wrap: wrap;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0));
 }
 .logo {
@@ -236,7 +260,7 @@ footer {
   flex-wrap: wrap;
   padding: 2rem;
   gap: 20px;
-  z-index: 2000;
+  z-index: 1;
 }
 footer > div {
   display: flex;
@@ -303,29 +327,24 @@ footer > .logo > a:hover {
 }
 
 /* Spline */
-canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
+canvas { width: 100%; height: 80%; outline: none; z-index: 10; }
 #container { width: 100%; height: 100%; position: relative; }
 
 
 #stars {
-  position: fixed;
-  z-index: -2000;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-}
-#stars img {
-  object-fit: cover;
+  background-image: url('../img/stars.jpg');
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 #mesh {
-  position: fixed;
-  z-index: -1999;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  align-items: stretch;
+  overflow-x: hidden;
 }
 #mesh img {
   opacity: 0.25;
@@ -334,7 +353,7 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
 
 #hand {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   width: 100%;
 }
 #hand img {
@@ -343,6 +362,7 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
   display: block;
   margin: 0 auto;
 }
+
 
 .logos {
   display: flex;
