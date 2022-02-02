@@ -52,6 +52,9 @@ body {
   font-size: 20px;
   line-height: 24px;
   font-weight: normal;
+  background-image: url('../img/stars.jpg');
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 @media (max-width: 800px) {
@@ -140,7 +143,7 @@ section {
 
 #title {
   width: 100vw;
-  height: 50vh;
+  height: 80vh;
   position: relative;
   text-align: center;
   z-index: 999;
@@ -187,6 +190,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 1000;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0));
 }
 .logo {
   height: 30px;
@@ -303,16 +307,28 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
 #container { width: 100%; height: 100%; position: relative; }
 
 
-#mesh {
+#stars {
   position: fixed;
   z-index: -2000;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
-#mesh img {
+#stars img {
+  object-fit: cover;
+}
+
+#mesh {
+  position: fixed;
+  z-index: -1999;
   width: 100%;
   height: 100%;
-  opacity: 1;
+  display: flex;
+  justify-content: center;
+}
+#mesh img {
+  opacity: 0.25;
   object-fit: cover;
 }
 
@@ -322,21 +338,8 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
   width: 100%;
 }
 #hand img {
-  width: 65%;
-  max-width: 860px;
-  display: block;
-  margin: 0 auto;
-  margin-top: -35%;
-  margin-left: 5%;
-}
-#globe {
-  position: absolute;
-  top: 220px;
-  z-index: 0;
-  width: 100%;
-}
-#globe img {
-  max-width: 300px;
+  width: 40%;
+  max-width: 500px;
   display: block;
   margin: 0 auto;
 }
@@ -354,18 +357,13 @@ canvas { width: 100%; height: 80%; outline: none; z-index: -1000; }
 
 @media (min-width: 1600px) {
   #hand img {
-    margin-left: 15%;
-    margin-top: -20%;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 800px) {
   #hand img {
     width: 100%;
-    margin-left: -15%;
-    margin-top: -30%;
-  }
-  #globe {
-    top: 180px;
+    margin: -50px auto 0;
   }
 }
