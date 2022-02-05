@@ -341,7 +341,7 @@ canvas { width: 100%; height: 80%; outline: none; z-index: 10; }
 
 #mesh {
   width: 100%;
-  height: 100%;
+  height: 140%;
   display: flex;
   align-items: stretch;
   overflow-x: hidden;
@@ -349,6 +349,7 @@ canvas { width: 100%; height: 80%; outline: none; z-index: 10; }
 #mesh img {
   opacity: 0.25;
   object-fit: cover;
+  width: 100%;
 }
 
 #hand {
