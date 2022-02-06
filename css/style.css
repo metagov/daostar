@@ -253,7 +253,7 @@ nav, .nav {
 @media (max-width: 640px) {
   header {
     justify-content: center;
-    gap: 20px;
+    gap: 5px;
   }
   nav, .nav {
     font-size: 1.2rem;
@@ -323,6 +323,11 @@ footer {
 @media (max-width: 800px) {
   .bottom {
     justify-content: center;
+  }
+}
+@media (orientation: portrait) {
+  footer {
+    height: auto;
   }
 }
 
@@ -411,8 +416,8 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
   flex-wrap: wrap;
   gap: 16px;
 }
-.logos a, .menu a {
-  border-bottom: 0;
+.logos a, .menu a, header a {
+  border-bottom: 0 !important;
 }
 .logos img {
   width: 80px;
@@ -421,6 +426,9 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
 
 
 @media (max-width: 1280px) {
+  .menu {
+    gap: 10px;
+  }
   #hand img {
     width: 100%;
     margin: auto;
