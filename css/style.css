@@ -179,7 +179,7 @@ iframe {
   z-index: 999;
 }
 #title > div {
-  padding-top: 5rem;
+  padding-top: 8rem;
 }
 
 .rows {
@@ -267,7 +267,7 @@ footer {
   z-index: 1;
   color: var(--clr-dark);
   position: relative;
-  height: 100%;
+  min-height: 80vh;
 }
 .cube {
   position: absolute;
@@ -276,7 +276,7 @@ footer {
 }
 .bottom {
   position: absolute;
-  bottom: 1rem;
+  bottom: 0rem;
   padding: 2rem;
   width: 100%;
   z-index: 100;
@@ -313,7 +313,7 @@ footer {
 }
 @media (min-width: 1600px) {
   footer {
-    min-height: 130vh;
+    min-height: 120vh;
   }
 }
 @media (max-width: 800px) {
@@ -394,7 +394,7 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
   width: 100%;
 }
 #hand img {
-  width: 40%;
+  width: 60%;
   max-width: 800px;
   display: block;
   margin: 0 auto;
@@ -412,15 +412,10 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
 }
 
 
-@media (min-width: 1600px) {
-  #hand img {
-    margin: 0 auto;
-  }
-}
 
-@media (max-width: 800px) {
+@media (max-width: 1280px) {
   #hand img {
     width: 100%;
-    margin: -50px auto 0;
+    margin: auto;
   }
 }
