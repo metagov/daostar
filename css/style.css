@@ -76,7 +76,7 @@ h2 {
   margin: 0;
   text-align: center;
   color: var(--clr-light);
-  border-bottom: 2px solid var(--clr-light);
+  /* border-bottom: 2px solid var(--clr-light); */
 }
 h3 {
   font-size: 1.2rem;
@@ -107,12 +107,12 @@ p.small {
 a, a:link, a:visited {
   color: var(--clr-light);
   text-decoration: none;
-  border-bottom: 2px solid rgba(0,0,0,0);
+  border-bottom: 1px solid rgb(255,255,255);
 }
 a:hover, a.active {
   color: var(--clr-accent);
   transition: 0.2s;
-  border-bottom: 2px solid var(--clr-accent);
+  border-bottom: 1px solid var(--clr-accent);
   transition: 0.5s;
 }
 
@@ -154,12 +154,16 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   max-width: 1024px;
   width: 80%;
   margin: 3rem auto;
   padding: 20vh 0;
   gap: 30px;
+}
+#credits {
+  height: 200px;
+  margin: 0 auto;
+  padding: 0;
 }
 iframe {
   width: 100%;
@@ -294,9 +298,9 @@ footer {
 }
 .bottom .logo {
   display: flex;
-  gap: 10px;
+  flex-direction: row;
+  gap: 15px;
   align-items: center;
-  text-align: center;
   margin: 0;
 }
 .bottom .logo a {
@@ -406,6 +410,9 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
   flex-direction: row;
   flex-wrap: wrap;
   gap: 16px;
+}
+.logos a, .menu a {
+  border-bottom: 0;
 }
 .logos img {
   width: 80px;
