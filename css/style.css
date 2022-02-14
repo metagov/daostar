@@ -160,11 +160,6 @@ section {
   padding: 20vh 0;
   gap: 30px;
 }
-#credits {
-  height: 200px;
-  margin: 0 auto;
-  padding: 0;
-}
 iframe {
   width: 100%;
   height: 400px;
@@ -183,7 +178,7 @@ iframe {
   z-index: 999;
 }
 #title > div {
-  padding-top: 8rem;
+  padding-top: 5rem;
 }
 
 .rows {
@@ -273,6 +268,9 @@ footer {
   position: relative;
   min-height: 80vh;
 }
+.credits {
+  margin: 0 auto;
+}
 .cube {
   position: absolute;
   bottom: 0;
@@ -292,6 +290,9 @@ footer {
   flex-wrap: wrap;
   gap: 25px;
 }
+.bottom p {
+  color: var(--clr-dark);
+}
 .bottom > .right {
   display: flex;
   gap: 15px;
@@ -308,29 +309,58 @@ footer {
   align-items: center;
   gap: 15px;
   border-bottom: 0;
+  background: none;
+  color: var(--clr-dark);
+  padding: 0;
 }
 .bottom .logo a:hover {
   border-bottom: 0;
 }
 .bottom a {
-  color: var(--clr-dark);
+  color: var(--clr-light);
+  background-color: var(--clr-dark);
+  padding: 2px 5px;
 }
-@media (min-width: 1600px) {
+.bottom a:hover {
+  color: var(--clr-dark);
+  background-color: var(--clr-accent);
+  transition: 0.5s;
+}
+@media (min-width: 800px) {
+  footer {
+    min-height: 80vh;
+  }
+}
+@media (min-width: 1024px) {
+  footer {
+    min-height: 100vh;
+  }
+}
+@media (min-width: 1280px) {
   footer {
     min-height: 120vh;
   }
 }
-@media (max-width: 800px) {
+
+/* mobile */
+@media (max-width: 1024px) {
+  .credits {
+    display: none;
+  }
+}
+@media (max-width: 800px) and (orientation: portrait) {
   .bottom {
     justify-content: center;
   }
-}
-@media (orientation: portrait) {
   footer {
     height: auto;
   }
+  .cube {
+    height: 80vh;
+    width: auto;
+    object-position: center;
+  }
 }
-
 
 
 
@@ -404,7 +434,6 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
 }
 #hand img {
   width: 60%;
-  max-width: 800px;
   display: block;
   margin: 0 auto;
 }
@@ -424,13 +453,30 @@ canvas { width: 100%; height: 100%; outline: none; z-index: 10; }
 }
 
 
-
-@media (max-width: 1280px) {
+@media (max-width: 600px) and (orientation: portrait) {
+  .logo { 
+    display: none;
+  }
   .menu {
     gap: 10px;
   }
   #hand img {
-    width: 100%;
     margin: auto;
+    width: auto;
+    max-height: 60vh;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1599px) {
+  #hand img {
+    margin: auto;
+    width: auto;
+    max-height: 60vh;
+  }
+}
+
+@media (min-width: 1600px) {
+  #hand img {
+    max-width: 600px;
   }
 }
