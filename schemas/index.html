@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DAOstar</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
+</head>
+
+<body data-spy="scroll" data-offset="0">
+
+	<header>
+		<a href="../index.html"><img src="../img/logo_dao.png" class="logo" /></a>
+	</header>
+
+	<div class="parallax--wrapper">
+		<div id="mesh" class="parallax parallax--minus2"><img src="img/mesh.svg" /></div>
+		<div id="hand" class="parallax parallax--minus1"><img src="img/hand_final.png" /></div>
+
+	<div class="wrapper parallax parallax-base">
+	
+
+        <section id="dao-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>DAO Schema</h3>
+            <table>
+                <tr>
+                    <td>name</td>    
+                    <td>name of the DAO</td> 
+                </tr>
+                <tr>
+                    <td>description</td>    
+                    <td>free text, details regarding the DAO 
+                    </td> 
+                </tr>
+                <tr>
+                    <td>membersURI</td>    
+                    <td>a URI pointing to a Json file representing the Members object</td> 
+                </tr>
+                <tr>
+                    <td>proposalsURI</td>    
+                    <td>a URI pointing to a Json file representing the Proposals object</td> 
+                </tr>
+                <tr>
+                    <td>activityLogURI</td>    
+                    <td>a URI pointing to a Json file representing the Activity Log object</td> 
+                </tr>
+                <tr>
+                    <td>governanceURI</td>    
+                    <td>a URI pointing to a flat file, detailing the governance system of the DAO</td> 
+                </tr>
+            </table>
+        </section>  
+
+        <section id="members-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>Members Schema</h3>
+            <table>
+                <tr>
+                    <td>name</td>    
+                    <td>name of the DAO</td> 
+                </tr>
+                <tr>
+                    <td>members</td>    
+                    <td>array of DAO member objects. A member object can include any relevant properties which relate to the specific DAOs concept of membership. An example of a simple member object will include one property which is an Ethereum address.</td> 
+                </tr>
+            </table>
+        </section>
+
+        <section id="proposals-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>Proposals Schema</h3>
+            <table>
+                <tr>
+                    <td>name</td>    
+                    <td>name of the DAO</td> 
+                </tr>
+                <tr>
+                    <td>proposals</td>    
+                    <td>array of DAO proposal objects. A proposal object must include an ID property as described in the Proposal Schema. Additionally  can include any relevant properties which relate to the specific DAOs concept of a proposal.</td> 
+                </tr>
+            </table>
+        </section>
+
+        <section id="activity-log-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>Activity Log Schema</h3>
+            <table>
+                <tr>
+                    <td>name</td>    
+                    <td>name of the DAO</td> 
+                </tr>
+                <tr>
+                    <td>activities</td>    
+                    <td>array of DAO activity objects. An activity object represents the interplay between members and proposals. </td> 
+                </tr>
+            </table>
+        </section>
+
+        <section id="proposal-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>Proposal Schema</h3>
+            <table>
+                <tr>
+                    <td>id</td>    
+                    <td>every unique on-chain proposal MUST be associated to a proposal ID of the form CAIP10_ADDRESS + “?proposalId=” + PROPOSAL_COUNTER, where PROPOSAL_COUNTER is an arbitrary string which is unique per CAIP10_ADDRESS </td> 
+                </tr>
+                <tr>
+                    <td>name</td>    
+                    <td>name of the proposal</td> 
+                </tr>
+                <tr>
+                    <td>contentURI</td>    
+                    <td>a URI pointing to some content such as a forum post or a description on a voting platform which predates or accompanies the actual proposal</td> 
+                </tr>
+                <tr>
+                    <td>status</td>    
+                    <td>free text describing the current status of the proposal</td> 
+                </tr>
+                <tr>
+                    <td>calls</td>    
+                    <td>for on-chain proposals with non-empty execution, an array of Call objects, which detail the execution data. The main use-case for this data is execution simulation of proposals. An example of a Call object is the CallDataEVM object described below.</td> 
+                </tr>
+            </table>
+        </section>
+
+        <section id="activity-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>Activity Schema</h3>
+            <table>
+                <tr>
+                    <td>id</td>    
+                    <td>activity id</td> 
+                </tr>
+                <tr>
+                    <td>proposal</td>    
+                    <td>an object containing the id of the proposal which the activity is related to</td> 
+                </tr>
+                <tr>
+                    <td>member</td>    
+                    <td>The member object which for which the activity is related to</td> 
+                </tr>
+            </table>
+        </section>
+
+        <section id="calldata-evm-schema" style="padding-top: 5vh; padding-bottom: 5vh;">
+            <h3>CallDataEVM Schema</h3>
+            <table>
+                <tr>
+                    <td>operation</td>    
+                    <td>call or delegate call</td> 
+                </tr>
+                <tr>
+                    <td>from</td>    
+                    <td>from address</td> 
+                </tr>
+                <tr>
+                    <td>to</td>    
+                    <td>to address</td> 
+                </tr>
+                <tr>
+                    <td>value</td>    
+                    <td>call value</td> 
+                </tr>
+                <tr>
+                    <td>data</td>    
+                    <td>call data</td> 
+                </tr>
+            </table>
+        </section>
+																	      
+	<footer>
+		<div class="bottom">
+			<div class="logo">
+				Hosted by <a href="https://metagov.org" target="_blank"><img src="../img/metagov.svg" alt="Metagovernance Project" height="48px" /> Metagov</a>
+			</div>
+
+			<div class="credits">
+				<p class="small">Site by <a href="https://jennyfan.com" target="_blank">Jenny Fan</a>, illustrations by <a href="https://www.instagram.com/hirsch_joe/" target="_blank">Joe Hirsch</a></p>
+			</div>
+
+			<div class="right">
+				<a href="https://discord.gg/PdrPkEZVFk" target="_blank">Discord</a>
+				<a href="https://twitter.com/DAOstar_One" target="_blank">Twitter</a>
+			</div>
+			
+		</div>
+
+
+		<img src="../img/cube.png" class="cube" />
+	</footer>
+	</div>
+
+	</div>
+
+</body>
+</html>
