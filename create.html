@@ -151,6 +151,7 @@
 
     const checkboxElem = document.getElementById("isImmutable");
     const caipElem = document.getElementById("caip");
+    const apiHost = 'http://127.0.0.1:8000'
 
     if (checkboxElem.checked == true) {
         caipElem.removeAttribute("hidden");
@@ -168,16 +169,19 @@
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         const form_data = Object.fromEntries(new FormData(form).entries());
-
+        let payload = {
+            'data': form_data
+        }
         const network = document.getElementById("network").value;
         const contract_id = document.getElementById("contract_id").value;
 
         console.log(form_data);
 
-        let endpoint = 'http://127.0.0.1:8000/immutable';
+        let endpoint = apiHost + '/immutable';
 
         if (checkboxElem.checked == true) {
-            endpoint = `http://127.0.0.1:8000/mutable/${network}:${contract_id}`
+            endpoint = apiHost + '/mutable'
+            payload.caip = `${network}:${contract_id}`
         }
 
         console.log(endpoint)
@@ -187,19 +191,14 @@
             {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(form_data)
+                body: JSON.stringify(payload)
             });
         
         const result = await response.json();
-
-        
-        let redirect = `/immutable/${result.id}`;
-
-        if (checkboxElem.checked == true) {
-            redirect = `/mutable/${network}:${contract_id}`
-        }
-
-        window.location.href = redirect;
+        console.log(result);
+        let redirect = result.url;
+        console.log(redirect);
+        // window.location.href = redirect;
     });
 
 </script>
