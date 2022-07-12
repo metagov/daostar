@@ -133,18 +133,29 @@
     const success = params.get("success");
     const success_alert = document.getElementById("contract-success");
     const form = document.getElementById("form");
-    const caip = params.get('caip');
-    const endpoint = `http://127.0.0.1:8000/mutable/${caip}`
-    const api_url = window.location.host + endpoint;
+    const apiHost = 'http://127.0.0.1:8000';
+    let endpoint = '';
+    let caip = '';
+    let cid = '';
 
-    document.getElementById("endpoint-url").href = 'https://' + api_url;
-    document.getElementById("endpoint-url").innerHTML = api_url;
+    if (params.get('caip')) {
+        caip = params.get('caip');
+        endpoint = apiHost + '/mutable/' + caip;
+    } else if (params.get('cid')) {
+        cid = params.get('cid');
+        endpoint = apiHost + '/immutable/' + cid;
+    }
 
-    document.getElementById("contract_id").innerHTML = caip.split(':')[2];
-    let api_path = window.location.pathname.slice(6);
+    document.getElementById("endpoint-url").href = endpoint;
+    document.getElementById("endpoint-url").innerHTML = endpoint;
+    if (caip) {
+        document.getElementById("contract_id").innerHTML = caip.split(':')[2];
+    } else if (cid) {
+        document.getElementById("contract_id").innerHTML = cid;
+    }
 
     function copy_api_url() {
-        navigator.clipboard.writeText('https://' + api_url);
+        navigator.clipboard.writeText(endpoint);
     }
 
     if (success == "true") {

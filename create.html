@@ -151,7 +151,7 @@
 
     const checkboxElem = document.getElementById("isImmutable");
     const caipElem = document.getElementById("caip");
-    const apiHost = 'http://127.0.0.1:8000'
+    const apiHost = 'http://127.0.0.1:8000';
 
     if (checkboxElem.checked == true) {
         caipElem.removeAttribute("hidden");
@@ -174,14 +174,18 @@
         }
         const network = document.getElementById("network").value;
         const contract_id = document.getElementById("contract_id").value;
+        let caip = network + ':' + contract_id;
 
         console.log(form_data);
+        const isMutable = (checkboxElem.checked == true);
 
-        let endpoint = apiHost + '/immutable';
+        let endpiont = '';
 
-        if (checkboxElem.checked == true) {
+        if (isMutable) {
             endpoint = apiHost + '/mutable'
-            payload.caip = `${network}:${contract_id}`
+            payload.caip = caip;
+        } else {
+            endpoint = apiHost + '/immutable';
         }
 
         console.log(endpoint)
@@ -195,10 +199,16 @@
             });
         
         const result = await response.json();
-        console.log(result);
-        let redirect = result.url;
-        console.log(redirect);
-        // window.location.href = redirect;
+
+        let redirect = '';
+        if (isMutable) {
+            redirect = '/view?caip=' + caip;
+        } else {
+            let cid = result.cid;
+            redirect = '/view?cid=' + cid;
+        }
+        
+        window.location.href = redirect;
     });
 
 </script>
