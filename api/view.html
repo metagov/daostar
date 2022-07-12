@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style-api.css">
+    <title>DAOstar API</title>
+</head>
+
+<body>
+    <div class="parallax--wrapper">
+        <div id="mesh"><img src="https://daostar.org/img/mesh.svg"/></div>
+
+    <div class="wrapper parallax parallax-base">
+        <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
+            <div class="container py-5">
+                <div class="card" style="background-color: rgb(233, 233, 233);">
+                    <div class="card-body">
+                        <h1 id="contract_id">0x...</h1>
+                        <h5>
+                            Endpoint: <a href="" class="link-secondary" id="endpoint-url" target="_index"></a>
+                            <a href="javascript:copy_api_url()" class="link-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                                </svg>
+                            </a>
+                        </h5>
+                        
+                        <hr/>
+                        <form id="form">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">
+                                    Name
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="name" name="name" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">
+                                    Description
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <textarea type="text" class="form-control" id="description" name="description" rows="3" disabled></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="membersURI" class="form-label">
+                                    Members URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="membersURI" name="membersURI" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="proposalsURI" class="form-label">
+                                    Proposals URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="proposalsURI" name="proposalsURI" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="activityLogURI" class="form-label">
+                                    Activity Log URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="activityLogURI" name="activityLogURI" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="governanceURI" class="form-label">
+                                    Governance URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file.">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="governanceURI" name="governanceURI" disabled>
+                            </div>                        
+
+                            <div class="d-flex">
+                                <div class="pe-2">
+                                    <button type="button" id="manage-endpoint" class="btn btn-primary" onclick="window.location.href = '/api/manage' + window.location.search" hidden>Manage</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert" style="position: absolute; top: 0px; width: 100%">
+            Contract updated!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));
+
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get("success");
+    const success_alert = document.getElementById("contract-success");
+    const form = document.getElementById("form");
+    const apiHost = 'http://127.0.0.1:8000';
+    let endpoint = '';
+    let caip = '';
+    let cid = '';
+
+    if (params.get('caip')) {
+        caip = params.get('caip');
+        endpoint = apiHost + '/mutable/' + caip;
+    } else if (params.get('cid')) {
+        cid = params.get('cid');
+        endpoint = apiHost + '/immutable/' + cid;
+    }
+
+    document.getElementById("endpoint-url").href = endpoint;
+    document.getElementById("endpoint-url").innerHTML = endpoint;
+    if (caip) {
+        document.getElementById("contract_id").innerHTML = caip.split(':')[2];
+        document.getElementById("manage-endpoint").removeAttribute('hidden');
+    } else if (cid) {
+        document.getElementById("contract_id").innerHTML = cid;
+    }
+
+    function copy_api_url() {
+        navigator.clipboard.writeText(endpoint);
+    }
+    
+    fetch(endpoint)
+        .then(resp => {
+            if (resp.status == 404) {
+                alert("not found");
+            }
+            return resp.json()
+        })
+        .then(data => {
+            for (let key in data) {
+                let elem = document.getElementById(key);
+                if (elem) {
+                    elem.value = data[key];
+                }
+            }
+
+        });
+
+</script>
+</html>
