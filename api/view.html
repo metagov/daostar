@@ -105,11 +105,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert" style="position: absolute; top: 0px; width: 100%">
-            Contract updated!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -127,8 +122,6 @@
     document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));
 
     const params = new URLSearchParams(window.location.search);
-    const success = params.get("success");
-    const success_alert = document.getElementById("contract-success");
     const form = document.getElementById("form");
     const apiHost = 'https://api.daostar.org';
     let endpoint = '';

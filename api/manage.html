@@ -130,7 +130,6 @@
     document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));
 
     const params = new URLSearchParams(window.location.search);
-    const success = params.get("success");
     const success_alert = document.getElementById("contract-success");
     const form = document.getElementById("form");
     const apiHost = 'https://api.daostar.org';
