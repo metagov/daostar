@@ -19,7 +19,7 @@
             <div class="card" style="background-color: rgb(233, 233, 233);">
                 <div class="card-body">
                     <form id="form">
-                        <div class="d-flex flex-row pb-2">
+                        <div class="d-flex flex-row">
                             <div>
                                 <select id="network" name="network" class="form-select">
                                     <option value="eip155:1">Mainnet</option>
@@ -33,12 +33,15 @@
                                 <input type="text" class="form-control" id="contract_id" name="contract_id"
                                     placeholder="Enter a contract address">
                             </div>
-                            <div>
+                            <div class="me-2">
                                 <button type="submit" class="btn btn-primary">Query Endpoint</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="window.location.href = '/api/create.html'">Create New Endpoint</button>
                             </div>
                         </div>
                     </form>
-                    <form>
+                    <!-- <form>
                         <div class="d-flex flex-row">
                             <div class="flex-grow-1 me-2">
                                 <input type="text" class="form-control" id="contract_id" name="contract_id"
@@ -48,7 +51,7 @@
                                 <button type="button" class="btn btn-success" onclick="window.location.href = '/generator.html'">Create New Endpoint</button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
@@ -93,7 +96,7 @@
         e.preventDefault();
         const form_data = Object.fromEntries(new FormData(form).entries());
         console.log(form_data);
-        window.location.href = `http://127.0.0.1:5000/contract.html?caip=${form_data.network}:${form_data.contract_id}`;
+        window.location.href = `/api/view.html?caip=${form_data.network}:${form_data.contract_id}`;
     })
 </script>
 </html>
