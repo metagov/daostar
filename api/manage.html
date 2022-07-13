@@ -172,9 +172,9 @@
                 </div>
             </div>
 
-            <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert"
+            <div class="alert alert-success alert-dismissible fade" id="update-alert" role="alert"
                 style="position: absolute; top: 0px; width: 100%">
-                Contract updated!
+                Updated successfully!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
@@ -194,7 +194,7 @@
     document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale=' + (1 / window.devicePixelRatio));
 
     const params = new URLSearchParams(window.location.search);
-    const success_alert = document.getElementById("contract-success");
+    const updateAlert = document.getElementById("update-alert");
     const form = document.getElementById("form");
     const apiHost = 'https://api.daostar.org';
     let endpoint = '';
@@ -221,14 +221,6 @@
         navigator.clipboard.writeText(endpoint);
     }
 
-    if (success == "true") {
-        success_alert.classList.toggle("show");
-        window.history.pushState("", "", window.location.pathname)
-        setTimeout(function () {
-            success_alert.classList.toggle("show");
-        }, 2000);
-    }
-
     function load_value(key, val) {
         elem = document.getElementById(key);
         if (val) {
@@ -241,6 +233,7 @@
         const form_data = Object.fromEntries(new FormData(form).entries());
 
         console.log(form_data);
+        if (!endpoint) {return}
 
         const response = await fetch(
             endpoint,
@@ -250,7 +243,13 @@
                 body: JSON.stringify(form_data)
             });
 
+        console.log(endpoint, response);
         const result = await response.json();
+
+        updateAlert.classList.toggle("show");
+        setTimeout(function () {
+            updateAlert.classList.toggle("show");
+        }, 3000);
 
         console.log(result);
     })
