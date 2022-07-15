@@ -225,15 +225,18 @@
         e.preventDefault();
         const form_data = Object.fromEntries(new FormData(form).entries());
 
-        console.log(form_data);
         if (!endpoint) {return}
+
+        let payload = {
+            'data': form_data
+        }
 
         const response = await fetch(
             endpoint,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form_data)
+                body: JSON.stringify(payload)
             });
 
         console.log(endpoint, response);
@@ -244,15 +247,12 @@
             updateAlert.classList.toggle("show");
         }, 3000);
 
-        console.log(result);
     })
 
     function deleteEndpoint() {
         fetch(endpoint, { method: 'DELETE' })
         window.location.href = "/generate"
     }
-
-    console.log(endpoint);
 
     fetch(endpoint)
         .then(resp => {
@@ -268,7 +268,6 @@
                     elem.value = data[key];
                 }
             }
-
         });
 
 </script>
