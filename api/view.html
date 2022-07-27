@@ -11,19 +11,15 @@
 </head>
 
 <body>
-    <!-- Modal -->
-    <div class="modal fade" id="notfound-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal" id="notfound-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-0">
                     <h5 class="modal-title">This endpoint does not exist.</h5>
                 </div>
-                <div class="modal-body">
-                    You can create a new one though!
-                </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="window.location.href='/api/create'">Create New Endpoint</button>
                     <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
-                    <!-- <button type="button" class="btn btn-success" onclick="deleteEndpoint()">Create New Endpoint</button> -->
                 </div>
             </div>
         </div>
@@ -144,13 +140,13 @@
 
     const params = new URLSearchParams(window.location.search);
     const form = document.getElementById("form");
-    const modal = document.getElementById("notfound-modal");
+    const modal = new bootstrap.Modal(document.getElementById("notfound-modal"));
     const apiHost = 'https://api.daostar.org';
     let endpoint = '';
     let caip = '';
     let cid = '';
 
-    modal.show();
+    // modal.show();
 
     if (params.get('caip')) {
         caip = params.get('caip');
@@ -175,8 +171,8 @@
     
     fetch(endpoint)
         .then(resp => {
-            if (resp.status == 404) {
-                alert("not found");
+            if (resp.status == 404 || resp.status == 400) {
+                modal.show();
             }
             return resp.json()
         })

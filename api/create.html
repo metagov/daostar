@@ -204,10 +204,6 @@
     const nameElem = document.getElementById("name");
     const apiHost = 'https://api.daostar.org';
 
-    if (checkboxElem.checked == true) {
-        caipElem.removeAttribute("hidden");
-    }
-
     function handleCheck(checkbox) {
         if (checkbox.checked == true) {
             caipElem.removeAttribute("hidden");
@@ -217,6 +213,8 @@
             contractIdElem.removeAttribute("required");
         }
     }
+
+    handleCheck(checkboxElem);
 
     var form = document.getElementById("form");
     form.addEventListener('submit', async function (e) {
