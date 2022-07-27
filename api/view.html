@@ -11,6 +11,23 @@
 </head>
 
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="notfound-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">This endpoint does not exist.</h5>
+                </div>
+                <div class="modal-body">
+                    You can create a new one though!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
+                    <!-- <button type="button" class="btn btn-success" onclick="deleteEndpoint()">Create New Endpoint</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="parallax--wrapper">
         <div id="mesh"><img src="/img/mesh.svg"/></div>
 
@@ -96,6 +113,10 @@
                                 <div>
                                     <button type="button" id="manage-endpoint" class="btn btn-primary" onclick="window.location.href = '/api/manage' + window.location.search" hidden>Manage</button>
                                 </div>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Delete
+                                        </button>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
                                 </div>
@@ -123,10 +144,13 @@
 
     const params = new URLSearchParams(window.location.search);
     const form = document.getElementById("form");
+    const modal = document.getElementById("notfound-modal");
     const apiHost = 'https://api.daostar.org';
     let endpoint = '';
     let caip = '';
     let cid = '';
+
+    modal.show();
 
     if (params.get('caip')) {
         caip = params.get('caip');
