@@ -39,7 +39,8 @@
                                 <div class="form-check form-switch mt-1">
                                     <input class="form-check-input" type="checkbox" role="switch" id="query-switch"
                                         onchange="handleCheck(this);">
-                                    <label class="form-check-label mt-1" for="query-switch">Query by Content ID (immutable schema)</label>
+                                    <label class="form-check-label mt-1" for="query-switch">Query by Content ID
+                                        (immutable schema)</label>
                                 </div>
                                 <div class="ms-auto">
                                     <button type="submit" class="btn btn-primary">Query Endpoint</button>
@@ -59,15 +60,26 @@
             <div class="container">
                 <div class="card" style="background-color: rgb(233, 233, 233);">
                     <div class="card-body">
-                        <h5 class="card-title">DAOstar Endpoint Service v0.1 <span class="text-muted">(Alderaan)</span>
+                        <h5 class="card-title">DAOstar Endpoint Service v0.2 <span class="text-muted">(Coruscant)</span>
                         </h5>
                         <p class="card-text">
                             This service hosts a DAOstar-compatible API endpoint that can be queried at
-                            https://api.daostar.org/eth/&lt;MAINNET_ADDRESS&gt; or, more generally, at
-                            https://api.daostar.org/&lt;CAIP10_ADDRESS&gt;. It is currently in alpha, and is provided
+                            https://api.daostar.org/mutable/&lt;CAIP10_ADDRESS&gt; or at
+                            https://api.daostar.org/immutable/&lt;CONTENT_ID&gt;. It is currently in alpha, and is
+                            provided
                             as-is.
-                            <br /><br />
-                            In future releases we will add:
+
+                            <ol></ol>
+                        In this version we support:
+                        <ol>
+                            <li>Creating a DAO schema endpoint hosted by our database (mutable)</li>
+                            <li>Creating a DAO schema endpoint hosted on IPFS (immutable)</li>
+                            <li>Making REST API calls to the service via api.daostar.org</li>
+                            <li>Updating or deleting mutable DAO schemas</li>
+                        </ol>
+
+                        
+                        In future releases we will add:
                         <ol>
                             <li>Additional endpoints for membersURI, proposalsURI, and activityLogURI data.</li>
                             <li>Permissioning via Web3 login.</li>
@@ -81,6 +93,7 @@
                             <li>Uptime guarantees.</li>
                             <li>Privacy options.</li>
                         </ol>
+
                         If you encounter any issues, please add them to our <a
                             href="https://github.com/metagov/daostar-api" target="_blank">GitHub</a> and we will put
                         them on our roadmap. If you have any questions, please join our <a
