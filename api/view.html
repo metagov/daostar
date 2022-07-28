@@ -11,8 +11,21 @@
 </head>
 
 <body>
+    <div class="modal" id="notfound-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">This endpoint does not exist.</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="window.location.href='/api/create'">Create New Endpoint</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="parallax--wrapper">
-        <div id="mesh"><img src="https://daostar.org/img/mesh.svg"/></div>
+        <div id="mesh"><img src="/img/mesh.svg"/></div>
 
     <div class="wrapper parallax parallax-base">
         <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
@@ -123,6 +136,7 @@
 
     const params = new URLSearchParams(window.location.search);
     const form = document.getElementById("form");
+    const modal = new bootstrap.Modal(document.getElementById("notfound-modal"));
     const apiHost = 'https://api.daostar.org';
     let endpoint = '';
     let caip = '';
@@ -151,8 +165,8 @@
     
     fetch(endpoint)
         .then(resp => {
-            if (resp.status == 404) {
-                alert("not found");
+            if (resp.status == 404 || resp.status == 400) {
+                modal.show();
             }
             return resp.json()
         })

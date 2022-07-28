@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Geogrotesque';
-    src: url('https://daostar.org/css/Geogrotesque-Medium.woff2') format('woff2'),
-        url('https://daostar.org/css/Geogrotesque-Medium.woff') format('woff');
+    src: url('/css/Geogrotesque-Medium.woff2') format('woff2'),
+        url('/css/Geogrotesque-Medium.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -9,8 +9,8 @@
 
 @font-face {
     font-family: 'Geogrotesque';
-    src: url('https://daostar.org/css/Geogrotesque-Regular.woff2') format('woff2'),
-        url('https://daostar.org/css/Geogrotesque-Regular.woff') format('woff');
+    src: url('/css/Geogrotesque-Regular.woff2') format('woff2'),
+        url('/css/Geogrotesque-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -40,7 +40,7 @@ body {
     line-height: 24px;
     font-weight: normal;
     overflow-x: hidden;
-    background-image: url('https://daostar.org/img/stars.jpg');
+    background-image: url('/img/stars.jpg');
     background-repeat: repeat;
     background-attachment: fixed;
 }
@@ -80,7 +80,7 @@ body {
 #stars {
     width: 100%;
     height: 100%;
-    background-image: url('https://daostar.org/img/stars.jpg');
+    background-image: url('/img/stars.jpg');
     background-repeat: repeat;
     background-attachment: fixed;
 }
