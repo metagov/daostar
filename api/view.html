@@ -109,10 +109,6 @@
                                 <div>
                                     <button type="button" id="manage-endpoint" class="btn btn-primary" onclick="window.location.href = '/api/manage' + window.location.search" hidden>Manage</button>
                                 </div>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            Delete
-                                        </button>
                                 <div class="ms-auto">
                                     <button type="button" class="btn btn-secondary" onclick="window.location.href='/api'">Back to Query</button>
                                 </div>
@@ -145,8 +141,6 @@
     let endpoint = '';
     let caip = '';
     let cid = '';
-
-    // modal.show();
 
     if (params.get('caip')) {
         caip = params.get('caip');

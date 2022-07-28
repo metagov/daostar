@@ -251,12 +251,16 @@
 
     function deleteEndpoint() {
         fetch(endpoint, { method: 'DELETE' })
-        window.location.href = "/generate"
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data);
+                window.location.href = "/api";
+            })
     }
 
     fetch(endpoint)
         .then(resp => {
-            if (resp.status == 404) {
+            if (resp.status == 404 || resp.status == 400) {
                 alert("not found");
             }
             return resp.json()
