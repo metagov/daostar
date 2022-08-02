@@ -161,7 +161,7 @@
       },
       "/immutable" : {
         "post" : {
-          "summary" : "creates a new mutable DAO endpoint",
+          "summary" : "creates a new immutable DAO endpoint",
           "requestBody" : {
             "content" : {
               "application/json" : {
