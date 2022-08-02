@@ -1,0 +1,272 @@
+{
+    "openapi" : "3.0.0",
+    "servers" : [ {
+      "description" : "DAOstar Endpoint Service",
+      "url" : "https://api.daostar.org"
+    } ],
+    "info" : {
+      "description" : "A hosting service for DAO schemas described by EIP-4824",
+      "version" : "1.0.0",
+      "title" : "DAOstar Endpoint Service",
+      "contact" : {
+        "email" : "luke@metagov.org"
+      }
+    },
+    "paths" : {
+      "/mutable" : {
+        "post" : {
+          "summary" : "creates a new mutable DAO endpoint",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "caip" : {
+                      "type" : "string",
+                      "example" : "eip155:1:0x2596Bc41f02d8b4446f7E35fF2163653e2918860"
+                    },
+                    "data" : {
+                      "$ref" : "#/components/schemas/DAO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "successfully created endpoint",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "type" : "object",
+                    "properties" : {
+                      "url" : {
+                        "type" : "string",
+                        "example" : "https://api.daostar.org/mutable/eip155:1:0x2596Bc41f02d8b4446f7E35fF2163653e2918860"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "bad request"
+            },
+            "409" : {
+              "description" : "endpoint already exists"
+            }
+          }
+        }
+      },
+      "/mutable/{caip}" : {
+        "get" : {
+          "summary" : "returns DAO schema",
+          "parameters" : [ {
+            "in" : "path",
+            "name" : "caip",
+            "description" : "CAIP-10 address of a DAO",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "found requested DAO schema",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/DAO"
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "bad request"
+            },
+            "404" : {
+              "description" : "endpoint not found"
+            }
+          }
+        },
+        "put" : {
+          "summary" : "updates DAO schema",
+          "parameters" : [ {
+            "in" : "path",
+            "name" : "caip",
+            "description" : "CAIP-10 address of a DAO",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "data" : {
+                      "$ref" : "#/components/schemas/DAO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "successfully updated DAO schema",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/DAO"
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "bad request"
+            },
+            "404" : {
+              "description" : "endpoint not found"
+            }
+          }
+        },
+        "delete" : {
+          "summary" : "deletes a DAO schema endpoint",
+          "parameters" : [ {
+            "in" : "path",
+            "name" : "caip",
+            "description" : "CAIP-10 address of a DAO",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "successfully deleted endpoint"
+            },
+            "400" : {
+              "description" : "bad request"
+            },
+            "404" : {
+              "description" : "endpoint not found"
+            }
+          }
+        }
+      },
+      "/immutable" : {
+        "post" : {
+          "summary" : "creates a new mutable DAO endpoint",
+          "requestBody" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "data" : {
+                      "$ref" : "#/components/schemas/DAO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses" : {
+            "200" : {
+              "description" : "successfully created endpoint",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "type" : "object",
+                    "properties" : {
+                      "url" : {
+                        "type" : "string",
+                        "example" : "https://api.daostar.org/immutable/Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu"
+                      },
+                      "cid" : {
+                        "type" : "string",
+                        "example" : "Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "bad request"
+            }
+          }
+        }
+      },
+      "/immutable/{cid}" : {
+        "get" : {
+          "summary" : "returns DAO schema",
+          "parameters" : [ {
+            "in" : "path",
+            "name" : "cid",
+            "description" : "CID of stored DAO Schema",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "found requested DAO schema",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/DAO"
+                  }
+                }
+              }
+            },
+            "400" : {
+              "description" : "bad request"
+            },
+            "404" : {
+              "description" : "endpoint not found"
+            }
+          }
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "DAO" : {
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "example" : "MyDAO"
+            },
+            "description" : {
+              "type" : "string",
+              "example" : "Demonstrates DAOstar setup process"
+            },
+            "membersURI" : {
+              "type" : "string",
+              "example" : "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu"
+            },
+            "proposalsURI" : {
+              "type" : "string",
+              "example" : "https://mydao.github.io/proposals"
+            },
+            "activityLogURI" : {
+              "type" : "string",
+              "example" : "https://mydao.com/activityLog.json"
+            },
+            "governanceURI" : {
+              "type" : "string",
+              "example" : "https://github.com/MyDAO/MyDAO/governance.md"
+            }
+          }
+        }
+      }
+    }
+  }
