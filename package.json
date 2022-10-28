@@ -1,0 +1,19 @@
+{
+  "name": "daostar",
+  "version": "1.0.0",
+  "description": "This repo contains the website for [daostar.org](daostar.org) as well as reference implementations, schemas, and other assets related to EIP-4824 Decentralized Autonomous Organizations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metagov/daostar.git"
+  },
+  "author": "metagov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metagov/daostar/issues"
+  },
+  "homepage": "https://github.com/metagov/daostar#readme"
+}
