@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/metagov/daostar/issues"
   },
-  "homepage": "https://github.com/metagov/daostar#readme"
+  "homepage": "https://github.com/metagov/daostar#readme",
+  "devDependencies": {
+    "create-react-app": "^5.0.1"
+  }
 }

@@ -1,0 +1,35 @@
+.centered-wizard {
+    max-width: 640px;
+    margin: 20vh auto;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.wizard-card h3 {
+    text-transform: none;
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0 24px 20px;
+    font-weight: 400;
+}
+
+.wizard-row {
+    margin: 16px 24px;
+}
+
+.wizard-row-flex {
+    display: flex;
+    gap: 6px;
+    align-items: end;
+}
+
+.wizard-row .bp4-form-group {
+    margin-bottom: 0;
+}
+
+.wizard-center {
+    text-align: center;
+}
+
+.wizard-no-margin {
+    margin: 0;
+}

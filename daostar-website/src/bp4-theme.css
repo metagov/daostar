@@ -1,0 +1,71 @@
+body {
+    --card-bg: rgb(41,41,41);
+    --card-bg-hover: rgb(52, 52, 52);
+    --card-border: rgb(78,78,78);
+    --placeholder-color: rgb(156,156,156);
+    --card-font: 'IBM Plex Mono', monospace;
+    --primary-color: rgb(66,142,255);
+    --primary-color-hover: rgb(98, 159, 250);
+}
+
+.bp4-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 2px;
+}
+
+.bp4-card.wizard-card {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.bp4-divider {
+    border-bottom: 1px solid var(--card-border);
+    border-right: 1px solid var(--card-border);
+    margin: 0;
+}
+
+.bp4-label {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.bp4-input,
+.bp4-html-select select {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    font-family: var(--card-font);
+    box-shadow: none;
+    color: #fff;
+}
+
+.bp4-html-select select {
+    transition: background-color 0.3s;
+}
+
+.bp4-html-select select:hover {
+    background-color: var(--card-bg-hover);
+}
+
+.bp4-input::placeholder {
+    color: var(--placeholder-color);
+    font-family: var(--card-font);
+}
+
+.bp4-button {
+    font-family: var(--card-font);
+}
+
+.bp4-button.bp4-intent-primary {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.bp4-button.bp4-intent-primary:hover {
+    background-color: var(--card-bg);
+    color: var(--primary-color-hover);
+    border: 1px solid var(--primary-color-hover)
+}
