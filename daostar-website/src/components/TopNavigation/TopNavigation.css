@@ -1,0 +1,19 @@
+.top-navigation .bp4-button.web3-connect {
+    color: #F8E441;
+    border: 1px solid #F8E441;
+    border-radius: 24px;
+    padding: 8px 16px;
+    background: #292929;
+    transition: background-color 0.3s, border 0.3s, opacity 0.3s;
+    opacity: 0.9;
+}
+
+.top-navigation .bp4-button.web3-connect:hover {
+    opacity: 1;
+    background: #1b1a1a;
+    border: 1px solid #ead007;
+}
+
+.top-navigation .bp4-button.web3-connect.bp4-loading {
+    background: #292929;
+}

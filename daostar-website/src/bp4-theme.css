@@ -17,7 +17,7 @@ body {
 .bp4-card.wizard-card {
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 0;
+    /* padding-bottom: 0; */
 }
 
 .bp4-divider {
@@ -68,4 +68,14 @@ body {
     background-color: var(--card-bg);
     color: var(--primary-color-hover);
     border: 1px solid var(--primary-color-hover)
+}
+
+.bp4-callout.bp4-intent-danger {
+    background: rgba(226, 68, 68, 0.4);
+    /* border: 1px solid rgba(226, 68, 68, 1); */
+    color: #E24444;
+}
+
+* .bp4-text-small {
+    font-size: 12px;
 }

@@ -22,8 +22,16 @@
     align-items: end;
 }
 
+.wizard-card p {
+    font-size: 14px;
+}
+
 .wizard-row .bp4-form-group {
     margin-bottom: 0;
+}
+
+.wizard-row .bp4-text-small {
+    font-size: 12px;
 }
 
 .wizard-center {
@@ -32,4 +40,8 @@
 
 .wizard-no-margin {
     margin: 0;
+}
+
+.wizard-margin-bottom-8 {
+    margin-bottom: 8px;
 }
