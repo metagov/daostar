@@ -1,0 +1,14 @@
+.explore-page {
+    margin: 20vh auto;
+    max-width: 900px;
+}
+
+.explore-page .dao-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.explore-page .dao-cards .bp4-card {
+    max-width: 438px;
+}
