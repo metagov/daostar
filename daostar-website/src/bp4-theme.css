@@ -2,6 +2,7 @@ body {
     --card-bg: rgb(41,41,41);
     --card-bg-hover: rgb(52, 52, 52);
     --card-border: rgb(78,78,78);
+    --card-border-hover: rgb(111, 111, 111);
     --placeholder-color: rgb(156,156,156);
     --card-font: 'IBM Plex Mono', monospace;
     --primary-color: rgb(66,142,255);
@@ -12,6 +13,7 @@ body {
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 2px;
+    transition: background-color 0.3s, border 0.3s;
 }
 
 .bp4-card.wizard-card {
@@ -57,6 +59,16 @@ body {
     font-family: var(--card-font);
 }
 
+.bp4-button:not([class*=bp4-intent-]) {
+    color: #fff;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border)
+}
+
+.bp4-button:not([class*=bp4-intent-]):hover {
+    background: var(--card-bg-hover);
+}
+
 .bp4-button.bp4-intent-primary {
     background-color: var(--card-bg);
     border: 1px solid var(--primary-color);
@@ -78,4 +90,23 @@ body {
 
 * .bp4-text-small {
     font-size: 12px;
+}
+
+.bp4-text-muted {
+    color: #9C9C9C;
+}
+
+.bp4-editable-text:hover {
+    background-color: var(--card-bg-hover);
+    border-radius: 4px;
+}
+
+.bp4-editable-text input,
+.bp4-editable-text-editing input {
+    background-color: black;
+}
+
+.bp4-editable-text-editing,
+.bp4-editable-text-editing .bp4-editable-text-content {
+    background-color: black;
 }

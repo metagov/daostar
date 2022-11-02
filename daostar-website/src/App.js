@@ -6,6 +6,8 @@ import TopNavigation from './components/TopNavigation/TopNavigation';
 import './App.css';
 import './bp4-theme.css';
 import { useEffect } from 'react';
+import RegistrationPage from './components/RegistrationPage/RegistrationPage';
+import ExplorePage from './components/ExplorePage/ExplorePage';
 
 function App() {
 
@@ -30,6 +32,8 @@ function App() {
       {/* <Homepage /> */}
       <Routes>
         <Route path='/register' element={<Register />} />
+        <Route path='/registration/:regID' element={<RegistrationPage />} />
+        <Route path='/explore' element={<ExplorePage />} />
         <Route path='/' element={<Homepage />} />
       </Routes>
       <Web3Modal config={config} />

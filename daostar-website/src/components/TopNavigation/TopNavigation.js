@@ -16,7 +16,7 @@ const TopNavigation = (props) => {
             <nav className="menu">
                 <Link to='/#standard'>Standard</Link>
                 <Link to='/register'>Register</Link>
-                <Link to='/#discussion'>Explore</Link>
+                <Link to='/explore'>Explore</Link>
                 <Link to='/#roundtable'>Roundtable</Link>
                 <Button 
                     className='web3-connect'

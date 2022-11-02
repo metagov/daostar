@@ -27,7 +27,7 @@ const RegistrationForm = ({
         executeRegistration
     ] = useAxios(
         {
-            url: `http://localhost:8080/https://api.daostar.org/mutable`,
+            url: `${process.env.REACT_APP_API_URL}/mutable`,
             method: 'POST'
         },
         { manual: true }
