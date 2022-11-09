@@ -1,6 +1,7 @@
-import { Button, Callout, Divider, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
-import useAxios from 'axios-hooks';
 import React, { Fragment, useEffect, useState } from 'react';
+import validator from 'validator';
+import useAxios from 'axios-hooks';
+import { Button, Callout, Divider, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
 
 const RegistrationForm = ({
     toggleRegScreen,
@@ -10,13 +11,24 @@ const RegistrationForm = ({
     const [daoContractNetwork, setDaoContractNetwork] = useState('eip155:1');
     const onChangeDaoContractNetwork = (e) => setDaoContractNetwork(e.target.value);
 
-    const [daoContractAddress, setDaoContractAddress] = useState('0xff68126dE027016702a54F20c12B2587C3619b70');
-    const [daoName, setDaoName] = useState('Registration Test DAO');
+    const [daoContractAddress, setDaoContractAddress] = useState('');
+    const onChangeDaoContractAddress = (e) => setDaoContractAddress(e.target.value);
+
+    const [daoName, setDaoName] = useState('');
+    const onChangeDaoName = (e) => setDaoName(e.target.value);
+
     const [daoFramework, setDaoFramework] = useState('custom'); 
+    const onChangeDaoFramework = (e) => setDaoFramework(e.target.value);
+
     const [daoManagerAddress, setDaoManagerAddress] = useState('');
-    const [daoGovDoc, setDaoGovDoc] = useState('Test');
+    const onChangeDaoManager = (e) => setDaoManagerAddress(e.target.value);
+
+    const [daoGovURI, setDaoGovURI] = useState('');
+    const onChangeDaoGovURI = (e) => setDaoGovURI(e.target.value);
 
     const [registrationError, setRegError] = useState(null);
+
+    const [validationErrors, setErrors] = useState(null);
 
     const [
         { 
@@ -27,7 +39,7 @@ const RegistrationForm = ({
         executeRegistration
     ] = useAxios(
         {
-            url: `${process.env.REACT_APP_API_URL}/mutable`,
+            url: `${process.env.REACT_APP_API_URL}/immutable`,
             method: 'POST'
         },
         { manual: true }
@@ -45,25 +57,32 @@ const RegistrationForm = ({
     }, [registerError])
 
     const onRegister = () => {
-        const registrationData = {
-            caip: `${daoContractNetwork}:${daoContractAddress}`,
-            data: {
-                name: daoName,
-                governanceURI: daoGovDoc
-            }
+        let errors = [];
+        if (daoName === '') errors.push(`DAO must have a name`);
+        if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address');
+        if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address');
+        if (!validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
+        if (errors.length > 0) {
+            setErrors(errors);
+            window.scrollTo(0, 0);
         }
-        console.log('registering data...', registrationData);
-        executeRegistration({
-            data: registrationData
-        }).then(response => {
-            console.log('response', response);
-            setRegistrationData({
-                ...registrationData.data,
-                daoURI: response.data.url,
-                daoContractAddress: daoContractAddress
-            })
-            toggleRegScreen('REG_RECEIVED');
-        });
+        if (errors.length === 0) {
+            const registrationData = {
+                data: {
+                    name: daoName,
+                    governanceURI: daoGovURI,
+                }
+            }
+            executeRegistration({
+                data: registrationData
+            }).then(response => {
+                setRegistrationData({
+                    daoURI: response.data.url,
+                    daoContractAddress: daoContractAddress
+                })
+                toggleRegScreen('REG_RECEIVED');
+            });
+        }
     }
 
     const EthNetworksSelect = (
@@ -92,10 +111,31 @@ const RegistrationForm = ({
         />
     )
 
+    const errorCallout = validationErrors ? (
+        <Callout
+            intent='danger'
+        >
+            <p>Please address the following issues:</p>
+            <ul>
+                {validationErrors.map((error, i) => {
+                    return <li key={i}>{error}</li>
+                })}
+            </ul>
+        </Callout>
+    ) : null;
+
     return (
         <Fragment>
             <h3>Register your DAO</h3>
-                <Divider vertical />
+                {validationErrors && (
+                    <Fragment>
+                        <Divider vertical />
+                        <div className='card-metadata'>
+                            {errorCallout}
+                        </div>
+                    </Fragment>
+                )}
+                <Divider vertical={true} />
                 <div className='wizard-row wizard-row-flex'>
                     <FormGroup
                         label='Contract address'
@@ -105,6 +145,8 @@ const RegistrationForm = ({
                     <InputGroup 
                         fill
                         placeholder='Enter DAO contract address'
+                        value={daoContractAddress}
+                        onChange={onChangeDaoContractAddress}
                     />
                 </div>
                 <div className='wizard-row'>
@@ -117,6 +159,8 @@ const RegistrationForm = ({
                             fill
                             id='name'
                             placeholder='Enter DAO name'
+                            value={daoName}
+                            onChange={onChangeDaoName}
                         />
                     </FormGroup>
                 </div>
@@ -142,6 +186,8 @@ const RegistrationForm = ({
                             fill
                             id='manager-address'
                             placeholder='Enter address of DAO manager'
+                            value={daoManagerAddress}
+                            onChange={onChangeDaoManager}
                         />
                     </FormGroup>
                 </div>
@@ -155,10 +201,12 @@ const RegistrationForm = ({
                             fill
                             id='governance-document'
                             placeholder='Enter URI to governance document (.md)'
+                            value={daoGovURI}
+                            onChange={onChangeDaoGovURI}
                         />
                     </FormGroup>
                 </div>
-                <Divider vertical />
+                <Divider vertical={true} />
                 {registrationError && (
                         <div className='wizard-row wizard-center'>
                         <Callout

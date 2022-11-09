@@ -11,7 +11,9 @@ const TopNavigation = (props) => {
 
     return (
         <header className='top-navigation'>
-            <a href="index.html"><img src={logo} className="logo" alt='DAOstar' /></a>
+            <Link to='/'>
+                <img src={logo} className="logo" alt='DAOstar' />
+            </Link>
             
             <nav className="menu">
                 <Link to='/#standard'>Standard</Link>

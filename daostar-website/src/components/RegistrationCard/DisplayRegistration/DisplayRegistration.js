@@ -1,5 +1,5 @@
 import { Button, Divider } from '@blueprintjs/core';
-import React, { Fragment } from 'react';
+import React, { Fragment, MouseEventHandler } from 'react';
 
 const DisplayRegistration = ({
     onClickEdit,
@@ -7,7 +7,7 @@ const DisplayRegistration = ({
     daoURI,
     description,
     name,
-    standalone
+    standalone 
 }) => {
  
     return (
@@ -21,7 +21,7 @@ const DisplayRegistration = ({
                     onClick={onClickEdit}
                 />
             )}
-            <Divider vertical />
+            <Divider />
             <div className='card-metadata'>
                 <p className='bp4-text-small wizard-no-margin'>
                     <span className='bp4-text-muted'>Contract address: </span>
@@ -36,7 +36,7 @@ const DisplayRegistration = ({
                     <span className='card-metadata-value'>None provided</span>
                 </p>
             </div>
-            <Divider vertical />
+            <Divider />
             <div className='card-metadata'>
                 <h6>Description</h6>
                 <p className='bp4-text-large'>{description}</p>

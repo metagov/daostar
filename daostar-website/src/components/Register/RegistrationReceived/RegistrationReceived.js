@@ -4,40 +4,39 @@ import React, { Fragment } from 'react';
 import CopyField from '../../ui/CopyField/CopyField';
 
 const RegistrationReceived = ({
-    registrationData
+    daoURI,
+    daoContractAddress,
+    isUpdate = false
 }) => {
 
     const { isOpen, open } = useConnectModal();
 
-    const callDataText = `
-        registerDAO (${registrationData.daoContractAddress}) { daoURI; managerAddress }
-    `
-
     return (
         <Fragment>
-            <h3>Registration received!</h3>
-            <Divider vertical />
+            <h3>{isUpdate ? 'Updated registration received' : 'Registration received!'}</h3>
+            <Divider vertical={true} />
             <div className='wizard-row wizard-center'>
                 <p className='wizard-margin-bottom-8'>
                     Your DAO URI has been created.
                 </p>
                 <div className='wizard-margin-bottom-8'>
                     <CopyField
-                        text={registrationData.daoURI}
+                        text={daoURI}
                     />
                 </div>
                 <p className='wizard-margin-bottom-8'>
                     To complete registration, propose this transaction to your DAO:
                 </p>
                 <Button 
+                    disabled
                     className='wizard-margin-bottom-8'
                     intent='primary'
-                    text='Connect as DAO'
+                    text='Connect as DAO (coming soon)'
                     onClick={open}
                     loading={isOpen}
                 />
             </div>
-            <Divider vertical />
+            <Divider vertical={true} />
             <div className='wizard-row'>
                 <p className='wizard-center'>
                     Or, manually copy transaction to your DAO:
@@ -51,19 +50,7 @@ const RegistrationReceived = ({
                     <CopyField
                         id='address'
                         fill={true}
-                        text={registrationData.daoContractAddress}
-                    />
-                </FormGroup>
-            </div>
-            <div className='wizard-row'>
-                <FormGroup
-                    label='Value'
-                    labelFor='value'
-                >
-                    <CopyField
-                        id='value'
-                        fill={true}
-                        text={`0`}
+                        text={daoContractAddress}
                     />
                 </FormGroup>
             </div>
@@ -72,21 +59,10 @@ const RegistrationReceived = ({
                     label='Call Data'
                     labelFor='call-data'
                 >
-                    <CopyField
-                        id='call-data'
-                        fill={true}
-                        text={callDataText}
-                    />
-                </FormGroup>
-            </div>
-            <div className='wizard-row'>
-                <FormGroup
-                    label='Advanced Settings'
-                    labelFor='advanced-settings'
-                >
                     <TextArea 
                         fill
                         id='advanced-settings'
+                        value={'{ ABI would go here }'}
                     />
                 </FormGroup>
             </div>

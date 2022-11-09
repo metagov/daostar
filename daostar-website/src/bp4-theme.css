@@ -76,7 +76,7 @@ body {
     transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
-.bp4-button.bp4-intent-primary:hover {
+.bp4-button.bp4-intent-primary:not(.bp4-disabled):hover {
     background-color: var(--card-bg);
     color: var(--primary-color-hover);
     border: 1px solid var(--primary-color-hover)
@@ -84,8 +84,12 @@ body {
 
 .bp4-callout.bp4-intent-danger {
     background: rgba(226, 68, 68, 0.4);
-    /* border: 1px solid rgba(226, 68, 68, 1); */
     color: #E24444;
+}
+
+.bp4-callout ul {
+    color: #fff;
+    padding: 0px 14px;
 }
 
 * .bp4-text-small {
@@ -109,4 +113,16 @@ body {
 .bp4-editable-text-editing,
 .bp4-editable-text-editing .bp4-editable-text-content {
     background-color: black;
+}
+
+.bp4-tooltip2 .bp4-popover2-content {
+    background-color: #000;
+    font-size: 14px;
+    font-family: var(--card-font);
+    padding: 4px 12px;
+}
+
+.bp4-tooltip2 .bp4-popover2-arrow-border,
+.bp4-tooltip2 .bp4-popover2-arrow-fill {
+    fill: #000;
 }

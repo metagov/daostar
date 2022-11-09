@@ -1,0 +1,30 @@
+.inline-text-field-expanded {
+    margin-bottom: 16px;
+}
+
+p + .inline-text-field-expanded { 
+    margin-top: 16px;
+}
+
+.inline-text-field-expanded .bp4-form-group {
+    margin-bottom: 8px;
+}
+
+.inline-text-field-expanded .bp4-callout {
+    font-size: 12px;
+}
+
+.inline-text-field-value {
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.inline-text-field-value:hover {
+    opacity: 1;
+}
+
+.inline-text-field-value svg {
+    position: relative;
+    top: -2px;
+}

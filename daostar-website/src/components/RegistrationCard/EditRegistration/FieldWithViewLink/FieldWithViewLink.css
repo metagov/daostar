@@ -1,0 +1,22 @@
+.field-with-view-link {
+    position: relative;
+}
+
+a.view-link {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    font-size: 12px;
+    border-bottom: 0;
+    transition: opacity 0.3s;
+}
+
+.view-link.hidden {
+    opacity: 0;
+}
+
+.view-link svg {
+    margin-right: 4px;
+    position: relative;
+    top: -2px;
+}

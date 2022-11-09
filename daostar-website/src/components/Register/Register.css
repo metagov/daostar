@@ -27,6 +27,10 @@
     font-size: 14px;
 }
 
+.wizard-card p.bp4-text-small {
+    font-size: 12px;
+}
+
 .wizard-row .bp4-form-group {
     margin-bottom: 0;
 }

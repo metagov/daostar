@@ -15,7 +15,7 @@ function App() {
     projectId: '<YOUR_PROJECT_ID>',
     theme: 'dark',
     accentColor: 'default',
-    ethereum: {
+    ethereum: { 
       appName: 'DAOstar'
     }
   }
@@ -23,10 +23,9 @@ function App() {
   const { account, isReady } = useAccount();
 
   useEffect(() => {
-    console.log('account', account);
   }, [account]);
 
-  return (
+  return ( 
     <div className="App">
       <TopNavigation />
       {/* <Homepage /> */}

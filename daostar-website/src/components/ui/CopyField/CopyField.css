@@ -1,3 +1,8 @@
+.copy-field-container .bp4-popover2-target {
+    width: 100%;
+    max-width: 100%;
+}
+
 .copy-field-container .bp4-button.copy-field,
 .copy-field-container .bp4-button.copy-field:hover {
     background-color: #424242;

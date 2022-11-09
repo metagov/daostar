@@ -34,9 +34,7 @@ const Register = (props) => {
                         />
                     )}
                     {registrationScreen === 'REG_RECEIVED' && (
-                        <RegistrationReceived 
-                            registrationData={registrationData}
-                        />
+                        <RegistrationReceived {...registrationData} />
                     )}
                 </Card>
             </div>
