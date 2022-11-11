@@ -29,11 +29,12 @@
   box-sizing: border-box;
 }
 
-:root {
+:root, * {
   --clr-light: rgb(233, 233, 233);
   --clr-dark: #191919;
   --clr-accent: #F8E441;
-  --font: 'Geogrotesque', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  --font: 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  font-family: 'Geogrotesque';
 }
 
 

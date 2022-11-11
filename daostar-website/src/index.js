@@ -1,20 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Web3ReactProvider } from '@web3-react/core'
+import { Web3Provider } from "@ethersproject/providers";
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { FocusStyleManager } from "@blueprintjs/core";
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
+function getLibrary(provider) {
+  return new Web3Provider(provider);
+}
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Web3ReactProvider>
   </React.StrictMode>
 );
 

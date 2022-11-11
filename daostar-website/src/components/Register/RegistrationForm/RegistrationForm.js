@@ -61,7 +61,7 @@ const RegistrationForm = ({
         if (daoName === '') errors.push(`DAO must have a name`);
         if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address');
         if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address');
-        if (!validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
+        if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
         if (errors.length > 0) {
             setErrors(errors);
             window.scrollTo(0, 0);
