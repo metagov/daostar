@@ -1,0 +1,14 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "forge build",
+    "deploy:goerli": "EVM_NETWORK=goerli source .env && forge script script/solidity/Deploy.s.sol --fork-url $GOERLI_RPC_URL --private-key $PRIVATE_KEY --verify --etherscan-api-key $ETHERSCAN_KEY -vvvv --broadcast",
+    "test": "forge test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
