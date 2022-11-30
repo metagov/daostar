@@ -1,4 +1,11 @@
-# Moloch
+# DAOStar API
+
+This serverless API is used to serve results on members, proposals, and activity log URIs for various DAO frameworks. It works by translating subgraph or other indexers into DAOstar formats.
+
+It can be forked to support other DAO frameworks.
+
+
+## Moloch
 
 *This reference implementation has not been finalized. It is pending changes to reflect the most recent version of the DAO standard.*
 
@@ -276,5 +283,11 @@ interface IEIP_TBD {
 
 function setDaoUri(string memory _newUri) external minionOnly;
 ```
+
+## Aave
+
+## DAOStack
+
+## Gnosis Safe
 
 -

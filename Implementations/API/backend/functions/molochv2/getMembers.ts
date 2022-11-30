@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
-import { graphConfig } from 'functions/config'
+import { daohausGraphConfig } from 'functions/config'
 import fetch from 'node-fetch'
 
 function apiRequest(path: string, method: string, data: any) {
@@ -17,8 +17,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
     if (!network) return { statusCode: 400, message: 'Missing network' }
     
-    console.log({graphConfig})
-    const path = graphConfig[network]
+    console.log({graphConfig: daohausGraphConfig})
+    const path = daohausGraphConfig[network]
     if (!path) return { statusCode: 400, message: 'Missing config for network' }
 
     const eventId = event?.pathParameters?.id
