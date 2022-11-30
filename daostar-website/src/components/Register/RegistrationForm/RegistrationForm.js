@@ -106,7 +106,10 @@ const RegistrationForm = ({
             iconProps={{ icon: 'caret-down', color: '#fff' }}
             placeholder='Select framework'
             options={[
-                { label: 'Custom', value: 'custom' }
+                { label: 'Custom', value: 'custom' },
+                { label: 'Moloch', value: 'moloch' },
+                { label: 'Safe', value: 'safe' },
+                { label: 'DAODAO', value: 'daodao' },
             ]}
         />
     )

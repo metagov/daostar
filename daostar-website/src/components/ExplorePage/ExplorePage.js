@@ -2,18 +2,24 @@ import React from 'react';
 import RegistrationCard from '../RegistrationCard/RegistrationCard';
 import { mockExploreData } from './mockExploreData';
 import './ExplorePage.css';
+import { useQuery } from '@apollo/client';
+import REGISTRATIONS from './queries/registrations';
 
 const ExplorePage = ({
 
 }) => {
 
-    console.log('mockExploreData', mockExploreData);
+    const { loading, error, data } = useQuery(REGISTRATIONS);
+    if (error) return 'error';
+    if (loading) return 'loading...';
 
-    const daoCards = mockExploreData.map((dao, i) => {
+    console.log('data', data);
+
+    const daoCards = data.newRegistrations.map((registration, i) => {
         return (
             <RegistrationCard 
                 key={i}
-                {...dao}
+                {...registration}
             />
         )
     })

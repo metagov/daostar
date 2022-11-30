@@ -73,7 +73,7 @@ const EditRegistration = ({
         if (!validator.isURL(daoMembersURI)) errors.push('Members URI must be a valid URI');
         if (!validator.isURL(daoActivityLogURI)) errors.push('Activity Log URI must be a valid URI');
         if (!validator.isURL(daoProposalsURI)) errors.push('Proposals URI must be a valid URI');
-        if (!validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
+        if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
         if (errors.length > 0) {
             setErrors(errors);
             window.scrollTo(0, 0);
@@ -91,7 +91,6 @@ const EditRegistration = ({
                     }
                 } 
             }).then(response => {
-                console.log('response', response);
                 setUpdatedData({
                     daoURI: response.data.url,
                     daoContractAddress: daoContractAddress

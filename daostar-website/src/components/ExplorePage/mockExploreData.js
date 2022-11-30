@@ -8,7 +8,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
         "@context": "<http://www.daostar.org/schemas>",
@@ -19,7 +19,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
         "@context": "<http://www.daostar.org/schemas>",
@@ -30,7 +30,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
         "@context": "<http://www.daostar.org/schemas>",
@@ -41,7 +41,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
         "@context": "<http://www.daostar.org/schemas>",
@@ -52,7 +52,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
         "@context": "<http://www.daostar.org/schemas>",
@@ -63,6 +63,6 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
-        "daoURI": "https://api.daostar.org/mutable/eip155:1:0xff68126dE027016702a54F20c12B2587C3619b70"
+        "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     }
 ]

@@ -6,6 +6,7 @@ import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { FocusStyleManager } from "@blueprintjs/core";
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,11 +17,18 @@ function getLibrary(provider) {
   return new Web3Provider(provider);
 }
 
+const client = new ApolloClient({
+  uri: `https://api.studio.thegraph.com/query/38146/daostar-goerli/0.2`,
+  cache: new InMemoryCache(),
+});
+
 root.render(
   <React.StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
       <BrowserRouter>
-        <App />
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
       </BrowserRouter>
     </Web3ReactProvider>
   </React.StrictMode>

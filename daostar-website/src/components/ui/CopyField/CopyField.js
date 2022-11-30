@@ -12,7 +12,7 @@ const CopyField = ({
     const [copyLabel, setCopyLabel] = useState('Copy');
     const onCopy = () => {
         navigator.clipboard.writeText(text).then(function() {
-            setCopyLabel('Copied');
+            setCopyLabel('✔ Copied');
             setTimeout(() => setCopyLabel('Copy'), 5000);
         });
     }

@@ -1,6 +1,8 @@
 import { Button, Divider, FormGroup, Icon, InputGroup, TextArea } from '@blueprintjs/core';
 import { useConnectModal } from '@web3modal/react';
+import { ethers } from 'ethers';
 import React, { Fragment } from 'react';
+import RegistrationContract from '../../../abi/RegistrationContract';
 import CopyField from '../../ui/CopyField/CopyField';
 
 const RegistrationReceived = ({
@@ -10,6 +12,24 @@ const RegistrationReceived = ({
 }) => {
 
     const { isOpen, open } = useConnectModal();
+    const factoryContracts = {
+        mainNet: `TBD`,
+        goerli: `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`
+    }
+
+    const regContract = new ethers.Contract(`0x5ef59b7cDe41b744f36b6e07fEF230884F800529`, RegistrationContract);
+    const salt = `0x1000000000000000000000000000000000000000000000000000000000000000`;
+    const managerExample = `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`;
+    const contracts = [];
+    const bytes = [];
+    const regData = [
+        salt,
+        daoURI,
+        managerExample,
+        contracts,
+        bytes
+    ]
+    const rawRegData = regContract.interface.encodeFunctionData("summonRegistration", [...regData]);
 
     return (
         <Fragment>
@@ -50,7 +70,31 @@ const RegistrationReceived = ({
                     <CopyField
                         id='address'
                         fill={true}
-                        text={daoContractAddress}
+                        text={factoryContracts.goerli}
+                    />
+                </FormGroup>
+            </div>
+            <div className='wizard-row'>
+                <FormGroup
+                    label='Value'
+                    labelFor='value'
+                >
+                    <CopyField
+                        fill
+                        id='value'
+                        text={'0'}
+                    />
+                </FormGroup>
+            </div>
+            <div className='wizard-row'>
+                <FormGroup
+                    label='Function'
+                    labelFor='function'
+                >
+                    <CopyField
+                        fill
+                        id='function'
+                        text={`summonRegistration(bytes32 salt,string daoURI_,address manager,address[] contracts,bytes[] data)`}
                     />
                 </FormGroup>
             </div>
@@ -61,8 +105,11 @@ const RegistrationReceived = ({
                 >
                     <TextArea 
                         fill
+                        // disabled
                         id='advanced-settings'
-                        value={'{ ABI would go here }'}
+                        value={rawRegData}
+                        growVertically
+                        style={{ minHeight: 200 }}
                     />
                 </FormGroup>
             </div>

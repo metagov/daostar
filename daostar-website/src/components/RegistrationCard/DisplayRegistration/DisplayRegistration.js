@@ -39,7 +39,9 @@ const DisplayRegistration = ({
             <Divider />
             <div className='card-metadata'>
                 <h6>Description</h6>
-                <p className='bp4-text-large'>{description}</p>
+                <p className='bp4-text-large'>
+                    {description ? description : 'None provided'}
+                </p>
                 <div className='card-metadata-row'>
                     <div className='card-metadata-item'>
                         <h6>Members</h6>

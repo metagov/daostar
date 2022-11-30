@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
-import { Button, Card, Divider, FormGroup } from '@blueprintjs/core';
+import { Button, Card, Divider, FormGroup, Spinner } from '@blueprintjs/core';
 import './RegistrationCard.css';
 import { Link } from 'react-router-dom';
 import DisplayRegistration from './DisplayRegistration/DisplayRegistration';
 import EditRegistration from './EditRegistration/EditRegistration';
 import RegistrationReceived from '../Register/RegistrationReceived/RegistrationReceived';
+import useAxios from 'axios-hooks';
 
 const RegistrationCard = ({
-    name,
     daoURI,
+    daoAddress,
     managerAddress,
-    description,
-    membersURI,
-    activityLogURI,
-    proposalsURI,
-    governanceURI,
     standalone = false // whether this card is presented within the explore view or on its own page
 }) => {
     
+    // TODO: use daoURI when real registrations exist
+    const mockDaoURI = `${process.env.REACT_APP_API_URL}/immutable/QmQxai8pjtJg8wSZCvP2YcSDMAMLMEqQJjaS45brkFCvho`;
+    const regID = mockDaoURI.substring(mockDaoURI.indexOf('immutable/')).substring(10);
+    console.log('regID', regID);
+    const [{ data, loading, error }] = useAxios(mockDaoURI);
 
     const [cardScreen, setScreen] = useState('DISPLAY'); // DISPLAY | EDIT | UPDATED
     const onClickEdit = () => setScreen('EDIT');
@@ -25,9 +26,23 @@ const RegistrationCard = ({
     const onCancelEdit = () => setScreen('DISPLAY');
     const [updatedData, setUpdatedData] = useState(null);
 
-    // const contractAddress = daoURI.substring(daoURI.indexOf('0x')); TODO: update when immutable API supports contract address
-    const contractAddress = 'Not yet implemented on immutable API'
-    const regID = daoURI.substring(daoURI.indexOf('eip'));
+    if (error) return 'error';
+    if (loading) return (
+        <Card className='wizard-card registration-card'>
+            <Spinner size={16} color={'#ffffff'} />
+        </Card>
+    );
+
+    const { 
+        name, 
+        description, 
+        membersURI, 
+        proposalsURI, 
+        activityLogURI, 
+        governanceURI 
+    } = data;
+
+    const contractAddress = daoAddress;
     
     const regCard = (
         <Card
@@ -36,7 +51,7 @@ const RegistrationCard = ({
             {cardScreen === 'DISPLAY' && (
                 <DisplayRegistration 
                     onClickEdit={onClickEdit}
-                    daoURI={daoURI}
+                    daoURI={mockDaoURI}
                     contractAddress={contractAddress}
                     description={description}
                     name={name}
