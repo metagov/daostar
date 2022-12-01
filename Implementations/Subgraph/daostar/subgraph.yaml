@@ -1,0 +1,44 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+templates:
+  - name: EIP4824Registration
+    kind: ethereum/contract
+    network: goerli
+    source:
+      abi: EIP4824Registration
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      entities:
+        - Registration
+      abis:
+        - name: EIP4824Registration
+          file: ./abis/EIP4824Registration.json
+      eventHandlers:
+        - event: NewURI(string,address) 
+          handler: handleNewURIGoerli
+dataSources:
+  - kind: ethereum
+    name: EIP4824RegistrationSummoner
+    network: goerli
+    source:
+      address: "0x5ef59b7cde41b744f36b6e07fef230884f800529"
+      abi: EIP4824RegistrationSummoner
+      startBlock: 7958681
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - NewRegistration
+        - RegistrationInstance
+      abis:
+        - name: EIP4824RegistrationSummoner
+          file: ./abis/EIP4824RegistrationSummoner.json
+      eventHandlers:
+        - event: NewRegistration(indexed address,string,address)
+          handler: handleNewRegistrationGoerli
+      file: ./src/mapping.ts
