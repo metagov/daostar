@@ -1,1 +1,10 @@
 .DS_Store
+
+*/**/node_modules
+*/**/.sst
+*/**/.build
+*/**/.env
+
+
+*/**/out
+*/**/cache
