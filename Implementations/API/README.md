@@ -1,4 +1,23 @@
-# Moloch
+# DAOStar API
+
+This serverless API is used to serve results on members, proposals, and activity log URIs for various DAO frameworks. It works by translating subgraph or other indexers into DAOstar formats.
+
+Currently supported DAOs and frameworks:
+
+| DAO       | Members URI | Proposals URI | Activity URI | Networks                                 |
+| --------- | ----------- | ------------- | ------------ | ---------------------------------------- |
+| Moloch v2 | Yes         | Yes           | No           | Mainnet, Gnosis Chain, Optimism, Rinkeby |
+| Moloch v3 | Yes         | Yes           | Yes          | Mainnet, Gnosis Chain, Optimism, Rinkeby |
+| DAOStack  | Yes         | Yes           | No           | Mainnet                                  |
+| Aave      | Yes         | Yes           | No           | Mainnet                                  |
+| Safe      | Yes         | Yes           | Yes          | Mainnet                                  |
+
+
+It can be forked to support other DAO frameworks.
+
+
+
+## Moloch
 
 *This reference implementation has not been finalized. It is pending changes to reflect the most recent version of the DAO standard.*
 
@@ -276,5 +295,11 @@ interface IEIP_TBD {
 
 function setDaoUri(string memory _newUri) external minionOnly;
 ```
+
+## Aave
+
+## DAOStack
+
+## Gnosis Safe
 
 -
