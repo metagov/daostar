@@ -1,6 +1,8 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
+features:
+  - ipfsOnEthereumContracts
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
@@ -9,7 +11,7 @@ templates:
       abi: EIP4824Registration
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mapping.ts
       entities:
@@ -30,7 +32,7 @@ dataSources:
       startBlock: 7958681
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - NewRegistration

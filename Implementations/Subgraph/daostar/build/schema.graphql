@@ -4,4 +4,10 @@ type RegistrationInstance @entity {
     daoAddress: Bytes!
     network: BigInt!
     daoURI: String! # string
+    daoName: String
+    daoDescription: String
+    membersURI: String
+    proposalsURI: String
+    governanceURI: String
+    activityLogURI: String
 }
