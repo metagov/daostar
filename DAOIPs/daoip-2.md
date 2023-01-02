@@ -1,5 +1,5 @@
 ---
-eip: 4824
+daoip: 2
 title: Common Interfaces for DAOs
 description: An API for decentralized autonomous organizations (DAOs).
 author: Joshua Tan (@thelastjosh), Isaac Patka (@ipatka), Ido Gershtein <ido@daostack.io>, Eyal Eithcowich <eyal@deepdao.io>, Michael Zargham (@mzargham), Sam Furter (@nivida)
@@ -8,6 +8,8 @@ status: Draft
 type: Standards Track
 category: ERC
 created: 2022-02-17
+---
+eip: 4824
 ---
 
 ## Abstract
