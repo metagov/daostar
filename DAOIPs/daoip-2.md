@@ -9,8 +9,6 @@ type: Standards Track
 category: ERC
 created: 2022-02-17
 ---
-eip: 4824
----
 
 ## Abstract
 
