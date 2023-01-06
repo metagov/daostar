@@ -4,8 +4,35 @@ import { NewURI } from '../generated/templates/EIP4824Registration/EIP4824Regist
 import { RegistrationInstance } from '../generated/schema'
 import { EIP4824Registration } from '../generated/templates'
 
+/* 
+ * Goerli
+*/
+
 export function handleNewRegistrationGoerli(event: NewRegistration): void {
     let chainId = '5'
+    handleNewRegistration(event, chainId)
+}
+
+export function handleNewURIGoerli(event: NewURI): void {
+    let chainId = '5'
+    handleNewURI(event, chainId)
+}
+
+/* 
+ * Mainnet
+*/
+
+export function handleNewRegistrationMainnet(event: NewRegistration): void {
+    let chainId = '1'
+    handleNewRegistration(event, chainId)
+}
+
+export function handleNewURIMainnet(event: NewURI): void {
+    let chainId = '1'
+    handleNewURI(event, chainId)
+}
+
+export function handleNewRegistration(event: NewRegistration, chainId: string): void {
     let daoAddress = event.params.daoAddress.toHex()
     let daoId = chainId + '-' + daoAddress
     let registrationInstance = RegistrationInstance.load(daoId)
@@ -23,8 +50,8 @@ export function handleNewRegistrationGoerli(event: NewRegistration): void {
     registrationInstance.save()
 }
 
-export function handleNewURIGoerli(event: NewURI): void {
-    let chainId = '5'
+
+function handleNewURI(event: NewURI, chainId: string): void {
     let daoAddress = event.params.daoAddress.toHex()
     let daoId = chainId + '-' + daoAddress
     let registrationInstance = RegistrationInstance.load(daoId)
