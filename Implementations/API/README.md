@@ -9,7 +9,7 @@ Currently supported DAOs and frameworks:
 | Moloch v2 | Yes         | Yes           | No           | Mainnet, Gnosis Chain, Optimism, Rinkeby |
 | Moloch v3 | Yes         | Yes           | Yes          | Mainnet, Gnosis Chain, Optimism, Rinkeby |
 | DAOStack  | Yes         | Yes           | No           | Mainnet                                  |
-| Aave      | Yes         | Yes           | No           | Mainnet                                  |
+| Aave      | No          | Yes           | No           | Mainnet                                  |
 | Safe      | Yes         | Yes           | Yes          | Mainnet                                  |
 
 
@@ -297,6 +297,58 @@ function setDaoUri(string memory _newUri) external minionOnly;
 ```
 
 ## Aave
+
+*This reference implementation has not been finalized. It is pending changes to reflect the most recent version of the DAO standard.*
+
+### Proposals URI
+
+Demo endpoint: `https://maj79gmufj.execute-api.us-east-1.amazonaws.com/aave/proposals/1/0xec568fffba86c094cf06b22134b23074dfe2252c`
+
+Demo response:
+
+
+```jsx
+{
+  "@context": {
+    "@vocab": "http://daostar.org/"
+  },
+  "type": "Aave governance v2",
+  "name": "0xec568fffba86c094cf06b22134b23074dfe2252c",
+  "proposals": [
+    {
+      "id": "0",
+      "type": "proposal",
+      "status": "Executed",
+      "contentURI": "Na"
+    },
+    {
+      "id": "1",
+      "type": "proposal",
+      "status": "Executed",
+      "contentURI": "Na"
+    },
+    {
+      "id": "10",
+      "type": "proposal",
+      "status": "Executed",
+      "contentURI": "https://governance.aave.com/t/aave-protocol-v1-v2-migration-tool-and-transition-plan/2053"
+    },
+    {
+      "id": "100",
+      "type": "proposal",
+      "status": "Executed",
+      "contentURI": "https://governance.aave.com/t/proposal-to-add-maticx-to-aave-v3-polygon-market/7995"
+    },
+    {
+      "id": "101",
+      "type": "proposal",
+      "status": "Executed",
+      "contentURI": "https://governance.aave.com/t/arc-re-enabling-eth-borrowing-post-merge/9657"
+    }
+  ]
+}
+```
+
 
 ## DAOStack
 
