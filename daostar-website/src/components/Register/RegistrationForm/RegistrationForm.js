@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import validator from 'validator';
 import useAxios from 'axios-hooks';
 import { Button, Callout, Divider, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
+import FRAMEWORK_URIs from './FRAMEWORK_URIs';
 
 const RegistrationForm = ({
     toggleRegScreen,
@@ -17,14 +18,33 @@ const RegistrationForm = ({
     const [daoName, setDaoName] = useState('');
     const onChangeDaoName = (e) => setDaoName(e.target.value);
 
-    const [daoFramework, setDaoFramework] = useState('custom'); 
-    const onChangeDaoFramework = (e) => setDaoFramework(e.target.value);
+    const [daoMembersURI, setDaoMembersURI] = useState('');
+    const onChangeMembersURI = (e) => setDaoMembersURI(e.target.value);
+
+    const [daoActivityURI, setDaoActivityURI] = useState('');
+    const onChangeActivityURI = (e) => setDaoActivityURI(e.target.value);
+
+    const [daoProposalsURI, setDaoProposalsURI] = useState('');
+    const onChangeProposalsURI = (e) => setDaoProposalsURI(e.target.value);
+
+    const [daoContractsRegistryURI, setDaoContractsRegistryURI] = useState('');
+    const onChangeContractsRegistryURI = (e) => setDaoContractsRegistryURI(e.target.value);
 
     const [daoManagerAddress, setDaoManagerAddress] = useState('');
     const onChangeDaoManager = (e) => setDaoManagerAddress(e.target.value);
 
     const [daoGovURI, setDaoGovURI] = useState('');
     const onChangeDaoGovURI = (e) => setDaoGovURI(e.target.value);
+
+    const [daoFramework, setDaoFramework] = useState('custom'); 
+    const onChangeDaoFramework = (e) => {
+        setDaoFramework(e.target.value);
+        // if the user chooses a DAO framework, default the URIs to framework-specific values
+        setDaoMembersURI(FRAMEWORK_URIs[e.target.value].membersURI);
+        setDaoActivityURI(FRAMEWORK_URIs[e.target.value].activityURI);
+        setDaoProposalsURI(FRAMEWORK_URIs[e.target.value].proposalsURI);
+        setDaoGovURI(FRAMEWORK_URIs[e.target.value].governanceURI);
+    }
 
     const [registrationError, setRegError] = useState(null);
 
@@ -58,20 +78,31 @@ const RegistrationForm = ({
 
     const onRegister = () => {
         let errors = [];
-        if (daoName === '') errors.push(`DAO must have a name`);
         if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address');
+        if (daoName === '') errors.push(`DAO must have a name`);
         if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address');
         if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
+        if (!validator.isURL(daoMembersURI)) errors.push(`Members URI must be a valid URI`);
+        if (!validator.isURL(daoActivityURI)) errors.push(`Activity Log URI must be a valid URI`);
+        if (!validator.isURL(daoProposalsURI)) errors.push(`Proposals URI must be a valid URI`);
+        if (daoContractsRegistryURI !== '' && !validator.isURL(daoContractsRegistryURI)) errors.push(`Contracts Registry URI must be a valid URI`);
+        
         if (errors.length > 0) {
             setErrors(errors);
             window.scrollTo(0, 0);
         }
         if (errors.length === 0) {
-            const registrationData = {
+            let registrationData = {
                 data: {
                     name: daoName,
                     governanceURI: daoGovURI,
                 }
+            }
+            if (daoFramework === 'custom') {
+                registrationData.data.membersURI = daoMembersURI;
+                registrationData.data.proposalsURI = daoProposalsURI;
+                registrationData.data.activityLogURI = daoActivityURI;
+                registrationData.data.contractsRegistryURI = daoContractsRegistryURI;
             }
             executeRegistration({
                 data: registrationData
@@ -104,6 +135,7 @@ const RegistrationForm = ({
             id='framework'
             fill
             iconProps={{ icon: 'caret-down', color: '#fff' }}
+            onChange={onChangeDaoFramework}
             placeholder='Select framework'
             options={[
                 { label: 'Custom', value: 'custom' },
@@ -178,6 +210,68 @@ const RegistrationForm = ({
                 </div>
                 <div className='wizard-row'>
                     <Divider />
+                </div>
+                <div>
+                    <div className='wizard-row'>
+                        <FormGroup
+                            label='Members URI'
+                            labelFor='members-uri'
+                            fill
+                        >
+                            <InputGroup 
+                                fill
+                                id='members-uri'
+                                value={daoMembersURI}
+                                placeholder='Enter URI to members'
+                                onChange={onChangeMembersURI}
+                            />
+                        </FormGroup>
+                    </div>
+                    <div className='wizard-row'>
+                        <FormGroup
+                            label='Activity Log URI'
+                            labelFor='activity-log-uri'
+                            fill
+                        >
+                            <InputGroup 
+                                fill
+                                id='activity-log-uri'
+                                placeholder='Enter URI to activity log'
+                                value={daoActivityURI}
+                                onChange={onChangeActivityURI}
+                            />
+                        </FormGroup>
+                    </div>
+                    <div className='wizard-row'>
+                        <FormGroup
+                            label='Proposals URI'
+                            labelFor='proposals-uri'
+                            fill
+                        >
+                            <InputGroup 
+                                fill
+                                id='proposals-uri'
+                                placeholder='Enter URI to proposals'
+                                value={daoProposalsURI}
+                                onChange={onChangeProposalsURI}
+                            />
+                        </FormGroup>
+                    </div>
+                    <div className='wizard-row'>
+                        <FormGroup
+                            label='Contracts Registry URI (optional)'
+                            labelFor='contracts-registry-uri'
+                            fill
+                        >
+                            <InputGroup 
+                                fill
+                                id='contracts-registry-uri'
+                                placeholder='Enter URI to contracts registry'
+                                value={daoContractsRegistryURI}
+                                onChange={onChangeContractsRegistryURI}
+                            />
+                        </FormGroup>
+                    </div>
                 </div>
                 <div className='wizard-row'>
                     <FormGroup

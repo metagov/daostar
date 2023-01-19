@@ -18,7 +18,7 @@ function getLibrary(provider) {
 }
 
 const client = new ApolloClient({
-  uri: `https://api.studio.thegraph.com/query/38146/daostar-goerli/0.2`,
+  uri: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
   cache: new InMemoryCache(),
 });
 

@@ -8,39 +8,26 @@ import RegistrationReceived from '../Register/RegistrationReceived/RegistrationR
 import useAxios from 'axios-hooks';
 
 const RegistrationCard = ({
+    id,
     daoURI,
     daoAddress,
+    daoDescription,
+    daoName,
+    governanceURI = '',
+    membersURI = '',
+    proposalsURI = '',
+    activityLogURI = '',
+    network,
+    registrationAddress,
     managerAddress,
     standalone = false // whether this card is presented within the explore view or on its own page
 }) => {
-    
-    // TODO: use daoURI when real registrations exist
-    const mockDaoURI = `${process.env.REACT_APP_API_URL}/immutable/QmQxai8pjtJg8wSZCvP2YcSDMAMLMEqQJjaS45brkFCvho`;
-    const regID = mockDaoURI.substring(mockDaoURI.indexOf('immutable/')).substring(10);
-    console.log('regID', regID);
-    const [{ data, loading, error }] = useAxios(mockDaoURI);
 
     const [cardScreen, setScreen] = useState('DISPLAY'); // DISPLAY | EDIT | UPDATED
     const onClickEdit = () => setScreen('EDIT');
     const onSetCardScreen = (screen) => setScreen(screen);
     const onCancelEdit = () => setScreen('DISPLAY');
     const [updatedData, setUpdatedData] = useState(null);
-
-    if (error) return 'error';
-    if (loading) return (
-        <Card className='wizard-card registration-card'>
-            <Spinner size={16} color={'#ffffff'} />
-        </Card>
-    );
-
-    const { 
-        name, 
-        description, 
-        membersURI, 
-        proposalsURI, 
-        activityLogURI, 
-        governanceURI 
-    } = data;
 
     const contractAddress = daoAddress;
     
@@ -50,21 +37,26 @@ const RegistrationCard = ({
         >
             {cardScreen === 'DISPLAY' && (
                 <DisplayRegistration 
+                    id={id}
                     onClickEdit={onClickEdit}
-                    daoURI={mockDaoURI}
+                    daoURI={daoURI}
                     contractAddress={contractAddress}
-                    description={description}
-                    name={name}
+                    description={daoDescription}
+                    name={daoName}
                     managerAddress={managerAddress}
                     standalone={standalone}
+                    membersURI={membersURI}
+                    activityLogURI={activityLogURI}
+                    proposalsURI={proposalsURI}
+                    governanceURI={governanceURI}
                 />
             )}
             {cardScreen === 'EDIT' && (
                 <EditRegistration
-                    name={name}
+                    name={daoName}
                     daoURI={daoURI}
                     contractAddress={contractAddress}
-                    description={description}
+                    description={daoDescription}
                     onCancelEdit={onCancelEdit}
                     membersURI={membersURI}
                     activityLogURI={activityLogURI}
@@ -85,9 +77,9 @@ const RegistrationCard = ({
 
     if (!standalone) {
         return (
-            <Link to={`/registration/${regID}`} className='card-link'>
-                {regCard}
-            </Link>
+            // <Link to={`/registration/${id}`} className='card-link'>
+                regCard
+            // </Link>
         )
     }
 

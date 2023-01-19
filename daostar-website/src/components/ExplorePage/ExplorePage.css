@@ -12,3 +12,18 @@
 .explore-page .dao-cards .bp4-card {
     max-width: 438px;
 }
+
+.explore-page .filter {
+    margin-bottom: 56px;
+}
+
+@media (max-width: 950px) {
+    .explore-page {
+        max-width: 80%;
+    }
+
+    .explore-page .dao-cards .bp4-card {
+        max-width: none;
+    }
+    
+}

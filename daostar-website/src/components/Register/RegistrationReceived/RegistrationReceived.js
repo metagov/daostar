@@ -1,7 +1,7 @@
-import { Button, Divider, FormGroup, Icon, InputGroup, TextArea } from '@blueprintjs/core';
+import React, { Fragment } from 'react';
+import { Button, Divider, FormGroup, TextArea } from '@blueprintjs/core';
 import { useConnectModal } from '@web3modal/react';
 import { ethers } from 'ethers';
-import React, { Fragment } from 'react';
 import RegistrationContract from '../../../abi/RegistrationContract';
 import CopyField from '../../ui/CopyField/CopyField';
 
@@ -18,13 +18,15 @@ const RegistrationReceived = ({
     }
 
     const regContract = new ethers.Contract(`0x5ef59b7cDe41b744f36b6e07fEF230884F800529`, RegistrationContract);
-    const salt = `0x1000000000000000000000000000000000000000000000000000000000000000`;
+    const salt = `0x2000000000000000000000000000000000000000000000000000000000000000`; // TODO: generate salt
     const managerExample = `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`;
     const contracts = [];
     const bytes = [];
+    const daoIPFS_URI = `ipfs://${daoURI.substring(daoURI.indexOf(`immutable/`) + 10)}`;
+    console.log('ipfs', daoIPFS_URI);
     const regData = [
         salt,
-        daoURI,
+        daoIPFS_URI,
         managerExample,
         contracts,
         bytes

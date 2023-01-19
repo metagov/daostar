@@ -9,6 +9,7 @@ import { ConnectKitProvider, getDefaultClient } from "connectkit";
 
 import './App.css';
 import './bp4-theme.css';
+import Eye from './components/Homepage/Eye/Eye';
 
 const alchemyId = process.env.ALCHEMY_ID;
 
@@ -41,6 +42,7 @@ function App() {
         {/* <Homepage /> */}
 
         <Routes>
+          <Route path='/eye' element={<Eye />} />
           <Route path='/register' element={<Register />} />
           <Route path='/registration/:regID' element={<RegistrationPage />} />
           <Route path='/explore' element={<ExplorePage />} />

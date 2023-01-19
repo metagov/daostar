@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-const REGISTRATIONS = gql`
-    query Registrations {
-        registrationInstances(first: 5) {
+const REGISTRATION = gql`
+    query Registration($id: String) {
+        registrationInstance(id: $id) {
             id
             daoAddress
             daoURI
@@ -18,4 +18,4 @@ const REGISTRATIONS = gql`
     }
 `
 
-export default REGISTRATIONS;
+export default REGISTRATION;

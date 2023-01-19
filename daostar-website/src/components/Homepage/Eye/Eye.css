@@ -1,0 +1,8 @@
+.eye-canvas canvas {
+    height: 400px;
+    width: 400px;
+    display: block;
+    background: red;
+    position: fixed;
+    top: 0;
+}

@@ -189,7 +189,7 @@ iframe {
   align-items: flex-start;
   gap: 20px;
   /* flex-wrap: wrap; */
-  margin: 5% auto;
+  margin: 32px auto;
 }
 .rows > div {
   display: flex;

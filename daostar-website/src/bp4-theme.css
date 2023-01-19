@@ -82,6 +82,10 @@ body {
     border: 1px solid var(--primary-color-hover)
 }
 
+.bp4-button .bp4-icon {
+    color: #fff;
+}
+
 .bp4-callout.bp4-intent-danger {
     background: rgba(226, 68, 68, 0.4);
     color: #E24444;

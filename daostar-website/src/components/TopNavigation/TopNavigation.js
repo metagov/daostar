@@ -16,7 +16,7 @@ const TopNavigation = ({
             
             <nav className="menu">
                 <Link to='/#standard'>Standard</Link>
-                <Link to='/register'>Register</Link>
+                <a href='/register'>Register</a>
                 <Link to='/explore'>Explore</Link>
                 <Link to='/#roundtable'>Roundtable</Link>
                 <ConnectWallet />

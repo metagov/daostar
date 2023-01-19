@@ -1,19 +1,22 @@
+import { useQuery } from '@apollo/client';
 import { Button, Card, Spinner } from '@blueprintjs/core';
 import useAxios from 'axios-hooks';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RegistrationCard from '../RegistrationCard/RegistrationCard';
+import REGISTRATION from './queries/registration';
 
 const RegistrationPage = ({
 
 }) => {
 
     const { regID } = useParams();
-    const daoURI = `https://api.daostar.org/${regID}`
-    const contractAddress = regID.substring(9);
-    const requestURI = `${process.env.REACT_APP_API_URL}/immutable/${regID}`;
-    const [{ data, loading, error }] = useAxios(requestURI)
-    
+    const { loading, error, data } = useQuery(REGISTRATION, {
+        variables: {
+            id: regID
+        }
+    });
+    if (error) return 'error';    
     if (loading) return (
         <div className='centered-wizard'>
             <Card
@@ -28,13 +31,14 @@ const RegistrationPage = ({
     )
     if (error) return <p>Error!</p>
 
+    console.log('reg data', data);
+
     return (
         <div className='centered-wizard'>
             <RegistrationCard 
-                daoURI={daoURI}
-                contractAddress={contractAddress}
+                contractAddress={data.registrationInstance.daoAddress}
                 standalone={true}
-                {...data}
+                {...data.registrationInstance}
             />
             <div 
                 className='wizard-center'

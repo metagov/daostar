@@ -1,0 +1,75 @@
+.space-mono, .space-mono * {
+    font-family: var(--heading-font);
+}
+
+.Typewriter__wrapper {
+    font-family: var(--heading-font);
+}
+
+.font-700 {
+    font-weight: 700;
+}
+
+.no-transform {
+    text-transform: none;
+}
+
+.info-section .info-container {
+    display: flex;
+    gap: 48px;
+}
+
+.info-container .main-content {
+    flex-grow: 2;
+}
+
+.info-container .sidebar {
+    flex-grow: 2;
+}
+
+.sidebar.one-third {
+    min-width: 33%;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    line-height: 1.4;
+}
+
+.sidebar .btn {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.info-container .bp4-card {
+    max-width: 438px;
+}
+
+.button-info-group {
+    margin-bottom: 24px;
+}
+
+.button-info-group .btn {
+    margin-bottom: 8px;
+}
+
+.button-info-group p {
+    text-align: center;
+    margin-top: 0;
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.quote {
+    text-align: center;
+}
+
+.quote-author {
+    font-size: 16px;
+}
+
+@media screen and (max-width: 900px) {
+    .info-section .info-container {
+        flex-direction: column;
+    }
+}

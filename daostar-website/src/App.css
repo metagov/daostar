@@ -2,6 +2,7 @@
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 @import "~@blueprintjs/popover2/lib/css/blueprint-popover2.css";
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 /* Font imports */
 @font-face {
@@ -33,7 +34,9 @@
   --clr-light: rgb(233, 233, 233);
   --clr-dark: #191919;
   --clr-accent: #F8E441;
+  --clr-secondary: rgba(66, 142, 255, 1);
   --font: 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  --heading-font: 'Space Mono', 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
   font-family: 'Geogrotesque';
 }
 
@@ -118,6 +121,16 @@ a:hover, a.active {
   transition: 0.5s;
 }
 
+a.underline:hover {
+  text-decoration: underline;
+}
+
+a.no-underline,
+a.no-underline:hover {
+  border-bottom: none;
+  text-decoration: none;
+}
+
 
 .wrapper { 
   margin: 0 auto;
@@ -191,7 +204,7 @@ iframe {
   align-items: flex-start;
   gap: 20px;
   /* flex-wrap: wrap; */
-  margin: 5% auto;
+  margin: 24px auto;
 }
 .rows > div {
   display: flex;
@@ -407,6 +420,17 @@ footer {
 .btn.inactive:hover {
   box-shadow: 0 0 0 0;
   color: #999;
+}
+.btn.primary {
+  border: 1px solid var(--clr-accent) !important;
+  color: var(--clr-accent);
+}
+.btn.secondary {
+  border: 1px solid var(--clr-secondary) !important;
+  color: var(--clr-secondary);
+}
+.btn.secondary:hover { 
+  box-shadow: 5px 5px 0 0 var(--clr-secondary); 
 }
 
 /* Spline */

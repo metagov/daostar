@@ -4,6 +4,12 @@
     min-height: 100px;
 }
 
+.registration-card h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .card-metadata {
     padding: 12px 24px;
 }
@@ -25,6 +31,12 @@
     white-space: nowrap;
     display: inline-block;
     vertical-align: bottom;
+}
+
+.card-metadata-item svg {
+    position: relative;
+    top: -4px;
+    left: 4px;
 }
 
 .card-metadata-row {
