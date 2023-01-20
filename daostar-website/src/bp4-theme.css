@@ -1,0 +1,136 @@
+body {
+    --card-bg: rgb(41,41,41);
+    --card-bg-hover: rgb(52, 52, 52);
+    --card-border: rgb(78,78,78);
+    --card-border-hover: rgb(111, 111, 111);
+    --placeholder-color: rgb(156,156,156);
+    --card-font: 'IBM Plex Mono', monospace;
+    --primary-color: rgb(66,142,255);
+    --primary-color-hover: rgb(98, 159, 250);
+}
+
+.bp4-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 2px;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.bp4-card.wizard-card {
+    padding-left: 0;
+    padding-right: 0;
+    /* padding-bottom: 0; */
+}
+
+.bp4-divider {
+    border-bottom: 1px solid var(--card-border);
+    border-right: 1px solid var(--card-border);
+    margin: 0;
+}
+
+.bp4-label {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.bp4-input,
+.bp4-html-select select {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    font-family: var(--card-font);
+    box-shadow: none;
+    color: #fff;
+}
+
+.bp4-html-select select {
+    transition: background-color 0.3s;
+}
+
+.bp4-html-select select:hover {
+    background-color: var(--card-bg-hover);
+}
+
+.bp4-input::placeholder {
+    color: var(--placeholder-color);
+    font-family: var(--card-font);
+}
+
+.bp4-button {
+    font-family: var(--card-font);
+}
+
+.bp4-button:not([class*=bp4-intent-]) {
+    color: #fff;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border)
+}
+
+.bp4-button:not([class*=bp4-intent-]):hover {
+    background: var(--card-bg-hover);
+}
+
+.bp4-button.bp4-intent-primary {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.bp4-button.bp4-intent-primary:not(.bp4-disabled):hover {
+    background-color: var(--card-bg);
+    color: var(--primary-color-hover);
+    border: 1px solid var(--primary-color-hover)
+}
+
+.bp4-button .bp4-icon {
+    color: #fff;
+}
+
+.bp4-callout.bp4-intent-danger {
+    background: rgba(226, 68, 68, 0.4);
+    color: #E24444;
+}
+
+.bp4-callout ul {
+    color: #fff;
+    padding: 0px 14px;
+}
+
+* .bp4-text-small {
+    font-size: 12px;
+}
+
+.bp4-text-muted {
+    color: #9C9C9C;
+}
+
+.bp4-editable-text:hover {
+    background-color: var(--card-bg-hover);
+    border-radius: 4px;
+}
+
+.bp4-editable-text input,
+.bp4-editable-text-editing input {
+    background-color: black;
+}
+
+.bp4-editable-text-editing,
+.bp4-editable-text-editing .bp4-editable-text-content {
+    background-color: black;
+}
+
+.bp4-tooltip2 .bp4-popover2-content {
+    background-color: #000;
+    font-size: 14px;
+    font-family: var(--card-font);
+    padding: 4px 12px;
+}
+
+.bp4-tooltip2 .bp4-popover2-arrow-border,
+.bp4-tooltip2 .bp4-popover2-arrow-fill {
+    fill: #000;
+}
+
+textarea.bp4-input {
+    resize: vertical;
+}  

@@ -122,7 +122,6 @@
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         const form_data = Object.fromEntries(new FormData(form).entries());
-        console.log(form_data);
         if (checkboxElem.checked) {
             window.location.href = `/api/view?cid=${form_data.contract_id}`;
         } else {

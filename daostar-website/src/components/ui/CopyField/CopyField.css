@@ -1,0 +1,22 @@
+.copy-field-container .bp4-popover2-target {
+    width: 100%;
+    max-width: 100%;
+}
+
+.copy-field-container .bp4-button.copy-field,
+.copy-field-container .bp4-button.copy-field:hover {
+    background-color: #424242;
+    color: #9c9c9c;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.copy-field-container .bp4-button .bp4-button-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.copy-field-container .bp4-button.copy-field .bp4-icon {
+    color: #fff;
+}

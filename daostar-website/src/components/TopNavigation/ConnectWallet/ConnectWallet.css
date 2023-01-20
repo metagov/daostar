@@ -1,0 +1,22 @@
+.ConnectButton {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 8px 16px;
+    color: #ffffff;
+    background: #333;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10rem;
+    box-shadow: 0 4px 24px -6px #F8E441;
+    border: 1px solid #F8E441;
+    transition: 200ms ease;
+}
+
+.ConnectButton:hover {
+    box-shadow: 0 6px 24px -6px #F8E441;
+}
+
+.ConnectButton:active {
+    box-shadow: 0 6px 32px -6px #F8E441;
+}

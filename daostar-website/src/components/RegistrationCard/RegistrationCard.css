@@ -1,0 +1,66 @@
+.registration-card {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+}
+
+.registration-card h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-metadata {
+    padding: 12px 24px;
+}
+
+.card-metadata p {
+    line-height: 1.5;
+}
+
+.card-metadata h6 {
+    font-weight: 400;
+    color: #9c9c9c;
+    margin: 0;
+}
+
+.card-metadata-value {
+    max-width: 65%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.card-metadata-item svg {
+    position: relative;
+    top: -4px;
+    left: 4px;
+}
+
+.card-metadata-row {
+    margin: 18px 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+a.card-link {
+    border-bottom: 0;
+}
+
+.card-link .bp4-card {
+    border: 1px solid var(--card-border);
+}
+
+.card-link .bp4-card:hover {
+    background-color: #3b3b3b;
+    color: inherit;
+    border: 1px solid var(--card-border-hover);
+}
+
+.edit-reg-btn {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+}

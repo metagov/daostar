@@ -1,0 +1,60 @@
+.centered-wizard {
+    max-width: 640px;
+    margin: 20vh auto;
+}
+
+.centered-wizard * {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.wizard-card h3 {
+    text-transform: none;
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0 24px 20px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.wizard-row {
+    margin: 16px 24px;
+}
+
+.wizard-row-flex {
+    display: flex;
+    gap: 6px;
+    align-items: end;
+}
+
+.wizard-card p {
+    font-size: 14px;
+}
+
+.wizard-card p.bp4-text-small {
+    font-size: 12px;
+}
+
+.wizard-row .bp4-form-group {
+    margin-bottom: 0;
+}
+
+.wizard-row .bp4-text-small {
+    font-size: 12px;
+}
+
+.wizard-center {
+    text-align: center;
+}
+
+.wizard-no-margin {
+    margin: 0;
+}
+
+.wizard-margin-bottom-8 {
+    margin-bottom: 8px;
+}
+
+.wizard-side-padding {
+    padding-left: 24px;
+    padding-right: 24px;
+}
