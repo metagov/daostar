@@ -84,4 +84,106 @@ export class RegistrationInstance extends Entity {
   set daoURI(value: string) {
     this.set("daoURI", Value.fromString(value));
   }
+
+  get daoName(): string | null {
+    let value = this.get("daoName");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set daoName(value: string | null) {
+    if (!value) {
+      this.unset("daoName");
+    } else {
+      this.set("daoName", Value.fromString(<string>value));
+    }
+  }
+
+  get daoDescription(): string | null {
+    let value = this.get("daoDescription");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set daoDescription(value: string | null) {
+    if (!value) {
+      this.unset("daoDescription");
+    } else {
+      this.set("daoDescription", Value.fromString(<string>value));
+    }
+  }
+
+  get membersURI(): string | null {
+    let value = this.get("membersURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set membersURI(value: string | null) {
+    if (!value) {
+      this.unset("membersURI");
+    } else {
+      this.set("membersURI", Value.fromString(<string>value));
+    }
+  }
+
+  get proposalsURI(): string | null {
+    let value = this.get("proposalsURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set proposalsURI(value: string | null) {
+    if (!value) {
+      this.unset("proposalsURI");
+    } else {
+      this.set("proposalsURI", Value.fromString(<string>value));
+    }
+  }
+
+  get governanceURI(): string | null {
+    let value = this.get("governanceURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set governanceURI(value: string | null) {
+    if (!value) {
+      this.unset("governanceURI");
+    } else {
+      this.set("governanceURI", Value.fromString(<string>value));
+    }
+  }
+
+  get activityLogURI(): string | null {
+    let value = this.get("activityLogURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set activityLogURI(value: string | null) {
+    if (!value) {
+      this.unset("activityLogURI");
+    } else {
+      this.set("activityLogURI", Value.fromString(<string>value));
+    }
+  }
 }
