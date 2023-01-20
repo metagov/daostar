@@ -9,7 +9,7 @@ const RegistrationForm = ({
     setRegistrationData
 }) => {
 
-    const [daoContractNetwork, setDaoContractNetwork] = useState('eip155:1');
+    const [daoContractNetwork, setDaoContractNetwork] = useState('mainnet');
     const onChangeDaoContractNetwork = (e) => setDaoContractNetwork(e.target.value);
 
     const [daoContractAddress, setDaoContractAddress] = useState('');
@@ -109,7 +109,8 @@ const RegistrationForm = ({
             }).then(response => {
                 setRegistrationData({
                     daoURI: response.data.url,
-                    daoContractAddress: daoContractAddress
+                    daoContractAddress: daoContractAddress,
+                    daoContractNetwork: daoContractNetwork
                 })
                 toggleRegScreen('REG_RECEIVED');
             });
@@ -123,9 +124,8 @@ const RegistrationForm = ({
             value={daoContractNetwork}
             onChange={onChangeDaoContractNetwork}
             options={[
-                { label: 'Mainnet', value: 'eip155:1' },
-                { label: 'Goerli', value: 'eip155:5' },
-                { label: 'Sepolia', value: 'eip155:11155111' }
+                { label: 'Mainnet', value: 'mainnet' },
+                { label: 'Goerli', value: 'goerli' }
             ]}
         />
     )
