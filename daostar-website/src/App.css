@@ -154,7 +154,7 @@ a.no-underline:hover {
   z-index: 1;
 }
 .parallax--minus1 {
-  transform: translateZ(-4px) scale(5);
+  transform: translateZ(-1px) scale(2);
   z-index: 0;
 }
 .parallax--minus2 {
