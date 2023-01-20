@@ -17,11 +17,11 @@ export function MyStack({ stack }: StackContext) {
             'GET /gnosis/proposals/{network}/{id}': 'functions/gnosis/getProposals.handler',
             'GET /gnosis/activities/{network}/{id}': 'functions/gnosis/getActivityLogs.handler',
         },
-        // customDomain: {
-        //     domainName: 'sandbox.logos.xyz',
-        //     hostedZone: 'sandbox.logos.xyz',
-        //     path: 'api/v1',
-        // },
+        customDomain: {
+            domainName: 'services.daostar.org',
+            hostedZone: 'services.daostar.org',
+            path: 'api/v1',
+        },
     })
 
     // Show the API endpoint in the output

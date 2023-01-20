@@ -4,7 +4,7 @@ schema:
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
-    network: goerli
+    network: mainnet
     source:
       abi: EIP4824Registration
     mapping:
@@ -19,15 +19,15 @@ templates:
           file: EIP4824Registration/abis/EIP4824Registration.json
       eventHandlers:
         - event: NewURI(string,address)
-          handler: handleNewURIGoerli
+          handler: handleNewURIMainnet
 dataSources:
   - kind: ethereum
     name: EIP4824RegistrationSummoner
-    network: goerli
+    network: mainnet
     source:
-      address: "0x5ef59b7cde41b744f36b6e07fef230884f800529"
+      address: "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc"
       abi: EIP4824RegistrationSummoner
-      startBlock: 7958681
+      startBlock: 16084997
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -40,5 +40,5 @@ dataSources:
           file: EIP4824RegistrationSummoner/abis/EIP4824RegistrationSummoner.json
       eventHandlers:
         - event: NewRegistration(indexed address,string,address)
-          handler: handleNewRegistrationGoerli
+          handler: handleNewRegistrationMainnet
       file: EIP4824RegistrationSummoner/EIP4824RegistrationSummoner.wasm

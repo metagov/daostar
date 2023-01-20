@@ -1,28 +1,32 @@
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
-import { gnosisGraphConfig } from 'functions/config'
-import fetch from 'node-fetch'
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { gnosisApiConfig } from "functions/config";
+import fetch, { RequestInit } from 'node-fetch'
+import "@ethersproject/shims"
+import { utils } from 'ethers'
 
-function apiRequest(path: string, method: string, data: any) {
-    return fetch(path, {
+function apiRequest(path: string, method: 'GET' | 'POST', data?: any) {
+    const payload: RequestInit = {
         headers: {
             'Content-Type': 'application/json',
         },
         method,
         redirect: 'follow',
-        body: JSON.stringify(data),
-    }).then((res) => res.json())
+    }
+    if (method === 'POST') payload.body = JSON.stringify(data)
+    return fetch(path, payload).then((res) => res.json())
 }
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
     if (!network) return { statusCode: 400, message: 'Missing network' }
 
-    console.log({ graphConfig: gnosisGraphConfig })
-    const path = gnosisGraphConfig[network]
-    if (!path) return { statusCode: 400, message: 'Missing config for network' }
+    const path = gnosisApiConfig[network]
+    if (!path) return { statusCode: 400, message: 'Missing network' }
 
     const eventId = event?.pathParameters?.id
-    if (!eventId) return { statusCode: 400, message: 'Missing id' }
+    if (!eventId) return { statusCode: 400 }
+
+    const checksummedId = utils.getAddress(eventId)
 
     const template = {
         '@context': {
@@ -32,41 +36,32 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         name: eventId,
     }
 
-    const query = `query GetMembers($dao: String!) {
-        wallet(id: $dao) {
-            id
-            owners
-        
-        }
-      }`
+    const queryPath = path + '/safes/' + checksummedId
 
-    const data = {
-        query,
-        variables: { dao: eventId.toLowerCase() },
-    }
-    console.log({ data })
+    const res = (await apiRequest(queryPath, 'GET')) as any
+    
+    if (!res.owners) return { statusCode: 404, message: 'DAO not found' }
+    const owners = res.owners
 
-    const res = (await apiRequest(path, 'POST', data)) as any
-    console.log({ res })
+  console.log({ owners });
 
-    if (!(res.data.wallet)) return { statusCode: 404, message: 'DAO not found' }
-    const members = res.data.wallet.owners
+  const membersFormatted = owners.map((a: any) => {
+    return {
+      id: a,
+      type: "EthereumAddress",
+    };
+  });
 
-    console.log({ members })
+  const transformed = { members: membersFormatted, ...template };
 
-    const membersFormatted = members.map((m: any) => {
-        return { id: m, type: 'EthereumAddress' }
-    })
+  return transformed
+    ? {
+        statusCode: 200,
+        body: JSON.stringify(transformed),
+      }
+    : {
+        statusCode: 404,
+        body: JSON.stringify({ error: true }),
+      };
+};
 
-    const transformed = { members: membersFormatted, ...template }
-
-    return transformed
-        ? {
-              statusCode: 200,
-              body: JSON.stringify(transformed),
-          }
-        : {
-              statusCode: 404,
-              body: JSON.stringify({ error: true }),
-          }
-}
