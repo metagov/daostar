@@ -51,7 +51,7 @@ const Homepage = (props) => {
                                 <span>built by </span>
                                 <Typewriter 
                                     options={{
-                                        strings: [ "Metagov", "Gnosis", "Moloch", "Aragon", "Compound", "DAOstack", "Colony", "Tribute", "OpenZeppelin" ],
+                                        strings: [ "Metagov", "Gnosis", "Moloch", "Aragon", "OpenZeppelin", "Compound", "DAOstack", "Colony", "Tribute" ],
                                         autoStart: true,
                                         loop: true,
                                         changeDeleteSpeed: 2000
