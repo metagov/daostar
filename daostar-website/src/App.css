@@ -35,7 +35,7 @@
   --clr-dark: #191919;
   --clr-accent: #F8E441;
   --clr-secondary: rgba(66, 142, 255, 1);
-  --font: 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  --font: 'Geogrotesque', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
   --heading-font: 'Geogrotesque', 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
   font-family: 'Geogrotesque';
 }
