@@ -62,7 +62,7 @@ const Homepage = (props) => {
                         </div>
                     </section>
 
-                    <section className='info-section'>
+                    <section className='info-section' id='standard'>
                         <h2 className='space-mono font-700 no-transform'>
                             An API for your DAO
                         </h2>
@@ -127,7 +127,7 @@ const Homepage = (props) => {
                         </div>
                     </section> 
 
-                    <section className='info-section'>
+                    <section className='info-section' id='build'>
                         <h2 className='space-mono font-700 no-transform'>
                             Contribute to standards
                         </h2>

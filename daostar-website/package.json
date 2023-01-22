@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://api.daostar.org/",
-  "homepage": "http://metagov.github.io/daostar",
+  "homepage": "http://daostar.org",
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@blueprintjs/core": "^4.11.5",
@@ -32,6 +32,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
     "react-three-fiber": "^6.0.13",
     "three": "^0.148.0",
@@ -46,8 +47,8 @@
   "scripts": {
     "start": "PORT=8000 REACT_APP_API_URL=http://localhost:8080/https://api.daostar.org react-scripts start",
     "build": "REACT_APP_API_URL=https://api.daostar.org react-scripts build",
-    "predeploy" : "REACT_APP_API_URL=https://api.daostar.org npm run build",
-    "deploy" : "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
+    "predeploy": "REACT_APP_API_URL=https://api.daostar.org npm run build",
+    "deploy": "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
