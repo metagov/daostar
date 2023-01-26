@@ -18,7 +18,6 @@ export class RegistrationInstance extends Entity {
 
     this.set("registrationAddress", Value.fromBytes(Bytes.empty()));
     this.set("daoAddress", Value.fromBytes(Bytes.empty()));
-    this.set("network", Value.fromBigInt(BigInt.zero()));
     this.set("daoURI", Value.fromString(""));
   }
 
@@ -65,15 +64,6 @@ export class RegistrationInstance extends Entity {
 
   set daoAddress(value: Bytes) {
     this.set("daoAddress", Value.fromBytes(value));
-  }
-
-  get network(): BigInt {
-    let value = this.get("network");
-    return value!.toBigInt();
-  }
-
-  set network(value: BigInt) {
-    this.set("network", Value.fromBigInt(value));
   }
 
   get daoURI(): string {

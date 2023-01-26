@@ -2,9 +2,13 @@
   "name": "daostar",
   "license": "UNLICENSED",
   "scripts": {
+    "build:mainnet": "graph codegen && graph build --network mainnet",
+    "build:goerli": "graph codegen && graph build --network goerli",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar",
+    "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar",
+    "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar-goerli",
+    "deploy:all": "yarn build:goerli && yarn deploy:goerli && yarn build:mainnet && yarn deploy:mainnet",
     "create-local": "graph create --node http://localhost:8020/ ipatka/daostar",
     "remove-local": "graph remove --node http://localhost:8020/ ipatka/daostar",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ipatka/daostar"

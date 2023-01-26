@@ -1,7 +1,14 @@
 {
   "goerli": {
     "EIP4824RegistrationSummoner": {
-      "address": "0x5ef59b7cde41b744f36b6e07fef230884f800529"
+      "address": "0x5ef59b7cde41b744f36b6e07fef230884f800529",
+      "startBlock": 7958681
+    }
+  },
+  "mainnet": {
+    "EIP4824RegistrationSummoner": {
+      "address": "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc",
+      "startBlock": 16084997
     }
   }
 }
