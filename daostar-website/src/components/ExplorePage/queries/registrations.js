@@ -13,7 +13,6 @@ const REGISTRATIONS = gql`
             governanceURI
             activityLogURI
             registrationAddress
-            network
         }
     }
 `
