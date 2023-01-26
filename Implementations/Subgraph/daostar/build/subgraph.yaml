@@ -21,14 +21,14 @@ templates:
           file: EIP4824Registration/abis/EIP4824Registration.json
       eventHandlers:
         - event: NewURI(string,address)
-          handler: handleNewURIMainnet
+          handler: handleNewURI
 dataSources:
   - kind: ethereum
     name: EIP4824RegistrationSummoner
     network: mainnet
     source:
-      address: "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc"
       abi: EIP4824RegistrationSummoner
+      address: "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc"
       startBlock: 16084997
     mapping:
       kind: ethereum/events
@@ -42,5 +42,5 @@ dataSources:
           file: EIP4824RegistrationSummoner/abis/EIP4824RegistrationSummoner.json
       eventHandlers:
         - event: NewRegistration(indexed address,string,address)
-          handler: handleNewRegistrationMainnet
+          handler: handleNewRegistration
       file: EIP4824RegistrationSummoner/EIP4824RegistrationSummoner.wasm
