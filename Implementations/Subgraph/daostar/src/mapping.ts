@@ -20,12 +20,13 @@ export function handleNewRegistration(event: NewRegistration): void {
     registrationInstance.daoURI = event.params.daoURI
 
     // retrieve registration info from IPFS
+    log.info('Fetching ipfs data for uri: {}', [event.params.daoURI])
     if (event.params.daoURI) {
         const ipfsHash = event.params.daoURI.substring(7)
-        registrationInstance.daoName = ipfsHash
         log.info('Fetching ipfs data for: {}', [ipfsHash])
         let ipfsData = ipfs.cat(ipfsHash)
         if (ipfsData) {
+            log.debug('IPFS data found for : {}', [ipfsHash])
             let daoMetadata = json.fromBytes(ipfsData).toObject()
 
             const daoName = daoMetadata.get('name')
@@ -42,9 +43,13 @@ export function handleNewRegistration(event: NewRegistration): void {
             registrationInstance.proposalsURI = proposalsURI ? proposalsURI.toString() : ''
             registrationInstance.governanceURI = governanceURI ? governanceURI.toString() : ''
             registrationInstance.activityLogURI = activityLogURI ? activityLogURI.toString() : ''
+            registrationInstance.save() // For some reason this does not work without this additional save
+        } else {
+            log.warning('IPFS data missing for : {}', [ipfsHash])
         }
     }
 
+    log.info('Saving registration for : {}', [event.params.daoURI])
     registrationInstance.save()
 }
 
@@ -55,7 +60,35 @@ export function handleNewURI(event: NewURI): void {
 
     if (!registrationInstance) log.warning('Invalid instance', [])
     else {
+        if (event.params.daoURI) {
+            const ipfsHash = event.params.daoURI.substring(7)
+            log.info('Fetching ipfs data for: {}', [ipfsHash])
+            let ipfsData = ipfs.cat(ipfsHash)
+            if (ipfsData) {
+                log.debug('IPFS data found for : {}', [ipfsHash])
+                let daoMetadata = json.fromBytes(ipfsData).toObject()
+
+                const daoName = daoMetadata.get('name')
+                log.info('My name is: {}', [daoName ? daoName.toString() : 'unknown'])
+                const daoDescription = daoMetadata.get('description')
+                const membersURI = daoMetadata.get('membersURI')
+                const proposalsURI = daoMetadata.get('proposalsURI')
+                const governanceURI = daoMetadata.get('governanceURI')
+                const activityLogURI = daoMetadata.get('activityLogURI')
+
+                registrationInstance.daoName = daoName ? daoName.toString() : ''
+                registrationInstance.daoDescription = daoDescription ? daoDescription.toString() : ''
+                registrationInstance.membersURI = membersURI ? membersURI.toString() : ''
+                registrationInstance.proposalsURI = proposalsURI ? proposalsURI.toString() : ''
+                registrationInstance.governanceURI = governanceURI ? governanceURI.toString() : ''
+                registrationInstance.activityLogURI = activityLogURI ? activityLogURI.toString() : ''
+                registrationInstance.save() // For some reason this does not work without this additional save
+            } else {
+                log.warning('IPFS data missing for : {}', [ipfsHash])
+            }
+        }
         registrationInstance.daoURI = event.params.daoURI
+        // TODO resolve IPFS here
         registrationInstance.save()
     }
 }
