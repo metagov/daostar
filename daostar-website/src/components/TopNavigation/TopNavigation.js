@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import logo from '../../img/logo_dao.png';
 import ConnectWallet from './ConnectWallet/ConnectWallet';
 import './TopNavigation.css';
@@ -15,10 +16,10 @@ const TopNavigation = ({
             </Link>
             
             <nav className="menu">
-                <Link to='/#standard'>Standard</Link>
+                <HashLink to='/#standard'>Standard</HashLink>
                 <a href='/register'>Register</a>
                 <Link to='/explore'>Explore</Link>
-                <Link to='/#roundtable'>Roundtable</Link>
+                <HashLink to='/#build'>Build</HashLink>
                 <ConnectWallet />
             </nav>
         </header>

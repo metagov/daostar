@@ -8,17 +8,23 @@ import CopyField from '../../ui/CopyField/CopyField';
 const RegistrationReceived = ({
     daoURI,
     daoContractAddress,
+    daoContractNetwork,
     isUpdate = false
 }) => {
 
     const { isOpen, open } = useWeb3Modal();
     const factoryContracts = {
-        mainNet: `TBD`,
-        goerli: `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`
+        mainnet: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
+        goerli: `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`,
+        gnosis: `0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa`,
+        polygon: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
+        optimism: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`
     }
 
     const regContract = new ethers.Contract(`0x5ef59b7cDe41b744f36b6e07fEF230884F800529`, RegistrationContract);
-    const salt = `0x2000000000000000000000000000000000000000000000000000000000000000`; // TODO: generate salt
+    const saltNumber = Math.floor(100000000000 + Math.random() * 900000000000)
+    const salt = `0x${saltNumber}0000000000000000000000000000000000000000000000000000`; // TODO: generate salt
+    console.log('salt', salt);
     const managerExample = `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`;
     const contracts = [];
     const bytes = [];
@@ -72,7 +78,7 @@ const RegistrationReceived = ({
                     <CopyField
                         id='address'
                         fill={true}
-                        text={factoryContracts.goerli}
+                        text={factoryContracts[daoContractNetwork]}
                     />
                 </FormGroup>
             </div>

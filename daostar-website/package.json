@@ -6,6 +6,7 @@
     "node": ">=16.13.1"
   },
   "proxy": "https://api.daostar.org/",
+  "homepage": "http://daostar.org",
   "dependencies": {
     "@apollo/client": "^3.7.5",
     "@blueprintjs/core": "^4.11.5",
@@ -48,6 +49,8 @@
   "scripts": {
     "start": "PORT=8000 REACT_APP_API_URL=http://localhost:8080/https://api.daostar.org react-scripts start",
     "build": "REACT_APP_API_URL=https://api.daostar.org react-scripts build",
+    "predeploy": "REACT_APP_API_URL=https://api.daostar.org npm run build",
+    "deploy": "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -72,6 +75,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
     "@testing-library/react": "^13.4.0",
+    "gh-pages": "^5.0.0",
     "react-test-renderer": "^18.2.0",
     "source-map-loader": "^4.0.1",
     "ts-loader": "^9.4.2"

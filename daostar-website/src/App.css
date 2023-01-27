@@ -35,8 +35,8 @@
   --clr-dark: #191919;
   --clr-accent: #F8E441;
   --clr-secondary: rgba(66, 142, 255, 1);
-  --font: 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
-  --heading-font: 'Space Mono', 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  --font: 'Geogrotesque', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+  --heading-font: 'Geogrotesque', 'IBM Plex Mono', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
   font-family: 'Geogrotesque';
 }
 
@@ -154,7 +154,7 @@ a.no-underline:hover {
   z-index: 1;
 }
 .parallax--minus1 {
-  transform: translateZ(-4px) scale(5);
+  transform: translateZ(-1px) scale(2);
   z-index: 0;
 }
 .parallax--minus2 {

@@ -8,16 +8,13 @@ import cube from '../../img/cube.png';
 import metagovSVG from '../../img/metagov.svg';
 import MemberLogos from './MemberLogos/MemberLogos';
 
-import molochLogo from '../../img/logos/moloch.jpeg';
-import daoStackLogo from '../../img/logos/daostack.jpeg';
-import compoundLogo from '../../img/logos/compound.png';
 import Eye from './Eye/Eye';
 import { Link } from 'react-router-dom';
-import './Homepage.css';
 import { useQuery } from '@apollo/client';
 import REGISTRATIONS from '../ExplorePage/queries/registrations';
 import RegistrationCard from '../RegistrationCard/RegistrationCard';
 import { filterRegistrations } from '../ExplorePage/ExplorePage';
+import './Homepage.css';
 
 const Homepage = (props) => {
 
@@ -46,12 +43,12 @@ const Homepage = (props) => {
                 <div className="wrapper parallax parallax-base">
                     <section id="title">
                         <div>
-                            <h1 className="title space-mono">
+                            <h1 className="title">
                                 The DAO standard,<br />
                                 <span>built by </span>
                                 <Typewriter 
                                     options={{
-                                        strings: [ "Metagov", "Gnosis", "Moloch", "Aragon", "Compound", "DAOstack", "Colony", "Tribute", "OpenZeppelin" ],
+                                        strings: [ "Metagov", "Gnosis", "Moloch", "Aragon", "OpenZeppelin", "Compound", "DAOstack", "Colony", "Tribute" ],
                                         autoStart: true,
                                         loop: true,
                                         changeDeleteSpeed: 2000
@@ -60,12 +57,12 @@ const Homepage = (props) => {
                             </h1>
                             <div className="buttons">
                                 <Link to='/register' className="btn primary">Upgrade your DAO</Link>
-                                <a href="#roundtable" className="btn">Explore the ecosystem</a>
+                                <Link to='/explore' className="btn">Explore the ecosystem</Link>
                             </div>
                         </div>
                     </section>
 
-                    <section className='info-section'>
+                    <section className='info-section' id='standard'>
                         <h2 className='space-mono font-700 no-transform'>
                             An API for your DAO
                         </h2>
@@ -130,7 +127,7 @@ const Homepage = (props) => {
                         </div>
                     </section> 
 
-                    <section className='info-section'>
+                    <section className='info-section' id='build'>
                         <h2 className='space-mono font-700 no-transform'>
                             Contribute to standards
                         </h2>
