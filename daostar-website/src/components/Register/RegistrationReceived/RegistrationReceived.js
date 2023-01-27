@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Button, Divider, FormGroup, TextArea } from '@blueprintjs/core';
-import { useConnectModal } from '@web3modal/react';
+import { useWeb3Modal } from '@web3modal/react';
 import { ethers } from 'ethers';
 import RegistrationContract from '../../../abi/RegistrationContract';
 import CopyField from '../../ui/CopyField/CopyField';
@@ -11,7 +11,7 @@ const RegistrationReceived = ({
     isUpdate = false
 }) => {
 
-    const { isOpen, open } = useConnectModal();
+    const { isOpen, open } = useWeb3Modal();
     const factoryContracts = {
         mainNet: `TBD`,
         goerli: `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`
