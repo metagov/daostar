@@ -2,11 +2,15 @@
   "name": "daostar-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.13.1"
+   },
   "proxy": "https://api.daostar.org/",
   "homepage": "http://daostar.org",
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@blueprintjs/core": "^4.11.5",
+    "@blueprintjs/popover2": "^1.12.0",
     "@react-three/fiber": "^8.9.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
