@@ -1,19 +1,14 @@
 ---
-daoip: 1
-title: DAOIP Purpose and Guidelines
-status: Living
-type: Meta
-author: Joshua Tan <josh@metagov.org>, et al.
-created: 2023-01-02
+daoip: 3
+title: Attestations for DAOs
+description: An attestation-based architecture and data model for DAO membership, member contributions, and other data.
+discussions-to: 
+status: Draft
+type: 
+category: 
+author: Fernando Mendes <mmendes@avenue.place>, Joshua Tan <josh@metagov.org>, 
+created: 2023-02-03
 ---
-
-## Attestations for DAOs
-
-*By Fernando Mendes and Joshua Tan*
-
-## Simple Summary
-
-An attestation-based architecture and data model for DAO membership, member contributions, and other data.
 
 ## Abstract
 
