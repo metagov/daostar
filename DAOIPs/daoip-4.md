@@ -137,39 +137,38 @@ Rationale / objectives - what will be the outcome of the work, and how will it c
 Deliverables - how will success of the initiative be measured
 Team - individuals (can be anonymous) or organizations who will be responsible for the successful execution of the related work
 Budget - amount and denomination (typically DAO governance token or USD-pegged stablecoin) of the request, use of funds breakdown, and receiving address
-Grants
+
+#### Grants
 Grants usually fund one-off initiatives perceived as creating value for the DAO’s ecosystem. Examples include product/protocol modules, code reviews, relevant research, bd/growth initiatives, and ecosystem support initiatives. When the grant amount or delivery duration is significant, proposals can include milestones and some quantitative metrics on what constitutes successful delivery. To ensure accountability and sustainability, DAOs that disburse substantial amounts in grant funding typically have more structured processes and dedicated teams (e.g. AAVE, Uniswap). When the initiative benefits multiple DAOs, disclosing other funding applications can serve as a positive social signal.
 
-#### Examples
+##### Examples
 https://forum.apecoin.com/t/aip-83-proposal-for-apefi-to-receive-apecoin-token-grant-ecosystem-fund-allocation/7447
 https://discourse.nouns.wtf/t/proposal-nounish-friends-nouns-town-collectible-figures-and-more-by-bigshottoyworks/967
 https://gov.uniswap.org/t/proposal-paid-uniswap-chat-support/7520
 
-### Operational budgets 
+#### Operational budgets 
 Operational budgets usually fund continuous workstreams and value-creating initiatives. Examples include product/protocol development, growth, and operations. Workstream funding proposals are typically bound to specific timeframes (e.g. seasons, quarters) and have well-articulated qualitative and quantitative deliverables. Often the teams performing specific workstreams remain consistent across timeframes.
 
-#### Examples
+##### Examples
 https://forum.makerdao.com/t/mip40c3-sp68-modify-protocol-engineering-core-unit-budget-pe-001/13797
 https://commonwealth.im/dydx/discussion/2511-drc-dydx-grants-program
 https://forum.badger.finance/t/bip-35-long-term-core-contributors/3006
 
-### Investments
+#### Investments
 A defining hallmark of investment proposals is that the DAO trades treasury assets for another asset it anticipates to increase in value. Examples can be on-chain (tokens, vesting tokens, NFTs, staked tokens) and off-chain (any traditional world asset). Investments can be purely market driven or also strategically driven. Strategic decisions can be driven by partner incentive alignment, meta-governance, or M&A.
 
-#### Examples
+##### Examples
 https://forum.badger.finance/t/bip-49-opolis-strategic-investment-integration/4071
 https://research.lido.fi/t/treasury-diversification-2/2570
 https://gov.pooltogether.com/t/ptip-11-treasury-diversification/963
 https://forum.rook.fi/t/kip-5-acquire-cvx-position/174
-Other
-The “treasury/other” proposal type includes other treasury-related proposals such as: 
-airdrops,
-liquidity mining, and
-bounties.
+
+#### Other
+The “treasury/other” proposal type includes other treasury-related proposals such as airdrops, liquidity mining, and bounties.
 
 These proposals are still undergoing rapid development. Liquidity mining and airdrop schemes were the tried and true method in 2020-2021 but have lost favor in 2022; Token holders are often biased when approving these methods since these schemes can either directly increase or decrease their individual net worth.
 
-#### Examples
+##### Examples
 https://governance.aave.com/t/introducing-gho/8730
 https://gov.pooltogether.com/t/1-million-weekly-prizes-pool-distribution/1055
 https://forum.badger.finance/t/bip-14-digg-distribution-overview/1210
@@ -179,39 +178,40 @@ https://forum.gnosis.io/t/gip-64-should-gnosisdao-distribute-safe-tokens-to-ince
 Protocol proposals are used to drive changes in a product controlled by the DAO, especially on-chain products. These changes can be large and small. For small and low-risk changes including inflation rate and yield rate adjustments, a lightweight proposal can be used. Additional rigor and communications will be required for high-risk changes such as major product updates. Major changes often are accompanied by audits.
 
 We identify 3 categories of protocol proposals: major code upgrades, parameter changes and others.
-Major code upgrades
+
+#### Major code upgrades
 Major code upgrades happen often in a protocol/product when DAOs address community needs or security issues. Given the potential impact, additional rigor such as audits must be applied. These changes are often complex, requiring deliberate communication across different levels of the community.
 
 For example, in February 2021, MakerDAO proposed a redesign of the DAO’s liquidation system. The proposal suggested replacing the existing English-style auction system, where bids start low, with a new Dutch-style auction system, where auction prices generally start high and then drop over time. The proposal took almost 2 months to ratify. Multiple scenarios were mapped out and four separate audits were done. The proposal gathered 45 comments with 9.2k views.
 
-#### Template
+##### Template
 Title: What is a clear and comprehensive explanation of the change?
 Summary: Why does there need to be a change?
 Specification: What change should be made?
 Known Risk: What might go wrong?
 Audits: Who audited the code and what were the results?
 
-#### Examples
+##### Examples
 https://governance.aave.com/t/arc-aave-governance-v3/6980
 https://tribe.fei.money/t/fei-v2-design-discussion/3467
 https://forum.thegraph.com/t/indexer-cut-simplification-proposal/2522
 https://www.comp.xyz/t/rfp12-implementation-ctoken-cleanup/2694
 
-### Parameter changes to protocol or product (Small)
+#### Parameter changes to protocol or product (Small)
 Sometimes, smaller changes in parameters or features will need to be voted on but the proposals carry much lower risks. In these cases, a lightweight proposal can be voted on and quickly carried out. In Sept 2020, Uniswap proposed to add the $UNI/$ETH pool to the list of pools eligible for rewards. The whole proposal was 2 sentences. 
 
-#### Template
+##### Template
 Description of situation: What is the current setting and what is driving a change?
 Technical analysis: What analysis went into your recommended changes?
 Recommendations: What should the DAO change?
 Next Steps: How will the DAO evaluate success? When should the DAO evaluate for another update?
 
-#### Examples 
+##### Examples 
 https://governance.aave.com/t/arc-ltv-and-liquidation-threshold-levels-2021-08-26/5467
 https://gov.curve.fi/t/add-a-gauge-for-the-ankr-reward-earning-staked-matic-amaticb-on-polygon-network/3011
 https://governance.aave.com/t/arc-aave-v2-liquidity-mining-program-90-days-at-30-reduced-rate/5946
 
-### Other
+#### Other
 There are other potential types of proposals relating to the governance of an on-chain protocol/product that the DAO controls. As the industry matures and specific categories emerge we can introduce more granular classification.
 
 ### Metagovernance Proposals
