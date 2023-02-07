@@ -82,9 +82,9 @@ const RegistrationForm = ({
         if (daoName === '') errors.push(`DAO must have a name`);
         if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address');
         if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
-        if (!validator.isURL(daoMembersURI)) errors.push(`Members URI must be a valid URI`);
-        if (!validator.isURL(daoActivityURI)) errors.push(`Activity Log URI must be a valid URI`);
-        if (!validator.isURL(daoProposalsURI)) errors.push(`Proposals URI must be a valid URI`);
+        if (daoMembersURI !== '' && !validator.isURL(daoMembersURI)) errors.push(`Members URI must be a valid URI`);
+        if (daoActivityURI !== '' && !validator.isURL(daoActivityURI)) errors.push(`Activity Log URI must be a valid URI`);
+        if (daoProposalsURI !== '' && !validator.isURL(daoProposalsURI)) errors.push(`Proposals URI must be a valid URI`);
         if (daoContractsRegistryURI !== '' && !validator.isURL(daoContractsRegistryURI)) errors.push(`Contracts Registry URI must be a valid URI`);
         
         if (errors.length > 0) {
