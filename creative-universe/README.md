@@ -1,6 +1,7 @@
-# DAOIP Table Instructions
+# DAO Creative Universe - Instructions
 
-Here's how to participate
+## Instructions
+Here's how to participate.
 
 1. Post a DAOIP idea to https://github.com/metagov/daostar/discussions/
 2. OR, if you don't have an idea yet, just introduce yourself in [the Introductions thread](https://github.com/metagov/daostar/discussions/41).
