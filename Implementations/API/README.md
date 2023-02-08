@@ -1,4 +1,4 @@
-# DAOStar API
+# DAOstar API
 
 This serverless API is used to serve results on members, proposals, and activity log URIs for various DAO frameworks. It works by translating subgraph or other indexers into DAOstar formats.
 
