@@ -1,0 +1,36 @@
+.explore-page {
+    margin: 20vh auto;
+    max-width: 900px;
+}
+
+.explore-page .dao-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.explore-page .dao-cards .bp4-card {
+    max-width: 438px;
+}
+
+.explore-page .filter {
+    margin-bottom: 56px;
+}
+
+@media (max-width: 950px) {
+    .explore-page {
+        max-width: 80%;
+    }
+
+    .explore-page .dao-cards .bp4-card {
+        max-width: none;
+    }
+    
+}
+
+.card-metadata-item h5{
+    margin-bottom: 5px;
+}
+.card-metadata h3{
+    margin: 40px 0 0;
+}

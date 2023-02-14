@@ -1,0 +1,72 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type DAO @model {
+  id: ID!
+  searchField: String!
+  name: String!
+  treasuryAddresses: [Address!]!
+  tokenAddresses: [Address!]!
+  factories: [String!]!
+  fora: [String!]!
+  formationDate: AWSDate!
+  reviewDate: AWSDate
+  status: DAOStatus!
+  type: [String!]!
+  amlStatus: Boolean!
+  legalRepresentative: Representative!
+  registrations: [Registeration!]!
+  presence: [String!]!
+  exclusions: [String]
+  wrappers: [Wrapper]
+  contact: Contact!
+}
+
+type Address {
+  address: String!
+  description: String
+}
+
+enum DAOStatus {
+  withGovernance
+  withoutGovernance
+  warning
+  shutdown
+  restructured
+}
+
+enum DAOTypes {
+  publicUseProtocol
+  memberUseProtocol
+}
+
+type Representative {
+  name: String!
+  contact: [String!]!
+}
+
+enum Registeration {
+  NONE
+  US_DE
+  US_VT
+  US_WY
+  BM
+  MT
+  MH
+  CH
+}
+
+type Wrapper {
+  name: String!
+  jurisdiction: String!
+  regulator: String!
+  functions: String!
+}
+
+type Contact {
+  name: String!
+  email: String!
+  phone: String!
+  company: String!
+  role: String!
+}
