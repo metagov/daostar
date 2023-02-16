@@ -6,13 +6,14 @@ const FRAMEWORK_URIs = {
         governanceURI: ''
     },
     moloch: {
-        membersURI: '',
+        membersURI: (address, network) => `https://placeholder.daostar.org/api/v1/gnosis/members/${network}/${address}`,
         activityURI: '',
         proposalsURI: '',
         governanceURI: ''
     },
     safe: {
-        membersURI: '',
+        membersURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/members/${network}/${address}`,
+        // membersURI: `https://services.daostar.org/api/v1/gnosis/members/{network}/{address}`,
         activityURI: '',
         proposalsURI: '',
         governanceURI: ''

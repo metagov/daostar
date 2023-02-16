@@ -18,6 +18,9 @@ const RegistrationForm = ({
     const [daoName, setDaoName] = useState('');
     const onChangeDaoName = (e) => setDaoName(e.target.value);
 
+    const [daoDescription, setDaoDescription] = useState('');
+    const onChangeDaoDescription = (e) => setDaoDescription(e.target.value);
+
     const [daoMembersURI, setDaoMembersURI] = useState('');
     const onChangeMembersURI = (e) => setDaoMembersURI(e.target.value);
 
@@ -95,6 +98,7 @@ const RegistrationForm = ({
             let registrationData = {
                 data: {
                     name: daoName,
+                    description: daoDescription,
                     governanceURI: daoGovURI,
                 }
             }
@@ -196,6 +200,21 @@ const RegistrationForm = ({
                             placeholder='Enter DAO name'
                             value={daoName}
                             onChange={onChangeDaoName}
+                        />
+                    </FormGroup>
+                </div>
+                <div className='wizard-row'>
+                    <FormGroup
+                        label='Description'
+                        labelFor='description'
+                        fill
+                    >
+                        <InputGroup 
+                            fill
+                            id='description'
+                            placeholder='Enter DAO description'
+                            value={daoDescription}
+                            onChange={onChangeDaoDescription}
                         />
                     </FormGroup>
                 </div>
