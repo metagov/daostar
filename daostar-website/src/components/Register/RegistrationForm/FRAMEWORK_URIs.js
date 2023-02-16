@@ -1,28 +1,11 @@
 const FRAMEWORK_URIs = {
-    custom: {
-        membersURI: '',
-        activityURI: '',
-        proposalsURI: '',
-        governanceURI: ''
-    },
-    moloch: {
-        membersURI: (address, network) => `https://placeholder.daostar.org/api/v1/gnosis/members/${network}/${address}`,
-        activityURI: '',
-        proposalsURI: '',
-        governanceURI: ''
+    molochv2: {
+        membersURI: (address, network) => `https://services.daostar.org/api/v1/molochv2/members/${network}/${address}`,
+        proposalsURI: (address, network) => `https://services.daostar.org/api/v1/molochv2/proposals/${network}/${address}`,
     },
     safe: {
         membersURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/members/${network}/${address}`,
-        // membersURI: `https://services.daostar.org/api/v1/gnosis/members/{network}/{address}`,
-        activityURI: '',
-        proposalsURI: '',
-        governanceURI: ''
-    },
-    daodao: {
-        membersURI: '',
-        activityURI: '',
-        proposalsURI: '',
-        governanceURI: ''
+        proposalsURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/proposals/${network}/${address}`,
     },
 }
 
