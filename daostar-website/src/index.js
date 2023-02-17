@@ -1,15 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Web3ReactProvider } from '@web3-react/core'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
-import App from './App.js';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import App from "./App.js";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 import { FocusStyleManager } from "@blueprintjs/core";
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-import './index.css';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
+import { Amplify } from "aws-amplify";
+import awsExports from "./aws-exports";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+Amplify.configure(awsExports);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 FocusStyleManager.onlyShowFocusOnTabs();
 

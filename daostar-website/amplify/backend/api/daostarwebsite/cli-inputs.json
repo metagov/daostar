@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "daostarwebsite",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 180,
+      "apiKeyExpirationDate": "2023-08-12T06:55:07.453Z",
+      "keyDescription": "testAPI"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}
