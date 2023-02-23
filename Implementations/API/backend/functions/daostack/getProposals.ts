@@ -1,17 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
+import { apiRequest } from 'functions/apiRequest'
 import { daostackGraphConfig } from 'functions/config'
-import fetch from 'node-fetch'
-
-function apiRequest(path: string, method: string, data: any) {
-    return fetch(path, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method,
-        redirect: 'follow',
-        body: JSON.stringify(data),
-    }).then((res) => res.json())
-}
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
