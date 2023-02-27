@@ -2,7 +2,7 @@
 daoip: 4
 title: Proposal Types
 description: Standard templates for DAO proposals
-discussions-to: 
+discussions-to: https://github.com/metagov/daostar/discussions/50
 status: Draft
 type: 
 category: 
