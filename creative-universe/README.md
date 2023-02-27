@@ -1,5 +1,5 @@
 # DAO Creative Universe
-The DAO Creative Universe is a map of the DAO ecosystem, featuring you.
+The DAO Creative Universe is a physical map of the DAO ecosystem, featuring you.
 
 ## Instructions
 Here's how to participate.
