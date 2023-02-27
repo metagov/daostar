@@ -32,100 +32,42 @@ The types described here represent a snapshot of what DAOs can do in 2022. Howev
 
 ### Schema
 In this standard, we extend the EIP-4824 Proposals JSON-LD Schema with a “proposal-type” field and a dictionary of such proposal types, including: 
-“treasury/grant”
-“treasury/budget”
-“treasury/investment”
-“treasury/other”
-“protocol/small-change”
-“protocol/major-change”
-“protocol/other”
-“metagov/small-change”
-“metagov/major-change”
-“metagov/delegate-governance”
-“metagov/spinout”
-“metagov/merger”
-“metagov/other”
+* “treasury/grant”
+* “treasury/budget”
+* “treasury/investment”
+* “treasury/other”
+* “protocol/small-change”
+* “protocol/major-change”
+* “protocol/other”
+* “metagov/small-change”
+* “metagov/major-change”
+* “metagov/delegate-governance”
+* “metagov/spinout”
+* “metagov/merger”
+* “metagov/other”
 
 ### Proposal type
-Category
-Frequency
-In standard?
-treasury/grant
-Treasury
-Common
-Yes
-treasury/investment
-Treasury
-Common
-Yes
-metagov/delegate-governance
-Metagovernance
-Uncommon
-Yes
-metagov/small-change
-Metagovernance
-Uncommon
-Yes
-metagov/spinout
-Metagovernance
-Rare
-Yes
-metagov/major-change
-Metagovernance
-Epic
-Yes
-metagov/merger
-Metagovernance
-Legendary
-Yes
-protocol/small-change
-Protocol
-Uncommon
-Yes
-protocol/major-change
-Protocol
-Epic
-Yes
-treasury/airdrop
-Treasury
-Common
-No
-treasury/token-swap
-Treasury
-Rare
-No
-treasury/token-buyback
-Treasury
-Epic
-No
-metagov/delegate-governance/delegate-tokens
-Metagovernance
-Rare
-No
-metagov/entity-to-dao
-Metagovernance
-Legendary
-No
-metagov/crosschain
-Metagovernance
-Legendary
-No
-metagov/dao-to-entity
-Metagovernance
-Legendary
-No
-Elections
-Other
-Epic
-No
-IP Licensing
-Other
-Unknown
-No
-Dispute resolution
-Other
-Unknown
-No
+| **Proposal type**                           | **Category**   | **Frequency** | **In standard?** |
+|---------------------------------------------|----------------|-----------|--------------|
+| treasury/grant                              | Treasury       | Common    | Yes          |
+| treasury/investment                         | Treasury       | Common    | Yes          |
+| metagov/delegate-governance                 | Metagovernance | Uncommon  | Yes          |
+| metagov/small-change                        | Metagovernance | Uncommon  | Yes          |
+| metagov/spinout                             | Metagovernance | Rare      | Yes          |
+| metagov/major-change                        | Metagovernance | Epic      | Yes          |
+| metagov/merger                              | Metagovernance | Legendary | Yes          |
+| protocol/small-change                       | Protocol       | Uncommon  | Yes          |
+| protocol/major-change                       | Protocol       | Epic      | Yes          |
+| treasury/airdrop                            | Treasury       | Common    | No           |
+| treasury/token-swap                         | Treasury       | Rare      | No           |
+| treasury/token-buyback                      | Treasury       | Epic      | No           |
+| metagov/delegate-governance/delegate-tokens | Metagovernance | Rare      | No           |
+| metagov/entity-to-dao                       | Metagovernance | Legendary | No           |
+| metagov/crosschain                          | Metagovernance | Legendary | No           |
+| metagov/dao-to-entity                       | Metagovernance | Legendary | No           |
+| Elections                                   | Other          | Epic      | No           |
+| IP Licensing                                | Other          | Unknown   | No           |
+| Dispute resolution                          | Other          | Unknown   | No           |
 
 ### Treasury Proposals
 For many early-stage DAOs, the financial assets held in their treasury are the main shared resource being governed by the DAO. The DAO’s strategy shapes and is shaped by the funding or defunding specific initiatives, making treasury proposals both common and important. We are categorizing “treasury proposals” as all proposals that relate to the transfer of assets from addresses controlled directly by the DAO. There are multiple types of treasury actions that we broadly bundle together into categories labeled as: Grants, Operational Budgets, Investments, and Other Token Distributions.
