@@ -47,6 +47,10 @@ function App() {
           <Route path='/registration/:regID' element={<RegistrationPage />} />
           <Route path='/explore' element={<ExplorePage />} />
           <Route path='/' element={<Homepage />} />
+          <Route path='/privacy-policy' component={() => {
+            window.location.href = 'https://github.com/metagov/daostar/discussions/41';
+            return null;
+          }}/>
         </Routes>
         </div> 
         
