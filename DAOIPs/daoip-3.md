@@ -2,7 +2,7 @@
 daoip: 3
 title: Attestations for DAOs
 description: An attestation-based architecture and data model for DAO membership, member contributions, and other data.
-discussions-to: 
+discussions-to: https://github.com/metagov/daostar/discussions/39
 status: Draft
 type: 
 category: 
