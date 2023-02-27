@@ -27,9 +27,9 @@ To identify the proposal types, we looked through 6,500 written proposals from 1
 
 We currently see the following three core proposal types across DAOs:
 
-- _ **Treasury** _ (grants, operational budgets, investments, and token distribution)
-- _ **Protocol** _ (parameter changes and major code upgrades)
-- _ **Metagovernance** _ (small governance changes, major governance changes, spin-outs, delegate governance, and mergers)
+- **Treasury** (grants, operational budgets, investments, and token distribution)
+- **Protocol** (parameter changes and major code upgrades)
+- **Metagovernance** (small governance changes, major governance changes, spin-outs, delegate governance, and mergers)
 
 The types described here represent a snapshot of what DAOs can do in 2022. However, the type system we specify below can be extended to cover new proposal types and subtypes.
 
@@ -123,7 +123,7 @@ The "treasury/other" proposal type includes other treasury-related proposals suc
 
 - airdrops,
 - liquidity mining, and
--
+- bounties.
 
 These proposals are still undergoing rapid development. Liquidity mining and airdrop schemes were the tried and true method in 2020-2021 but have lost favor in 2022; Token holders are often biased when approving these methods since these schemes can either directly increase or decrease their individual net worth.
 
