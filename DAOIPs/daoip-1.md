@@ -1,6 +1,7 @@
 ---
 daoip: 1
 title: DAOIP Purpose and Guidelines
+discussions-to: https://github.com/metagov/daostar/discussions/38
 status: Living
 type: Meta
 author: Joshua Tan <josh@metagov.org>, et al.
