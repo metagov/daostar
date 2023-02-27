@@ -73,12 +73,12 @@ In this standard, we extend the EIP-4824 Proposals JSON-LD Schema with a “prop
 For many early-stage DAOs, the financial assets held in their treasury are the main shared resource being governed by the DAO. The DAO’s strategy shapes and is shaped by the funding or defunding specific initiatives, making treasury proposals both common and important. We are categorizing “treasury proposals” as all proposals that relate to the transfer of assets from addresses controlled directly by the DAO. There are multiple types of treasury actions that we broadly bundle together into categories labeled as: Grants, Operational Budgets, Investments, and Other Token Distributions.
 
 Most treasury proposals share this similar template:
-TLDR: An overall summary of the proposal
-Description / scope of work - an explanation of the work to be completed / actions to be taken
-Rationale / objectives - what will be the outcome of the work, and how will it contribute toward the betterment of the specific DAO
-Deliverables - how will success of the initiative be measured
-Team - individuals (can be anonymous) or organizations who will be responsible for the successful execution of the related work
-Budget - amount and denomination (typically DAO governance token or USD-pegged stablecoin) of the request, use of funds breakdown, and receiving address
+* TLDR: An overall summary of the proposal
+* Description / scope of work - an explanation of the work to be completed / actions to be taken
+* Rationale / objectives - what will be the outcome of the work, and how will it contribute toward the betterment of the specific DAO
+* Deliverables - how will success of the initiative be measured
+* Team - individuals (can be anonymous) or organizations who will be responsible for the successful execution of the related work
+* Budget - amount and denomination (typically DAO governance token or USD-pegged stablecoin) of the request, use of funds breakdown, and receiving address
 
 #### Grants
 Grants usually fund one-off initiatives perceived as creating value for the DAO’s ecosystem. Examples include product/protocol modules, code reviews, relevant research, bd/growth initiatives, and ecosystem support initiatives. When the grant amount or delivery duration is significant, proposals can include milestones and some quantitative metrics on what constitutes successful delivery. To ensure accountability and sustainability, DAOs that disburse substantial amounts in grant funding typically have more structured processes and dedicated teams (e.g. AAVE, Uniswap). When the initiative benefits multiple DAOs, disclosing other funding applications can serve as a positive social signal.
