@@ -11,7 +11,7 @@ Introduce yourself
 
 ![Screen Shot 2023-02-26 at 10 12 23 PM](https://user-images.githubusercontent.com/9309884/221479614-5e3f5c5e-dd6d-4a4a-bacf-0be8f52c12ea.png)
 
-4. Write your profile number on the back of your medallion. Add your name or handle, if you like.
+4. Write your profile number on the back of your medallion. Add your name or handle, if you like, plus any #hashtags.
 5. Add your medallion to the DAO Creative Universe.
 
 <!-- 6. If your organization is a member of DAOstar One, add a little star. (Other categories will be coming.) -->
