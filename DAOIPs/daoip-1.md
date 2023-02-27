@@ -12,9 +12,9 @@ created: 2023-01-02
 
 DAOIP stands for DAO Improvement Proposal. A DAOIP is a design document providing information to the DAO ecosystem, or describing a new feature for DAOs or their processes or environment. The DAOIP should provide a concise technical specification of the feature and a rationale for the feature. The DAOIP author is responsible for building consensus within the community and documenting dissenting opinions.
 
-As of February 26, 2023, the DAOIP system is currently being specified while work continues on specific DAOIPs. Our goal is specifying the DAOIP system to is create a system that has many permissionless elements (as with EIPs and BIPs) while support more professionalized, programmatic support for writing certain standards (as with W3C and even ISO standards, but also similar to how EIPs operate with "core" standards).
+As of February 26, 2023, the DAOIP system is currently being specified while work continues on specific DAOIPs. Our goal in specifying the DAOIP system is to create a system that is both open and permissionless (as with EIPs and BIPs) but which also benefits from more professionalized, programmatic support for writing and governing certain key standards (as with W3C and ISO standards, but also similar to how EIPs operate with respect to "core" standards).
 
-For now, please follow the general norms of the EIP system.
+In the absence of additional direction, please follow the norms of the EIP system.
 
 ## DAOIP Rationale
 
