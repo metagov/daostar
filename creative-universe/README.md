@@ -1,6 +1,5 @@
 # DAO Creative Universe
-
-
+The DAO Creative Universe is a map of the DAO ecosystem, featuring you.
 
 ## Instructions
 Here's how to participate.
@@ -27,3 +26,6 @@ Submit an idea
 Volunteer for an idea
 1. If you see an idea that you'd like to contribute to, say so in the thread.
 2. Move your medallion next to the idea in the DAO Creative Universe.
+
+## License
+All content within this folder is dual-licensed under the MIT License and the Creative Commons Attribution 4.0 International License. That means you may use, copy, modify, and redistribute all files included in this distribution, individually or in aggregate, subject to the terms and conditions of the MIT license. In addition, you may -- at your option -- use, copy, modify and redistribute all images included in this distribution under the directory named `creative-universe` according to the terms and conditions of the Creative Commons Attribution 4.0 International License.
