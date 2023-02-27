@@ -14,7 +14,7 @@ DAOIP stands for DAO Improvement Proposal. A DAOIP is a design document providin
 
 As of February 26, 2023, the DAOIP system is currently being specified while work continues on specific DAOIPs. Our goal in specifying the DAOIP system is to create a system that is both open and permissionless (as with EIPs and BIPs) but which also benefits from more professionalized, programmatic support for writing and governing certain key standards (as with W3C and ISO standards, but also similar to how EIPs operate with respect to "core" standards).
 
-In the absence of additional direction, please follow the norms of the EIP system.
+In the absence of additional direction, please follow the norms of the [EIP system](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1.md).
 
 ## DAOIP Rationale
 
