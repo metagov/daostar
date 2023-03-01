@@ -7,7 +7,7 @@ Help us illustrate and communicate the DAO ecosystem, including its projects, id
 ## Getting started
 1. Take a look at the assets.
 2. Remix, modify, or add your own assets to the map.
-3. Join the [Telegram group](https://t.me/+89zzaHLQZHo3MWVh) and/or [the DAOstar Discord](https://discord.gg/crEUNHEr68) (#creative-universe channel).
+3. Join the [the DAOstar Discord](https://discord.gg/crEUNHEr68) and say hi in the `#creative-universe` channel.
 
 ## Assets
 All the content in the DAO Creative Universe (i.e. everything in this folder) is free for you to use. We also have a several physical assets, including a bunch of medallions, a star map, a big banner, and a couple of mobile printers. Tell us what to do with them!
