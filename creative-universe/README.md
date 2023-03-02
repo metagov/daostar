@@ -2,7 +2,7 @@
 The DAO Creative Universe is a map of the DAO ecosystem, featuring you. It's comprised of a set of freely-shared physical and digital illustrations of the DAO ecosystem. It's also an experiment in decentralized branding supported by DAOstar, a (nonprofit, public good) standards body for DAOs.
 
 ## The ask
-Help us illustrate and communicate the DAO ecosystem, including its projects, ideas, stories, and people.
+Help us map, illustrate, and communicate the DAO ecosystem, including its projects, ideas, stories, and people.
 
 ## Getting started
 1. Take a look at the assets above.
