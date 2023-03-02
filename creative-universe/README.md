@@ -5,6 +5,7 @@ The DAO Creative Universe is a map of the DAO ecosystem, featuring you. It's com
 Help us map, illustrate, and communicate the DAO ecosystem, including its values, projects, ideas, stories, myths, and people.
 
 ![image](https://user-images.githubusercontent.com/9309884/222457357-36bcb2e0-4ca9-47c1-818b-627960a2f16f.png)
+^ kinda like this, but even cooler
 
 ## Getting started
 1. Find us at ETH Denver and check out the physical map (we're building one in Miro and will share that soon).
