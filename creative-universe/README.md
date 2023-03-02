@@ -1,12 +1,14 @@
 # DAO Creative Universe
 The DAO Creative Universe is a map of the DAO ecosystem, featuring you. It's comprised of a set of freely-shared physical and digital illustrations of the DAO ecosystem. It's also an experiment in decentralized branding supported by DAOstar, a (nonprofit, public good) standards body for DAOs.
 
-## The ask
-Help us map, illustrate, and communicate the DAO ecosystem, including its projects, ideas, stories, and people.
+## The opportunity
+Help us map, illustrate, and communicate the DAO ecosystem, including its values, projects, ideas, stories, myths, and people.
+
+![image](https://user-images.githubusercontent.com/9309884/222457357-36bcb2e0-4ca9-47c1-818b-627960a2f16f.png)
 
 ## Getting started
-1. Take a look at the assets above.
-2. Remix, modify, or add your own assets to the map.
+1. Find us at ETH Denver and check out the physical map (we're building one in Miro and will share that soon).
+2. Ping us if you have any ideas for how we could do it better. Seriously, we are mostly devs & researchers, so even the most basic artistic / marketing / branding advice would be useful.
 3. Join the [the DAOstar Discord](https://discord.gg/crEUNHEr68) and say hi in the `#creative-universe` channel.
 
 ## Assets
