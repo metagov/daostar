@@ -1,3 +1,12 @@
+export const HttpMethods = {
+    POST: 'POST'
+}
+export const ETHEREUM_NETWORK_ID = '1'
+
+const theGraphUrlGenerator = ( protocolName: string, subgraphName: string ): string => {
+    return `https://api.thegraph.com/subgraphs/name/${protocolName}/${subgraphName}`
+}
+
 export const daohausGraphConfig: { [key: string]: any } = {
     '1': 'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus',
     '100': 'https://api.thegraph.com/subgraphs/name/odyssy-automaton/daohaus-xdai',
@@ -20,4 +29,10 @@ export const gnosisGraphConfig: { [key: string]: any } = {
 
 export const gnosisApiConfig: { [key: string]: any } = {
     '1': 'https://safe-transaction-mainnet.safe.global/api/v1'
+}
+
+export const gitcoinGraphConfig: { [ key: string ]: any } = 
+{
+    // TODO: url probably isn't right
+    ETHEREUM_NETWORK_ID: theGraphUrlGenerator('gitcoin', 'governance-v2')
 }

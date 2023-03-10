@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
 export function apiRequest(path: string, method: string, data: any) {
     return fetch(path, {
