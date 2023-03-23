@@ -16,6 +16,8 @@ export function MyStack({ stack }: StackContext) {
             'GET /gnosis/members/{network}/{id}': 'functions/gnosis/getMembers.handler',
             'GET /gnosis/proposals/{network}/{id}': 'functions/gnosis/getProposals.handler',
             'GET /gnosis/activities/{network}/{id}': 'functions/gnosis/getActivityLogs.handler',
+            'GET /daodao/members/{network}/{id}': 'functions/daodao/getMembers.handler',
+            'GET /daodao/proposals/{network}/{id}': 'functions/daodao/getProposals.handler',
         },
         customDomain: {
             domainName: 'services.daostar.org',

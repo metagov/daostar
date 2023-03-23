@@ -31,34 +31,7 @@ const client = new ApolloClient({
             createHttpLink: createHttpLink,
         }),
     ]),
-    cache: new InMemoryCache({
-        typePolicies: {
-            RegistrationInstance: {
-                fields: {
-                    daoName: {
-                        read(daoName = null) {
-                            return 'OVERRIDE'
-                        },
-                        merge(existing = [], incoming) {
-                            console.log({ existing, incoming })
-                            // return { ...existing, ...incoming }
-                            return { a: 'b' }
-                            // this part of code is depends what you actually need to do, in my
-                            // case i had to save my incoming data as single object in cache
-                        },
-                    },
-                },
-
-                merge(existing = [], incoming) {
-                    console.log({ existing, incoming })
-                    // return { ...existing, ...incoming }
-                    return { a: 'b' }
-                    // this part of code is depends what you actually need to do, in my
-                    // case i had to save my incoming data as single object in cache
-                },
-            },
-        },
-    }),
+    cache: new InMemoryCache({}),
 })
 
 root.render(

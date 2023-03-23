@@ -21,17 +21,14 @@ const ExplorePage = ({}) => {
     const [filterVal, setFilterVal] = useState('')
     const onChangeFilter = (e) => setFilterVal(e.target.value)
 
-    const mainnetRes = useQuery(queries.REGISTRATIONS_MAINNET, { context: { apiName: 'mainnet' } })
-    const goerliRes = useQuery(queries.REGISTRATIONS_GOERLI, { context: { apiName: 'goerli' } })
-    console.log({ mainnetRes, goerliRes })
-    const { loading, error, data: mainnetData } = mainnetRes
+    const { loading, error, data: mainnetData } = useQuery(queries.REGISTRATIONS, { context: { apiName: 'mainnet' }, variables: { id: 'mainnet' } })
+    const goerliRes = useQuery(queries.REGISTRATIONS, { context: { apiName: 'goerli' }, variables: { id: 'goerli' } })
     const { loading: goerliLoading, error: goerliError, data: goerliData } = goerliRes
-    console.log({ error, loading, mainnetData })
-    console.log({ goerliError, goerliLoading, goerliData })
+    console.log({ mainnetData, goerliData })
 
     if (error || goerliError) return 'error'
     if (loading || goerliLoading) return 'loading...'
-    const registrationInstances = mainnetData.registrationInstances.concat(goerliData.registrationInstances)
+    const registrationInstances = mainnetData.registrationNetwork.registrations.concat(goerliData.registrationNetwork.registrations)
 
     console.log({ registrationInstances })
 

@@ -1,10 +1,18 @@
-import { BigInt, ipfs, json, JSONValueKind, log } from '@graphprotocol/graph-ts'
+import { BigInt, ipfs, json, JSONValueKind, log, dataSource } from '@graphprotocol/graph-ts'
 import { NewRegistration } from '../generated/EIP4824RegistrationSummoner/EIP4824RegistrationSummoner'
 import { NewURI } from '../generated/templates/EIP4824Registration/EIP4824Registration'
-import { RegistrationInstance } from '../generated/schema'
+import { RegistrationInstance, RegistrationNetwork } from '../generated/schema'
 import { EIP4824Registration } from '../generated/templates'
 
 export function handleNewRegistration(event: NewRegistration): void {
+    const chainName = dataSource.network() // returns network name
+
+    let registrationNetwork = RegistrationNetwork.load(chainName)
+    if (!registrationNetwork) {
+        registrationNetwork = new RegistrationNetwork(chainName)
+        registrationNetwork.save()
+    }
+
     let daoAddress = event.params.daoAddress.toHex()
     let daoId = daoAddress
     let registrationInstance = RegistrationInstance.load(daoId)
@@ -15,6 +23,7 @@ export function handleNewRegistration(event: NewRegistration): void {
         registrationInstance = new RegistrationInstance(newAddress)
     }
 
+    registrationInstance.registrationNetwork = chainName
     registrationInstance.registrationAddress = event.params.registration
     registrationInstance.daoAddress = event.params.daoAddress
     registrationInstance.daoURI = event.params.daoURI
@@ -80,7 +89,7 @@ export function handleNewURI(event: NewURI): void {
                 const governanceURI = daoMetadata.get('governanceURI')
                 const activityLogURI = daoMetadata.get('activityLogURI')
 
-            registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
+                registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
                 registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
                 registrationInstance.membersURI = membersURI && membersURI.kind == JSONValueKind.STRING ? membersURI.toString() : ''
                 registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
