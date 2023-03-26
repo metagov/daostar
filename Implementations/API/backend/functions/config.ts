@@ -1,5 +1,5 @@
-export const HttpMethods = {
-    POST: 'POST'
+export enum HttpMethod {
+    POST='POST',
 }
 export const ETHEREUM_NETWORK_ID = '1'
 

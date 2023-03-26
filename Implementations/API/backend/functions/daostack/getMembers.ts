@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 import { apiRequest } from 'functions/apiRequest'
-import { daostackGraphConfig } from 'functions/config'
+import { HttpMethod, daostackGraphConfig } from 'functions/config'
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
@@ -39,7 +39,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     }
     console.log({ data })
 
-    const res = (await apiRequest(path, 'POST', data)) as any
+    const res = (await apiRequest(path, HttpMethod.POST, data)) as any
     console.log({ res })
 
     if (!(res.data.dao)) return { statusCode: 404, message: 'DAO not found' }

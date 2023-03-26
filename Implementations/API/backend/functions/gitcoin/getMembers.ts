@@ -1,6 +1,6 @@
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
+import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from 'aws-lambda'
 import { apiRequest } from 'functions/apiRequest'
-import { HttpMethods, gitcoinGraphConfig } from 'functions/config'
+import { HttpMethod, gitcoinGraphConfig } from 'functions/config'
 
 const ETHEREUM_ADDRESS = 'EthereumAddress'
 
@@ -23,9 +23,9 @@ type RequestParameters = {
 }
 
 type SubgraphRequest = {
-  path,
-  method,
-  data
+  path: string,
+  method: HttpMethod,
+  data: any
 }
 
 type ReputationHolder = {
@@ -47,8 +47,8 @@ type SubgraphResponse = {
 
 class Member
 {
-  id: string
-  type: string
+  id!: string
+  type!: string
 
   static fromReputationHolder( holder: ReputationHolder ): Member
   {
@@ -112,7 +112,7 @@ const buildRequest = ( params: RequestParameters ): Promise<SubgraphRequest> =>
 
     resolve( {
       path,
-      method: HttpMethods.POST,
+      method: HttpMethod.POST,
       data
     } )
   } )
@@ -120,11 +120,11 @@ const buildRequest = ( params: RequestParameters ): Promise<SubgraphRequest> =>
 
 const sendRequest = ( request: SubgraphRequest ): Promise<SubgraphResponse> => 
 {
-  return new Promise( ( resolve, reject ) =>
+  return new Promise<SubgraphResponse>( ( resolve, reject ) =>
   {
     const { path, method, data } = request
     apiRequest( path, method, data )
-      .then( resolve )
+      .then((res: unknown) => resolve(res as SubgraphResponse))
       .catch( reject )
   } )
 }
@@ -145,7 +145,7 @@ const transformResponse = ( eventId: string, response: any ): GetMembersResponse
   }
 }
 
-const queryMembersOfDao = ( event ) =>
+const queryMembersOfDao = ( event: APIGatewayProxyEventV2 ) =>
 {
   return new Promise( ( resolve, reject ) =>
   {
@@ -166,7 +166,7 @@ export const handler: APIGatewayProxyHandlerV2 = async ( event ) =>
 {
   let statusCode, body
 
-  queryMembersOfDao( event )
+  await queryMembersOfDao( event )
     .then( ( res ) =>
     {
       statusCode = 200

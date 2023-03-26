@@ -5,4 +5,5 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const network = event?.pathParameters?.network
   if (!eventId) return { statusCode: 400 }
   if (!network) return { statusCode: 400 } 
+  
 }

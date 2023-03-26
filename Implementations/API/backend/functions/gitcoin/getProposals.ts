@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
 import { HttpResponse } from 'aws-sdk'
 import { apiRequest } from 'functions/apiRequest'
-import { HttpMethods, gitcoinGraphConfig } from 'functions/config'
+import { HttpMethod, gitcoinGraphConfig } from 'functions/config'
 
 // todo: this type clashes with the AWS handler type, how can we specify what type `event` is in the handler parameters?
 type GitcoinProposalsRequestEventType = {
@@ -26,10 +26,10 @@ type ProposalsResponseType = {
 
 class FormattedProposal
 {
-  id: string
-  type: string
-  status: string
-  contentURI: string
+  id!: string
+  type!: string
+  status!: string
+  contentURI!: string
 
   static fromGraphResponse( p: ProposalsResponseType )
   {
@@ -74,19 +74,19 @@ const transformResponse = ( res: any, eventId: string ): HttpResponse =>
 {
   // TODO: do these get added on later? what type should we return instead? probably shouldn't have null headers...
   const emptyResponse = {
-    createUnbufferedStream: null,
-    body: null,
-    headers: null,
-    streaming: null,
+    body: '',
+    headers: {},
+    streaming: false,
+    createUnbufferedStream: () => new ReadableStream(),
     statusMessage: null
   }
 
   if ( !( res.data.proposals ) ) return {
+    ...emptyResponse,
     statusCode: 404,
     // TODO: is this DAO not found, or proposals not found, 
     // or something else more specific?
-    statusMessage: 'DAO not found',
-    ...emptyResponse
+    statusMessage: 'DAO not found'
   }
 
   const proposals: ProposalsResponseType[] = res.data.proposals
@@ -101,20 +101,22 @@ const transformResponse = ( res: any, eventId: string ): HttpResponse =>
   //       can we check that more explicitly?
   if ( !response )
     return {
+      ...emptyResponse,
       statusCode: 500, // todo: right status code?
+      statusMessage: 'Internal server error',
       body: JSON.stringify( {
         error: true,
         // TODO: how's this error message? 
         //       more specific, less specific?
         message: 'An unknown error occurred while handling the response from the graph.'
       } ),
-      ...emptyResponse
     }
 
   return {
+    ...emptyResponse,
     statusCode: 200,
+    statusMessage: 'OK',
     body: JSON.stringify( response ),
-    ...emptyResponse
   }
 }
 
@@ -149,7 +151,7 @@ export const handler: APIGatewayProxyHandlerV2 = async ( event ) =>
   }
 
   const res = ( await apiRequest(
-    ( path ), HttpMethods.POST, req
+    ( path ), HttpMethod.POST, req
   ) ) as any
 
   return transformResponse( res, eventId )
