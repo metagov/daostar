@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.97",
-    "@types/node": "^18.15.9"
+    "@types/node": "^18.15.9",
+    "http-status-codes": "^2.2.0"
   }
 }

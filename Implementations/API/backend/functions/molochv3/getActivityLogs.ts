@@ -16,6 +16,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const eventId = event?.pathParameters?.id;
   if (!eventId) return { statusCode: 400 };
 
+  // TODO: this could be pulled out to a generic file. 
   const template = {
     "@context": {
       "@vocab": "http://daostar.org/",
@@ -24,6 +25,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     name: eventId,
   };
 
+  // TODO: is activites a typo?
   const query = `query GetActivityLogs($dao: String!) {
         activityUri(id: $dao) {
           id

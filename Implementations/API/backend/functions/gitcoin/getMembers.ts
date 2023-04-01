@@ -2,10 +2,10 @@ import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from 'aws-lambda'
 import { apiRequest } from 'functions/apiRequest'
 import { HttpMethod, gitcoinGraphConfig } from 'functions/config'
 
-const ETHEREUM_ADDRESS = 'EthereumAddress'
+export const ETHEREUM_ADDRESS = 'EthereumAddress'
 
 // TODO: move this to a more common utils file
-class MissingValueError
+export class MissingValueError
 {
   statusCode: number
   message: string
@@ -17,12 +17,13 @@ class MissingValueError
   }
 }
 
-type RequestParameters = {
+export type RequestParameters = {
   eventId: string
   network: string
+  requestPath: string
 }
 
-type SubgraphRequest = {
+export type SubgraphRequest = {
   path: string,
   method: HttpMethod,
   data: any
@@ -35,7 +36,7 @@ type ReputationHolder = {
 }
 
 // TODO: are some of these numbers?
-type SubgraphResponse = {
+export type SubgraphResponse = {
   data: {
     dao: {
       id: string
@@ -65,7 +66,7 @@ type GetMembersResponse = {
   name: string
 }
 
-const validateRequest = ( event: any ):
+export const validateRequest = ( event: APIGatewayProxyEventV2 ):
   Promise<RequestParameters> => 
 {
   return new Promise( ( resolve, reject ) =>
@@ -78,9 +79,14 @@ const validateRequest = ( event: any ):
     if ( !network )
       reject( new MissingValueError( 400, 'event parameter network' ) )
 
+    const path = gitcoinGraphConfig[network!]
+    if ( !path )
+      reject( new MissingValueError( 400, 'config for network' ) )
+
     resolve( {
-      eventId,
-      network
+      eventId: eventId!,
+      network: network!,
+      requestPath: path!
     } )
   } )
 }
@@ -89,11 +95,7 @@ const buildRequest = ( params: RequestParameters ): Promise<SubgraphRequest> =>
 {
   return new Promise( ( resolve, reject ) =>
   {
-    const { eventId, network } = params
-    const path = gitcoinGraphConfig[ network ]
-
-    if ( !path )
-      reject( new MissingValueError( 400, 'config for network' ) )
+    const { eventId, requestPath } = params
 
     const data = {
       query: `query GetMembers($dao: String!) {
@@ -111,14 +113,14 @@ const buildRequest = ( params: RequestParameters ): Promise<SubgraphRequest> =>
     }
 
     resolve( {
-      path,
+      path: requestPath,
       method: HttpMethod.POST,
       data
     } )
   } )
 }
 
-const sendRequest = ( request: SubgraphRequest ): Promise<SubgraphResponse> => 
+export const sendRequest = ( request: SubgraphRequest ): Promise<SubgraphResponse> => 
 {
   return new Promise<SubgraphResponse>( ( resolve, reject ) =>
   {

@@ -1,15 +1,8 @@
-import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
-import { HttpResponse } from 'aws-sdk'
-import { apiRequest } from 'functions/apiRequest'
-import { HttpMethod, gitcoinGraphConfig } from 'functions/config'
+import HttpStatus from 'http-status-codes'
+import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from 'aws-lambda'
+import { HttpMethod } from 'functions/config'
+import { RequestParameters, SubgraphRequest, sendRequest, validateRequest } from './getMembers'
 
-// todo: this type clashes with the AWS handler type, how can we specify what type `event` is in the handler parameters?
-type GitcoinProposalsRequestEventType = {
-  pathParameters: {
-    eventId: string,
-    network: string
-  }
-}
 
 type SubgraphQuery = {
   query: string,
@@ -45,7 +38,7 @@ class FormattedProposal
 // TODO: how to better distinguish 
 //       - responses from the graph
 //       - vs responses we're returning?
-type ProposalsApiResponse = {
+type GetProposalsResponse = {
   proposals: FormattedProposal[],
   '@context': {
     '@vocab': string
@@ -54,10 +47,11 @@ type ProposalsApiResponse = {
   name: string
 }
 
+
 const formatApiResponse = (
   eventId: string,
   formattedProposals: FormattedProposal[]
-): ProposalsApiResponse => 
+): GetProposalsResponse => 
 {
   return {
     proposals: formattedProposals,
@@ -70,89 +64,88 @@ const formatApiResponse = (
 }
 
 
-const transformResponse = ( res: any, eventId: string ): HttpResponse =>
+const transformProposalsResponse = ( res: any, eventId: string ): Promise<GetProposalsResponse> =>
 {
-  // TODO: do these get added on later? what type should we return instead? probably shouldn't have null headers...
-  const emptyResponse = {
-    body: '',
-    headers: {},
-    streaming: false,
-    createUnbufferedStream: () => new ReadableStream(),
-    statusMessage: null
-  }
+  return new Promise( ( resolve, reject ) =>
+  {
+    // TODO: reject on bad response
+    const proposals: ProposalsResponseType[] = res.data.proposals
+    const formattedProposals: FormattedProposal[] = proposals.map(
+      FormattedProposal.fromGraphResponse
+    )
 
-  if ( !( res.data.proposals ) ) return {
-    ...emptyResponse,
-    statusCode: 404,
-    // TODO: is this DAO not found, or proposals not found, 
-    // or something else more specific?
-    statusMessage: 'DAO not found'
-  }
-
-  const proposals: ProposalsResponseType[] = res.data.proposals
-  const formattedProposals: FormattedProposal[] = proposals.map(
-    FormattedProposal.fromGraphResponse
-  )
-
-  const response: ProposalsApiResponse = formatApiResponse( eventId, formattedProposals )
-
-  // todo: i don't like this structure - in what 
-  //       situation is `response` falsy? 
-  //       can we check that more explicitly?
-  if ( !response )
-    return {
-      ...emptyResponse,
-      statusCode: 500, // todo: right status code?
-      statusMessage: 'Internal server error',
-      body: JSON.stringify( {
-        error: true,
-        // TODO: how's this error message? 
-        //       more specific, less specific?
-        message: 'An unknown error occurred while handling the response from the graph.'
-      } ),
-    }
-
-  return {
-    ...emptyResponse,
-    statusCode: 200,
-    statusMessage: 'OK',
-    body: JSON.stringify( response ),
-  }
+    resolve(formatApiResponse( eventId, formattedProposals ))
+  })
 }
 
-// TODO: can we type event as a GitcoinProposalsRequestEventType
-//       or something like that ?
-export const handler: APIGatewayProxyHandlerV2 = async ( event ) =>
+const buildProposalsRequest = ( params: RequestParameters ): Promise<SubgraphRequest> =>
 {
-  // TODO: write json.schema file for event and 
-  //       validate against that?
-  const eventId = event?.pathParameters?.id
-  // TODO: use HTTP import for specific code, eg. HttpStatus.BadRequest or something like that
-  if ( !eventId ) return { statusCode: 400, message: 'Missing event parameter "id"'! }
+  return new Promise( ( resolve, reject ) =>
+  {
+    // TODO: reject on bad response
+    const { eventId, requestPath } = params
 
-  const network = event?.pathParameters?.network
-  if ( !network ) return { statusCode: 400, message: 'Missing event parameter "network"!' }
-
-  const path = gitcoinGraphConfig[ network ]
-
-  const req: SubgraphQuery = {
-    // TODO: am assuming this is the query based on aave.  
-    //       if so, maybe abstract this out into a config file?
-    query: `
-      query GetProposals {
-        proposals {
-          id
-          state
-          discussions
+    const data: SubgraphQuery = {
+      // TODO: am assuming this is the query based on aave.  
+      //       if so, maybe abstract this out into a config file?
+      query: `
+        query GetProposals {
+          proposals {
+            id
+            state
+            discussions
+          }
         }
-      }
-      `,
-    variables: { dao: eventId }
+        `,
+      variables: { dao: eventId }
+    }
+
+    resolve( {
+      path: requestPath,
+      method: HttpMethod.POST,
+      data
+    } )
+
+  } )
+}
+
+const queryProposals = async ( event: APIGatewayProxyEventV2 ) =>
+{
+  return new Promise( ( resolve, reject ) =>
+  {
+    validateRequest( event )
+      .then( params =>
+      {
+        buildProposalsRequest( params )
+          .then( req => sendRequest( req ) )
+          .then( res => transformProposalsResponse( res, params.eventId ) )
+          .then( resolve )
+          .catch( reject )
+      } )
+  } )
+}
+
+export const handler: APIGatewayProxyHandlerV2 = async ( event: APIGatewayProxyEventV2 ) =>
+{
+  let statusCode, body
+
+  await queryProposals( event )
+    .then( ( res ) =>
+    {
+      statusCode = HttpStatus.OK
+      body = JSON.stringify( ( res ) )
+    } )
+    .catch( ( err ) =>
+    {
+      statusCode = HttpStatus.INTERNAL_SERVER_ERROR
+      body = JSON.stringify( {
+        error: true,
+        errorMessage: err
+      } )
+    } )
+
+  return {
+    statusCode,
+    body
   }
-
-  const res = ( await apiRequest(
-    ( path ), HttpMethod.POST, req
-  ) ) as any
-
-  return transformResponse( res, eventId )
 }
