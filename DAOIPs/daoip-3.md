@@ -32,7 +32,7 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 ### For DAOs: attestationIssuers and issuerURI
 
-All DAOs conforming to DAOIP-## MUST implement the `attestationIssuers` field as part of `daoURI`. `attestationIssuers`is an array of attestation endpoints (see “Attestation Endpoints”, below) hosted by service providers trusted by the DAO to issue attestations on their behalf.
+All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuers` field as part of `daoURI`. `attestationIssuers`is an array of attestation endpoints (see “Attestation Endpoints”, below) hosted by service providers trusted by the DAO to issue attestations on their behalf.
 
 ```json
 {
@@ -57,7 +57,7 @@ All DAOs conforming to DAOIP-## MUST implement the `attestationIssuers` field as
 
 An *attestation issuer*, or just issuer, is an entity that issues and manages attestations on behalf of some other entity such as a DAO. 
 
-Every issuer conforming to DAOIP-## MUST implement an `issuerURI` endpoint describing the issuer and listing endpoints that it supports, following the Attestation Issuer JSON Schema below: 
+Every issuer conforming to DAOIP-3 MUST implement an `issuerURI` endpoint describing the issuer and listing endpoints that it supports, following the Attestation Issuer JSON Schema below: 
 
 ```json
 {
