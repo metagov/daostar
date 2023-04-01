@@ -1,17 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from 'aws-lambda'
-import { daostackGraphConfig } from 'functions/config'
-import fetch from 'node-fetch'
-
-function apiRequest(path: string, method: string, data: any) {
-    return fetch(path, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method,
-        redirect: 'follow',
-        body: JSON.stringify(data),
-    }).then((res) => res.json())
-}
+import { apiRequest } from 'functions/apiRequest'
+import { HttpMethod, daostackGraphConfig } from 'functions/config'
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
@@ -50,7 +39,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     }
     console.log({ data })
 
-    const res = (await apiRequest(path, 'POST', data)) as any
+    const res = (await apiRequest(path, HttpMethod.POST, data)) as any
     console.log({ res })
 
     if (!(res.data.dao)) return { statusCode: 404, message: 'DAO not found' }
