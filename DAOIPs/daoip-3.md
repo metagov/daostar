@@ -180,7 +180,8 @@ Any contributions the user allows to be publicly shared will also be available t
 			"commit_type": "tweet",
 			"reference?": "<URI reference to the tweet on Govrn's platform>",
 			"attesterURI": "<Govrn's issuerURI>"
-		},
+		}
+	]
 }
 ```
 
