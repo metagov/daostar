@@ -21,24 +21,23 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
         EIP4824Registration.create(event.params.daoAddress)
         let newAddress = event.params.daoAddress.toHex()
         registrationInstance = new RegistrationInstance(newAddress)
+        registrationInstance.registrationNetwork = chainName
+        registrationInstance.registrationAddress = event.params.daoAddress
+        registrationInstance.daoAddress = event.params.daoAddress
+        registrationInstance.daoURI = 'placeholder'
+        registrationInstance.save()
     }
-
-    registrationInstance.registrationNetwork = chainName
-    registrationInstance.registrationAddress = event.params.daoAddress
-    registrationInstance.daoAddress = event.params.daoAddress
-    registrationInstance.daoURI = 'placeholder'
-
-    registrationInstance.save()
 }
 
 export function handleNewURI(event: DAOURIUpdate): void {
-    let daoAddress = event.params.daoAddress.toHex()
-    let daoId = daoAddress
-    let registrationInstance = RegistrationInstance.load(daoId)
+    let registrationAddress = event.address.toHex()
+    let registrationInstance = RegistrationInstance.load(registrationAddress)
 
-    if (!registrationInstance) log.warning('Invalid instance', [])
+    if (!registrationInstance) log.warning('Invalid Registration: {}', [registrationAddress])
     else {
+        registrationInstance.daoAddress = event.params.daoAddress
         if (event.params.daoURI) {
+            registrationInstance.daoURI = event.params.daoURI
             const ipfsHash = event.params.daoURI.substring(7)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
             let ipfsData = ipfs.cat(ipfsHash)
