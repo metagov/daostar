@@ -2,15 +2,45 @@
 pragma solidity 0.8.13;
 
 import {AccessControl} from "openzeppelin/access/AccessControl.sol";
+import {IERC165} from "openzeppelin/interfaces/IERC165.sol";
+import {ERC165} from "openzeppelin/utils/introspection/ERC165.sol";
+import {ERC165Checker} from "openzeppelin/utils/introspection/ERC165Checker.sol";
 import {Clones} from "openzeppelin/proxy/Clones.sol";
 
 /// @title EIP-4824 DAOs
 /// @dev See <https://eips.ethereum.org/EIPS/eip-4824>
-interface EIP4824 {
+interface IEIP4824 {
     event DAOURIUpdate(address daoAddress, string daoURI);
 
     /// @notice A distinct Uniform Resource Identifier (URI) pointing to a JSON object following the "EIP-4824 DAO JSON-LD Schema". This JSON file splits into four URIs: membersURI, proposalsURI, activityLogURI, and governanceURI. The membersURI should point to a JSON file that conforms to the "EIP-4824 Members JSON-LD Schema". The proposalsURI should point to a JSON file that conforms to the "EIP-4824 Proposals JSON-LD Schema". The activityLogURI should point to a JSON file that conforms to the "EIP-4824 Activity Log JSON-LD Schema". The governanceURI should point to a flatfile, normatively a .md file. Each of the JSON files named above can be statically-hosted or dynamically-generated.
     function daoURI() external view returns (string memory _daoURI);
+}
+
+error EIP4824InterfaceNotSupported();
+
+contract EIP4824Index is AccessControl {
+    using ERC165Checker for address;
+
+    bytes32 public constant REGISTRATION_ROLE = keccak256("REGISTRATION_ROLE");
+
+    event DAOURIRegistered(address daoAddress);
+
+    constructor() {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(REGISTRATION_ROLE, msg.sender);
+    }
+
+    function logRegistrationPermissioned(
+        address daoAddress
+    ) external onlyRole(REGISTRATION_ROLE) {
+        emit DAOURIRegistered(daoAddress);
+    }
+
+    function logRegistration(address daoAddress) external {
+        if (!daoAddress.supportsInterface(type(IEIP4824).interfaceId))
+            revert EIP4824InterfaceNotSupported();
+        emit DAOURIRegistered(daoAddress);
+    }
 }
 
 error NotDaoOrManager();
@@ -20,7 +50,7 @@ error AlreadyInitialized();
 error OfferExpired();
 
 /// @title EIP-4824: DAO Registration
-contract EIP4824Registration is EIP4824, AccessControl {
+contract EIP4824Registration is IEIP4824, AccessControl {
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
     string private _daoURI;
@@ -39,9 +69,10 @@ contract EIP4824Registration is EIP4824, AccessControl {
     function initialize(
         address _daoAddress,
         address _manager,
-        string memory daoURI_
+        string memory daoURI_,
+        address _eip4824Index
     ) external {
-        initialize(_daoAddress, daoURI_);
+        initialize(_daoAddress, daoURI_, _eip4824Index);
         _grantRole(MANAGER_ROLE, _manager);
     }
 
@@ -49,13 +80,19 @@ contract EIP4824Registration is EIP4824, AccessControl {
     /// @dev Throws if initialized already
     /// @param _daoAddress The primary address for a DAO
     /// @param daoURI_ The URI which will resolve to the governance docs
-    function initialize(address _daoAddress, string memory daoURI_) public {
+    function initialize(
+        address _daoAddress,
+        string memory daoURI_,
+        address _eip4824Index
+    ) public {
         if (daoAddress != address(0)) revert AlreadyInitialized();
         daoAddress = _daoAddress;
         _setURI(daoURI_);
 
         _grantRole(DEFAULT_ADMIN_ROLE, _daoAddress);
         _grantRole(MANAGER_ROLE, _daoAddress);
+
+        EIP4824Index(_eip4824Index).logRegistration(address(this));
     }
 
     /// @notice Update the URI for a DAO
@@ -73,6 +110,14 @@ contract EIP4824Registration is EIP4824, AccessControl {
     function daoURI() external view returns (string memory daoURI_) {
         return _daoURI;
     }
+
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view virtual override returns (bool) {
+        return
+            interfaceId == type(IEIP4824).interfaceId ||
+            super.supportsInterface(interfaceId);
+    }
 }
 
 error ArrayLengthsMismatch();
@@ -84,10 +129,12 @@ contract EIP4824RegistrationSummoner {
         address registration
     );
 
+    address public eip4824Index;
     address public template; /*Template contract to clone*/
 
-    constructor(address _template) {
+    constructor(address _template, address _eip4824Index) {
         template = _template;
+        eip4824Index = _eip4824Index;
     }
 
     function registrationAddress(
@@ -115,12 +162,17 @@ contract EIP4824RegistrationSummoner {
         );
 
         if (manager == address(0)) {
-            EIP4824Registration(registration).initialize(msg.sender, daoURI_);
+            EIP4824Registration(registration).initialize(
+                msg.sender,
+                daoURI_,
+                eip4824Index
+            );
         } else {
             EIP4824Registration(registration).initialize(
                 msg.sender,
                 manager,
-                daoURI_
+                daoURI_,
+                eip4824Index
             );
         }
 
@@ -223,18 +275,5 @@ contract EIP4824RegistrationSummoner {
             // Equivalent to `keccak256(abi.encode(by, salt))`.
             result := keccak256(0x00, 0x40)
         }
-    }
-}
-
-contract EIP4824MinimalRegistrationLog {
-    event DAOURIUpdate(address daoAddress, string daoURI);
-
-    mapping(address => string) public daoURIs;
-
-    constructor() {}
-
-    function logRegistration(string calldata daoURI_) external {
-        daoURIs[msg.sender] = daoURI_;
-        emit DAOURIUpdate(msg.sender, daoURI_); // Require to be called by DAO itself. Can be called as many times as desired
     }
 }
