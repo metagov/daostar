@@ -17,7 +17,7 @@ const RegistrationCard = ({
     membersURI = '',
     proposalsURI = '',
     activityLogURI = '',
-    network,
+    registrationNetwork,
     registrationAddress,
     managerAddress,
     standalone = false // whether this card is presented within the explore view or on its own page
@@ -38,6 +38,7 @@ const RegistrationCard = ({
             {cardScreen === 'DISPLAY' && (
                 <DisplayRegistration 
                     id={id}
+                    network={registrationNetwork.id}
                     onClickEdit={onClickEdit}
                     daoURI={daoURI}
                     contractAddress={contractAddress}

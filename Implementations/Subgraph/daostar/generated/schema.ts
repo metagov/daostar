@@ -19,6 +19,7 @@ export class RegistrationInstance extends Entity {
     this.set("registrationAddress", Value.fromBytes(Bytes.empty()));
     this.set("daoAddress", Value.fromBytes(Bytes.empty()));
     this.set("daoURI", Value.fromString(""));
+    this.set("registrationNetwork", Value.fromString(""));
   }
 
   save(): void {
@@ -90,6 +91,15 @@ export class RegistrationInstance extends Entity {
     } else {
       this.set("daoName", Value.fromString(<string>value));
     }
+  }
+
+  get registrationNetwork(): string {
+    let value = this.get("registrationNetwork");
+    return value!.toString();
+  }
+
+  set registrationNetwork(value: string) {
+    this.set("registrationNetwork", Value.fromString(value));
   }
 
   get daoDescription(): string | null {
@@ -175,5 +185,67 @@ export class RegistrationInstance extends Entity {
     } else {
       this.set("activityLogURI", Value.fromString(<string>value));
     }
+  }
+}
+
+export class RegistrationNetwork extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("chainId", Value.fromString(""));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save RegistrationNetwork entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type RegistrationNetwork must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("RegistrationNetwork", id.toString(), this);
+    }
+  }
+
+  static load(id: string): RegistrationNetwork | null {
+    return changetype<RegistrationNetwork | null>(
+      store.get("RegistrationNetwork", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get registrations(): Array<string> | null {
+    let value = this.get("registrations");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set registrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("registrations");
+    } else {
+      this.set("registrations", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get chainId(): string {
+    let value = this.get("chainId");
+    return value!.toString();
+  }
+
+  set chainId(value: string) {
+    this.set("chainId", Value.fromString(value));
   }
 }
