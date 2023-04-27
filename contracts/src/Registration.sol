@@ -7,6 +7,8 @@ import {Clones} from "openzeppelin/proxy/Clones.sol";
 /// @title EIP-4824 DAOs
 /// @dev See <https://eips.ethereum.org/EIPS/eip-4824>
 interface EIP4824 {
+    event DAOURIUpdate(address daoAddress, string daoURI);
+
     /// @notice A distinct Uniform Resource Identifier (URI) pointing to a JSON object following the "EIP-4824 DAO JSON-LD Schema". This JSON file splits into four URIs: membersURI, proposalsURI, activityLogURI, and governanceURI. The membersURI should point to a JSON file that conforms to the "EIP-4824 Members JSON-LD Schema". The proposalsURI should point to a JSON file that conforms to the "EIP-4824 Proposals JSON-LD Schema". The activityLogURI should point to a JSON file that conforms to the "EIP-4824 Activity Log JSON-LD Schema". The governanceURI should point to a flatfile, normatively a .md file. Each of the JSON files named above can be statically-hosted or dynamically-generated.
     function daoURI() external view returns (string memory _daoURI);
 }
@@ -19,8 +21,6 @@ error OfferExpired();
 
 /// @title EIP-4824: DAO Registration
 contract EIP4824Registration is EIP4824, AccessControl {
-    event NewURI(string daoURI, address daoAddress);
-
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
 
     string private _daoURI;
@@ -67,7 +67,7 @@ contract EIP4824Registration is EIP4824, AccessControl {
 
     function _setURI(string memory daoURI_) internal {
         _daoURI = daoURI_;
-        emit NewURI(daoURI_, daoAddress);
+        emit DAOURIUpdate(daoAddress, daoURI_);
     }
 
     function daoURI() external view returns (string memory daoURI_) {
@@ -90,11 +90,10 @@ contract EIP4824RegistrationSummoner {
         template = _template;
     }
 
-    function registrationAddress(address by, bytes32 salt)
-        external
-        view
-        returns (address addr, bool exists)
-    {
+    function registrationAddress(
+        address by,
+        bytes32 salt
+    ) external view returns (address addr, bool exists) {
         addr = Clones.predictDeterministicAddress(
             template,
             _saltedSalt(by, salt),
@@ -140,10 +139,10 @@ contract EIP4824RegistrationSummoner {
      * @param data      The `abi.encodeWithSelector` calldata for each of the contracts.
      * @return results The results of calling the contracts.
      */
-    function _callContracts(address[] calldata contracts, bytes[] calldata data)
-        internal
-        returns (bytes[] memory results)
-    {
+    function _callContracts(
+        address[] calldata contracts,
+        bytes[] calldata data
+    ) internal returns (bytes[] memory results) {
         if (contracts.length != data.length) revert ArrayLengthsMismatch();
 
         assembly {
@@ -213,11 +212,10 @@ contract EIP4824RegistrationSummoner {
         }
     }
 
-    function _saltedSalt(address by, bytes32 salt)
-        internal
-        pure
-        returns (bytes32 result)
-    {
+    function _saltedSalt(
+        address by,
+        bytes32 salt
+    ) internal pure returns (bytes32 result) {
         assembly {
             // Store the variables into the scratch space.
             mstore(0x00, by)
@@ -225,5 +223,18 @@ contract EIP4824RegistrationSummoner {
             // Equivalent to `keccak256(abi.encode(by, salt))`.
             result := keccak256(0x00, 0x40)
         }
+    }
+}
+
+contract EIP4824MinimalRegistrationLog {
+    event DAOURIUpdate(address daoAddress, string daoURI);
+
+    mapping(address => string) public daoURIs;
+
+    constructor() {}
+
+    function logRegistration(string calldata daoURI_) external {
+        daoURIs[msg.sender] = daoURI_;
+        emit DAOURIUpdate(msg.sender, daoURI_); // Require to be called by DAO itself. Can be called as many times as desired
     }
 }
