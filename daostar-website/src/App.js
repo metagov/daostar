@@ -27,11 +27,13 @@ function App() {
     const { loading, error, data: mainnetData } = useQuery(queries.REGISTRATIONS, { context: { apiName: 'mainnet' }, variables: { id: 'mainnet' } })
     const goerliRes = useQuery(queries.REGISTRATIONS, { context: { apiName: 'goerli' }, variables: { id: 'goerli' } })
     const { loading: goerliLoading, error: goerliError, data: goerliData } = goerliRes
-    // console.log({ mainnetData, goerliData })
+    console.log({ mainnetData, goerliData })
 
     if (error || goerliError) return 'error'
     if (loading || goerliLoading) return 'loading...'
-    const registrationInstances = mainnetData.registrationNetwork.registrations.concat(goerliData.registrationNetwork.registrations)
+    const mainnetRegistrations = mainnetData?.registrationNetwork?.registrations || []
+    const goerliRegistrations = goerliData?.registrationNetwork?.registrations || []
+    const registrationInstances = mainnetRegistrations.concat(goerliRegistrations)
 
     console.log({ registrationInstances })
 

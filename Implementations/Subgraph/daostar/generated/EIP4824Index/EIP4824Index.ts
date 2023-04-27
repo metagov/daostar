@@ -10,25 +10,21 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class DAOURIUpdate extends ethereum.Event {
-  get params(): DAOURIUpdate__Params {
-    return new DAOURIUpdate__Params(this);
+export class DAOURIRegistered extends ethereum.Event {
+  get params(): DAOURIRegistered__Params {
+    return new DAOURIRegistered__Params(this);
   }
 }
 
-export class DAOURIUpdate__Params {
-  _event: DAOURIUpdate;
+export class DAOURIRegistered__Params {
+  _event: DAOURIRegistered;
 
-  constructor(event: DAOURIUpdate) {
+  constructor(event: DAOURIRegistered) {
     this._event = event;
   }
 
   get daoAddress(): Address {
     return this._event.parameters[0].value.toAddress();
-  }
-
-  get daoURI(): string {
-    return this._event.parameters[1].value.toString();
   }
 }
 
@@ -110,9 +106,9 @@ export class RoleRevoked__Params {
   }
 }
 
-export class EIP4824Registration extends ethereum.SmartContract {
-  static bind(address: Address): EIP4824Registration {
-    return new EIP4824Registration("EIP4824Registration", address);
+export class EIP4824Index extends ethereum.SmartContract {
+  static bind(address: Address): EIP4824Index {
+    return new EIP4824Index("EIP4824Index", address);
   }
 
   DEFAULT_ADMIN_ROLE(): Bytes {
@@ -138,34 +134,27 @@ export class EIP4824Registration extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
-  MANAGER_ROLE(): Bytes {
-    let result = super.call("MANAGER_ROLE", "MANAGER_ROLE():(bytes32)", []);
+  REGISTRATION_ROLE(): Bytes {
+    let result = super.call(
+      "REGISTRATION_ROLE",
+      "REGISTRATION_ROLE():(bytes32)",
+      []
+    );
 
     return result[0].toBytes();
   }
 
-  try_MANAGER_ROLE(): ethereum.CallResult<Bytes> {
-    let result = super.tryCall("MANAGER_ROLE", "MANAGER_ROLE():(bytes32)", []);
+  try_REGISTRATION_ROLE(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "REGISTRATION_ROLE",
+      "REGISTRATION_ROLE():(bytes32)",
+      []
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  daoURI(): string {
-    let result = super.call("daoURI", "daoURI():(string)", []);
-
-    return result[0].toString();
-  }
-
-  try_daoURI(): ethereum.CallResult<string> {
-    let result = super.tryCall("daoURI", "daoURI():(string)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
   }
 
   getRoleAdmin(role: Bytes): Bytes {
@@ -294,82 +283,62 @@ export class GrantRoleCall__Outputs {
   }
 }
 
-export class InitializeCall extends ethereum.Call {
-  get inputs(): InitializeCall__Inputs {
-    return new InitializeCall__Inputs(this);
+export class LogRegistrationCall extends ethereum.Call {
+  get inputs(): LogRegistrationCall__Inputs {
+    return new LogRegistrationCall__Inputs(this);
   }
 
-  get outputs(): InitializeCall__Outputs {
-    return new InitializeCall__Outputs(this);
+  get outputs(): LogRegistrationCall__Outputs {
+    return new LogRegistrationCall__Outputs(this);
   }
 }
 
-export class InitializeCall__Inputs {
-  _call: InitializeCall;
+export class LogRegistrationCall__Inputs {
+  _call: LogRegistrationCall;
 
-  constructor(call: InitializeCall) {
+  constructor(call: LogRegistrationCall) {
     this._call = call;
   }
 
-  get _daoAddress(): Address {
+  get daoAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
-
-  get _manager(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get daoURI_(): string {
-    return this._call.inputValues[2].value.toString();
-  }
-
-  get _eip4824Index(): Address {
-    return this._call.inputValues[3].value.toAddress();
-  }
 }
 
-export class InitializeCall__Outputs {
-  _call: InitializeCall;
+export class LogRegistrationCall__Outputs {
+  _call: LogRegistrationCall;
 
-  constructor(call: InitializeCall) {
+  constructor(call: LogRegistrationCall) {
     this._call = call;
   }
 }
 
-export class Initialize1Call extends ethereum.Call {
-  get inputs(): Initialize1Call__Inputs {
-    return new Initialize1Call__Inputs(this);
+export class LogRegistrationPermissionedCall extends ethereum.Call {
+  get inputs(): LogRegistrationPermissionedCall__Inputs {
+    return new LogRegistrationPermissionedCall__Inputs(this);
   }
 
-  get outputs(): Initialize1Call__Outputs {
-    return new Initialize1Call__Outputs(this);
+  get outputs(): LogRegistrationPermissionedCall__Outputs {
+    return new LogRegistrationPermissionedCall__Outputs(this);
   }
 }
 
-export class Initialize1Call__Inputs {
-  _call: Initialize1Call;
+export class LogRegistrationPermissionedCall__Inputs {
+  _call: LogRegistrationPermissionedCall;
 
-  constructor(call: Initialize1Call) {
+  constructor(call: LogRegistrationPermissionedCall) {
     this._call = call;
   }
 
-  get _daoAddress(): Address {
+  get daoAddress(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
-
-  get daoURI_(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-
-  get _eip4824Index(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
 }
 
-export class Initialize1Call__Outputs {
-  _call: Initialize1Call;
+export class LogRegistrationPermissionedCall__Outputs {
+  _call: LogRegistrationPermissionedCall;
 
-  constructor(call: Initialize1Call) {
+  constructor(call: LogRegistrationPermissionedCall) {
     this._call = call;
   }
 }
@@ -438,36 +407,6 @@ export class RevokeRoleCall__Outputs {
   _call: RevokeRoleCall;
 
   constructor(call: RevokeRoleCall) {
-    this._call = call;
-  }
-}
-
-export class SetURICall extends ethereum.Call {
-  get inputs(): SetURICall__Inputs {
-    return new SetURICall__Inputs(this);
-  }
-
-  get outputs(): SetURICall__Outputs {
-    return new SetURICall__Outputs(this);
-  }
-}
-
-export class SetURICall__Inputs {
-  _call: SetURICall;
-
-  constructor(call: SetURICall) {
-    this._call = call;
-  }
-
-  get daoURI_(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class SetURICall__Outputs {
-  _call: SetURICall;
-
-  constructor(call: SetURICall) {
     this._call = call;
   }
 }

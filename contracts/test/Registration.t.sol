@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 
-import {EIP4824Registration, EIP4824RegistrationSummoner} from "../src/Registration.sol";
+import {EIP4824Registration, EIP4824RegistrationSummoner, EIP4824Index} from "../src/Registration.sol";
 
 contract ContractTest is Test {
     address deployer;
@@ -11,9 +11,12 @@ contract ContractTest is Test {
     address manager;
     address anyone;
 
+    EIP4824Index indexer;
     EIP4824RegistrationSummoner summoner;
     EIP4824Registration registration;
     EIP4824Registration registrationWithManager;
+
+    bytes32 public constant REGISTRATION_ROLE = keccak256("REGISTRATION_ROLE");
 
     uint256 salt = 1;
 
@@ -31,8 +34,14 @@ contract ContractTest is Test {
         manager = getFundedAccount(3);
         anyone = getFundedAccount(4);
 
+        vm.startPrank(deployer);
+        indexer = new EIP4824Index();
         EIP4824Registration template = new EIP4824Registration();
-        summoner = new EIP4824RegistrationSummoner(address(template));
+        summoner = new EIP4824RegistrationSummoner(
+            address(template),
+            address(indexer)
+        );
+        vm.stopPrank();
 
         address[] memory _targets = new address[](0);
         bytes[] memory _data = new bytes[](0);
@@ -73,7 +82,7 @@ contract ContractTest is Test {
 
         // Cannot reinitialize
         vm.expectRevert();
-        registration.initialize(dao, manager, daoUri);
+        registration.initialize(dao, manager, daoUri, address(indexer));
     }
 
     function test_managerCannotSetUriIfNoManager() public _as(manager) {
@@ -97,6 +106,27 @@ contract ContractTest is Test {
         assertEq(registrationWithManager.daoURI(), daoUri);
         registrationWithManager.setURI("new");
         assertEq(registrationWithManager.daoURI(), "new");
+    }
+
+    function test_LogRegistrationFailsWithNoERC165() public _as(dao) {
+        vm.expectRevert();
+        indexer.logRegistration(dao);
+    }
+
+    function test_LogRegistrationSucceedsWithDefaultRole() public {
+        vm.startPrank(deployer);
+        indexer.logRegistrationPermissioned(dao);
+        vm.stopPrank();
+    }
+
+    function test_LogRegistrationSucceedsWithRole() public {
+        vm.startPrank(deployer);
+        indexer.grantRole(REGISTRATION_ROLE, dao);
+        vm.stopPrank();
+
+        vm.startPrank(dao);
+        indexer.logRegistrationPermissioned(dao);
+        vm.stopPrank();
     }
 
     function getFundedAccount(uint256 num) internal returns (address) {

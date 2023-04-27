@@ -6,7 +6,7 @@
   },
   {
     "inputs": [],
-    "name": "AlreadyInitialized",
+    "name": "EIP4824InterfaceNotSupported",
     "type": "error"
   },
   {
@@ -17,15 +17,9 @@
         "internalType": "address",
         "name": "daoAddress",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "daoURI",
-        "type": "string"
       }
     ],
-    "name": "DAOURIUpdate",
+    "name": "DAOURIRegistered",
     "type": "event"
   },
   {
@@ -118,25 +112,12 @@
   },
   {
     "inputs": [],
-    "name": "MANAGER_ROLE",
+    "name": "REGISTRATION_ROLE",
     "outputs": [
       {
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "daoURI",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "daoURI_",
-        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -207,26 +188,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_daoAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_manager",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "daoURI_",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "_eip4824Index",
+        "name": "daoAddress",
         "type": "address"
       }
     ],
-    "name": "initialize",
+    "name": "logRegistration",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -235,21 +201,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_daoAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "string",
-        "name": "daoURI_",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "_eip4824Index",
+        "name": "daoAddress",
         "type": "address"
       }
     ],
-    "name": "initialize",
+    "name": "logRegistrationPermissioned",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -286,19 +242,6 @@
       }
     ],
     "name": "revokeRole",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "daoURI_",
-        "type": "string"
-      }
-    ],
-    "name": "setURI",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
