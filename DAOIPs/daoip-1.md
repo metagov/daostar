@@ -1,17 +1,20 @@
 ---
 daoip: 1
 title: DAOIP Purpose and Guidelines
+discussions-to: https://github.com/metagov/daostar/discussions/38
 status: Living
 type: Meta
 author: Joshua Tan <josh@metagov.org>, et al.
 created: 2023-01-02
 ---
 
-## What is an DAOIP?
+## What is a DAOIP?
 
 DAOIP stands for DAO Improvement Proposal. A DAOIP is a design document providing information to the DAO ecosystem, or describing a new feature for DAOs or their processes or environment. The DAOIP should provide a concise technical specification of the feature and a rationale for the feature. The DAOIP author is responsible for building consensus within the community and documenting dissenting opinions.
 
-The DAOIP system is currently being specified while work continues on specific .
+As of February 26, 2023, the DAOIP system is currently being specified while work continues on specific DAOIPs. Our goal in specifying the DAOIP system is to create a system that is both open and permissionless (as with EIPs and BIPs) but which also benefits from more professionalized, programmatic support for writing and governing certain key standards (as with W3C and ISO standards, but also similar to how EIPs operate with respect to "core" standards).
+
+In the absence of additional direction, please follow the norms of the [EIP system](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1.md).
 
 ## DAOIP Rationale
 

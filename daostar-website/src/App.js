@@ -60,12 +60,20 @@ function App() {
           <Route path='/registration/:regID' element={<RegistrationPage />} />
           <Route path='/explore' element={<ExplorePage registrationInstances={registrationInstances} />} />
           <Route path='/' element={<Homepage registrationInstances={registrationInstances} />} />
+          <Route path='/creative-universe' component={() => {
+            window.location.href = 'https://github.com/metagov/daostar/discussions/41';
+            return null;
+          }}/>
         </Routes>
         </div> 
         
       </ConnectKitProvider>
     </WagmiConfig>
   );
+}
+
+if (window.location.path === "creative-universe"){
+  window.location = "https://github.com/metagov/daostar/discussions/41"
 }
 
 export default App;

@@ -138,13 +138,13 @@ const Homepage = ({registrationInstances}) => {
                             <div className='sidebar one-third'>
                                 <div className='button-info-group'>
                                     <a 
-                                        href="https://discord.com/invite/PdrPkEZVFk" 
+                                        href="https://github.com/metagov/daostar/discussions" 
                                         target="_blank"
                                         className="btn"
                                     >
-                                        Join our Discord
+                                        DAOIPs
                                     </a>
-                                    <p>For questions and discussion, go to #daostar or #daostar-one.</p>
+                                    <p>Join the forum to submit and discuss DAOIPs</p>
                                 </div>
                                 <div className='button-info-group'>
                                     <a 
