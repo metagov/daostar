@@ -10,29 +10,18 @@ import MemberLogos from './MemberLogos/MemberLogos';
 
 import Eye from './Eye/Eye';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import REGISTRATIONS from '../ExplorePage/queries/registrations';
 import RegistrationCard from '../RegistrationCard/RegistrationCard';
 import { filterRegistrations } from '../ExplorePage/ExplorePage';
 import './Homepage.css';
 
-const Homepage = (props) => {
 
-    const { loading, error, data } = useQuery(REGISTRATIONS);
+const Homepage = ({registrationInstances}) => {
 
-    const daoCards = data ? (
-            data.registrationInstances
-                .filter(reg => filterRegistrations(reg))
-                .filter((reg, i) => i < 2)
-                .map((registration, i) => {
-                    return (
-                        <RegistrationCard 
-                            key={i}
-                            {...registration}
-                        />
-                    )
-                })
-            ) : null;
+    const daoCards = registrationInstances
+        .filter((reg) => filterRegistrations(reg, ''))
+        .map((registration, i) => {
+            return <RegistrationCard key={i} {...registration} />
+        })
 
     return (
         <div>				
@@ -277,3 +266,4 @@ const Homepage = (props) => {
 }
 
 export default Homepage;
+

@@ -15,48 +15,32 @@ const REGISTRATIONS = gql`
                 governanceURI
                 activityLogURI
                 registrationAddress
-            }
-        }
-    }
-`
-const REGISTRATIONS_MAINNET = gql`
-    query Registrations($id: String) @api(name: mainnet) {
-        registrationNetwork(id: $id) {
-            id
-            registrations {
-                id
-                daoAddress
-                daoURI
-                daoName
-                daoDescription
-                membersURI
-                proposalsURI
-                governanceURI
-                activityLogURI
-                registrationAddress
+                registrationNetwork {
+                    id
+                  }
             }
         }
     }
 `
 
-const REGISTRATIONS_GOERLI = gql`
-    query Registrations @api(name: goerli) {
-        registrationNetwork(id: "goerli") {
+const REGISTRATION = gql`
+    query Registration($id: String) @api(contextKey: "apiName") {
+        registrationInstance(id: $id) {
             id
-            registrations {
+            daoAddress
+            daoURI
+            daoName
+            daoDescription
+            membersURI
+            proposalsURI
+            governanceURI
+            activityLogURI
+            registrationAddress
+            registrationNetwork {
                 id
-                daoAddress
-                daoURI
-                daoName
-                daoDescription
-                membersURI
-                proposalsURI
-                governanceURI
-                activityLogURI
-                registrationAddress
-            }
-        }
+                }
+          }
     }
 `
 
-export default { REGISTRATIONS, REGISTRATIONS_GOERLI, REGISTRATIONS_MAINNET }
+export default { REGISTRATIONS, REGISTRATION}

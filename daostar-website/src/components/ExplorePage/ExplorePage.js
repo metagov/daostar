@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import RegistrationCard from '../RegistrationCard/RegistrationCard'
-import { mockExploreData } from './mockExploreData'
 import './ExplorePage.css'
-import validator from 'validator'
-import { useQuery } from '@apollo/client'
-import queries from './queries/registrations'
 import { InputGroup } from '@blueprintjs/core'
 
 export const filterRegistrations = (registration, filterVal = '') => {
@@ -17,20 +13,10 @@ export const filterRegistrations = (registration, filterVal = '') => {
     return true
 }
 
-const ExplorePage = ({}) => {
+const ExplorePage = ({registrationInstances}) => {
     const [filterVal, setFilterVal] = useState('')
     const onChangeFilter = (e) => setFilterVal(e.target.value)
 
-    const { loading, error, data: mainnetData } = useQuery(queries.REGISTRATIONS, { context: { apiName: 'mainnet' }, variables: { id: 'mainnet' } })
-    const goerliRes = useQuery(queries.REGISTRATIONS, { context: { apiName: 'goerli' }, variables: { id: 'goerli' } })
-    const { loading: goerliLoading, error: goerliError, data: goerliData } = goerliRes
-    console.log({ mainnetData, goerliData })
-
-    if (error || goerliError) return 'error'
-    if (loading || goerliLoading) return 'loading...'
-    const registrationInstances = mainnetData.registrationNetwork.registrations.concat(goerliData.registrationNetwork.registrations)
-
-    console.log({ registrationInstances })
 
     const daoCards = registrationInstances
         .filter((reg) => filterRegistrations(reg, filterVal))

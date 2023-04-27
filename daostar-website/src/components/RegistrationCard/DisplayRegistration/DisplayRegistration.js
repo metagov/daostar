@@ -16,6 +16,7 @@ const getHttpDaoURI = (daoURI) => {
 
 const DisplayRegistration = ({
     id,
+    network,
     onClickEdit,
     contractAddress,
     managerAddress,
@@ -37,7 +38,7 @@ const DisplayRegistration = ({
             {standalone === true ? (
                 <h3>{name}</h3>
             ) : (
-                <Link to={`/registration/${id}`} className='underline'>
+                <Link to={`/registration/${network}:${id}`} className='underline'>
                     <h3>{name}</h3>
                 </Link>
             )}
@@ -74,6 +75,10 @@ const DisplayRegistration = ({
                     ) : (
                         <span className='card-metadata-value'>None provided</span>
                     )}
+                </p>
+                <p className='bp4-text-small wizard-no-margin'>
+                    <span className='bp4-text-muted'>Network: </span>
+                        <span className='card-metadata-value'>{network}</span>
                 </p>
             </div>
             <Divider />

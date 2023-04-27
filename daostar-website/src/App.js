@@ -6,6 +6,9 @@ import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import ExplorePage from './components/ExplorePage/ExplorePage';
 import { WagmiConfig, createClient } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
+import { useQuery } from '@apollo/client'
+
+import queries from './components/ExplorePage/queries/registrations'
 
 import './App.css';
 import './bp4-theme.css';
@@ -21,6 +24,16 @@ const client = createClient(
 );
 
 function App() {
+    const { loading, error, data: mainnetData } = useQuery(queries.REGISTRATIONS, { context: { apiName: 'mainnet' }, variables: { id: 'mainnet' } })
+    const goerliRes = useQuery(queries.REGISTRATIONS, { context: { apiName: 'goerli' }, variables: { id: 'goerli' } })
+    const { loading: goerliLoading, error: goerliError, data: goerliData } = goerliRes
+    // console.log({ mainnetData, goerliData })
+
+    if (error || goerliError) return 'error'
+    if (loading || goerliLoading) return 'loading...'
+    const registrationInstances = mainnetData.registrationNetwork.registrations.concat(goerliData.registrationNetwork.registrations)
+
+    console.log({ registrationInstances })
 
   return ( 
     <WagmiConfig client={client}>
@@ -45,8 +58,8 @@ function App() {
           <Route path='/eye' element={<Eye />} />
           <Route path='/register' element={<Register />} />
           <Route path='/registration/:regID' element={<RegistrationPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/' element={<Homepage />} />
+          <Route path='/explore' element={<ExplorePage registrationInstances={registrationInstances} />} />
+          <Route path='/' element={<Homepage registrationInstances={registrationInstances} />} />
         </Routes>
         </div> 
         
