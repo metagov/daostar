@@ -203,6 +203,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                 { label: 'Moloch', value: 'molochv2' },
                 { label: 'Safe', value: 'safe' },
                 { label: 'DAODAO', value: 'daodao' },
+                { label: 'Snapshot', value: 'snapshot' },
             ]}
         />
     )
@@ -230,7 +231,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <Divider vertical={true} />
             <div className="wizard-row wizard-row-flex">
                 <FormGroup label="Contract address">{EthNetworksSelect}</FormGroup>
-                <InputGroup fill placeholder="Enter DAO contract address" value={daoContractAddress} onChange={onChangeDaoContractAddress} />
+                <InputGroup fill placeholder="Enter DAO address or id (eg ENS for snapshot)" value={daoContractAddress} onChange={onChangeDaoContractAddress} />
             </div>
             <div className="wizard-row">
                 <FormGroup label="Name" labelFor="name" fill>
