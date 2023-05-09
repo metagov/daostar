@@ -7,6 +7,10 @@ const FRAMEWORK_URIs = {
         membersURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/members/${network}/${address}`,
         proposalsURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/proposals/${network}/${address}`,
     },
+    snapshot: {
+        membersURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/members/${address}`,
+        proposalsURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/proposals/${address}`,
+    },
 }
 
 export default FRAMEWORK_URIs;

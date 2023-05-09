@@ -21,3 +21,7 @@ export const gnosisGraphConfig: { [key: string]: any } = {
 export const gnosisApiConfig: { [key: string]: any } = {
     '1': 'https://safe-transaction-mainnet.safe.global/api/v1'
 }
+
+export const snapshotApiConfig: { [key: string]: any } = {
+    '1': 'https://hub.snapshot.org/graphql'
+}

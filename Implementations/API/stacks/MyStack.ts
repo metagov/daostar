@@ -18,6 +18,8 @@ export function MyStack({ stack }: StackContext) {
             'GET /gnosis/activities/{network}/{id}': 'functions/gnosis/getActivityLogs.handler',
             'GET /daodao/members/{network}/{id}': 'functions/daodao/getMembers.handler',
             'GET /daodao/proposals/{network}/{id}': 'functions/daodao/getProposals.handler',
+            'GET /snapshot/members/{id}': 'functions/snapshot/getMembers.handler',
+            'GET /snapshot/proposals/{id}': 'functions/snapshot/getProposals.handler',
         },
         customDomain: {
             domainName: 'services.daostar.org',
