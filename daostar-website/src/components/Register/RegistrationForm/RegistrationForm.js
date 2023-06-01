@@ -138,7 +138,11 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
 
     const onRegister = () => {
         let errors = []
-        if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address')
+        if (daoFramework === 'snapshot') {
+            if (!daoContractAddress.includes('.eth')) errors.push('Must be valid ENS name')
+        } else {
+            if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address')
+        }
         if (daoName === '') errors.push(`DAO must have a name`)
         if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address')
         if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI')
@@ -231,7 +235,12 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <Divider vertical={true} />
             <div className="wizard-row wizard-row-flex">
                 <FormGroup label="Contract address">{EthNetworksSelect}</FormGroup>
-                <InputGroup fill placeholder="Enter DAO address or id (eg ENS for snapshot)" value={daoContractAddress} onChange={onChangeDaoContractAddress} />
+                <InputGroup
+                    fill
+                    placeholder="Enter DAO address or id (eg ENS for snapshot)"
+                    value={daoContractAddress}
+                    onChange={onChangeDaoContractAddress}
+                />
             </div>
             <div className="wizard-row">
                 <FormGroup label="Name" labelFor="name" fill>
