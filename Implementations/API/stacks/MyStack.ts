@@ -20,6 +20,7 @@ export function MyStack({ stack }: StackContext) {
             'GET /daodao/proposals/{network}/{id}': 'functions/daodao/getProposals.handler',
             'GET /snapshot/members/{id}': 'functions/snapshot/getMembers.handler',
             'GET /snapshot/proposals/{id}': 'functions/snapshot/getProposals.handler',
+            'GET /nouns/members/{network}/': 'functions/nouns/getMembers.handler',
         },
         customDomain: {
             domainName: 'services.daostar.org',
