@@ -25,7 +25,3 @@ export const gnosisApiConfig: { [key: string]: any } = {
 export const snapshotApiConfig: { [key: string]: any } = {
     '1': 'https://hub.snapshot.org/graphql'
 }
-
-export const nonusApiConfig: { [key: string]: any } = {
-    '1': 'https://api.thegraph.com/subgraphs/name/nounsdao/nouns-subgraph'
-}

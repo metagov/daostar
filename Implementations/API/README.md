@@ -11,17 +11,11 @@ Currently supported DAOs and frameworks:
 | DAOStack  | Yes         | Yes           | No           | Mainnet                                  |
 | Aave      | No          | Yes           | No           | Mainnet                                  |
 | Safe      | Yes         | Yes           | Yes          | Mainnet                                  |
-| Nonus     | Yes         | No            | No           | Mainnet                                  |
+
 
 It can be forked to support other DAO frameworks.
 
-## Adding new DAO endpoints
 
-In order to add a new DAO's endpoints, you'll need to follow a few steps.
-1. adding the endpoint -> function handler pointer in `stacks/MyStack.ts`
-2. creating the folder `functions/<MyDao>/`
-3. creating the handlers for each endpoint within the folder created in step 2.
-4. creating the subgraph that the handlers will fetch information from.
 
 ## Moloch
 
