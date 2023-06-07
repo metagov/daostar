@@ -11,10 +11,9 @@ Currently supported DAOs and frameworks:
 | DAOStack  | Yes         | Yes           | No           | Mainnet                                  |
 | Aave      | No          | Yes           | No           | Mainnet                                  |
 | Safe      | Yes         | Yes           | Yes          | Mainnet                                  |
-
+| Nouns     | Yes         |               |              | Mainnet                                  |
 
 It can be forked to support other DAO frameworks.
-
 
 
 ## Moloch
