@@ -27,7 +27,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const network = event?.pathParameters?.network
     if (!network) return { statusCode: 400, message: 'Missing network' }
 
-    console.log({ graphConfig: nonusApiConfig })
     const path = nonusApiConfig[network]
     if (!path) return { statusCode: 400, message: 'Missing config for network' }
 
@@ -45,6 +44,10 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     let res = await getRes(`query {
         accounts( where: {tokenBalance_not: "0"},first:1000) {
             tokenBalance
+            delegate {
+                id
+                delegatedVotes
+            }
             id
             nouns {
                 seed {
@@ -106,23 +109,20 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
                 nonvotingShares = nonvotingShares + 1;
             }
         }
-        delegate = delegates.find((d: any) => {
-            return d.id == n.id
-        });
         delegates = delegates.filter((d: any) => {
             return d.id != n.id
         });
 
         member['votingShares'] = votingShares;
         member['nonVotingShares'] = nonvotingShares;
-        member['delegatedShares'] = delegate.delegatedVotes;
-        if (delegate.delegatedVotes > 0) {
-            delegate.nounsRepresented.forEach((m: any) => {
-                delegatee_ethereum_address.push({
-                    "@value": m.owner.id,
-                    "@type": "EthereumAddress",
-                })
-            });
+        member['delegatedShares'] = n.delegate.delegatedVotes;
+        if (n.delegate.delegatedVotes > 0) {
+
+            delegatee_ethereum_address.push({
+                "@value": n.delegate.id,
+                "@type": "EthereumAddress",
+            })
+
         }
 
         member['delegatee-ethereum-address'] = delegatee_ethereum_address;
@@ -140,20 +140,10 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
                 "@type": "EthereumAddress",
             }
 
-            let delegatee_ethereum_address: any = [];
-
-            //let delegatedVotes = 0;
-
             member['votingShares'] = 0;
             member['nonVotingShares'] = 0;
             member['delegatedShares'] = n.delegatedVotes;
-            n.nounsRepresented.forEach((m: any) => {
-                delegatee_ethereum_address.push({
-                    "@value": m.owner.id,
-                    "@type": "EthereumAddress",
-                })
-            });
-            member['delegatee-ethereum-address'] = delegatee_ethereum_address;
+            member['delegatee-ethereum-address'] = [];
             members.push(member);
         }
     }
