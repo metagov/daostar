@@ -6,6 +6,8 @@ Nouns DAO uses a fork of Compound Governance.
 
 ### Members URI
 
+*Demo endpoint: https://jmgfo3l869.execute-api.us-east-1.amazonaws.com/nouns/members/1/1*
+
 In this implementation of membersURI, we define a member of the DAO as any address with a voting share OR non-voting shares greater than or equal to zero. votingShares represent the amount of token each address has and is not delegated into another address. nonVotingShares represent the number of tokens one delegated to another address. Also, delegatedShares indicates the total number of tokens delegated to the member’s address.
 
 We add a checkpoint property because the Nouns governance contract keeps track of the voting weights based on the block time by using checkpoints. Nouns governance token contract has a structure named Checkpoint which has two elements; fromBlock and votes. Each time a member transfers tokens to another party delegates the tokens to another party or cancels the delegation this structure for the member will be updated. fromBlock will be changed into the block number in which the change happen and votes will be changed in a proper way based on the transfer of voting right.
@@ -102,7 +104,4 @@ We add "delegatee-ethereum-address" field to specify to which address the member
 
 ### Proposals URI
 
-
-
-## Compound
 
