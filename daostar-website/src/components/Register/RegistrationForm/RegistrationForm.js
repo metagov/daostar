@@ -161,13 +161,11 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     name: daoName,
                     description: daoDescription,
                     governanceURI: daoGovURI,
+                    membersURI: daoMembersURI,
+                    proposalsURI: daoProposalsURI,
+                    activityLogURI: daoActivityURI,
+                    contractsRegistryURI: daoContractsRegistryURI,
                 },
-            }
-            if (daoFramework === 'custom') {
-                registrationData.data.membersURI = daoMembersURI
-                registrationData.data.proposalsURI = daoProposalsURI
-                registrationData.data.activityLogURI = daoActivityURI
-                registrationData.data.contractsRegistryURI = daoContractsRegistryURI
             }
             executeRegistration({
                 data: registrationData,
