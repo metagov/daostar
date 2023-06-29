@@ -1,9 +1,13 @@
 [context.production.environment]
     REACT_APP_API_URL = "https://api.daostar.org"
     CI = "false"
-    
+
 [[redirects]]
   from = "/creative-universe"
   to = "https://github.com/metagov/daostar/discussions/41"
   status = 301
   force = true # COMMENT: ensure that we always redirect
+
+[build.environment]
+# Environment variables are set here
+NODE_VERSION = "16.13.1"
