@@ -9,5 +9,5 @@
   force = true # COMMENT: ensure that we always redirect
 
 [build.environment]
-# Environment variables are set here
-NODE_VERSION = "16.13.1"
+  # Environment variables are set here
+  NODE_VERSION = "16.13.1"
