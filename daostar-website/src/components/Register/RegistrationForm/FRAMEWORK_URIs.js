@@ -10,6 +10,7 @@ const FRAMEWORK_URIs = {
     snapshot: {
         membersURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/members/${address}`,
         proposalsURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/proposals/${address}`,
+        activityLogURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/activityLogs/${address}`,
     },
 }
 

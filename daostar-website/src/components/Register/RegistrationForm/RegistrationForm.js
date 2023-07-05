@@ -104,6 +104,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                 if (frameworkSettings.proposalsURI) {
                     setDaoProposalsURI(FRAMEWORK_URIs[framework].proposalsURI(address, networkId))
                 }
+                if (frameworkSettings.activityLogURI) {
+                    setDaoActivityURI(FRAMEWORK_URIs[framework].activityLogURI(address, networkId))
+                }
             }
         } else {
             setDaoMembersURI('')
