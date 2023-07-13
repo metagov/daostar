@@ -4,9 +4,9 @@ title: Attestations for DAOs
 description: An attestation-based architecture and data model for DAO membership, member contributions, and other data.
 discussions-to: https://github.com/metagov/daostar/discussions/39
 status: Draft
-type: 
-category: 
-author: Fernando Mendes <mmendes@avenue.place>, Joshua Tan <josh@metagov.org>, 
+type:
+category:
+author: Fernando Mendes <fernando@mendes.codes>, Joshua Tan <josh@metagov.org>,
 created: 2023-02-03
 ---
 
@@ -55,9 +55,9 @@ All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuers` field as 
 
 ### For Issuers: Attestation Endpoints
 
-An *attestation issuer*, or just issuer, is an entity that issues and manages attestations on behalf of some other entity such as a DAO. 
+An *attestation issuer*, or just issuer, is an entity that issues and manages attestations on behalf of some other entity such as a DAO.
 
-Every issuer conforming to DAOIP-3 MUST implement an `issuerURI` endpoint describing the issuer and listing endpoints that it supports, following the Attestation Issuer JSON Schema below: 
+Every issuer conforming to DAOIP-3 MUST implement an `issuerURI` endpoint describing the issuer and listing endpoints that it supports, following the Attestation Issuer JSON Schema below:
 
 ```json
 {
@@ -189,7 +189,7 @@ Notice the `contributions` field includes information issued by Govrn and relaye
 
 Let’s assume now that Avenue also integrates with Disco. Disco, in turn, attests user identities. If the user links both profiles (`josh.eth` and `joshua.eth`) in Disco, even though the former only has token access to DAOStar One, Disco can issue an attestation that it should be able to access groundw3rk as well. In essence, Disco is stating “`josh.eth` has tokens to access DAOStar One but, even though you can’t see it, I guarantee you its owner also has an address with the NFT to access groundw3rk”.
 
-This is represented by returning the following data in Discos’ issuer endpoint:  
+This is represented by returning the following data in Discos’ issuer endpoint:
 
 ```json
 {
