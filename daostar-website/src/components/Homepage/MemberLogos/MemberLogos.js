@@ -9,7 +9,7 @@ import _1hiveLogo from '../../../img/logos/1hive.png';
 import abridgedLogo from '../../../img/logos/abridged.jpeg';
 import aDAOlogo from '../../../img/logos/adao.png';
 import agoraLogo from '../../../img/logos/agora.png';
-import aragonLogo from '../../../img/logos/aragon.png';
+import aragonLogo from '../../../img/logos/aragonorg.png';
 import avenueLogo from '../../../img/logos/avenue.png';
 import balancerLogo from '../../../img/logos/balancer.png';
 import boardroomLogo from '../../../img/logos/boardroom.jpeg';
