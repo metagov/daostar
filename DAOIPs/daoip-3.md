@@ -50,14 +50,14 @@ The Attestation Issuers JSON-LD Schema
 	"@context": "<http://www.daostar.org/schemas>",
 	"type": "attestationIssuers",
 	"name": "Name of the DAO",
-	attestationIssuers: [
+	"attestationIssuers": [
 		{
 			"type": "AttestationIssuer",
-			"issuerURI": "<URI>" % this can link directly to whatever endpoints we have, so Govrn's DAOIP-3-compliant endpoint
+			"issuerURI": "<URI>"
 		},
 		{
 			"type": "AttestationIssuer",
-			"issuerURI": "<URI>" % REPUTABLE's DAOIP-3-compliant endpoint
+			"issuerURI": "<URI>"
 		}
 	]
 }
