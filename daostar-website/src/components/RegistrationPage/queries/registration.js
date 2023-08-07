@@ -9,6 +9,7 @@ const REGISTRATION = gql`
             daoName
             daoDescription
             membersURI
+            issuersURI
             proposalsURI
             governanceURI
             activityLogURI
