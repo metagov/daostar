@@ -32,22 +32,32 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 ### For DAOs: attestationIssuers and issuerURI
 
-All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuers` field as part of `daoURI`. `attestationIssuers`is an array of attestation endpoints (see “Attestation Endpoints”, below) hosted by service providers trusted by the DAO to issue attestations on their behalf.
+All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuersURI` field as part of `daoURI`. 
 
 ```json
 {
 	"@context": "<http://www.daostar.org/schemas>",
 	"type": "DAO",
-	"name": "<name of the DAO>",
-	"description": "<description>",
-	"attestationIssuers": [
+	"attestationIssuersURI": "<URI>"
+}
+```
+
+`attestationIssuersURI` MUST then return an array of attestation endpoints following the Attestation Issuers JSON-LD Schema below. The various issuerURIs MAY then be crawled and indexed by explorers and other services. Each issuerURI SHOULD be hosted by a service provider trusted by the DAO to issue relevant attestations on its behalf and/or on behalf of its members.
+
+The Attestation Issuers JSON-LD Schema
+```json
+{
+	"@context": "<http://www.daostar.org/schemas>",
+	"type": "attestationIssuers",
+	"name": "Name of the DAO",
+	attestationIssuers: [
 		{
 			"type": "AttestationIssuer",
-			"issuerURI": "<URI>"
+			"issuerURI": "<URI>" % this can link directly to whatever endpoints we have, so Govrn's DAOIP-3-compliant endpoint
 		},
 		{
 			"type": "AttestationIssuer",
-			"issuerURI": "<URI>"
+			"issuerURI": "<URI>" % REPUTABLE's DAOIP-3-compliant endpoint
 		}
 	]
 }
