@@ -296,7 +296,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                         <InputGroup
                             fill
                             id="issuer-uri"
-                            placeholder="Enter URI to proposals"
+                            placeholder="Enter URI for Issuers"
                             value={daoIssuersURI}
                             onChange={onChangeIssuersURI}
                         />

@@ -195,7 +195,7 @@ const EditRegistration = ({
                     id='issuers'
                     value={daoIssuersURI}
                     onChange={onChangeIssuersURI}
-                    placeholder='https://api.daostar.org/eth/address/members'
+                    placeholder='https://api.daostar.org/eth/address/issuers'
                 />
                 <FieldWithViewLink
                     label='Activity Log'
