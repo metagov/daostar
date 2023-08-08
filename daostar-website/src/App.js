@@ -14,7 +14,7 @@ import "./App.css";
 import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
 
-const alchemyId = process.env.ALCHEMY_ID;
+const alchemyId = 'zRjrGRWEO4rE5Ek2HrP9dNlNXMXsSVDs';
 
 const client = createClient(
     getDefaultClient({
