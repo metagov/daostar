@@ -11,6 +11,7 @@ const REGISTRATIONS = gql`
                 daoName
                 daoDescription
                 proposalsURI
+                membersURI
                 governanceURI
                 activityLogURI
                 registrationAddress
@@ -31,6 +32,7 @@ const REGISTRATION = gql`
             daoName
             daoDescription
             proposalsURI
+            membersURI
             governanceURI
             activityLogURI
             registrationAddress

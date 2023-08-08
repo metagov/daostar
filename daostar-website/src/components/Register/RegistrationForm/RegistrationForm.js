@@ -122,11 +122,6 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         {
             url: `${process.env.REACT_APP_API_URL}/immutable`,
             method: 'POST',
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-            }
         },
         { manual: true }
     )
