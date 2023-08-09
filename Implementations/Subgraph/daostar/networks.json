@@ -1,4 +1,10 @@
 {
+    "mainnet": {
+        "EIP4824Index": {
+            "address": "0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa",
+            "startBlock": 17874753
+        }
+    },
     "goerli": {
         "EIP4824Index": {
             "address": "0xd8f49391ba81942d40c26a50f8ca63cdca6fb3da",
