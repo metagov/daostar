@@ -169,7 +169,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     proposalsURI: daoProposalsURI,
                     activityLogURI: daoActivityURI,
                     contractsRegistryURI: daoContractsRegistryURI,
-                    issuerURI: daoIssuersURI
+                    issuersURI: daoIssuersURI
                 },
             }
             executeRegistration({
