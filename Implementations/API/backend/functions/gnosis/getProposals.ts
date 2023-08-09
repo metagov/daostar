@@ -25,7 +25,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
     const eventId = event?.pathParameters?.id
     if (!eventId) return { statusCode: 400 }
-    
+
     console.log({eventId})
 
     const checksummedId = ethers.utils.getAddress(eventId)
@@ -40,8 +40,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         name: eventId,
     }
 
-    const queryPath = path + '/safes/' + checksummedId + '/multisig-transactions/?executed=false'
-    
+    const queryPath = path + '/safes/' + checksummedId + '/multisig-transactions/'
+
     console.log({queryPath})
 
     const res = (await apiRequest(queryPath, 'GET')) as any
