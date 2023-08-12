@@ -6,6 +6,9 @@ import FRAMEWORK_URIs from './FRAMEWORK_URIs'
 
 const networkIds = {
     mainnet: 1,
+    goerli: 5,
+    optimismGoerli: 420
+
 }
 
 const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
@@ -189,6 +192,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             options={[
                 { label: 'Mainnet', value: 'mainnet' },
                 { label: 'Goerli', value: 'goerli' },
+                { label: 'Optimism-Goerli', value: 'optimismGoerli'}
             ]}
         />
     )

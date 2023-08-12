@@ -36,6 +36,15 @@ function App() {
         context: { apiName: "goerli" },
         variables: { id: "goerli" },
     });
+    const optimismGoerliRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "optimism-goerli" },
+        variables: { id: "optimism-goerli" },
+    }); 
+    const {
+        loading: optimismGoerliLoading,
+        error: optimismGoerliError,
+        data: optimismGoerliData,
+    } = optimismGoerliRes;
     const {
         loading: goerliLoading,
         error: goerliError,
@@ -52,17 +61,20 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData });
 
-    if (error || goerliError || gnosisError) return "error";
-    if (loading || goerliLoading || gnosisLoading) return "loading...";
+    if (error || goerliError || gnosisError || optimismGoerliError) return "error";
+    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
     const goerliRegistrations =
         goerliData?.registrationNetwork?.registrations || [];
+    const optimismGoerliRegistrations =
+        optimismGoerliData?.registrationNetwork?.registrations || [];
     const gnosisRegistrations =
         gnosisData?.registrationNetwork?.registrations || [];
     const registrationInstances = mainnetRegistrations.concat(
         goerliRegistrations,
-        gnosisRegistrations
+        gnosisRegistrations,
+        optimismGoerliRegistrations
     );
 
     console.log({ registrationInstances });
