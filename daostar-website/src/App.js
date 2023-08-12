@@ -61,7 +61,7 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData });
 
-    if (error || goerliError || gnosisError || optimismGoerliError) return "error";
+    if (error || goerliError || gnosisError ) return "error";
     if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
