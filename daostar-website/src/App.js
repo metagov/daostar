@@ -78,6 +78,8 @@ function App() {
     );
 
     console.log({ registrationInstances });
+    console.log(optimismGoerliError);
+    
 
     return (
         <WagmiConfig client={client}>
