@@ -37,8 +37,8 @@ function App() {
         variables: { id: "goerli" },
     });
     const optimismGoerliRes = useQuery(queries.REGISTRATIONS, {
-        context: { apiName: "optimism-goerli" },
-        variables: { id: "optimism-goerli" },
+        context: { apiName: "optimismGoerli" },
+        variables: { id: "optimismGoerli" },
     }); 
     const {
         loading: optimismGoerliLoading,
@@ -59,7 +59,7 @@ function App() {
         error: gnosisError,
         data: gnosisData,
     } = gnosisRes;
-    console.log({ mainnetData, goerliData, gnosisData });
+    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData });
 
     if (error || goerliError || gnosisError ) return "error";
     if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
@@ -78,7 +78,8 @@ function App() {
     );
 
     console.log({ registrationInstances });
-    console.log(optimismGoerliError);
+
+    console.log("error" + optimismGoerliError);
     
 
     return (
