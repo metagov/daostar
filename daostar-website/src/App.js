@@ -38,7 +38,7 @@ function App() {
     });
     const optimismGoerliRes = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "optimismGoerli" },
-        variables: { id: "optimismGoerli" },
+        variables: { id: "optimism-goerli" },
     }); 
     const {
         loading: optimismGoerliLoading,
