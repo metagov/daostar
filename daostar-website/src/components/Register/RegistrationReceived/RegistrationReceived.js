@@ -13,8 +13,8 @@ const RegistrationReceived = ({
 }) => {
   const { isOpen, open } = useWeb3Modal();
   const factoryContracts = {
-    mainnet: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
-    goerli: `0x5ef59b7cDe41b744f36b6e07fEF230884F800529`,
+    mainnet: `0x2dac5dbbf1d024c1e0d9c92d3aeda7618e15add7`,
+    goerli: `0x3271b3479f7485dadb2bd5fff43eeb4367b1a91a`,
     gnosis: `0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa`,
     polygon: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
     optimism: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,

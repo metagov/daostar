@@ -14,7 +14,7 @@ const RegistrationPage = ({}) => {
         context: { apiName: network },
         variables: { id: address },
     })
-    if (error) return 'error'
+    if (error) return error
     if (loading)
         return (
             <div className="centered-wizard">
