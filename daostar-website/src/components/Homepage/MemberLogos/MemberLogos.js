@@ -7,7 +7,6 @@ import compoundLogo from '../../../img/logos/compound.png';
 import _0xLogo from '../../../img/logos/0x.jpeg';
 import _1hiveLogo from '../../../img/logos/1hive.png';
 import abridgedLogo from '../../../img/logos/abridged.jpeg';
-import aDAOlogo from '../../../img/logos/adao.png';
 import agoraLogo from '../../../img/logos/agora.png';
 import aragonLogo from '../../../img/logos/aragon.png';
 import avenueLogo from '../../../img/logos/avenue.png';
@@ -79,7 +78,6 @@ const MemberLogos = (props) => {
             <a href="https://0x.org/" target="_blank"><img src={_0xLogo} alt="0x" /></a>
             <a href="https://1hive.org/" target="_blank"><img src={_1hiveLogo} alt="1Hive" /></a>
             <a href="https://abridged.io/" target="_blank"><img src={abridgedLogo} alt="Abridged" /></a>
-            <a href="https://www.theadadao.com" target="_blank"><img src={aDAOlogo} alt="ADAO" /></a>
             <a href="https://agora.xyz/" target="_blank"><img src={agoraLogo} alt="Agora Space" /></a>
             <a href="https://aragon.org/" target="_blank"><img src={aragonLogo} alt="Aragon" /></a>
             <a href="https://avenue.place/" target="_blank"><img src={avenueLogo} alt="Avenue" /></a>
