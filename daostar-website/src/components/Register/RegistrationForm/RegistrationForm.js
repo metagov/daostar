@@ -71,6 +71,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     const [daoMembersURI, setDaoMembersURI] = useState('')
     const onChangeMembersURI = (e) => setDaoMembersURI(e.target.value)
 
+    const [daoIssuersURI, setDaoIssuersURI] = useState('')
+    const onChangeIssuersURI = (e) => setDaoIssuersURI(e.target.value)
+
     const [daoActivityURI, setDaoActivityURI] = useState('')
     const onChangeActivityURI = (e) => setDaoActivityURI(e.target.value)
 
@@ -150,6 +153,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         if (daoActivityURI !== '' && !validator.isURL(daoActivityURI)) errors.push(`Activity Log URI must be a valid URI`)
         if (daoProposalsURI !== '' && !validator.isURL(daoProposalsURI)) errors.push(`Proposals URI must be a valid URI`)
         if (daoContractsRegistryURI !== '' && !validator.isURL(daoContractsRegistryURI)) errors.push(`Contracts Registry URI must be a valid URI`)
+        if (daoIssuersURI !== '' && !validator.isURL(daoIssuersURI)) errors.push(`Issuer URI must be a valid URI`)
 
         if (errors.length > 0) {
             setErrors(errors)
@@ -165,6 +169,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     proposalsURI: daoProposalsURI,
                     activityLogURI: daoActivityURI,
                     contractsRegistryURI: daoContractsRegistryURI,
+                    issuersURI: daoIssuersURI
                 },
             }
             executeRegistration({
@@ -283,6 +288,17 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                             placeholder="Enter URI to proposals"
                             value={daoProposalsURI}
                             onChange={onChangeProposalsURI}
+                        />
+                    </FormGroup>
+                </div>
+                <div className="wizard-row">
+                    <FormGroup label="Issuers URI" labelFor="proposals-uri" fill>
+                        <InputGroup
+                            fill
+                            id="issuer-uri"
+                            placeholder="Enter URI for Issuers"
+                            value={daoIssuersURI}
+                            onChange={onChangeIssuersURI}
                         />
                     </FormGroup>
                 </div>

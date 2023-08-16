@@ -52,7 +52,7 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData });
 
-    if (error || goerliError || gnosisError) return "error";
+    // if (error || goerliError || gnosisError) return "error";
     if (loading || goerliLoading || gnosisLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];

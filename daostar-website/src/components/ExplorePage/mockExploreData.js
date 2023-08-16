@@ -8,6 +8,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
@@ -19,6 +20,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
@@ -30,6 +32,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
@@ -41,6 +44,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
@@ -52,6 +56,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     },
     {
@@ -63,6 +68,7 @@ export const mockExploreData = [
         "proposalsURI": "https://sample.dao/proposals.json",
         "activityLogURI": "https://sample.dao/activityLog.json",
         "governanceURI": "https://sample.dao/governance.md",
+        "issuersURI": "https://sample.dao/issuer.md",
         "daoURI": "https://api.daostar.org/immutable/QmRj4AasAEWg45vBmNzAJ5MLVnVUDEZqdbF9yTKhgsswcK"
     }
 ]
