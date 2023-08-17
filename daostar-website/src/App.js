@@ -61,7 +61,13 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData });
 
-    if (error || goerliError || gnosisError| optimismGoerliError ) return "error";
+    if (error || goerliError || gnosisError| optimismGoerliError ) {
+        console.error("Mainnet Error "+ error);
+        console.error("Goerli Error "+ goerliError);
+        console.error("Optimism Goerli Error "+ optimismGoerliError);
+        console.error("Gnosis Error "+ gnosisError);
+        return "Error";
+    };
     if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
@@ -79,7 +85,10 @@ function App() {
 
     console.log({ registrationInstances });
 
-    console.log("error" + optimismGoerliError);
+    
+
+
+
     
 
     return (
