@@ -61,7 +61,7 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData });
 
-    if (error || goerliError || gnosisError| optimismGoerliError ) {
+    if (error || goerliError || gnosisError || optimismGoerliError ) {
         console.error("Mainnet Error "+ error);
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
@@ -84,12 +84,6 @@ function App() {
     );
 
     console.log({ registrationInstances });
-
-    
-
-
-
-    
 
     return (
         <WagmiConfig client={client}>
