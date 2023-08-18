@@ -182,6 +182,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     daoURI: response.data.url,
                     daoContractAddress: daoContractAddress,
                     daoContractNetwork: daoContractNetwork,
+                    name: daoName,
+                    description: daoDescription,
+                    governanceURI: daoGovURI,
+                    membersURI: daoMembersURI,
+                    proposalsURI: daoProposalsURI,
+                    activityLogURI: daoActivityURI,
+                    contractsRegistryURI: daoContractsRegistryURI,
+                    issuersURI: daoIssuersURI
                 })
                 toggleRegScreen('REG_RECEIVED')
             })
