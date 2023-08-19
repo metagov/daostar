@@ -6,6 +6,9 @@ import FRAMEWORK_URIs from './FRAMEWORK_URIs'
 
 const networkIds = {
     mainnet: 1,
+    goerli: 5,
+    optimismGoerli: 420
+
 }
 
 const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
@@ -179,6 +182,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     daoURI: response.data.url,
                     daoContractAddress: daoContractAddress,
                     daoContractNetwork: daoContractNetwork,
+                    daoName: daoName,
+                    daoDescription: daoDescription,
+                    governanceURI: daoGovURI,
+                    membersURI: daoMembersURI,
+                    proposalsURI: daoProposalsURI,
+                    activityLogURI: daoActivityURI,
+                    contractsRegistryURI: daoContractsRegistryURI,
+                    issuersURI: daoIssuersURI
                 })
                 toggleRegScreen('REG_RECEIVED')
             })
@@ -194,6 +205,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             options={[
                 { label: 'Mainnet', value: 'mainnet' },
                 { label: 'Goerli', value: 'goerli' },
+                { label: 'Optimism-Goerli', value: 'optimismGoerli'}
             ]}
         />
     )

@@ -30,6 +30,7 @@ const client = new ApolloClient({
         new MultiAPILink({
             endpoints: {
                 goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
+                optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
                 mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
                 gnosis: `https://api.thegraph.com/subgraphs/name/mrutsavg/daostar-gnosis`,
             },
