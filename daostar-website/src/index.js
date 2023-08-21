@@ -9,7 +9,6 @@ import { FocusStyleManager } from "@blueprintjs/core";
 import {
     ApolloClient,
     ApolloLink,
-    HttpLink,
     InMemoryCache,
     ApolloProvider,
 } from "@apollo/client";
