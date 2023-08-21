@@ -18,7 +18,7 @@ const RegistrationReceived = ({
     gnosis: `0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa`,
     polygon: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
     optimism: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
-    optimismGoerli: `0x45E81552DEC1F57c18E3cbd69549252624b96D98`
+    optimismGoerli: `0x45E81552DEC1F57c18E3cbd69549252624b96D98`,
   };
 
   const regContract = new ethers.Contract(
@@ -80,10 +80,16 @@ const RegistrationReceived = ({
         </FormGroup>
       </div>
       <div className="wizard-row">
-        <FormGroup label="Value" labelFor="value">
-          <CopyField fill id="value" text={"0"} />
+        <FormGroup label="Salt" labelFor="value">
+          <CopyField fill id="salt" text={salt} />
         </FormGroup>
       </div>
+      <div className="wizard-row">
+        <FormGroup label="DAO URI" labelFor="value">
+          <CopyField fill id="daouri" text={daoIPFS_URI} />
+        </FormGroup>
+      </div>
+  
       <div className="wizard-row">
         <FormGroup label="Function" labelFor="function">
           <CopyField
