@@ -73,7 +73,7 @@ const RegistrationCard = ({
             {cardScreen === 'UPDATED' && (
                 <RegistrationReceived 
                     isUpdate
-                    registrationNetwork
+                    daoContractNetwork={registrationNetwork}
                     {...updatedData} 
                 />
             )}
