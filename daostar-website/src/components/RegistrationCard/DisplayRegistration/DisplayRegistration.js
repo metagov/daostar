@@ -32,6 +32,9 @@ const DisplayRegistration = ({
 }) => {
 
     const httpDaoURI = getHttpDaoURI(daoURI);
+    if (network === 'optimism-goerli') {
+        network = 'optimismGoerli'
+    }
  
     return (
         <Fragment>
