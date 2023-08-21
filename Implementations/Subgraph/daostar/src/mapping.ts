@@ -38,7 +38,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
         registrationInstance.daoAddress = event.params.daoAddress
         if (event.params.daoURI) {
             registrationInstance.daoURI = event.params.daoURI
-            const ipfsHash = event.params.daoURI.substring(7)
+            const ipfsHash = event.params.daoURI.substring(33)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
             let ipfsData = ipfs.cat(ipfsHash)
             if (ipfsData) {
