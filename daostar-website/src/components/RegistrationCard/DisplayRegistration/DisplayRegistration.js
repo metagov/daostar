@@ -1,4 +1,4 @@
-import { Button, Divider, Icon } from '@blueprintjs/core';
+import { Button, Divider} from '@blueprintjs/core';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import EtherscanLink from './EtherscanLink/EtherscanLink';
@@ -65,7 +65,7 @@ const DisplayRegistration = ({
                         <a 
                             href={httpDaoURI} 
                             target="_blank"
-                            className='no-underline'
+                            className='no-underline' rel="noreferrer"
                         >
                             {httpDaoURI}
                         </a>
