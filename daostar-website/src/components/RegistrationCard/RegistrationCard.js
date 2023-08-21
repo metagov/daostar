@@ -73,6 +73,7 @@ const RegistrationCard = ({
             {cardScreen === 'UPDATED' && (
                 <RegistrationReceived 
                     isUpdate
+                    registrationNetwork
                     {...updatedData} 
                 />
             )}

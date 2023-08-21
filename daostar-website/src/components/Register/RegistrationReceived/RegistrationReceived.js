@@ -40,9 +40,7 @@ const RegistrationReceived = ({
     "summonRegistration",
     [...regData]
   );
-  if (daoContractNetwork === 'optimism-goerli') {
-    daoContractNetwork = 'optimismGoerli'
-}
+  
 
   return (
     <Fragment>
