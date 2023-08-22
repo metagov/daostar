@@ -19,6 +19,7 @@ export function MyStack({ stack }: StackContext) {
             'GET /daodao/members/{network}/{id}': 'functions/daodao/getMembers.handler',
             'GET /daodao/proposals/{network}/{id}': 'functions/daodao/getProposals.handler',
             'GET /snapshot/members/{id}': 'functions/snapshot/getMembers.handler',
+            'GET /snapshot/delegations/{id}': 'functions/snapshot/getDelegations.handler',
             'GET /snapshot/proposals/{id}': 'functions/snapshot/getProposals.handler',
             'GET /nouns/members/{network}/{id}': 'functions/nouns/getMembers.handler',
         },
