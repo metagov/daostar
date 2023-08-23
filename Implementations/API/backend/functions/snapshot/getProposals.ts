@@ -48,6 +48,11 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     const eventId = event?.pathParameters?.id
     if (!eventId) return { statusCode: 400, message: 'Missing id' }
 
+    const page = parseInt(event?.queryStringParameters?.page) || 1; // Get the requested page number
+
+    const pageSize = 20; // Number of items per page
+    const skip = (page - 1) * pageSize; // Calculate the number of items to skip
+
     const template = {
         '@context': {
             '@vocab': 'http://daostar.org/',
@@ -56,13 +61,15 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
         name: eventId,
     }
 
-    const query = `query GetProposals($dao: String!) {
+    const query = `query GetProposals($dao: String!, $first: Int!, $skip: Int!) {
         proposals (
             where: {
               space_in: [$dao],
             },
             orderBy: "created",
-            orderDirection: desc
+            orderDirection: desc,
+            first: $first,
+            skip: $skip
           ) {
             id
             title
@@ -82,7 +89,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
     const data = {
         query,
-        variables: { dao: eventId },
+        variables: { dao: eventId, first: pageSize, skip },
     }
 
     const res = (await apiRequest(path, 'POST', data)) as any
