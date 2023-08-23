@@ -1,4 +1,4 @@
-import { Api, StackContext } from '@serverless-stack/resources'
+import { Api, StackContext } from "@serverless-stack/resources";
 
 export function MyStack({ stack }: StackContext) {
     // Create the HTTP API
@@ -22,6 +22,8 @@ export function MyStack({ stack }: StackContext) {
             'GET /snapshot/delegations/{id}': 'functions/snapshot/getDelegations.handler',
             'GET /snapshot/proposals/{id}': 'functions/snapshot/getProposals.handler',
             'GET /nouns/members/{network}/{id}': 'functions/nouns/getMembers.handler',
+            "GET /boardroom/members/{network}/{id}":
+                "functions/boardroom/getMembers.handler",
         },
         customDomain: {
             domainName: 'services.daostar.org',
@@ -30,8 +32,9 @@ export function MyStack({ stack }: StackContext) {
         },
     })
 
-    // Show the API endpoint in the output
-    stack.addOutputs({
-        ApiEndpoint: api.url,
-    })
+
+  // Show the API endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
 }
