@@ -39,3 +39,15 @@ export const BoardroomAddressKeyConfig: { [key: string]: any } = {
   "0x90A48D5CF7343B08dA12E067680B4C6dbfE551Be":
     "c909030d97aaa3f635a09eb4a3df58fc",
 };
+
+export const delegationsSubgraphs: { [key: string]: string } = {
+  "1": "https://subgrapher.snapshot.org/gateway.thegraph.com/api/0f15b42bdeff7a063a4e1757d7e2f99e/deployments/id/QmXZiV6S13ha6QXq4dmaM3TB4CHcDxBMvGexSNu9Kc28EH",
+  "5": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-goerli",
+  "10": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-optimism",
+  "56": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-binance-smart-chain",
+  "100": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-gnosis-chain",
+  "137": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-polygon",
+  "250": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-fantom",
+  "42161": "https://subgrapher.snapshot.org/api.thegraph.com/subgraphs/name/snapshot-labs/snapshot-arbitrum"
+}
+

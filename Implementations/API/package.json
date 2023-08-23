@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "@ethersproject/shims": "^5.7.0",
+    "@snapshot-labs/snapshot.js": "^0.4.98",
     "aws-lambda": "^1.0.7",
     "ethers": "^5.7.2",
     "node-fetch": "^3.2.6"
