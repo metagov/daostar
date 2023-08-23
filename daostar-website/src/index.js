@@ -31,7 +31,7 @@ const client = new ApolloClient({
                 goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
                 optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
                 mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
-                gnosis: `https://api.thegraph.com/subgraphs/name/mrutsavg/daostar-gnosis`,
+                gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
             },
             // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",

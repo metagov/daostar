@@ -6,5 +6,9 @@
   "hosted-zone:account=395914241380:domainName=services.daostar.org:region=us-east-1": {
     "Id": "/hostedzone/Z02877671PLIIMUOU6SQ2",
     "Name": "services.daostar.org."
+  },
+  "hosted-zone:account=836240692170:domainName=services.daostar.org:region=us-east-1": {
+    "Id": "/hostedzone/Z0072475BFZIXNSR4F6S",
+    "Name": "services.daostar.org."
   }
 }

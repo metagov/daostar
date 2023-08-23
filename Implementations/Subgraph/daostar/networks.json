@@ -16,5 +16,11 @@
             "address": "0x9Aff4e5e7A7Ae449B89162EF4798b2Bb60DC92c0",
             "startBlock": 13115254
         }
+    },
+    "mainnet": {
+        "EIP4824Index": {
+            "address": "0x4f2c9028fE7107d9f1A8a9CFf34aa2d3F28600fa",
+            "startBlock": 17874753
+        }
     }
 }

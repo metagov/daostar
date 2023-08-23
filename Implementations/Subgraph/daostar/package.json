@@ -11,7 +11,7 @@
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar",
         "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar-goerli",
         "deploy:optimism-goerli": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-optimism-goerli",
-        "deploy:gnosis": "graph deploy --node https://api.thegraph.com/deploy/ mrutsavg/daostar-gnosis",
+        "deploy:gnosis": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-gnosis",
         "deploy:all": "yarn build:optimism-goerli && yarn deploy:optimism-goerli && yarn build:goerli && yarn deploy:goerli && yarn build:mainnet && yarn deploy:mainnet && yarn build:gnosis && yarn deploy:gnosis",
         "create-local": "graph create --node http://localhost:8020/ ipatka/daostar",
         "remove-local": "graph remove --node http://localhost:8020/ ipatka/daostar",
