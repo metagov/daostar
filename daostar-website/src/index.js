@@ -7,50 +7,49 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { FocusStyleManager } from "@blueprintjs/core";
 import {
-    ApolloClient,
-    ApolloLink,
-    InMemoryCache,
-    ApolloProvider,
+  ApolloClient,
+  ApolloLink,
+  InMemoryCache,
+  ApolloProvider,
 } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
 import { MultiAPILink } from "@habx/apollo-multi-endpoint-link";
 import "./index.css";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
 function getLibrary(provider) {
-    return new Web3Provider(provider);
+  return new Web3Provider(provider);
 }
 
 const client = new ApolloClient({
-    link: ApolloLink.from([
-        new MultiAPILink({
-            endpoints: {
-                goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
-                optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
-                mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
-                gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
-            },
-            // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
-            httpSuffix: "",
-            createHttpLink: createHttpLink,
-        }),
-    ]),
-    cache: new InMemoryCache({}),
+  link: ApolloLink.from([
+    new MultiAPILink({
+      endpoints: {
+        goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
+        optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
+        mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
+        gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
+      },
+      // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
+      httpSuffix: "",
+      createHttpLink: createHttpLink,
+    }),
+  ]),
+  cache: new InMemoryCache({}),
 });
 
 root.render(
-    <React.StrictMode>
-        <Web3ReactProvider getLibrary={getLibrary}>
-            <BrowserRouter>
-                <ApolloProvider client={client}>
-                    <App />
-                </ApolloProvider>
-            </BrowserRouter>
-        </Web3ReactProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <BrowserRouter>
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
+      </BrowserRouter>
+    </Web3ReactProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

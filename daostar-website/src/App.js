@@ -4,10 +4,9 @@ import Register from "./components/Register/Register";
 import TopNavigation from "./components/TopNavigation/TopNavigation";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import ExplorePage from "./components/ExplorePage/ExplorePage";
-import { WagmiConfig, createClient } from "wagmi";
+import { WagmiConfig, createClient, useEnsAddress } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { useQuery } from "@apollo/client";
-
 import queries from "./components/ExplorePage/queries/registrations";
 
 import "./App.css";
@@ -15,6 +14,7 @@ import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
 
 const alchemyId = process.env.ALCHEMY_ID;
+
 
 const client = createClient(
     getDefaultClient({
