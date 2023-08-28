@@ -24,6 +24,7 @@ const Register = (props) => {
     const onToggleRegScreen = (screen) => setRegistrationScreen(screen);
     
     const [registrationData, setRegistrationData] = useState(null);
+    console.log(registrationData)
 
     return (
         <div>

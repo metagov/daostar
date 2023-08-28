@@ -98,7 +98,8 @@ const EditRegistration = ({
             }).then(response => {
                 setUpdatedData({
                     daoURI: response.data.url,
-                    daoContractAddress: daoContractAddress
+                    daoContractAddress: daoContractAddress,
+                    daoManagerAddress: daoManagerAddress
                 })
                 onSetCardScreen('UPDATED');
             })

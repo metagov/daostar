@@ -9,6 +9,7 @@ const RegistrationReceived = ({
   daoURI,
   daoContractAddress,
   daoContractNetwork,
+  daoManagerAddress,
   isUpdate = false,
 }) => {
   const { isOpen, open } = useWeb3Modal();

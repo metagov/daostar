@@ -231,6 +231,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           daoURI: response.data.url,
           daoContractAddress: daoContractAddress,
           daoContractNetwork: daoContractNetwork,
+          daoManagerAddress: daoManagerAddress,
           daoName: daoName,
           daoDescription: daoDescription,
           governanceURI: daoGovURI,
