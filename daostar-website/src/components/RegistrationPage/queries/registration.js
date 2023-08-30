@@ -13,6 +13,8 @@ const REGISTRATION = gql`
             proposalsURI
             governanceURI
             activityLogURI
+            managerAddresss
+    contractRegistryURI
             registrationAddress
             network
         }

@@ -172,7 +172,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     proposalsURI: daoProposalsURI,
                     activityLogURI: daoActivityURI,
                     contractsRegistryURI: daoContractsRegistryURI,
-                    issuersURI: daoIssuersURI
+                    issuersURI: daoIssuersURI,
+                    daoManagerAddress: daoManagerAddress
                 },
             }
             executeRegistration({
@@ -182,6 +183,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     daoURI: response.data.url,
                     daoContractAddress: daoContractAddress,
                     daoContractNetwork: daoContractNetwork,
+                    daoManagerAddress: daoManagerAddress,
                     daoName: daoName,
                     daoDescription: daoDescription,
                     governanceURI: daoGovURI,
@@ -189,7 +191,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     proposalsURI: daoProposalsURI,
                     activityLogURI: daoActivityURI,
                     contractsRegistryURI: daoContractsRegistryURI,
-                    issuersURI: daoIssuersURI
+                    issuersURI: daoIssuersURI,
+
                 })
                 toggleRegScreen('REG_RECEIVED')
             })

@@ -11,6 +11,8 @@ type RegistrationInstance @entity {
     proposalsURI: String
     governanceURI: String
     activityLogURI: String
+    managerAddresss: String
+    contractRegistryURI: String
 }
 
 type RegistrationNetwork @entity {
