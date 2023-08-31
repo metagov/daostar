@@ -118,6 +118,10 @@ contract EIP4824Registration is IEIP4824, AccessControl {
             interfaceId == type(IEIP4824).interfaceId ||
             super.supportsInterface(interfaceId);
     }
+
+    function version () external returns(string){
+        return "1.0.0";
+    }
 }
 
 error ArrayLengthsMismatch();
@@ -275,5 +279,9 @@ contract EIP4824RegistrationSummoner {
             // Equivalent to `keccak256(abi.encode(by, salt))`.
             result := keccak256(0x00, 0x40)
         }
+    }
+
+    function version () external returns(string){
+        return "1.0.0";
     }
 }
