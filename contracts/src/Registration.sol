@@ -119,7 +119,7 @@ contract EIP4824Registration is IEIP4824, AccessControl {
             super.supportsInterface(interfaceId);
     }
 
-    function version () external returns(string){
+    function version () external pure returns(string memory){
         return "1.0.0";
     }
 }
@@ -281,7 +281,7 @@ contract EIP4824RegistrationSummoner {
         }
     }
 
-    function version () external returns(string){
+    function version () external pure returns(string memory){
         return "1.0.0";
     }
 }
