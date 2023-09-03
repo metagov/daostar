@@ -22,5 +22,17 @@
             "address": "0x4f2c9028fE7107d9f1A8a9CFf34aa2d3F28600fa",
             "startBlock": 17874753
         }
+    },
+    "arbitrum-goerli": {
+        "EIP4824Index": {
+            "address": "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4",
+            "startBlock": 38043712
+        }
+    },
+    "chapel": {
+        "EIP4824Index": {
+            "address": "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4",
+            "startBlock": 32947350
+        }
     }
 }
