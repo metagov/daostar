@@ -19,6 +19,9 @@ const RegistrationReceived = ({
     polygon: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
     optimism: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
     optimismGoerli: `0x45E81552DEC1F57c18E3cbd69549252624b96D98`,
+    arbitrumGoerli: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
+    chapel:`0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`
+
   };
 
   const regContract = new ethers.Contract(
