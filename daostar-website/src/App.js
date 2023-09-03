@@ -40,11 +40,29 @@ function App() {
         context: { apiName: "optimismGoerli" },
         variables: { id: "optimism-goerli" },
     }); 
+    const arbitrumGoerliRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "arbitrumGoerli" },
+        variables: { id: "arbitrum-goerli" },
+    }); 
+    const chapelRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "chapel" },
+        variables: { id: "chapel" },
+    }); 
     const {
         loading: optimismGoerliLoading,
         error: optimismGoerliError,
         data: optimismGoerliData,
     } = optimismGoerliRes;
+    const {
+        loading: arbitrumGoerliLoading,
+        error: arbitrumGoerliError,
+        data: arbitrumGoerliData,
+    } = arbitrumGoerliRes;
+    const {
+        loading: chapelLoading,
+        error: chapelError,
+        data: chapelData,
+    } = chapelRes;
     const {
         loading: goerliLoading,
         error: goerliError,
@@ -66,7 +84,7 @@ function App() {
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
     };
-    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
+    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
     const goerliRegistrations =
@@ -75,10 +93,16 @@ function App() {
         optimismGoerliData?.registrationNetwork?.registrations || [];
     const gnosisRegistrations =
         gnosisData?.registrationNetwork?.registrations || [];
+    const arbitrumGoerliRegistrations =
+        arbitrumGoerliData?.registrationNetwork?.registrations || [];
+    const chapelRegistrations =
+        chapelData?.registrationNetwork?.registrations || [];
     const registrationInstances = mainnetRegistrations.concat(
         goerliRegistrations,
         gnosisRegistrations,
-        optimismGoerliRegistrations
+        optimismGoerliRegistrations,
+        arbitrumGoerliRegistrations,
+        chapelRegistrations
     );
 
     console.log({ registrationInstances });

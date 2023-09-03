@@ -40,11 +40,13 @@ const RegistrationReceived = ({
     "summonRegistration",
     [...regData]
   );
-
+// The below assignment is done because url cant handle '-' in the links
   if(daoContractNetwork === 'optimism-goerli'){
     daoContractNetwork = 'optimismGoerli';
   }
-  
+  if(daoContractNetwork === 'arbitrum-goerli'){
+    daoContractNetwork = 'arbitrumGoerli';
+  }
 
   return (
     <Fragment>

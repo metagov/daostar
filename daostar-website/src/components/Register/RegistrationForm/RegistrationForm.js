@@ -205,7 +205,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             options={[
                 { label: 'Mainnet', value: 'mainnet' },
                 { label: 'Goerli', value: 'goerli' },
-                { label: 'Optimism-Goerli', value: 'optimismGoerli'}
+                { label: 'Optimism-Goerli', value: 'optimismGoerli'},
+                { label: 'Arbitrum-Goerli', value: 'arbitrumGoerli'},
+                { label: 'BNB Bruno', value: 'chapel'}
+
             ]}
         />
     )
