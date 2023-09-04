@@ -77,9 +77,9 @@ function App() {
         error: gnosisError,
         data: gnosisData,
     } = gnosisRes;
-    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData });
+    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData, arbitrumGoerliData, chapelData });
 
-    if (error || goerliError || optimismGoerliError ) {
+    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError ) {
         console.error("Mainnet Error "+ error);
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
@@ -102,8 +102,9 @@ function App() {
         gnosisRegistrations,
         optimismGoerliRegistrations,
         arbitrumGoerliRegistrations,
-        chapelRegistrations
+        chapelRegistrations,
     );
+    
 
     console.log({ registrationInstances });
 
