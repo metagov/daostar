@@ -49,6 +49,18 @@ function App() {
         context: { apiName: "chapel" },
         variables: { id: "chapel" },
     }); 
+
+    const optimismRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "optimism" },
+        variables: { id: "optimism" },
+    });
+
+    const {
+        loading: optimismLoading,
+        error: optimismError,
+        data: optimismData,
+    } = optimismRes;
+
     const {
         loading: optimismGoerliLoading,
         error: optimismGoerliError,
@@ -80,18 +92,23 @@ function App() {
     } = gnosisRes;
     console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData, arbitrumGoerliData, chapelData });
 
-    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError ) {
+    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError || optimismError ) {
         console.error("Mainnet Error "+ error);
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
+        console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
+        console.error("Chapel Error" + chapelError);
+        console.error("Optimism Error" + optimismError)
     };
-    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading) return "loading...";
+    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading || optimismLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
     const goerliRegistrations =
         goerliData?.registrationNetwork?.registrations || [];
     const optimismGoerliRegistrations =
         optimismGoerliData?.registrationNetwork?.registrations || [];
+    const optimismRegistrations =
+        optimismData?.registrationNetwork?.registrations || [];
     const gnosisRegistrations =
         gnosisData?.registrationNetwork?.registrations || [];
     const arbitrumGoerliRegistrations =
@@ -104,6 +121,7 @@ function App() {
         optimismGoerliRegistrations,
         arbitrumGoerliRegistrations,
         chapelRegistrations,
+        optimismRegistrations
     );
 
     const registrationInstances = allRegistrationInstances.filter((instance) => 

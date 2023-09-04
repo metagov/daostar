@@ -17,10 +17,10 @@ const RegistrationReceived = ({
     goerli: `0x3271b3479f7485dadb2bd5fff43eeb4367b1a91a`,
     gnosis: `0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa`,
     polygon: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
-    optimism: `0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc`,
     optimismGoerli: `0x45E81552DEC1F57c18E3cbd69549252624b96D98`,
     arbitrumGoerli: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
-    chapel:`0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`
+    chapel:`0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
+    optimism: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
 
   };
 
