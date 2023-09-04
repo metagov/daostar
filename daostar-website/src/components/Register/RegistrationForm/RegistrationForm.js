@@ -3,11 +3,14 @@ import validator from 'validator'
 import useAxios from 'axios-hooks'
 import { Button, Callout, Divider, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core'
 import FRAMEWORK_URIs from './FRAMEWORK_URIs'
+import { arbitrumGoerli } from 'wagmi/dist/chains'
 
 const networkIds = {
     mainnet: 1,
     goerli: 5,
-    optimismGoerli: 420
+    optimismGoerli: 420,
+    arbitrumGoerli: 421613,
+    chapel: 97
 
 }
 
