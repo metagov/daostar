@@ -7,6 +7,7 @@ import ExplorePage from "./components/ExplorePage/ExplorePage";
 import { WagmiConfig, createClient } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { useQuery } from "@apollo/client";
+import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 
 import queries from "./components/ExplorePage/queries/registrations";
 
@@ -97,16 +98,19 @@ function App() {
         arbitrumGoerliData?.registrationNetwork?.registrations || [];
     const chapelRegistrations =
         chapelData?.registrationNetwork?.registrations || [];
-    const registrationInstances = mainnetRegistrations.concat(
+    const allRegistrationInstances = mainnetRegistrations.concat(
         goerliRegistrations,
         gnosisRegistrations,
         optimismGoerliRegistrations,
         arbitrumGoerliRegistrations,
         chapelRegistrations,
     );
+
+    const registrationInstances = allRegistrationInstances.filter((instance) => 
+        !registrationIdsToFilter.includes(instance.id)
+    )
     
 
-    console.log({ registrationInstances });
 
     return (
         <WagmiConfig client={client}>
