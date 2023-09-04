@@ -3,6 +3,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "build:mainnet": "graph codegen && graph build --network mainnet",
+        "build:optimism": "graph codegen && graph build --network optimism",
         "build:goerli": "graph codegen && graph build --network goerli",
         "build:gnosis": "graph codegen && graph build --network gnosis",
         "build:optimism-goerli": "graph codegen && graph build --network optimism-goerli",
@@ -11,6 +12,7 @@
         "codegen": "graph codegen",
         "build": "graph build",
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar",
+        "deploy:optimism": "graph deploy --node https://api.thegraph.com/deploy/ crazyyuan/daostar-optimism",
         "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar-goerli",
         "deploy:optimism-goerli": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-optimism-goerli",
         "deploy:gnosis": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-gnosis",
