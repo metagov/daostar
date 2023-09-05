@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { BoardroomAddressKeyConfig, shapeshiftApiConfig } from "../config";
+import { BoardroomKey, boardroomApiConfig } from "../config";
 import fetch, { RequestInit } from "node-fetch";
 import { utils } from "ethers";
 
@@ -19,25 +19,24 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const network = event?.pathParameters?.network;
   if (!network) return { statusCode: 400, message: "Missing network" };
 
-  const path = shapeshiftApiConfig[network];
+  const path = boardroomApiConfig[network];
   if (!path) return { statusCode: 400, message: "Missing config for network" };
 
-  const eventId = event?.pathParameters?.id;
-  if (!eventId) return { statusCode: 400, message: "Missing id" };
+  const name = event?.pathParameters?.id;
+  if (!name) return { statusCode: 400, message: "Missing name" };
 
   const template = {
     "@context": {
       "@vocab": "http://daostar.org/",
     },
     type: "DAO",
-    name: eventId,
+    name: name,
   };
 
-  const address = utils.getAddress(eventId);
-
   const queryPath =
-    path + "/voters" + "?limit=50&key=" + BoardroomAddressKeyConfig[address];
+    path + "/" + name + "/voters" + "?limit=50&key=" + BoardroomKey;
 
+  console.log("queryPath:", queryPath);
   const res = (await apiRequest(queryPath, "GET")) as any;
 
   if (!res.data) return { statusCode: 404, message: "DAO not found" };
