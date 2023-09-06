@@ -12,7 +12,6 @@ These contracts are used to register on DAOstar website.
 #### Ethereum
 * **EIP4824Index**
   * Contract: [0x4f2c9028fE7107d9f1A8a9CFf34aa2d3F28600fa](https://etherscan.io/address/0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa)
-  * Version: N/A
   * TheGraph: [daostar](https://thegraph.com/hosted-service/subgraph/ipatka/daostar)
 * **EIP4824Registration**
   * Contract: [0x2F8E0Eb8969715BdA8bf6e9b768850A1581fB358](https://etherscan.io/address/0x2f8e0eb8969715bda8bf6e9b768850a1581fb358)
