@@ -36,7 +36,12 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   };
 
   let queryPath =
-    path + "/" + name + "/voters" + "?limit=50&key=" + BoardroomKey;
+    path +
+    "/" +
+    name +
+    "/voters" +
+    "?limit=50&key=" +
+    process.env.BOARDROOM_KEY;
   if (cursor) {
     queryPath += "&cursor=" + decodeURIComponent(cursor);
   }
