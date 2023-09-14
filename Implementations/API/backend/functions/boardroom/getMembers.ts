@@ -25,6 +25,8 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const name = event?.pathParameters?.id;
   if (!name) return { statusCode: 400, message: "Missing name" };
 
+  const cursor: string | undefined = event?.queryStringParameters?.cursor;
+
   const template = {
     "@context": {
       "@vocab": "http://daostar.org/",
@@ -33,14 +35,22 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     name: name,
   };
 
-  const queryPath =
-    path + "/" + name + "/voters" + "?limit=50&key=" + BoardroomKey;
+  let queryPath =
+    path +
+    "/" +
+    name +
+    "/voters" +
+    "?limit=50&key=" +
+    process.env.BOARDROOM_KEY;
+  if (cursor) {
+    queryPath += "&cursor=" + decodeURIComponent(cursor);
+  }
 
-  console.log("queryPath:", queryPath);
   const res = (await apiRequest(queryPath, "GET")) as any;
 
   if (!res.data) return { statusCode: 404, message: "DAO not found" };
   const voters = res.data;
+  const nextCursor = res.nextCursor;
 
   const membersFormatted = voters.map((a: any) => {
     return {
@@ -49,7 +59,11 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     };
   });
 
-  const transformed = { members: membersFormatted, ...template };
+  const transformed = {
+    members: membersFormatted,
+    ...template,
+    nextCursor: encodeURIComponent(nextCursor),
+  };
 
   return transformed
     ? {

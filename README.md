@@ -70,3 +70,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824RegistrationSummoner**
     * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://testnet.bscscan.com/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
     * Version: 1.0.0
+
+# Licenses
+
+All code in this repository is licensed under the MIT License, except for published standards, which are released to the public domain under [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/).
