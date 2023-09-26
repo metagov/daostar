@@ -107,7 +107,6 @@ const MemberLogos = (props) => {
             <a href="https://kleros.io/" target="_blank"><img src={klerosLogo} alt="Kleros" /></a>
             <a href="https://kycdao.xyz/" target="_blank"><img src={kycdaoLogo} alt="kycDAO" /></a>
             <a href="https://litprotocol.com/" target="_blank"><img src={litProtocolLogo} alt="Lit Protocol" /></a>
-            <a href="https://logos.xyz/" target="_blank"><img src={logosLogo} alt="Logos" /></a>
             <a href="https://lxdao.io/" target="_blank"><img src={lxdaoLogo} alt="LXDAO" /></a>
             <a href="https://messari.io/" target="_blank"><img src={messariLogo} alt="Messari" /></a>
             <a href="https://metacartel.xyz/" target="_blank"><img src={metacartelLogo} alt="MetaCartel Ventures" /></a>
