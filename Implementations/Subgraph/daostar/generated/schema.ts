@@ -136,6 +136,23 @@ export class RegistrationInstance extends Entity {
     }
   }
 
+  get issuersURI(): string | null {
+    let value = this.get("issuersURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set issuersURI(value: string | null) {
+    if (!value) {
+      this.unset("issuersURI");
+    } else {
+      this.set("issuersURI", Value.fromString(<string>value));
+    }
+  }
+
   get proposalsURI(): string | null {
     let value = this.get("proposalsURI");
     if (!value || value.kind == ValueKind.NULL) {

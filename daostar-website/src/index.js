@@ -9,7 +9,6 @@ import { FocusStyleManager } from "@blueprintjs/core";
 import {
     ApolloClient,
     ApolloLink,
-    HttpLink,
     InMemoryCache,
     ApolloProvider,
 } from "@apollo/client";
@@ -30,8 +29,13 @@ const client = new ApolloClient({
         new MultiAPILink({
             endpoints: {
                 goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
+                optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
                 mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
-                gnosis: `https://api.thegraph.com/subgraphs/name/mrutsavg/daostar-gnosis`,
+                gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
+                arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-arbitrum-goerli`,
+                chapel:`https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-bnb-bruno`,
+                optimism: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-optimism`
+
             },
             // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",

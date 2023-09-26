@@ -10,8 +10,9 @@ const REGISTRATIONS = gql`
                 daoURI
                 daoName
                 daoDescription
-                membersURI
                 proposalsURI
+                membersURI
+                issuersURI
                 governanceURI
                 activityLogURI
                 registrationAddress
@@ -31,8 +32,9 @@ const REGISTRATION = gql`
             daoURI
             daoName
             daoDescription
-            membersURI
             proposalsURI
+            membersURI
+            issuersURI
             governanceURI
             activityLogURI
             registrationAddress
@@ -43,4 +45,4 @@ const REGISTRATION = gql`
     }
 `
 
-export default { REGISTRATIONS, REGISTRATION}
+export default { REGISTRATIONS, REGISTRATION }

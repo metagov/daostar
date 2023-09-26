@@ -52,6 +52,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                     daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : 'unknown',
                 ])
                 const membersURI = daoMetadata.get('membersURI')
+                const issuersURI = daoMetadata.get('issuersURI')
                 const proposalsURI = daoMetadata.get('proposalsURI')
                 const governanceURI = daoMetadata.get('governanceURI')
                 const activityLogURI = daoMetadata.get('activityLogURI')
@@ -59,6 +60,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
                 registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
                 registrationInstance.membersURI = membersURI && membersURI.kind == JSONValueKind.STRING ? membersURI.toString() : ''
+                registrationInstance.issuersURI = issuersURI && issuersURI.kind == JSONValueKind.STRING ? issuersURI.toString() : ''
                 registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
                 registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
                 registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
