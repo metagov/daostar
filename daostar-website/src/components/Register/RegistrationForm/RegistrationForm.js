@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
+
 import validator from 'validator'
 import useAxios from 'axios-hooks'
 import { Button, Callout, Divider, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core'
@@ -262,6 +263,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     placeholder="Enter DAO address or id (eg ENS for snapshot)"
                     value={daoContractAddress}
                     onChange={onChangeDaoContractAddress}
+                    disabled={ daoFramework !== 'custom' ? false : true}
                 />
             </div>
             <div className="wizard-row">
