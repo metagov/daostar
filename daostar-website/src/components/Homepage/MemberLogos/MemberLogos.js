@@ -68,6 +68,7 @@ import tributeLogo from '../../../img/logos/tribute.png';
 import utopiaLogo from '../../../img/logos/utopialabs.webp';
 import wildfireLogo from '../../../img/logos/wildfiredao.png';
 import wonderverseLogo from '../../../img/logos/wonderverse.png';
+import lxdaoLogo from '../../../img/logos/lxdao.jpg';
 
 const MemberLogos = (props) => {
     return (
@@ -80,7 +81,7 @@ const MemberLogos = (props) => {
             <a href="https://balancer.finance/" target="_blank"><img src={balancerLogo} alt="BalancerDAO" /></a>
             <a href="https://www.boardroom.info/" target="_blank"><img src={boardroomLogo} alt="Boardroom" /></a>
             <a href="https://ceramic.network/" target="_blank"><img src={ceramicLogo} alt="Ceramic" /></a>
-            <a href="https://charmverse.io/" target="_blank"><img src={charmverseLogo} alt="Charmverse" /></a>	
+            <a href="https://charmverse.io/" target="_blank"><img src={charmverseLogo} alt="Charmverse" /></a>
             <a href="https://www.coinbase.com/" target="_blank"><img src={coinbaseLogo} alt="Coinbase" /></a>
             <a href="https://colony.io/" target="_blank"><img src={colonyLogo} alt="Colony" /></a>
             <a href="https://commonwealth.im/" target="_blank"><img src={commonwealthLogo} alt="Commonwealth" /></a>
@@ -106,6 +107,7 @@ const MemberLogos = (props) => {
             <a href="https://kleros.io/" target="_blank"><img src={klerosLogo} alt="Kleros" /></a>
             <a href="https://kycdao.xyz/" target="_blank"><img src={kycdaoLogo} alt="kycDAO" /></a>
             <a href="https://litprotocol.com/" target="_blank"><img src={litProtocolLogo} alt="Lit Protocol" /></a>
+            <a href="https://lxdao.io/" target="_blank"><img src={lxdaoLogo} alt="LXDAO" /></a>
             <a href="https://messari.io/" target="_blank"><img src={messariLogo} alt="Messari" /></a>
             <a href="https://metacartel.xyz/" target="_blank"><img src={metacartelLogo} alt="MetaCartel Ventures" /></a>
             <a href="https://metagov.org/" target="_blank"><img src={metagovLogo} alt="Metagov" /></a>
@@ -120,7 +122,7 @@ const MemberLogos = (props) => {
             <a href="https://otterspace.xyz/" target="_blank"><img src={otterspaceLogo} alt="Otterspace" /></a>
             <a href="https://paladin.vote/" target="_blank"><img src={paladinLogo} alt="Paladin" /></a>
             <a href="https://polygon.community/" target="_blank"><img src={polygonLogo} alt="Polygon DAO" /></a>
-            <a href="https://protocol.ai/" target="_blank"><img src={protocolLogo} alt="Protocol Labs" /></a>	
+            <a href="https://protocol.ai/" target="_blank"><img src={protocolLogo} alt="Protocol Labs" /></a>
             <a href="https://rabbithole.gg/" target="_blank"><img src={rabbitholeLogo} alt="Rabbit Hole" /></a>
             <a href="https://www.radicalxchange.org/" target="_blank"><img src={radicalxchangeLogo} alt="RadicalxChange" /></a>
             <a href="https://radicle.xyz/" target="_blank"><img src={radicleLogo} alt="Radicle" /></a>
@@ -136,7 +138,7 @@ const MemberLogos = (props) => {
             <a href="https://tenderly.co/" target="_blank"><img src={tenderlyLogo} alt="Tenderly" /></a>
             <a href="https://tributedao.com/" target="_blank"><img src={tributeLogo} alt="Tribute Labs" /></a>
             <a href="https://www.utopialabs.com/" target="_blank"><img src={utopiaLogo} alt="Utopia Labs" /></a>
-            <a href="https://mirror.xyz/james.eth/71ibzWJvs3Frqu3beIzAtcQu5sJ2k8Hz15svQhBWKvI" target="_blank"><img src={wildfireLogo} alt="Wildfire DAO" /></a>	
+            <a href="https://mirror.xyz/james.eth/71ibzWJvs3Frqu3beIzAtcQu5sJ2k8Hz15svQhBWKvI" target="_blank"><img src={wildfireLogo} alt="Wildfire DAO" /></a>
             <a href="https://www.wonderverse.xyz/" target="_blank"><img src={wonderverseLogo} alt="Wonderverse" /></a>
         </div>
     )

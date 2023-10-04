@@ -12,10 +12,15 @@ import {
 import FRAMEWORK_URIs from "./FRAMEWORK_URIs";
 import { useEnsAddress } from "wagmi";
 const networkIds = {
-  mainnet: 1,
-  goerli: 5,
-  optimismGoerli: 420,
-};
+    mainnet: 1,
+    goerli: 5,
+    optimismGoerli: 420,
+    arbitrumGoerli: 421613,
+    chapel: 97,
+    optimism:10
+
+
+}
 
 const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const [daoContractNetwork, setDaoContractNetwork] = useState("mainnet");
@@ -246,19 +251,22 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     }
   };
 
-  const EthNetworksSelect = (
-    <HTMLSelect
-      style={{ minWidth: 140 }}
-      iconProps={{ icon: "caret-down", color: "#fff" }}
-      value={daoContractNetwork}
-      onChange={onChangeDaoContractNetwork}
-      options={[
-        { label: "Mainnet", value: "mainnet" },
-        { label: "Goerli", value: "goerli" },
-        { label: "Optimism-Goerli", value: "optimismGoerli" },
-      ]}
-    />
-  );
+    const EthNetworksSelect = (
+        <HTMLSelect
+            style={{ minWidth: 140 }}
+            iconProps={{ icon: 'caret-down', color: '#fff' }}
+            value={daoContractNetwork}
+            onChange={onChangeDaoContractNetwork}
+            options={[
+                { label: 'Mainnet', value: 'mainnet' },
+                { label: 'Optimism', value: 'optimism'},
+                { label: 'Goerli', value: 'goerli' },
+                { label: 'Optimism-Goerli', value: 'optimismGoerli'},
+                { label: 'Arbitrum-Goerli', value: 'arbitrumGoerli'},
+                { label: 'BNB Bruno', value: 'chapel'},
+            ]}
+        />
+    )
 
   const FrameworkSelect = (
     <HTMLSelect

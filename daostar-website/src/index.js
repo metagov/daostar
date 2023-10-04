@@ -24,20 +24,24 @@ function getLibrary(provider) {
 }
 
 const client = new ApolloClient({
-  link: ApolloLink.from([
-    new MultiAPILink({
-      endpoints: {
-        goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
-        optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
-        mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
-        gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
-      },
-      // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
-      httpSuffix: "",
-      createHttpLink: createHttpLink,
-    }),
-  ]),
-  cache: new InMemoryCache({}),
+    link: ApolloLink.from([
+        new MultiAPILink({
+            endpoints: {
+                goerli: `https://api.thegraph.com/subgraphs/name/ipatka/daostar-goerli`,
+                optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
+                mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
+                gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
+                arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-arbitrum-goerli`,
+                chapel:`https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-bnb-bruno`,
+                optimism: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-optimism`
+
+            },
+            // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
+            httpSuffix: "",
+            createHttpLink: createHttpLink,
+        }),
+    ]),
+    cache: new InMemoryCache({}),
 });
 
 root.render(

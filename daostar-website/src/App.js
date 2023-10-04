@@ -7,6 +7,8 @@ import ExplorePage from "./components/ExplorePage/ExplorePage";
 import { WagmiConfig, createClient, useEnsAddress } from "wagmi";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { useQuery } from "@apollo/client";
+import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
+
 import queries from "./components/ExplorePage/queries/registrations";
 
 import "./App.css";
@@ -40,11 +42,41 @@ function App() {
         context: { apiName: "optimismGoerli" },
         variables: { id: "optimism-goerli" },
     }); 
+    const arbitrumGoerliRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "arbitrumGoerli" },
+        variables: { id: "arbitrum-goerli" },
+    }); 
+    const chapelRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "chapel" },
+        variables: { id: "chapel" },
+    }); 
+
+    const optimismRes = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "optimism" },
+        variables: { id: "optimism" },
+    });
+
+    const {
+        loading: optimismLoading,
+        error: optimismError,
+        data: optimismData,
+    } = optimismRes;
+
     const {
         loading: optimismGoerliLoading,
         error: optimismGoerliError,
         data: optimismGoerliData,
     } = optimismGoerliRes;
+    const {
+        loading: arbitrumGoerliLoading,
+        error: arbitrumGoerliError,
+        data: arbitrumGoerliData,
+    } = arbitrumGoerliRes;
+    const {
+        loading: chapelLoading,
+        error: chapelError,
+        data: chapelData,
+    } = chapelRes;
     const {
         loading: goerliLoading,
         error: goerliError,
@@ -59,29 +91,45 @@ function App() {
         error: gnosisError,
         data: gnosisData,
     } = gnosisRes;
-    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData });
+    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData, arbitrumGoerliData, chapelData });
 
-    if (error || goerliError || optimismGoerliError ) {
+    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError || optimismError ) {
         console.error("Mainnet Error "+ error);
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
+        console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
+        console.error("Chapel Error" + chapelError);
+        console.error("Optimism Error" + optimismError)
     };
-    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading) return "loading...";
+    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading || optimismLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
     const goerliRegistrations =
         goerliData?.registrationNetwork?.registrations || [];
     const optimismGoerliRegistrations =
         optimismGoerliData?.registrationNetwork?.registrations || [];
+    const optimismRegistrations =
+        optimismData?.registrationNetwork?.registrations || [];
     const gnosisRegistrations =
         gnosisData?.registrationNetwork?.registrations || [];
-    const registrationInstances = mainnetRegistrations.concat(
+    const arbitrumGoerliRegistrations =
+        arbitrumGoerliData?.registrationNetwork?.registrations || [];
+    const chapelRegistrations =
+        chapelData?.registrationNetwork?.registrations || [];
+    const allRegistrationInstances = mainnetRegistrations.concat(
         goerliRegistrations,
         gnosisRegistrations,
-        optimismGoerliRegistrations
+        optimismGoerliRegistrations,
+        arbitrumGoerliRegistrations,
+        chapelRegistrations,
+        optimismRegistrations
     );
 
-    console.log({ registrationInstances });
+    const registrationInstances = allRegistrationInstances.filter((instance) => 
+        !registrationIdsToFilter.includes(instance.id)
+    )
+    
+
 
     return (
         <WagmiConfig client={client}>
