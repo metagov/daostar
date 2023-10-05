@@ -35,6 +35,10 @@ const DisplayRegistration = ({
     network = "optimismGoerli";
   }
 
+  if(network === 'arbitrum-goerli'){
+    network = 'arbitrumGoerli';
+  }
+
   return (
     <Fragment>
       {standalone === true ? (

@@ -7,7 +7,11 @@ import FRAMEWORK_URIs from './FRAMEWORK_URIs'
 const networkIds = {
     mainnet: 1,
     goerli: 5,
-    optimismGoerli: 420
+    optimismGoerli: 420,
+    arbitrumGoerli: 421613,
+    chapel: 97,
+    optimism:10
+
 
 }
 
@@ -207,8 +211,11 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             onChange={onChangeDaoContractNetwork}
             options={[
                 { label: 'Mainnet', value: 'mainnet' },
+                { label: 'Optimism', value: 'optimism'},
                 { label: 'Goerli', value: 'goerli' },
-                { label: 'Optimism-Goerli', value: 'optimismGoerli'}
+                { label: 'Optimism-Goerli', value: 'optimismGoerli'},
+                { label: 'Arbitrum-Goerli', value: 'arbitrumGoerli'},
+                { label: 'BNB Bruno', value: 'chapel'},
             ]}
         />
     )
