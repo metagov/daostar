@@ -13,7 +13,9 @@ const mockRegistrationData = {
     membersURI: "ipfs://Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu",
     proposalsURI: "https://mydao.github.io/proposals",
     activityLogURI: "https://mydao.com/activityLog.json",
-    governanceURI: "https://github.com/MyDAO/MyDAO/governance.md"
+    governanceURI: "https://github.com/MyDAO/MyDAO/governance.md",
+    issuersURI: "https://sample.dao/issuer.md",
+
 }
 
 const Register = (props) => {

@@ -13,6 +13,7 @@ const EditRegistration = ({
     description,
     onCancelEdit,
     membersURI,
+    issuersURI,
     activityLogURI,
     proposalsURI,
     governanceURI,
@@ -31,6 +32,9 @@ const EditRegistration = ({
 
     const [daoMembersURI, setDaoMembersURI] = useState(() => membersURI ? membersURI : '');
     const onChangeMembersURI = (e) => setDaoMembersURI(e.target.value);
+
+    const [daoIssuersURI, setDaoIssuersURI] = useState(() => issuersURI ? issuersURI : '')
+    const onChangeIssuersURI = (e) => setDaoIssuersURI(e.target.value)
 
     const [daoActivityLogURI, setDaoActivityLogURI] = useState(() => activityLogURI ? activityLogURI : '');
     const onChangeActivityURI = (e) => setDaoActivityLogURI(e.target.value);
@@ -54,7 +58,7 @@ const EditRegistration = ({
     ] = useAxios(
         {
             url: `${process.env.REACT_APP_API_URL}/immutable`,
-            method: 'POST'
+            method: 'POST',
         },
         { manual: true }
     )
@@ -74,6 +78,7 @@ const EditRegistration = ({
         if (!validator.isURL(daoActivityLogURI)) errors.push('Activity Log URI must be a valid URI');
         if (!validator.isURL(daoProposalsURI)) errors.push('Proposals URI must be a valid URI');
         if (daoGovURI !== '' && !validator.isURL(daoGovURI)) errors.push('Governance URI must be a valid URI');
+        if (daoIssuersURI !== '' && !validator.isURL(daoIssuersURI)) errors.push(`Issuer URI must be a valid URI`)
         if (errors.length > 0) {
             setErrors(errors);
             window.scrollTo(0, 0);
@@ -184,6 +189,13 @@ const EditRegistration = ({
                     value={daoMembersURI}
                     onChange={onChangeMembersURI}
                     placeholder='https://api.daostar.org/eth/address/members'
+                />
+                <FieldWithViewLink
+                    label='Issuers'
+                    id='issuers'
+                    value={daoIssuersURI}
+                    onChange={onChangeIssuersURI}
+                    placeholder='https://api.daostar.org/eth/address/issuers'
                 />
                 <FieldWithViewLink
                     label='Activity Log'

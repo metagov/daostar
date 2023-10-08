@@ -15,6 +15,7 @@ const RegistrationCard = ({
     daoName,
     governanceURI = '',
     membersURI = '',
+    issuersURI = '',
     proposalsURI = '',
     activityLogURI = '',
     registrationNetwork,
@@ -47,6 +48,7 @@ const RegistrationCard = ({
                     managerAddress={managerAddress}
                     standalone={standalone}
                     membersURI={membersURI}
+                    issuersURI={issuersURI}
                     activityLogURI={activityLogURI}
                     proposalsURI={proposalsURI}
                     governanceURI={governanceURI}
@@ -60,6 +62,7 @@ const RegistrationCard = ({
                     description={daoDescription}
                     onCancelEdit={onCancelEdit}
                     membersURI={membersURI}
+                    issuersURI={issuersURI}
                     activityLogURI={activityLogURI}
                     proposalsURI={proposalsURI}
                     governanceURI={governanceURI}
@@ -70,6 +73,7 @@ const RegistrationCard = ({
             {cardScreen === 'UPDATED' && (
                 <RegistrationReceived 
                     isUpdate
+                    daoContractNetwork={registrationNetwork.id}
                     {...updatedData} 
                 />
             )}

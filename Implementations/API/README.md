@@ -15,6 +15,25 @@ Currently supported DAOs and frameworks:
 
 It can be forked to support other DAO frameworks.
 
+## Build and Deployment Instructions
+
+- Create your access key with CLI use case
+Example link: https://us-east-1.console.aws.amazon.com/iamv2/home#/users/details/rashmi@daostar.org?section=security_credentials
+
+- Open Terminal and navigate to .aws/credentails file And update the credentials
+- Next, navigate to DAOStar/daostar/Implementations/API
+
+Run the below commands
+
+``` npm run install```
+```npm run build```
+
+Type in the stage name prod
+
+```npm run deploy```
+
+
+- Navigate to CloudFormation and View Stacks, you should see the status of prod-rest-api-Mystack
 
 ## Moloch
 
