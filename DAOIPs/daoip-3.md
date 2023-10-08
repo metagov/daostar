@@ -1,7 +1,7 @@
 ---
 daoip: 3
 title: Attestations for DAOs
-description: An attestation-based architecture and data model for DAO membership, member contributions, and other data.
+description: An attestation-based architecture and data model for DAO membership, contributions, and other data.
 discussions-to: https://github.com/metagov/daostar/discussions/39
 status: Draft
 type:
@@ -22,7 +22,7 @@ Contributions and membership are important building blocks within DAOs and relat
 
 In current DAOs, membership and contributions are commonly defined via ownership of on-chain assets, whether fungible tokens, NFTs, or (more recently) soulbound NFTs. But on-chain definitions miss many important use-cases and risk locking DAOs into very specific modes of membership and organization. For example, a DAO may want to make membership contingent on some (off-chain) measure of participation such as git commits or Discourse posts, while definitions of contributions could vary across each of the (off- and on-chain) services that a DAO uses to track contributions.
 
-[daoURI](https://daostar.one/EIP) already allows a DAO to publish off-chain data about itself and its members. This standard composes with daoURI in order to specify a permissionless attestation framework _for service providers and other entities_ to publish information about the DAO and its members. Importantly, it defines an indexing strategy for different entities to publish and search for on- and off-chain data relevant to the members of a DAO. The underlying format of the attestations themselves is designed to be compatible with the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/).
+[daoURI](daoip-2.md) already allows a DAO to publish off-chain data about itself and its members. This standard composes with daoURI in order to specify a permissionless attestation framework _for service providers and other entities_ to publish information about the DAO and its members. Importantly, it defines an indexing strategy for different entities to publish and search for on- and off-chain data relevant to the members of a DAO. The underlying format of the attestations themselves is designed to be compatible with the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/).
 
 *Note: this standard does* not *specify how DAOs and service providers should handle identity verification & management. We assume that many different identity systems exist in tandem across different DAOs and different service providers. The way these are implemented is left to the discretion of both the DAO and its service providers. Thus, this standard is NOT appropriate for handling personally-identifiable information (PII) or other forms of personal data.*
 
@@ -36,7 +36,7 @@ A DAOIP-3 attestation MUST take the following form:
 ```json
 {
 	"@context": ["https://daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
-	"type": "["VerifiableCredential", "Attestation", <the type of the attestation if any>]",
+	"type": ["VerifiableCredential", "Attestation", "<the type of the attestation if any>"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
 	"expirationDate": "<ISO DateTime>",
@@ -77,7 +77,7 @@ If an issuer wishes to extend the attestation framework to attestations about th
 ```json
 {
 	"@context": ["https://daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
-	"type": "["VerifiableCredential", "Attestation", <the type of the attestation>]",
+	"type": ["VerifiableCredential", "Attestation", "<the type of the attestation>"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
 	"expirationDate": "<ISO DateTime>",
@@ -87,9 +87,88 @@ If an issuer wishes to extend the attestation framework to attestations about th
 }
 ```
 
+#### Membership Attestations 
+
+Attestations communicating membership MUST declare the `MembershipAttestation` type and use the `memberOf` property within `credentialSubject`.
+
+```json
+{
+	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
+	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
+	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
+	"expirationDate": "<ISO DateTime>",
+	"credentialSubject": {
+		"memberOf": {
+			"type": "DAO",
+			"id": "<the DAO's daoURI>",
+		}
+}
+```
+
+#### Contribution Attestations
+
+A contribution is some event, artifact, or behavior that has been made by some entity or set of entities. Attestations communicating contributions MUST declare the `ContributionAttestation` type and use the `contributions` property within `credentialSubject`.
+
+```json
+{
+	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"type": ["VerifiableCredential", "Attestation", "ContributionAttestation"],
+	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
+	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
+	"expirationDate": "<ISO DateTime>",
+	"credentialSubject": {
+		"type": "<e.g. EthereumAddress, DIDAddress, ENSName, CAIP10Address, HTTPAddress>",
+		"id": "<subject's identifier, e.g. their Ethereum address, DID address, ENS address, CAIP-10 address, or HTTP address>",
+		"contributions": {
+			"type": "Contribution",
+			"name": "<name of the contribution>",
+			"description": "<description of the contribution>",
+			"hasContributors": [
+				{
+					"type": "<e.g. EthereumAddress, DIDAddress, ENSName, CAIP10Address, HTTPAddress>",
+					"id": "<subject's identifier, e.g. their Ethereum address, DID address, ENS address, CAIP-10 address, or HTTP address>"
+				}
+			],
+			"engagementDate": "<ISO DateTime>",
+			"externalData": [
+				{
+					"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
+					"<additionalFields>": "<additionalFieldData>"
+				},
+				{
+					"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
+					"<additionalFields>": "<additionalFieldData>"
+				}
+			]
+		}
+	}
+}
+```
+
+An issuer MAY publish its own data about the Contribution (e.g. `id` information about the contribution) under `externalData`.
+
+#### daoURI Attestations
+An issuer may publish a version of `daoURI` on behalf of a DAO as an attestation. This follows the common pattern whereby an aggregator constructs a profile for a DAO that may then be "claimed". If accompanied by a digital signature or other proof, this MAY be indexed as the DAO's `daoURI` in the sense of [DAOIP-2](daoip-2.md).
+
+```json
+{
+	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"type": ["VerifiableCredential", "Attestation", "daoURIAttestation"],
+	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
+	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
+	"expirationDate": "<ISO DateTime>",
+	"credentialSubject": {
+		"type": "<e.g. EthereumAddress, DIDAddress, ENSName, CAIP10Address, HTTPAddress>",
+		"id": "<subject's identifier, e.g. their Ethereum address, DID address, ENS address, CAIP-10 address, or HTTP address>",
+		"daoURI": "<URI>"
+	}
+}
+```
+
 ### For DAOs: attestationIssuers
 
-All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuersURI` field as part of `daoURI` as described in [DAOIP-2](DAOIP-2) and/or [EIP-4824](https://eips.ethereum.org/EIPS/eip-4824).
+All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuersURI` field as part of `daoURI` as described in [DAOIP-2](daoip-2.md) and/or [EIP-4824](https://eips.ethereum.org/EIPS/eip-4824).
 
 ```json
 {
@@ -99,7 +178,7 @@ All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuersURI` field 
 }
 ```
 
-The target of `attestationIssuersURI` MUST return an array of entities, each represented by an `issuer`, who issue attestations on behalf of the DAO.
+The target of `attestationIssuersURI` MUST return an array of entities, each represented by an `issuer` which issues attestations on behalf of the DAO.
 
 ```json
 {
@@ -107,23 +186,25 @@ The target of `attestationIssuersURI` MUST return an array of entities, each rep
 	"attestationIssuers": [
 		{
 			"type": "AttestationIssuer",
-			"name": "<name of the attestation issuer>"
+			"name": "<name of the attestation issuer>",
 			"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 		},
 		{
 			"type": "AttestationIssuer",
-			"name": "<name of the attestation issuer>"
+			"name": "<name of the attestation issuer>",
 			"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 		}
 	]
 }
 ```
 
-### For Issuers: issuerURI and Attestation Endpoints
+Membership attestations (see above) issued by an issuer listed by the DAO in `attestationIssuers` SHOULD be considered acceptable evidence of membership in the DAO.
+
+### For Issuers: `issuer` and Attestation Endpoints
 
 An *attestation issuer*, or just issuer, is an entity that issues and manages attestations, sometimes but not always on behalf of some other entity. Issuers often provide services, host data about organizations and their members, or are trusted in some other way.
 
-Every issuer conforming to DAOIP-3 MUST implement an `issuerURI` endpoint describing the issuer and the endpoints that it publishes, following the Attestation Issuer JSON-LD Schema below. 
+Every issuer conforming to DAOIP-3 MUST implement an `issuer` endpoint describing the issuer and the endpoints that it publishes, following the Attestation Issuer JSON-LD Schema below.
 
 Attestation Issuer JSON-LD Schema
 ```json
@@ -134,76 +215,32 @@ Attestation Issuer JSON-LD Schema
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"description": "<description of the attestation issuer>",
 	"endpoints": {
-		subjectAttestationsURI: "<URI>",
-		subjectPresentationURI: "<URI>",
-	}
-	"apiURI": "<URI to specification or documentation of the issuer's API>",
+		"subjectAttestationsURI": "<URI of endpoint>",
+	},
+	"apiURI": "<URI to specification or documentation of the issuer's API>"
 }
 ```
+
+Within the `endpoint` property, issuers MUST publish the `subjectAttestationsURI` endpoint, which, in response to a request about an entity (typically identified through its `type` and `id` properties, but possibly through other fields such as `name`), returns an array of attestations about that entity.
 
 Issuers MAY choose to publish an API documentation specification through `apiURI`. If so, it is RECOMMENDED that they return a JSON or YAML object following the [OpenAPI specification](https://spec.openapis.org/oas/latest.html).
 
 ### Subject Presentations
-An issuer MAY implement a `subjectPresentationURI` endpoint which, given an `id` object such as `EthereumAddress` or `ENSAddress`, returns a list of organizations following the Subject Presentation JSON Schema below:
+An issuer MAY aggregate information from multiple attestations within a single *presentation* or *verifiable presentation*. If so, it MUST publish an endpoint `subjectPresentationURI` within the `endpoints` property. Further, aggregate information about members or contributions MUST take the form of arrays under the `memberOf` and `contributions` properties.
 
-Subject Presentation JSON Schema
+The example below shows such a presentation:
+
 ```json
 {
 	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
 	"expirationDate": "<ISO DateTime>",
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"credentialSubject": {
-		"type": "<e.g. EthereumAddress, DIDAddress, ENSAddress, CAIP10Address, HTTPAddress>",
+		"type": "<e.g. EthereumAddress, DIDAddress, ENSName, CAIP10Address, HTTPAddress>",
 		"id": "<subject's identifier, e.g. their Ethereum address, DID address, ENS address, CAIP-10 address, or HTTP address>",
-		"organizations": [ ... ],
-		"contributions": [ ... ]
+		"memberOf": [{ "..." }],
+		"contributions": [{ "..." }]
 	}
-```
-
-Further, note that the above schema is designed to attest to a member object by looking up its “identity”, where identity might be determined by Ethereum address, Cosmos address, CAIP-10 address, decentralized identity, ENS, BrightID, Disco, or any other service with a recognized identity type.
-
-### daoURI Attestation
-An issuer may publish a version of daoURI on behalf of a DAO as an attestation.
-
-```json
-{
-	"type": ["VerifiableCredential", "Attestation", "daoURI"],
-	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
-	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
-	"expirationDate": "<ISO DateTime>",
-	"credentialSubject": {
-		"daoURI": "<URI>"
-	}
-}
-```
-
-### Membership Attestations 
-
-```json
-{
-	"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
-	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
-	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
-	"expirationDate": "<ISO DateTime>",
-	"credentialSubject": {
-		"memberOf": {
-			"type": "DAO",
-			"id": "<daoURI>",
-		}
-}
-```
-
-### Contribution Attestations
-
-```json
-{
-	"type": "contributionAttestation",
-	"expirationDate": "<ISO DateTime>",
-	"attestationURI": "<the URI from which someone can obtain the attestation, in this case, the issuer's getMemberAttestationsURI>",
-	"contributionType": "<arbitrary text, e.g. tweet>",
-	"contributionURI": "<arbitrary URI giving information about the contribution>"
-}
-
 ```
 
 ## Rationale
@@ -222,112 +259,138 @@ Let’s take a hypothetical example featuring two DAOs (DAOstar One and Nouns DA
 
 Through their two addresses, the user belongs to two DAOs:
 
-1. `josh.eth` owns enough DAO tokens to be a member of DAOstar One
-2. `joshua.eth` owns an NFT needed to be a member of Nouns DAO
+1. `josh.eth` owns enough DAO tokens to be a member of DAOstar One, and
+2. `joshua.eth` owns an NFT needed to be a member of Nouns DAO.
 
-Our user logs into Avenue using `josh.eth`. When a third-party queries Avenue’s attestation endpoint, the response should be:
+Our user logs into Avenue using (the address that owns) `josh.eth`. When a third-party queries Avenue’s `subjectAttestationsURI` endpoint with the input `{"type": "ENSName", "id": "josh.eth"}`, the response should be something like:
+
 
 ```json
-{
-	"@context": "http://www.daostar.org/schemas",
-	"type": "arrayAttestation",
-	"issuer": "<Avenue's issuerURI>",
-	"member": {
-		"type": "ENS",
-		"id": "josh.eth"
-	},
-	"organizations": [
-		{
-			"expirationDate": "<ISO-datetime>",
-			"attesterURI": "<DAOStar One's membersURI>",
-			"name": "DAOstar One",
-			"daoURI": "<DAOStar One's daoURI, following EIP-4824>"
+[
+	{
+		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
+		"issuer": "<Avenue's issuer URI>",
+		"attestationURI": "<a URI maintained by Avenue from which someone can obtain this attestation>",
+		"expirationDate": "<ISO DateTime>",
+		"credentialSubject": {
+			"type": "ENSName",
+			"id": "josh.eth",
+			"memberOf": {
+				"type": "DAO",
+				"id": "<DAOstar One's daoURI>",
+			}
 		}
-	]
-}
+	}
+]
 ```
 
 Let’s now assume DAOstar One is using Govrn to track contributions and Avenue is integrating with Govrn to track data.
 
-Any contributions the user allows to be publicly shared will also be available to Avenue. Even though a client would be querying Avenue’s attestation endpoint, the `contributions` field would relay any contributions made by Govrn. Querying the previous endpoint would return:
+Any contributions the user allows to be publicly shared will also be available to Avenue. Even though a client would be querying Avenue’s attestation endpoint, the `contributions` field would relay any contributions made by Govrn. Querying Avenue's endpoint with the input `{"type": "ENSName", "id": "josh.eth"}` should now return something like:
+
 
 ```json
-{
-	"@context": "http://www.daostar.org/schemas",
-	"type": "arrayAttestation",
-	"issuer": "<Avenue's issuerURI>",
-	"member": {
-		"type": "ENS",
-		"id": "josh.eth"
+[
+	{
+		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
+		"issuer": "<Avenue's issuer URI>",
+		"attestationURI": "<Avenue's subjectAttestationsURI>",
+		"expirationDate": "2023-10-04T19:23:24Z",
+		"credentialSubject": {
+			"type": "ENSName",
+			"id": "josh.eth",
+			"memberOf": {
+				"type": "DAO",
+				"id": "<DAOstar One's daoURI>",
+			}
+		}
 	},
-	"organizations": [
-		{
-			"expirationDate": "<ISO-datetime>",
-			"attesterURI": "<DAOStar One's membersURI>",
-			"name": "DAOstar One",
-			"daoURI": "<DAOStar One's daoURI, following EIP-4824>"
+	{
+		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"type": ["VerifiableCredential", "Attestation", "ContributionAttestation"],
+		"issuer": "<Avenue's issuer URI>",
+		"attestationURI": "<Govrn's subjectAttestationsURI>",
+		"expirationDate": "2023-10-05T12:19:11Z",
+		"credentialSubject": {
+			"type": "ENSName",
+			"id": "josh.eth",
+			"contributions": [
+				{
+					"type": "Contribution",
+					"name": "Tweeted DAOstar Launch",
+					"description": "I tweeted DAOstar's launch on February 2, 2021.",
+					"hasContributors": [
+						{
+							"type": "ENSName",
+							"id": "josh.eth"
+						}
+					],
+					"engagementDate": "2021-02-02T19:23:24Z"
+				}
+			]
 		}
-	],
-	"contributions": [
-		{
-			"type": "contribution",
-			"commit_type": "tweet",
-			"reference?": "<URI reference to the tweet on Govrn's platform>",
-			"attesterURI": "<Govrn's issuerURI>"
-		}
-	]
-}
+	}
+]
 ```
 
-Notice the `contributions` field includes information issued by Govrn and relayed by Avenue. Making use of this information relay allows tools to easily integrate with a single one of the issuers but still have access to data of others without being aware of any implementation details. At the same time, there’s still confidence in the data being relayed since it can be validated by the `reference` field.
+Notice the `contributions` field includes information issued by Govrn and relayed by Avenue. Making use of this information relay allows tools to easily integrate with a single one of the issuers but still have access to data of others without being aware of any implementation details. At the same time, there’s still confidence in the data being relayed since it can be validated by the `attestationURI` field.
 
-Let’s assume now that Avenue also integrates with Disco. Disco, in turn, attests user identities. If the user links both profiles (`josh.eth` and `joshua.eth`) in Disco, even though the former only has token access to DAOStar One, Disco can issue an attestation that it should be able to access groundw3rk as well. In essence, Disco is stating “`josh.eth` has tokens to access DAOStar One but, even though you can’t see it, I guarantee you its owner also has an address with the NFT to access groundw3rk”.
+Let’s assume now that Avenue also integrates with Disco. Disco, in turn, attests user identities. If the user links both profiles (`josh.eth` and `joshua.eth`) in Disco, even though the former only has token access to DAOStar One, Disco can issue an attestation that it should be able to access Nouns DAO as well. In essence, Disco is stating “`josh.eth` has tokens to access DAOStar One but, even though you can’t see it, I guarantee you its owner also has an address with the NFT to access Nouns DAO.
 
-This is represented by returning the following data in Discos’ issuer endpoint:
+This is represented by returning the following data in Disco's `subjectAttestationsURI` endpoint:
 
 ```json
-{
-	"@context": "http://www.daostar.org/schemas",
-	"type": "arrayAttestation",
-	"issuer": "<Disco's issuerURI>",
-	"member": {
-		"type": "ENS",
-		"id": "josh.eth"
-	},
-	"organizations": [
-		{
-			"expirationDate": "<ISO-datetime>",
-			"attesterURI": "<DAOStar One's membersURI>",
-			"name": "DAOstar One",
-			"daoURI": "<DAOStar One's daoURI, following EIP-4824>"
-		},
-		{
-			"expirationDate": "<ISO-datetime>",
-			"attesterURI": "<Disco's URI>",
-			"name": "groundw3rk",
-			"daoURI": "<groundw3rk's daoURI, following EIP-4824>"
+[
+	{
+		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
+		"issuer": "<Disco's issuer URI>",
+		"attestationURI": "<Avenue's subjectAttestationsURI>",
+		"expirationDate": "2023-10-04T19:23:24Z",
+		"credentialSubject": {
+			"type": "ENSName",
+			"id": "josh.eth",
+			"memberOf": {
+				"type": "DAO",
+				"id": "<DAOstar One's daoURI>",
+			}
 		}
-	]
-}
+	},
+	{
+		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
+		"issuer": "<Disco's issuer URI>",
+		"attestationURI": "<Disco's subjectAttestationsURI>",
+		"expirationDate": "2023-10-04T19:23:24Z",
+		"credentialSubject": {
+			"type": "ENSName",
+			"id": "josh.eth",
+			"memberOf": {
+				"type": "DAO",
+				"id": "<Nouns DAO's daoURI>",
+			}
+		}
+	}
+]
 ```
 
-Notice how the `attesterURI` in this scenario points to Disco’s own URI. A third-party using this information to token gate access to a DAO should decide if they trust Disco’s attestation.
+Notice how the `attestationURI` in this scenario points to Disco’s own `subjectAttestationsURI`. A third-party using this information to gate access to a DAO should decide if they trust Disco’s attestation.
 
-### Attestations
-We require membersURI (and overload it with membersURI from daoURI) because a DAO's membersURI can be published by the DAO, or by an issuer. But DAOs attestations via membersURI are given special status relative to a typical issuer attestation. [But why? Why do we do this? Mainly, I suppose, because they are "by the DAO itself". Not every piece of data needs to take the form of an attestation.] We also considered naming `memberAttestationURI` as `membersURI`, i.e. overloading the name with the field expected from `daoURI`. One reason for doing so is because membersURI (and effectively any data coming from daoURI) is in some sense an attestation. This would define a clear way in which  I think the distinction is that data from an attestation is meant to be in some sense portable, whereas data from membersURI is served directly from the DAO's own API.
+### For DAOs: attestationIssuers
 
-### Attestation types
-Issuers will often need to publish additional data...
+The basic use-case for a DAO using `attestationIssuers` is so that the DAO can (1) declare what services they use, along with the data published by those service providers, and (2) to declare to other services where "authorized" third party data is being maintained about members of the data.
 
-### For DAOs: attestationIssuers and issuerURI
+The intended indexing flow for a service building on top of DAOIP-3 is: 
+1. index all daoURIs,
+2. index data from `attestationIssuersURI` in order to discover (or cull) new issuers / service providers,
+3. pull data from `subjectAttestationsURI`, or through other endpoints listed through at `issuer`.
 
-The basic use-case for a DAO using `attestationIssuers` and `issuerURI` is so that the DAO can (1) declare what services they use, along with the data published by those service providers, and (2) to declare to other services where “authorized” third party data is being maintained about members of the data.
-
-Attestations issued by an issuer listed in `attestationIssuers` should be considered acceptable evidence of membership in the DAO.
 
 ### Expiration
 
-Since attestations can be easily (and freely) issued by the DAO issuer contract or a trusted party, we propose adding an expiry timestamp to the attestation schema. Having a (short-lived) self-expiring attestation avoids the rigmarole of maintaining a revocation registry and the underlying issues of trust and access to it.
+Since attestations can be easily (and freely) issued by the DAO or by the issuer, we propose adding an expiry timestamp to the attestation schema. Having a (short-lived) self-expiring attestation avoids the rigmarole of maintaining a revocation registry and the underlying issues of trust and access to it.
 
 With self-revoking credentials, the problem of storing is partially solved: they can at any time be reissued by the DAO contract or the trusted party. The approach also adds flexibility for storage by the user themselves (e.g. via a browser extension, that could potentially automatically refresh expired credentials).
 
@@ -343,4 +406,4 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 Please cite this document as:
 
-Fernando Mendes and Joshua Z. Tan, “Attestations for DAOs Working Paper”, July 8, 2022.
+Fernando Mendes and Joshua Z. Tan, “DAOIP-2: Attestations for DAOs Working Paper v0.2”, October 8, 2023.
