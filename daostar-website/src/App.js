@@ -33,6 +33,10 @@ function App() {
         context: { apiName: "mainnet" },
         variables: { id: "mainnet" },
     });
+    const mainnetv0Res = useQuery(queries.REGISTRATIONS, {
+        context: { apiName: "mainnetv0" },
+        variables: { id: "mainnet" },
+    });
     const goerliRes = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "goerli" },
         variables: { id: "goerli" },
@@ -54,7 +58,11 @@ function App() {
         context: { apiName: "optimism" },
         variables: { id: "optimism" },
     });
-
+    const {
+        loading: mainnetv0Loading,
+        error: mainnetv0Error,
+        data: mainnetv0Data,
+    } = mainnetv0Res;
     const {
         loading: optimismLoading,
         error: optimismError,
@@ -90,19 +98,22 @@ function App() {
         error: gnosisError,
         data: gnosisData,
     } = gnosisRes;
-    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData, arbitrumGoerliData, chapelData });
+    console.log({ mainnetData, goerliData, gnosisData, optimismGoerliData, arbitrumGoerliData, chapelData, mainnetv0Data });
 
-    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError || optimismError ) {
+    if (error || goerliError || optimismGoerliError || arbitrumGoerliError || chapelError || optimismError || mainnetv0Error ) {
         console.error("Mainnet Error "+ error);
+        console.error("Mainnet  v0 Error "+ mainnetv0Error);
         console.error("Goerli Error "+ goerliError);
         console.error("Optimism Goerli Error "+ optimismGoerliError);
         console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
         console.error("Chapel Error" + chapelError);
         console.error("Optimism Error" + optimismError)
     };
-    if (loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading || optimismLoading) return "loading...";
+    if (loading || mainnetv0Loading || goerliLoading || gnosisLoading || optimismGoerliLoading || arbitrumGoerliLoading || chapelLoading || optimismLoading) return "loading...";
     const mainnetRegistrations =
         mainnetData?.registrationNetwork?.registrations || [];
+    const mainnetv0Registrations =
+        mainnetv0Data?.registrationNetwork?.registrations || [];
     const goerliRegistrations =
         goerliData?.registrationNetwork?.registrations || [];
     const optimismGoerliRegistrations =
@@ -116,6 +127,7 @@ function App() {
     const chapelRegistrations =
         chapelData?.registrationNetwork?.registrations || [];
     const allRegistrationInstances = mainnetRegistrations.concat(
+        mainnetv0Registrations,
         goerliRegistrations,
         gnosisRegistrations,
         optimismGoerliRegistrations,
