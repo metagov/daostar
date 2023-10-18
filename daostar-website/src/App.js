@@ -16,11 +16,14 @@ import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
 
 const alchemyId = process.env.ALCHEMY_ID;
+const walletConnectProjectId = process.env.WALLETCONNECT_ID;
+
 
 const client = createConfig(
     getDefaultConfig({
         appName: "Your App Name",
         alchemyId,
+        walletConnectProjectId,
     })
 );
 
