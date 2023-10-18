@@ -1,0 +1,19 @@
+type RegistrationInstance @entity {
+    id: ID!
+    registrationAddress: Bytes!
+    daoAddress: Bytes!
+    daoURI: String! # string
+    daoName: String
+    registrationNetwork: RegistrationNetwork!
+    daoDescription: String
+    membersURI: String
+    proposalsURI: String
+    governanceURI: String
+    activityLogURI: String
+}
+
+type RegistrationNetwork @entity {
+    id: ID!
+    registrations: [RegistrationInstance!] @derivedFrom(field: "registrationNetwork")
+    chainId: String!
+}
