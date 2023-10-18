@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import RegistrationCard from '../RegistrationCard/RegistrationCard'
 import './ExplorePage.css'
 import { InputGroup } from '@blueprintjs/core'
