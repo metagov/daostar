@@ -46,15 +46,15 @@
     "react-three-fiber": "^6.0.13",
     "three": "^0.148.0",
     "ts-jest": "^29.0.5",
-    "typescript": "^4.9.4",
+    "typescript": "^5.2.2",
     "typewriter-effect": "^2.19.0",
     "validator": "^13.7.0",
-    "wagmi": "^0.11.4",
+    "wagmi": "^1.1.1",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.1"
   },
   "scripts": {
-    "start": "PORT=8000 REACT_APP_API_URL=https://api.daostar.org react-scripts start",
+    "start": "PORT=8000 REACT_APP_API_URL=http://localhost:8080/https://api.daostar.org react-scripts start",
     "build": "REACT_APP_API_URL=https://api.daostar.org react-scripts build",
     "predeploy": "REACT_APP_API_URL=https://api.daostar.org npm run build",
     "deploy": "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
