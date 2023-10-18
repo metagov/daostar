@@ -1,0 +1,46 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+features:
+  - ipfsOnEthereumContracts
+templates:
+  - name: EIP4824Registration
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: EIP4824Registration
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: EIP4824RegistrationSummoner/EIP4824RegistrationSummoner.wasm
+      entities:
+        - Registration
+      abis:
+        - name: EIP4824Registration
+          file: EIP4824Registration/abis/EIP4824Registration.json
+      eventHandlers:
+        - event: NewURI(string,address)
+          handler: handleNewURI
+dataSources:
+  - kind: ethereum
+    name: EIP4824RegistrationSummoner
+    network: mainnet
+    source:
+      abi: EIP4824RegistrationSummoner
+      address: "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc"
+      startBlock: 16084997
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - NewRegistration
+        - RegistrationInstance
+      abis:
+        - name: EIP4824RegistrationSummoner
+          file: EIP4824RegistrationSummoner/abis/EIP4824RegistrationSummoner.json
+      eventHandlers:
+        - event: NewRegistration(indexed address,string,address)
+          handler: handleNewRegistration
+      file: EIP4824RegistrationSummoner/EIP4824RegistrationSummoner.wasm
