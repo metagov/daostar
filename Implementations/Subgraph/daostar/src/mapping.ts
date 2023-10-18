@@ -56,7 +56,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 const proposalsURI = daoMetadata.get('proposalsURI')
                 const governanceURI = daoMetadata.get('governanceURI')
                 const activityLogURI = daoMetadata.get('activityLogURI')
-                const managerAddresss = daoMetadata.get('managerAddress');
+                const managerAddress = daoMetadata.get('managerAddress');
                 const contractRegistryURI = daoMetadata.get('contractRegistryURI');
 
 
@@ -68,7 +68,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
                 registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
                 registrationInstance.contractRegistryURI = contractRegistryURI && contractRegistryURI.kind == JSONValueKind.STRING ? contractRegistryURI.toString() : ''
-                registrationInstance.managerAddresss = managerAddresss && managerAddresss.kind == JSONValueKind.STRING ? managerAddresss.toString() : ''
+                registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
 
                 registrationInstance.save() // For some reason this does not work without this additional save
             } else {

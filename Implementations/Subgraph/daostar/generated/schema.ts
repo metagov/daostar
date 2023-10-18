@@ -225,8 +225,8 @@ export class RegistrationInstance extends Entity {
     }
   }
 
-  get managerAddresss(): string | null {
-    let value = this.get("managerAddresss");
+  get managerAddress(): string | null {
+    let value = this.get("managerAddress");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -234,11 +234,11 @@ export class RegistrationInstance extends Entity {
     }
   }
 
-  set managerAddresss(value: string | null) {
+  set managerAddress(value: string | null) {
     if (!value) {
-      this.unset("managerAddresss");
+      this.unset("managerAddress");
     } else {
-      this.set("managerAddresss", Value.fromString(<string>value));
+      this.set("managerAddress", Value.fromString(<string>value));
     }
   }
 
