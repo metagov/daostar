@@ -5,7 +5,7 @@ import TopNavigation from "./components/TopNavigation/TopNavigation";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import ExplorePage from "./components/ExplorePage/ExplorePage";
 import { WagmiConfig, createConfig } from "wagmi";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { ConnectKitProvider, getDefaultClient, getDefaultConfig } from "connectkit";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 
@@ -23,7 +23,6 @@ const client = createConfig(
     getDefaultConfig({
         appName: "Your App Name",
         alchemyId,
-        walletConnectProjectId,
     })
 );
 
@@ -146,7 +145,7 @@ function App() {
 
 
     return (
-        <WagmiConfig client={client}>
+        <WagmiConfig config={client}>
             <ConnectKitProvider
                 mode="dark"
                 customTheme={{
