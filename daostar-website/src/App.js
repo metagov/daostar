@@ -4,8 +4,8 @@ import Register from "./components/Register/Register";
 import TopNavigation from "./components/TopNavigation/TopNavigation";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import ExplorePage from "./components/ExplorePage/ExplorePage";
-import { WagmiConfig, createClient } from "wagmi";
-import { ConnectKitProvider, getDefaultClient } from "connectkit";
+import { WagmiConfig, createConfig } from "wagmi";
+import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 
@@ -17,9 +17,9 @@ import Eye from "./components/Homepage/Eye/Eye";
 
 const alchemyId = process.env.ALCHEMY_ID;
 
-const client = createClient(
-    getDefaultClient({
-        appName: "Your App Name",
+const config = createConfig(
+    getDefaultConfig({
+        appName: "DAOstar",
         alchemyId,
     })
 );
@@ -143,7 +143,7 @@ function App() {
 
 
     return (
-        <WagmiConfig client={client}>
+        <WagmiConfig config={config}>
             <ConnectKitProvider
                 mode="dark"
                 customTheme={{
