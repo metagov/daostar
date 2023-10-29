@@ -24,7 +24,7 @@
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 ipatka/daostar"
     },
     "dependencies": {
-        "@graphprotocol/graph-cli": "latest",
-        "@graphprotocol/graph-ts": "latest"
+        "@graphprotocol/graph-cli": "0.60.0",
+        "@graphprotocol/graph-ts": "0.31.0"
     }
 }

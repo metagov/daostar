@@ -3,6 +3,7 @@ import { NewRegistration } from '../generated/EIP4824RegistrationSummoner/EIP482
 import { NewURI } from '../generated/templates/EIP4824Registration/EIP4824Registration'
 import { RegistrationInstance, RegistrationNetwork } from '../generated/schema'
 import { EIP4824Registration } from '../generated/templates'
+import { getChainId } from './getChainId'
 
 export function handleNewRegistration(event: NewRegistration): void {
     const chainName = dataSource.network() // returns network name
@@ -10,6 +11,8 @@ export function handleNewRegistration(event: NewRegistration): void {
     let registrationNetwork = RegistrationNetwork.load(chainName)
     if (!registrationNetwork) {
         registrationNetwork = new RegistrationNetwork(chainName)
+        registrationNetwork.chainId = getChainId().toString();
+
         registrationNetwork.save()
     }
 
@@ -31,7 +34,7 @@ export function handleNewRegistration(event: NewRegistration): void {
     // retrieve registration info from IPFS
     log.info('Fetching ipfs data for uri: {}', [event.params.daoURI])
     if (event.params.daoURI) {
-        const ipfsHash = event.params.daoURI.substring(7)
+        const ipfsHash = event.params.daoURI.substring(event.params.daoURI.length - 46)
         log.info('Fetching ipfs data for: {}', [ipfsHash])
         let ipfsData = ipfs.cat(ipfsHash)
         if (ipfsData) {
@@ -71,7 +74,7 @@ export function handleNewURI(event: NewURI): void {
     if (!registrationInstance) log.warning('Invalid instance', [])
     else {
         if (event.params.daoURI) {
-            const ipfsHash = event.params.daoURI.substring(7)
+            const ipfsHash = event.params.daoURI.substring(-46)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
             let ipfsData = ipfs.cat(ipfsHash)
             if (ipfsData) {

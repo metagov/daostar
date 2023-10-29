@@ -3,6 +3,7 @@ import { DAOURIRegistered } from '../generated/EIP4824Index/EIP4824Index'
 import { DAOURIUpdate } from '../generated/templates/EIP4824Registration/EIP4824Registration'
 import { RegistrationInstance, RegistrationNetwork } from '../generated/schema'
 import { EIP4824Registration } from '../generated/templates'
+import { getChainId } from './getChainId'
 
 export function handleNewRegistration(event: DAOURIRegistered): void {
     const chainName = dataSource.network() // returns network name
@@ -10,6 +11,7 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
     let registrationNetwork = RegistrationNetwork.load(chainName)
     if (!registrationNetwork) {
         registrationNetwork = new RegistrationNetwork(chainName)
+        registrationNetwork.chainId = getChainId().toString();
         registrationNetwork.save()
     }
 
