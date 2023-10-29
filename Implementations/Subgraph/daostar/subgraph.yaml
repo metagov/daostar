@@ -6,7 +6,7 @@ features:
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
-    network: gnosis
+    network: chapel
     source:
       abi: EIP4824Registration
     mapping:
@@ -25,11 +25,11 @@ templates:
 dataSources:
   - kind: ethereum
     name: EIP4824Index
-    network: gnosis
+    network: chapel
     source:
       abi: EIP4824Index
-      address: "0x8180cbfBFFe59F54BF3Ea5d7DdbaE1232e2bB298"
-      startBlock: 27702194
+      address: "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4"
+      startBlock: 32947350
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
