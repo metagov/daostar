@@ -34,7 +34,7 @@ const client = new ApolloClient({
                 gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
                 arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-arbitrum-goerli`,
                 chapel:`https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-bnb-bruno`,
-                optimism: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-optimism`,
+                optimism: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism`,
                 mainnetv0: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-ethereum-main-v0`
 
             },

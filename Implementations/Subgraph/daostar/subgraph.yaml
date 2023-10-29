@@ -6,7 +6,7 @@ features:
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
-    network: mainnet
+    network: optimism
     source:
       abi: EIP4824Registration
     mapping:
@@ -25,11 +25,11 @@ templates:
 dataSources:
   - kind: ethereum
     name: EIP4824Index
-    network: mainnet
+    network: optimism
     source:
       abi: EIP4824Index
-      address: "0x4f2c9028fE7107d9f1A8a9CFf34aa2d3F28600fa"
-      startBlock: 17874753
+      address: "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4"
+      startBlock: 109109991
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
