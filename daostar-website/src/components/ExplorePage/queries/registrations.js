@@ -16,7 +16,7 @@ const REGISTRATIONS = gql`
                 governanceURI
                 activityLogURI
                 managerAddress
-                contractRegistryURI
+                contractsRegistryURI
                 registrationAddress
                 registrationNetwork {
                     id
