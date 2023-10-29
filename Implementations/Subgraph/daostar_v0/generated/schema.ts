@@ -157,6 +157,23 @@ export class RegistrationInstance extends Entity {
     }
   }
 
+  get issuersURI(): string | null {
+    let value = this.get("issuersURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set issuersURI(value: string | null) {
+    if (!value) {
+      this.unset("issuersURI");
+    } else {
+      this.set("issuersURI", Value.fromString(<string>value));
+    }
+  }
+
   get proposalsURI(): string | null {
     let value = this.get("proposalsURI");
     if (!value || value.kind == ValueKind.NULL) {
@@ -205,6 +222,40 @@ export class RegistrationInstance extends Entity {
       this.unset("activityLogURI");
     } else {
       this.set("activityLogURI", Value.fromString(<string>value));
+    }
+  }
+
+  get managerAddress(): string | null {
+    let value = this.get("managerAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set managerAddress(value: string | null) {
+    if (!value) {
+      this.unset("managerAddress");
+    } else {
+      this.set("managerAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get contractsRegistryURI(): string | null {
+    let value = this.get("contractsRegistryURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set contractsRegistryURI(value: string | null) {
+    if (!value) {
+      this.unset("contractsRegistryURI");
+    } else {
+      this.set("contractsRegistryURI", Value.fromString(<string>value));
     }
   }
 }

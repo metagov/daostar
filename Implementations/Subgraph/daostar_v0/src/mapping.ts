@@ -49,6 +49,9 @@ export function handleNewRegistration(event: NewRegistration): void {
             const proposalsURI = daoMetadata.get('proposalsURI')
             const governanceURI = daoMetadata.get('governanceURI')
             const activityLogURI = daoMetadata.get('activityLogURI')
+            const issuersURI = daoMetadata.get('issuersURI')
+            const managerAddress = daoMetadata.get('managerAddress');
+            const contractsRegistryURI = daoMetadata.get('contractsRegistryURI');
 
             registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
             registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
@@ -56,6 +59,9 @@ export function handleNewRegistration(event: NewRegistration): void {
             registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
             registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
             registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
+            registrationInstance.issuersURI = issuersURI && issuersURI.kind == JSONValueKind.STRING ? issuersURI.toString() : ''
+            registrationInstance.contractsRegistryURI = contractsRegistryURI && contractsRegistryURI.kind == JSONValueKind.STRING ? contractsRegistryURI.toString() : ''
+            registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
             registrationInstance.save() // For some reason this does not work without this additional save
         } else {
             log.warning('IPFS data missing for : {}', [ipfsHash])
