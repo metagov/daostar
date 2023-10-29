@@ -38,7 +38,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
         registrationInstance.daoAddress = event.params.daoAddress
         if (event.params.daoURI) {
             registrationInstance.daoURI = event.params.daoURI
-            const ipfsHash = event.params.daoURI.substring(-46)
+            const ipfsHash = event.params.daoURI.substring(event.params.daoURI.length - 46)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
             let ipfsData = ipfs.cat(ipfsHash)
             if (ipfsData) {
@@ -57,7 +57,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 const governanceURI = daoMetadata.get('governanceURI')
                 const activityLogURI = daoMetadata.get('activityLogURI')
                 const managerAddress = daoMetadata.get('managerAddress');
-                const contractRegistryURI = daoMetadata.get('contractRegistryURI');
+                const contractsRegistryURI = daoMetadata.get('contractsRegistryURI');
 
                 registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
                 registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
@@ -66,7 +66,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
                 registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
                 registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
-                registrationInstance.contractRegistryURI = contractRegistryURI && contractRegistryURI.kind == JSONValueKind.STRING ? contractRegistryURI.toString() : ''
+                registrationInstance.contractsRegistryURI = contractsRegistryURI && contractsRegistryURI.kind == JSONValueKind.STRING ? contractsRegistryURI.toString() : ''
                 registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
                 registrationInstance.save() // For some reason this does not work without this additional save
             } else {

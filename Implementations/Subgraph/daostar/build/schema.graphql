@@ -12,7 +12,7 @@ type RegistrationInstance @entity {
     governanceURI: String
     activityLogURI: String
     managerAddress: String
-    contractRegistryURI: String
+    contractsRegistryURI: String
 }
 
 type RegistrationNetwork @entity {

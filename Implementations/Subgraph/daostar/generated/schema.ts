@@ -242,8 +242,8 @@ export class RegistrationInstance extends Entity {
     }
   }
 
-  get contractRegistryURI(): string | null {
-    let value = this.get("contractRegistryURI");
+  get contractsRegistryURI(): string | null {
+    let value = this.get("contractsRegistryURI");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -251,11 +251,11 @@ export class RegistrationInstance extends Entity {
     }
   }
 
-  set contractRegistryURI(value: string | null) {
+  set contractsRegistryURI(value: string | null) {
     if (!value) {
-      this.unset("contractRegistryURI");
+      this.unset("contractsRegistryURI");
     } else {
-      this.set("contractRegistryURI", Value.fromString(<string>value));
+      this.set("contractsRegistryURI", Value.fromString(<string>value));
     }
   }
 }
