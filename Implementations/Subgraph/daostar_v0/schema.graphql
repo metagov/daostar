@@ -7,9 +7,12 @@ type RegistrationInstance @entity {
     registrationNetwork: RegistrationNetwork!
     daoDescription: String
     membersURI: String
+    issuersURI: String
     proposalsURI: String
     governanceURI: String
     activityLogURI: String
+    managerAddress: String
+    contractsRegistryURI: String
 }
 
 type RegistrationNetwork @entity {

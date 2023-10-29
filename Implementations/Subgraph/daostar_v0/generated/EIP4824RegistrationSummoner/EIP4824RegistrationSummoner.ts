@@ -51,6 +51,14 @@ export class EIP4824RegistrationSummoner__registrationAddressResult {
     map.set("value1", ethereum.Value.fromBoolean(this.value1));
     return map;
   }
+
+  getAddr(): Address {
+    return this.value0;
+  }
+
+  getExists(): boolean {
+    return this.value1;
+  }
 }
 
 export class EIP4824RegistrationSummoner__summonRegistrationResult {
@@ -67,6 +75,14 @@ export class EIP4824RegistrationSummoner__summonRegistrationResult {
     map.set("value0", ethereum.Value.fromAddress(this.value0));
     map.set("value1", ethereum.Value.fromBytesArray(this.value1));
     return map;
+  }
+
+  getRegistration(): Address {
+    return this.value0;
+  }
+
+  getResults(): Array<Bytes> {
+    return this.value1;
   }
 }
 

@@ -19,7 +19,7 @@ const alchemyId = process.env.ALCHEMY_ID;
 
 const client = createClient(
     getDefaultClient({
-        appName: "Your App Name",
+        appName: "DAOstar",
         alchemyId,
     })
 );
@@ -34,8 +34,8 @@ function App() {
         variables: { id: "mainnet" },
     });
     const mainnetv0Res = useQuery(queries.REGISTRATIONS, {
-        context: { apiName: "mainnetv0" },
-        variables: { id: "mainnet" },
+        context: { apiName: "mainnetOld" },
+        variables: { id: "mainnetOld" },
     });
     const goerliRes = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "goerli" },

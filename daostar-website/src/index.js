@@ -32,10 +32,10 @@ const client = new ApolloClient({
                 optimismGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism-goerli`,
                 mainnet: `https://api.thegraph.com/subgraphs/name/ipatka/daostar`,
                 gnosis: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-gnosis`,
-                arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-arbitrum-goerli`,
-                chapel:`https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-bnb-bruno`,
-                optimism: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-optimism`,
-                mainnetv0: `https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-ethereum-main-v0`
+                arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-arbitrum-goerli`,
+                chapel:`https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-bnb-bruno`,
+                optimism: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism`,
+                mainnetOld: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0`
 
             },
             // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
