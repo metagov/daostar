@@ -35,7 +35,7 @@ function App() {
     });
     const mainnetv0Res = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "mainnetv0" },
-        variables: { id: "mainnet" },
+        variables: { id: "mainnetv0" },
     });
     const goerliRes = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "goerli" },
