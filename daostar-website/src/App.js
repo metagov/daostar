@@ -19,8 +19,8 @@ const alchemyId = process.env.ALCHEMY_ID;
 const walletConnectProjectId = process.env.WALLETCONNECT_ID;
 
 
-const client = createClient(
-    getDefaultClient({
+const client = createConfig(
+    getDefaultConfig({
         appName: "DAOstar",
         alchemyId,
     })
@@ -145,7 +145,7 @@ function App() {
 
 
     return (
-        <WagmiConfig client={client}>
+        <WagmiConfig config={client}>
             <ConnectKitProvider
                 mode="dark"
                 customTheme={{
