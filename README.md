@@ -243,7 +243,7 @@ const networkIds = {
 5. Make sure build is successful
 
 ```
-torch@torchablazed:~/Desktop/Work/MetaGov/daostar/daostar-website$ npm run build
+npm run build
 ```
 
 Now you can commit and publish the changes!

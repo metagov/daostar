@@ -152,7 +152,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         if (daoFramework === 'snapshot') {
             if (!daoContractAddress.includes('.eth')) errors.push('Must be valid ENS name')
         } else {
-            if (!validator.isEthereumAddress(daoContractAddress)) errors.push('Contract address must be a valid ethereum address')
+            if ((!validator.isEthereumAddress(daoContractAddress)) && (daoFramework !== 'custom')) errors.push('Contract address must be a valid ethereum address')
         }
         if (daoName === '') errors.push(`DAO must have a name`)
         if (daoManagerAddress && !validator.isEthereumAddress(daoManagerAddress)) errors.push('Manager address must be a valid ethereum address')
@@ -177,6 +177,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     proposalsURI: daoProposalsURI,
                     activityLogURI: daoActivityURI,
                     contractsRegistryURI: daoContractsRegistryURI,
+                    managerAddress: daoManagerAddress,
                     issuersURI: daoIssuersURI
                 },
             }
@@ -189,6 +190,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     daoContractNetwork: daoContractNetwork,
                     daoName: daoName,
                     daoDescription: daoDescription,
+                    managerAddress: daoManagerAddress,
                     governanceURI: daoGovURI,
                     membersURI: daoMembersURI,
                     proposalsURI: daoProposalsURI,

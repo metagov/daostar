@@ -1,35 +1,35 @@
 specVersion: 0.0.4
 schema:
-  file: schema.graphql
+  file: ./schema.graphql
 features:
   - ipfsOnEthereumContracts
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
-    network: chapel
+    network: mainnet
     source:
       abi: EIP4824Registration
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: EIP4824Index/EIP4824Index.wasm
+      file: ./src/mapping.ts
       entities:
         - Registration
       abis:
         - name: EIP4824Registration
-          file: EIP4824Registration/abis/EIP4824Registration.json
+          file: ./abis/EIP4824Registration.json
       eventHandlers:
-        - event: DAOURIUpdate(address,string)
+        - event: NewURI(string,address)
           handler: handleNewURI
 dataSources:
   - kind: ethereum
-    name: EIP4824Index
-    network: chapel
+    name: EIP4824RegistrationSummoner
+    network: mainnet
     source:
-      abi: EIP4824Index
-      address: "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4"
-      startBlock: 32947350
+      abi: EIP4824RegistrationSummoner
+      address: "0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc"
+      startBlock: 16084997
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -38,9 +38,9 @@ dataSources:
         - NewRegistration
         - RegistrationInstance
       abis:
-        - name: EIP4824Index
-          file: EIP4824Index/abis/EIP4824Index.json
+        - name: EIP4824RegistrationSummoner
+          file: ./abis/EIP4824RegistrationSummoner.json
       eventHandlers:
-        - event: DAOURIRegistered(address)
+        - event: NewRegistration(indexed address,string,address)
           handler: handleNewRegistration
-      file: EIP4824Index/EIP4824Index.wasm
+      file: ./src/mapping.ts

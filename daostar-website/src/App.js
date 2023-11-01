@@ -19,9 +19,9 @@ const alchemyId = process.env.ALCHEMY_ID;
 const walletConnectProjectId = process.env.WALLETCONNECT_ID;
 
 
-const client = createConfig(
-    getDefaultConfig({
-        appName: "Your App Name",
+const client = createClient(
+    getDefaultClient({
+        appName: "DAOstar",
         alchemyId,
     })
 );
@@ -36,8 +36,8 @@ function App() {
         variables: { id: "mainnet" },
     });
     const mainnetv0Res = useQuery(queries.REGISTRATIONS, {
-        context: { apiName: "mainnetv0" },
-        variables: { id: "mainnet" },
+        context: { apiName: "mainnetOld" },
+        variables: { id: "mainnetOld" },
     });
     const goerliRes = useQuery(queries.REGISTRATIONS, {
         context: { apiName: "goerli" },
@@ -145,7 +145,7 @@ function App() {
 
 
     return (
-        <WagmiConfig config={client}>
+        <WagmiConfig client={client}>
             <ConnectKitProvider
                 mode="dark"
                 customTheme={{
