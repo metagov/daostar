@@ -45,15 +45,10 @@
     -->
     <script defer type="module">
       import { Application } from './scripts/runtime.js';
-      try {
-        console.log('application', Application);
+      console.log('application', Application);
       const app = new Application();
       console.log('app', app);
-      app.load('/scripts/scene.json');
-      } catch (error) {
-        console.error(error)
-      }
-     
+      app.load('/scripts/scene.json');     
     </script>
 
     <script defer src="/scripts/main.js"></script>
