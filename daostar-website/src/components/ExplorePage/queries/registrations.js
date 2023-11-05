@@ -26,6 +26,32 @@ const REGISTRATIONS = gql`
     }
 `
 
+const REGISTRATIONSOLD = gql`
+    query Registrations($id: String) @api(name: mainnetOld) {
+        registrationNetwork(id: $id) {
+            id
+            registrations {
+                id
+                daoAddress
+                daoURI
+                daoName
+                daoDescription
+                proposalsURI
+                membersURI
+                issuersURI
+                governanceURI
+                activityLogURI
+                managerAddress
+                contractsRegistryURI
+                registrationAddress
+                registrationNetwork {
+                    id
+                  }
+            }
+        }
+    }
+`
+
 const REGISTRATION = gql`
     query Registration($id: String) @api(contextKey: "apiName") {
         registrationInstance(id: $id) {
@@ -49,4 +75,4 @@ const REGISTRATION = gql`
     }
 `
 
-export default { REGISTRATIONS, REGISTRATION }
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD }

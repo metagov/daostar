@@ -38,7 +38,7 @@ const client = new ApolloClient({
                 mainnetOld: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0`
 
             },
-            // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
+            //defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",
             createHttpLink: createHttpLink,
         }),
