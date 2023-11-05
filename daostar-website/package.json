@@ -54,8 +54,8 @@
     "web3": "^1.8.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+   "start": "PORT=8000 REACT_APP_API_URL=https://api.daostar.org react-scripts start",
+    "build": "REACT_APP_API_URL=https://api.daostar.org react-scripts build",
     "predeploy": "REACT_APP_API_URL=https://api.daostar.org npm run build",
     "deploy": "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
     "test": "react-scripts test",
