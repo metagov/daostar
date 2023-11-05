@@ -27,7 +27,7 @@ const REGISTRATIONS = gql`
 `
 
 const REGISTRATIONSOLD = gql`
-    query Registrations($id: String) @api(name: mainnetOld) {
+    query Registrations($id: String) @api(contextKey: "apiName") {
         registrationNetwork(id: $id) {
             id
             registrations {

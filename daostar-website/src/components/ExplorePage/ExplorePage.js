@@ -20,21 +20,7 @@ const ExplorePage = ({registrationInstances}) => {
     const [filterVal, setFilterVal] = useState('')
     const onChangeFilter = (e) => setFilterVal(e.target.value)
 
-    const {
-        mainnetv0Loading,
-        mainnetv0Error,
-        mainnetv0Data,
-      } = useQuery(queries.REGISTRATIONSOLD, {
-        context: { apiName: "mainnet" },
-        variables: { id: "mainnet" },
-      });
-      console.log(mainnetv0Data );
-      console.error("Mainnet v0 Error " + mainnetv0Error);
-      const mainnetv0Registrations = mainnetv0Data?.registrationNetwork?.registrations || [];
-
-
     const daoCards = registrationInstances
-        .concat(mainnetv0Registrations)
         .filter((reg) => filterRegistrations(reg, filterVal))
         .map((registration, i) => {
             return <RegistrationCard key={i} {...registration} />

@@ -8,12 +8,20 @@ import { WagmiConfig, createConfig } from "wagmi";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { createHttpLink } from "apollo-link-http";
 
 import queries from "./components/ExplorePage/queries/registrations";
-
 import "./App.css";
 import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
+
+const mainnetOldClient = new ApolloClient({
+  link: createHttpLink({
+    uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
+  }),
+  cache: new InMemoryCache(),
+});
 
 const alchemyId = process.env.ALCHEMY_ID;
 const walletConnectId = process.env.WALLETCONNECT_ID;
@@ -36,7 +44,15 @@ function App() {
     variables: { id: "mainnet" },
   });
 
- 
+  const {
+    loading: mainnetv0Loading,
+    error: mainnetv0Error,
+    data: mainnetv0Data,
+  } = useQuery(queries.REGISTRATIONSOLD, {
+    client: mainnetOldClient,
+    context: { apiName: "mainnet" },
+    variables: { id: "mainnet" },
+  });
 
   const goerliRes = useQuery(queries.REGISTRATIONS, {
     context: { apiName: "goerli" },
@@ -61,6 +77,16 @@ function App() {
   });
 
   const {
+    loading: goerliLoading,
+    error: goerliError,
+    data: goerliData,
+  } = goerliRes;
+
+  const gnosisRes = useQuery(queries.REGISTRATIONS, {
+    context: { apiName: "gnosis" },
+    variables: { id: "gnosis" },
+  });
+  const {
     loading: optimismLoading,
     error: optimismError,
     data: optimismData,
@@ -81,22 +107,16 @@ function App() {
     error: chapelError,
     data: chapelData,
   } = chapelRes;
-  const {
-    loading: goerliLoading,
-    error: goerliError,
-    data: goerliData,
-  } = goerliRes;
-  const gnosisRes = useQuery(queries.REGISTRATIONS, {
-    context: { apiName: "gnosis" },
-    variables: { id: "gnosis" },
-  });
+
   const {
     loading: gnosisLoading,
     error: gnosisError,
     data: gnosisData,
   } = gnosisRes;
+
   console.log({
     mainnetData,
+    mainnetv0Data,
     goerliData,
     gnosisData,
     optimismGoerliData,
@@ -104,16 +124,17 @@ function App() {
     chapelData,
   });
 
-
   if (
     error ||
     goerliError ||
     optimismGoerliError ||
     arbitrumGoerliError ||
     chapelError ||
-    optimismError
+    optimismError ||
+    mainnetv0Error
   ) {
     console.error("Mainnet Error " + error);
+    console.error("Mainnet v0 Error " + mainnetv0Error);
     console.error("Goerli Error " + goerliError);
     console.error("Optimism Goerli Error " + optimismGoerliError);
     console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
@@ -127,12 +148,14 @@ function App() {
     optimismGoerliLoading ||
     arbitrumGoerliLoading ||
     chapelLoading ||
-    optimismLoading
+    optimismLoading ||
+    mainnetv0Loading
   )
     return "loading...";
   const mainnetRegistrations =
     mainnetData?.registrationNetwork?.registrations || [];
-  //const mainnetv0Registrations = mainnetv0Data?.registrationNetwork?.registrations || [];
+  const mainnetv0Registrations =
+    mainnetv0Data?.registrationNetwork?.registrations || [];
   const goerliRegistrations =
     goerliData?.registrationNetwork?.registrations || [];
   const optimismGoerliRegistrations =
@@ -146,6 +169,7 @@ function App() {
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
   const allRegistrationInstances = mainnetRegistrations.concat(
+    mainnetv0Registrations,
     goerliRegistrations,
     gnosisRegistrations,
     optimismGoerliRegistrations,
