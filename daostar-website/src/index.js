@@ -15,14 +15,17 @@ import {
 import { createHttpLink } from "apollo-link-http";
 import { MultiAPILink } from "@habx/apollo-multi-endpoint-link";
 import "./index.css";
+import { setupErrorHandling } from "./errorHandler.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+setupErrorHandling();
 FocusStyleManager.onlyShowFocusOnTabs();
 
 function getLibrary(provider) {
     return new Web3Provider(provider);
 }
+
 
 const client = new ApolloClient({
     link: ApolloLink.from([
@@ -35,16 +38,16 @@ const client = new ApolloClient({
                 arbitrumGoerli: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-arbitrum-goerli`,
                 chapel:`https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-bnb-bruno`,
                 optimism: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism`,
-                mainnetOld: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0`
 
             },
-            // defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
+            //defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",
             createHttpLink: createHttpLink,
         }),
     ]),
     cache: new InMemoryCache({}),
 });
+
 
 root.render(
     <React.StrictMode>
