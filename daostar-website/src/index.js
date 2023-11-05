@@ -15,11 +15,9 @@ import {
 import { createHttpLink } from "apollo-link-http";
 import { MultiAPILink } from "@habx/apollo-multi-endpoint-link";
 import "./index.css";
-import { setupErrorHandling } from "./errorHandler.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-setupErrorHandling();
 FocusStyleManager.onlyShowFocusOnTabs();
 
 function getLibrary(provider) {
