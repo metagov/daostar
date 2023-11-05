@@ -25,7 +25,8 @@ const REGISTRATIONS = gql`
         }
     }
 `
-
+// DO NOT UPDATE THIS QUERY, this query is specifically for v0 Subgraph Indexer
+// We don't want to keep having to update the schema of old indexers as we add new fields
 const REGISTRATIONSOLD = gql`
     query Registrations($id: String) @api(contextKey: "apiName") {
         registrationNetwork(id: $id) {

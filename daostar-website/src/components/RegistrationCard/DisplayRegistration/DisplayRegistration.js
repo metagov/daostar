@@ -39,10 +39,6 @@ const DisplayRegistration = ({
     network = 'arbitrumGoerli';
   }
 
-  if(network === 'mainnet-Old'){
-    network = 'mainnet';
-  }
-
   return (
     <Fragment>
       {standalone === true ? (
