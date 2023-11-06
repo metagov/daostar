@@ -3,6 +3,7 @@ import { DAOURIRegistered } from '../generated/EIP4824Index/EIP4824Index'
 import { DAOURIUpdate } from '../generated/templates/EIP4824Registration/EIP4824Registration'
 import { RegistrationInstance, RegistrationNetwork } from '../generated/schema'
 import { EIP4824Registration } from '../generated/templates'
+import { getChainId } from './getChainId'
 
 export function handleNewRegistration(event: DAOURIRegistered): void {
     const chainName = dataSource.network() // returns network name
@@ -10,6 +11,7 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
     let registrationNetwork = RegistrationNetwork.load(chainName)
     if (!registrationNetwork) {
         registrationNetwork = new RegistrationNetwork(chainName)
+        registrationNetwork.chainId = getChainId().toString();
         registrationNetwork.save()
     }
 
@@ -38,7 +40,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
         registrationInstance.daoAddress = event.params.daoAddress
         if (event.params.daoURI) {
             registrationInstance.daoURI = event.params.daoURI
-            const ipfsHash = event.params.daoURI.substring(7)
+            const ipfsHash = event.params.daoURI.substring(event.params.daoURI.length - 46)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
             let ipfsData = ipfs.cat(ipfsHash)
             if (ipfsData) {
@@ -56,6 +58,8 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 const proposalsURI = daoMetadata.get('proposalsURI')
                 const governanceURI = daoMetadata.get('governanceURI')
                 const activityLogURI = daoMetadata.get('activityLogURI')
+                const managerAddress = daoMetadata.get('managerAddress');
+                const contractsRegistryURI = daoMetadata.get('contractsRegistryURI');
 
                 registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
                 registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
@@ -64,6 +68,8 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
                 registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
                 registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
+                registrationInstance.contractsRegistryURI = contractsRegistryURI && contractsRegistryURI.kind == JSONValueKind.STRING ? contractsRegistryURI.toString() : ''
+                registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
                 registrationInstance.save() // For some reason this does not work without this additional save
             } else {
                 log.warning('IPFS data missing for : {}', [ipfsHash])

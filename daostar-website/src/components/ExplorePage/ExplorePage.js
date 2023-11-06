@@ -17,7 +17,6 @@ const ExplorePage = ({registrationInstances}) => {
     const [filterVal, setFilterVal] = useState('')
     const onChangeFilter = (e) => setFilterVal(e.target.value)
 
-
     const daoCards = registrationInstances
         .filter((reg) => filterRegistrations(reg, filterVal))
         .map((registration, i) => {
