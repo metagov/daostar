@@ -4,8 +4,8 @@ import Register from "./components/Register/Register";
 import TopNavigation from "./components/TopNavigation/TopNavigation";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import ExplorePage from "./components/ExplorePage/ExplorePage";
-import { WagmiConfig, createConfig } from "wagmi";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { WagmiConfig, createClient } from "wagmi";
+import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
@@ -26,11 +26,10 @@ const mainnetOldClient = new ApolloClient({
 const alchemyId = process.env.ALCHEMY_ID;
 const walletConnectId = process.env.WALLETCONNECT_ID;
 
-const client = createConfig(
-  getDefaultConfig({
+const client = createClient(
+  getDefaultClient({
     appName: "DAOstar",
     alchemyId,
-    walletConnectId,
   })
 );
 
@@ -148,9 +147,7 @@ function App() {
     optimismGoerliLoading ||
     arbitrumGoerliLoading ||
     chapelLoading ||
-    optimismLoading ||
-    mainnetv0Loading
-  )
+    optimismLoading  )
     return "loading...";
   const mainnetRegistrations =
     mainnetData?.registrationNetwork?.registrations || [];
@@ -183,7 +180,7 @@ function App() {
   );
 
   return (
-    <WagmiConfig config={client}>
+    <WagmiConfig client={client}>
       <ConnectKitProvider
         mode="dark"
         customTheme={{
