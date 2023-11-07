@@ -33,7 +33,7 @@
     "axios-hooks": "^4.0.0",
     "babel-jest": "^29.4.1",
     "caip": "^1.1.0",
-    "connectkit": "^1.5.3",
+    "connectkit": "^1.1.2",
     "ethers": "^5.7.2",
     "graphql": "^15.0.0",
     "jest": "^29.4.1",
@@ -49,12 +49,12 @@
     "typescript": "^5.2.2",
     "typewriter-effect": "^2.19.0",
     "validator": "^13.7.0",
-    "wagmi": "^1.4.5",
+    "wagmi": "^0.12.19",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.1"
   },
   "scripts": {
-   "start": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "REACT_APP_API_URL=https://api.daostar.org npm run build",
     "deploy": "REACT_APP_API_URL=https://api.daostar.org gh-pages -d build",
