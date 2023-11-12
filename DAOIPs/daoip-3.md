@@ -12,7 +12,7 @@ created: 2023-02-03
 
 ## Abstract
 
-This standard provides the basic architecture for a permissionless attestation framework where different parties can make arbitrary and conflicting attestations about membership, contributions, and other data relevant to DAOs and their members.
+This standard provides a basic indexing architecture on top of the verifiable credentials specification, in order to bootstrap a permissionless attestation system for DAOs.
 
 ## Motivation
 
@@ -22,7 +22,7 @@ Contributions and membership are important building blocks within DAOs and relat
 
 In current DAOs, membership and contributions are commonly defined via ownership of on-chain assets, whether fungible tokens, NFTs, or (more recently) soulbound NFTs. But on-chain definitions miss many important use-cases and risk locking DAOs into very specific modes of membership and organization. For example, a DAO may want to make membership contingent on some (off-chain) measure of participation such as git commits or Discourse posts, while definitions of contributions could vary across each of the (off- and on-chain) services that a DAO uses to track contributions.
 
-[daoURI](daoip-2.md) already allows a DAO to publish off-chain data about itself and its members. This standard composes with daoURI in order to specify a permissionless attestation framework _for service providers and other entities_ to publish information about the DAO and its members. Importantly, it defines an indexing strategy for different entities to publish and search for on- and off-chain data relevant to the members of a DAO. The underlying format of the attestations themselves is designed to be compatible with the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/).
+[daoURI](daoip-2.md) already allows a DAO to publish off-chain metadata about itself. This standard composes with daoURI in order to specify a permissionless attestation framework so that _service providers and other entities_ can publish information about the DAO and its members. Importantly, it defines an indexing strategy for different entities to publish and search for on- and off-chain data relevant to the members of a DAO. The underlying format of the attestations themselves is designed to be compatible with the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/).
 
 *Note: this standard does* not *specify how DAOs and service providers should handle identity verification & management. We assume that many different identity systems exist in tandem across different DAOs and different service providers. The way these are implemented is left to the discretion of both the DAO and its service providers. Thus, this standard is NOT appropriate for handling personally-identifiable information (PII) or other forms of personal data.*
 
