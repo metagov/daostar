@@ -51,6 +51,7 @@ import otterspaceLogo from '../../../img/logos/otterspace.png';
 import paladinLogo from '../../../img/logos/paladin.png';
 import polygonLogo from '../../../img/logos/polygondao.webp';
 import protocolLogo from '../../../img/logos/protocol.png';
+import QBlockchainLogo from '../../../img/logos/Q-logo-green.png'
 import rabbitholeLogo from '../../../img/logos/rabbithole.jpg';
 import radicalxchangeLogo from '../../../img/logos/radicalxchange.png';
 import radicleLogo from '../../../img/logos/radicle.png';
@@ -123,6 +124,7 @@ const MemberLogos = (props) => {
             <a href="https://paladin.vote/" target="_blank"><img src={paladinLogo} alt="Paladin" /></a>
             <a href="https://polygon.community/" target="_blank"><img src={polygonLogo} alt="Polygon DAO" /></a>
             <a href="https://protocol.ai/" target="_blank"><img src={protocolLogo} alt="Protocol Labs" /></a>
+            <a href="https://q.org/" target="_blank"><img src={QBlockchainLogo} alt="Q Blockchain" /></a>
             <a href="https://rabbithole.gg/" target="_blank"><img src={rabbitholeLogo} alt="Rabbit Hole" /></a>
             <a href="https://www.radicalxchange.org/" target="_blank"><img src={radicalxchangeLogo} alt="RadicalxChange" /></a>
             <a href="https://radicle.xyz/" target="_blank"><img src={radicleLogo} alt="Radicle" /></a>
