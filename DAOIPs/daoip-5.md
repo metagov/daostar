@@ -16,7 +16,7 @@ Common interfaces and data structures for grants management, including a common 
 # Motivation
 As the Web3 space has grown in recent years, grant programs run by protocols and projects have themselves exploded in size and popularity. Over a billion dollars in capital have been deployed or committed, grant programs have come and gone, and many organizations are now assessing the progress and impact of their issued funding. 
 
-There have been a wide range of approaches, from transparent (e.g. Aave) or closed (e.g. Ethereum Foundation and Solana Foundation) to communally architected (e.g. Stacks Foundation) to being launched by a compensated team (e.g. Mantle), from prospective (e.g. Uniswap Foundation) to retroactive (e.g. Optimism) to research-focused (e.g. Protocol Labs Research Grants) to quadratically funded (e.g. Gitcoin), to RFP-based (i.e. Protocol Labs, Uniswap Foundation, Solana Foundation, etc.). The diversity of thought on how to best run such programs has led to innovative approaches for grants management but has also fragmented capital and reduced transparency.
+There have been [a wide range of approaches](https://docs.google.com/document/d/1CFD6ztSh2ggJSO-U3uEea92UVB1cRbvBlA1tfPxLKi8/edit?usp=sharing), from transparent (e.g. Aave) or closed (e.g. Ethereum Foundation and Solana Foundation) to communally architected (e.g. Stacks Foundation) to being launched by a compensated team (e.g. Mantle), from prospective (e.g. Uniswap Foundation) to retroactive (e.g. Optimism) to research-focused (e.g. Protocol Labs Research Grants) to quadratically funded (e.g. Gitcoin), to RFP-based (i.e. Protocol Labs, Uniswap Foundation, Solana Foundation, etc.). The diversity of thought on how to best run such programs has led to innovative approaches for grants management but has also fragmented capital and reduced transparency.
 
 This specification lays out a common set of on- and off-chain interfaces for grant programs looking to deploy funding and for projects looking to receive funding. It is intended to increase interoperability between grants tooling, improve the transparency of grant programs, and ultimately make grant programs more efficient for funders, administrators, and grantees. In particular, this specification lays the groundwork for a “common application” for grants as well as easier coordination between grants programs.
 
@@ -36,41 +36,41 @@ A grants system represents the top-level governance or administration of a grant
 
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "name": "<name of the entity>",
-  "type": "<entity type, e.g. DAO or Foundation>",
-  "grantPoolsURI": "<URI declaring any grant pools maintained by the entity>",
+    "@context": "http://www.daostar.org/schemas",
+    "name": "<name of the entity>",
+    "type": "<entity type, e.g. DAO or Foundation>",
+    "grantPoolsURI": "<URI declaring any grant pools maintained by the entity>",
 }
 ```
 
 ## Grant pools
-A grant pool is funding locked in a smart contract or other fundable object with the intention of being used to pay out grants. Here, a grant pool is defined to be a subtype of `DAO` in the sense of [DAOIP-2](DAOIP-2.md), but one which does not necessarily publish its own on-chain daoURI.
+A grant pool is funding locked in a smart contract or other fundable object with the intention of being used to pay out grants. Here, a grant pool is defined to be a subtype of `DAO` in the sense of [DAOIP-2](daoip-2.md), but one which does not necessarily publish its own on-chain daoURI.
 
 A grant pool adopting this specification MUST publish additional metadata about its processes and status through the Grant Pool JSON-LD Schema below. Unless otherwise noted, all fields in the Grant Pool JSON-LD Schema are REQUIRED. In particular, a grant pool MUST publish an `applicationsURI` field, which in more detail in the Applications section, below. If a grant system operates multiple grant pools, they MAY add additional elements to the array below.
 
 Grant Pool JSON-LD Schema
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "name": "<name of the entity>",
-  "type": "<entity type, e.g. DAO or Foundation>",
-  "grantPools": [
-    {
-      "type": "GrantPool",
-      "id": "<The CAIP-10 address of the grant pool contract OR the CAIP-10 address of the grants system contract + "?id=" + pool_counter.>",
-      "name": "<The name of the grant pool.>",
-      "description": "<A description of the grant pool.>",
-      "isOpen": "<OPTIONAL: A Boolean yes/no indicating whether the grant pool is open to or seeking new applications.>",
-      "closeDate": "<OPTIONAL: The ISO DateTime at which the grant pool will stop taking new applications.>",
-      "applicationsURI": "<A URI pointing to a service for handling communication over applications, including receiving applications and publishing information about current and past applications following the DAOIP-5 Applications JSON-LD Schema.>",
-      "governanceURI": "<A URI pointing to additional information about the governance, requirements, and criteria for the grant, normatively a .md file.>",
-      "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the grant pool, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
-      "requiredCredentials": ["<RECOMMENDED: An array of attestation types, following DAOIP-3 Attestations for DAOs.>"],
-      "email": "<OPTIONAL: A working email address through which the grant pool can respond to inquiries and requests.>",
-      "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
-      "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
-    }
-  ]
+    "@context": "http://www.daostar.org/schemas",
+    "name": "<name of the entity>",
+    "type": "<entity type, e.g. DAO or Foundation>",
+    "grantPools": [
+        {
+            "type": "GrantPool",
+            "id": "<The CAIP-10 address of the grant pool contract OR the CAIP-10 address of the grants system contract + "?id=" + pool_counter.>",
+            "name": "<The name of the grant pool.>",
+            "description": "<A description of the grant pool.>",
+            "isOpen": "<OPTIONAL: A Boolean yes/no indicating whether the grant pool is open to or seeking new applications.>",
+            "closeDate": "<OPTIONAL: The ISO DateTime at which the grant pool will stop taking new applications.>",
+            "applicationsURI": "<A URI pointing to current and past applications received by the grant pool, following the DAOIP-5 Applications JSON-LD Schema.>",
+            "governanceURI": "<A URI pointing to additional information about the governance, requirements, and criteria for the grant, which SHOULD be a .md file.>",
+            "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the grant pool, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
+            "requiredCredentials": ["<RECOMMENDED: An array of attestation types, following DAOIP-3 Attestations for DAOs.>"],
+            "email": "<OPTIONAL: A working email address through which the grant pool can respond to inquiries and requests.>",
+            "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
+            "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
+        }
+    ]
 }
 ```
 
@@ -81,36 +81,36 @@ For efficient indexing, all projects adopting DAOIP-5, even individuals and team
 
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "name": "<name of the entity>",
-  "type": "<entity type, e.g. DAO or Person>",
-  "projectsURI": "<A URI pointing to a JSON of projects seeking grant funding following the DAOIP-5 Projects JSON-LD Schema.>"
+    "@context": "http://www.daostar.org/schemas",
+    "name": "<name of the entity>",
+    "type": "<entity type, e.g. DAO or Person>",
+    "projectsURI": "<A URI pointing to a JSON of projects seeking grant funding following the DAOIP-5 Projects JSON-LD Schema.>"
 }
 ```
 
-In this specification, an application is a subtype of `Proposal` in the sense of [DAOIP-2](DAOIP-2.md). This means that on-chain applications MUST publish an id of the form `CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the proposing team or individual and `PROPOSAL_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain proposals MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL.
+In this specification, an application is a subtype of a proposal in the sense of [DAOIP-2](DAOIP-2.md). This means that on-chain applications MUST publish an id of the form `CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the proposing team or individual and `PROPOSAL_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain proposals MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL.
 
 Projects JSON-LD Schema
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "name": "<name of the entity>",
-  "type": "<entity type, e.g. DAO or Person>",
-  "projects": [
-    {
-    "type": "Project",
-    "id": "<The uid of the proposal, in the format specified above.>",
-    "name": "<The name of the project.>",
-    "description": "<A description of the project.>",
-    "contentURI": "<A longer description of the project forming the core of a pitch for the project, including such things as activities proposed, milestones, team, impact assessment, past history, contact information, and so on. Normatively, this should be a Markdown file.>",
-    "email": "<OPTIONAL: A working email address through which the project can respond to grant inquiries and requests.>",
-    "membersURI": "<OPTIONAL: A URI pointing to a JSON of members of the project, following the DAOIP-2 Members JSON-LD Schema.>",
-    "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the project and its members, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
-    "relevantTo": "<OPTIONAL: An array of (GrantPool id, GrantPool name) intended to call attention to specific grant pools for which this project is relevant. This does not constitute a formal grant application unless recognized by the grant pool.>",
-    "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
-    "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
-  }
-  ]
+    "@context": "http://www.daostar.org/schemas",
+    "name": "<name of the entity>",
+    "type": "<entity type, e.g. DAO or Person>",
+    "projects": [
+        {
+        "type": "Project",
+        "id": "<The uid of the proposal, in the format specified above.>",
+        "name": "<The name of the project.>",
+        "description": "<A description of the project.>",
+        "contentURI": "<A longer description of the project forming the core of a pitch for the project, including such things as activities proposed, milestones, team, impact assessment, past history, contact information, and so on.>",
+        "email": "<OPTIONAL: A working email address through which the project can respond to grant inquiries and requests.>",
+        "membersURI": "<OPTIONAL: A URI pointing to a JSON of members of the project, following the DAOIP-2 Members JSON-LD Schema.>",
+        "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the project and its members, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
+        "relevantTo": "<OPTIONAL: An array of (GrantPool id, GrantPool name) intended to call attention to specific grant pools for which this project is relevant. This does not constitute a formal grant application unless recognized by the grant pool.>",
+        "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
+        "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
+        }
+    ]
 }
 ```
 
@@ -126,67 +126,61 @@ Every grant system and grant pool adopting DAOIP-5 MUST publish an applicationsU
 Applications JSON-LD Schema
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "name": "<name of the entity>",
-  "type": "<type of the entity, e.g. DAO or Foundation>",
-  "grantPools": [
-    {
-    "type": "GrantPool",
-    "name": "<The name of the grant pool.>",
-    "applications": [
-      "type": "GrantApplication",
-      "id": "<The uid of the proposal, in the format specified above.>",
-      "grantPoolsURI": "<A URI pointing to the grant pools published by the entity.>",
-      "grantPoolId": "<The id of the grant pool.>",
-      "grantPoolName": "<The name of the grant pool.>",
-      "projectsURI": "<The URI of an organization’s projects applying for grant funding.>",
-      "projectId": "<The id of the project.>",
-      "projectName": "<The name of the project.>",
-      "createdAt": "<ISO DateTime>",
-      "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
-      "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
-      "fundsAsked": [
+    "@context": "http://www.daostar.org/schemas",
+    "name": "<name of the entity>",
+    "type": "<type of the entity, e.g. DAO or Foundation>",
+    "grantPools": [
         {
-        "amount": "<The amount of funding asked>”,
-        "denomination": "<The denomination of currency asked>)"
+        "type": "GrantPool",
+        "name": "<The name of the grant pool.>",
+        "applications": [
+            "type": "GrantApplication",
+            "id": "<The uid of the proposal, in the format specified above.>",
+            "grantPoolsURI": "<A URI pointing to the grant pools published by the entity.>",
+            "grantPoolId": "<The id of the grant pool.>",
+            "grantPoolName": "<The name of the grant pool.>",
+            "projectsURI": "<The URI of an organization’s projects applying for grant funding.>",
+            "projectId": "<The id of the project.>",
+            "projectName": "<The name of the project.>",
+            "createdAt": "<ISO DateTime>",
+            "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
+            "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
+            "fundsAsked": [
+                {
+                    "amount": "<The amount of funding asked>",
+                    "denomination": "<The denomination of currency asked>"
+                }
+            ],
+            "fundsApproved": [
+                {
+                    "amount": "<The amount of funding approved>",
+                    "denomination": "<The denomination of currency approved>"
+                }
+            ],
+            "payoutAddress": {
+                "type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
+                "value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
+            },
+            "isEligible": <OPTIONAL: A Boolean true/false indicating that an application is eligible (e.g. by fulfilling all required criteria) for consideration by the grant pool.>,
+            "isReviewed": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been reviewed by the grant pool.>,
+            "isApproved": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been approved for funding by the grant pool.>,
+            "isPaid": <OPTIONAL: A Boolean true/false indicating that an approved grant is fully paid, and no additional funds should be expected from the grant pool.>,
+            "payouts": [ <OPTIONAL>
+            {
+            "type": "<The type of the payout transaction, e.g. CallDataEVM.>",
+            "value": {"<The values of the payout transaction, e.g. operation, from, to, value, data, and so on.>"}
+            "proof": "<The transaction hash or other evidence that the payout was made.>",
+            } 
+            ]
         }
-      ],
-      "fundsApproved": [
-        {
-        "amount": "<The amount of funding approved>”,
-        "denomination": "<The denomination of currency approved>)"
-        }
-      ],
-      "payoutAddress": {
-      	"type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
-      	"value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
-      },
-      "isEligible": <OPTIONAL: A Boolean true/false indicating that an application is eligible (e.g. by fulfilling all required criteria) for consideration by the grant pool.>,
-      "isReviewed": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been reviewed by the grant pool.>,
-      "isApproved": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been approved for funding by the grant pool.>,
-      "isPaid": <OPTIONAL: A Boolean true/false indicating that an approved grant is fully paid, and no additional funds should be expected from the grant pool.>,
-      "payouts": [ <OPTIONAL>
-        {
-        "type": "<The type of the payout transaction, e.g. CallDataEVM.>",
-        "value": {"<The values of the payout transaction, e.g. operation, from, to, value, data, and so on.>"}
-        "proof": "<The transaction hash or other evidence that the payout was made.>",
-        } 
-      ]
-    }
-  ]
+    ]
 }
 ```
 
 # Rationale
-The intention of this standard is to facilitate aggregation and transparency.. It is not intended to define precise on-chain implementations. There is also an increasing appetite for coordination amongst grant programs in order to share learnings, to create a shared database for approved grants where improved methods grantee progress and impact measurement can be experimented with, support the idea of a “common application” for grants, and to limit ‘grant farming’—projects purely looking to apply to quick and easy money with limited-to-no intention of contributing to the ecosystem beyond a single grant or portion of a grant. 
+The intention of this specification is to facilitate easier aggregation, transparency, and coordination across grant systems, and can be thought of as an architecture for building and maintaining a shared, distributed database of grant opportunities and grant applications. It is not intended to specify precise onchain implementations of grant pools. The standard is designed to support a variety of use-cases, from improved methods for tracking grantee awards and payouts, to impact measurement, to more consistent credentialing and reputation (including reuse of credentials), to fostering more co-funding / limiting 'grant farming', to a common application across grant pools.
 
-In order for any additional collaboration and aggregation to take place, a data standard would lay the foundation for such work. There has been some inter-program collaboration to date, however, those efforts have been driven purely based on social connections. With the adoption of this standard, it will be possible for DAOstar to coordinate a series of efforts and working groups that can be much easier to opt-into for any relevant and reputable grant program to join. 
-
-This standard will be able to be the backbone for:
-1. Increasing accountability and transparency for anyone who wants to explore data across grant programs.
-2. Improving impact measurement by building a shared database of approved grants that can be integrated with Karma’s Grantee Accountability Protocol. This makes it possible for public tracking for the progress of the grant both during and after the time when the grant is executed. By collaborating with relevant organizations such as Karma and OS Observer, these efforts can provide shared learnings on how to best capture and track impact data on top of the kind of the grant data outlined in this standard.
-3. Exploring a grant common app that would a) make applying across grant programs (and coordinating grant requests across these programs) significantly easier and b) make it possible for there to be a reputation layer for grantees that integrates with all grant tech stacks. 
-4. Creating a social infrastructure across all groups that choose to adopt the standard as well as those broadly interested in any of the aforementioned efforts to a) provide best practices, b) coordinate on supporting research on grant program improvement, c) create high value communication channels across programs, and d) to coordinate on virtual and in-person events/workshops to help advance the state of granting in web3. 
+In particular, we hope that this specification will foster more collaboration across grant programs, and make it easier to maintain those collaborations. While there has been some inter-program collaboration, many of these efforts are driven socially rather than programmatically, at scale.
 
 ## Example: a common application
 Suppose Chiyo has an idea for an open-source project, “Shoes Protocol”, and wants to apply to three grant pools: Optimism via Charmverse, the Ethereum Foundation via their in-house system, and a Gitcoin grant round. Assume that Charmverse, Ethereum Foundation, and Gitcoin have all adopted DAOIP-5, i.e are publishing a `grantPoolsURI’ as part of daoURI.
@@ -262,52 +256,52 @@ In this case, she manually applies to two grant pools that she finds through Git
 
 ```json
 {
-"@context": "http://www.daostar.org/schemas",
-"name": "Gitcoin",
-"type": "DAO",
-"grantPools": [
-{
-	"type": "GrantPool",
-	"id": "eip155:424:0x1234abcd",
-	"name": "Web3 Community",
-	"applications": [
-		{
-"type": "GrantApplication",
-"id": "eip155:424:0x1234abcd?proposal=1.>",
-"grantPoolsURI": "<A URI pointing to the grant pools published by the entity.>",
-"grantPoolId": "<The id of the grant pool.>",
-"grantPoolName": "<The name of the grant pool.>",
-"projectsURI": "<The URI of an organization’s projects applying for grant funding.>",
-"projectId": "<The id of the project.>",
-"projectName": "<Shoes Protocol>",
-"createdAt": "<2023-11-14T15:52:25Z>",
-"contentURI": "<A URI pointing to the publicly accessible content of the application.>"
-"discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
-"fundsAsked": [
-{
-"amount": "5000”,
-"denomination": "USDC"
-}
-],
-"fundsApproved": [
-{
-"amount": "”,
-"denomination": ""
-}
-],
-"payoutAddress": {
-	"type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
-	"value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
-},
-"isEligible": true,
-"isReviewed": false,
-"isApproved": false,
-"isPaid": false,
-"payouts": "",
-}
-]
-}
-	]
+    "@context": "http://www.daostar.org/schemas",
+    "name": "Gitcoin",
+    "type": "DAO",
+    "grantPools": [
+        {
+        "type": "GrantPool",
+        "id": "eip155:424:0x1234abcd",
+        "name": "Web3 Community",
+        "applications": [
+            {
+                "type": "GrantApplication",
+                "id": "eip155:424:0x1234abcd?proposal=1.>",
+                "grantPoolsURI": "<A URI pointing to the grant pools published by the entity.>",
+                "grantPoolId": "<The id of the grant pool.>",
+                "grantPoolName": "<The name of the grant pool.>",
+                "projectsURI": "<The URI of an organization’s projects applying for grant funding.>",
+                "projectId": "<The id of the project.>",
+                "projectName": "<Shoes Protocol>",
+                "createdAt": "<2023-11-14T15:52:25Z>",
+                "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
+                "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
+                "fundsAsked": [
+                    {
+                        "amount": "5000”,
+                        "denomination": "USDC"
+                    }
+                ],
+                "fundsApproved": [
+                    {
+                        "amount": "”,
+                        "denomination": ""
+                    }
+                ],
+                "payoutAddress": {
+                	"type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
+                	"value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
+                },
+                "isEligible": true,
+                "isReviewed": false,
+                "isApproved": false,
+                "isPaid": false,
+                "payouts": "",
+                }
+            ]
+        }
+    ]
 }
 ```
 
