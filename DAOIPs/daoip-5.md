@@ -32,7 +32,7 @@ This specification is organized into four main components:
 While eligibility and compliance flows (including KYC) are important in grants systems, we decided to not include them within the scope of the current specification. Similarly, we have decided not to standardize interactions with voting and payout systems, though these are also common aspects of grants.
 
 ## Grants systems
-A grants system represents the top-level governance or administration of a grant pool or grant program, typically identified as an organization such as a foundation or DAO. All organizations and entities adopting DAOIP-5, even those not deployed or organized as DAOs, MUST publish a daoURI with the additional field "grantPoolsURI" either via DAOIP-2 or through a trusted issuer via DAOIP-3. This bootstraps indexing and discovery of grant pools via the existing on-chain indexing infrastructure for daoURI.
+A grants system represents the top-level governance or administration of a grant pool or grant program, typically identified as an organization such as a foundation or DAO. All organizations and entities adopting DAOIP-5, even those not deployed or organized as DAOs, MUST publish a daoURI with the additional field `grantPoolsURI` either via DAOIP-2 or through a trusted issuer via DAOIP-3. This bootstraps indexing and discovery of grant pools via the existing on-chain indexing infrastructure for daoURI.
 
 ```json
 {
@@ -44,9 +44,9 @@ A grants system represents the top-level governance or administration of a grant
 ```
 
 ## Grant pools
-A grant pool is funding locked in a smart contract or other fundable object with the intention of being used to pay out grants. Here, a grant pool is defined to be a subtype of `DAO` in the sense of [DAOIP-2](daoip-2.md), but one which does not necessarily publish its own on-chain daoURI.
+A grant pool is a smart contract or other fundable object containing funds with the intention of being used to pay out grants. In this specification, a grant pool is defined to be a subtype of a contract in the sense of [DAOIP-2](daoip-2.md). This means that on-chain grant pools MUST publish an id of the form `CAIP10_ADDRESS + "?contractId=" + CONTRACT_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the grant system and `CONTRACT_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain grant pools MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL. 
 
-A grant pool adopting this specification MUST publish additional metadata about its processes and status through the Grant Pool JSON-LD Schema below. Unless otherwise noted, all fields in the Grant Pool JSON-LD Schema are REQUIRED. In particular, a grant pool MUST publish an `applicationsURI` field, which in more detail in the Applications section, below. If a grant system operates multiple grant pools, they MAY add additional elements to the array below.
+Unless otherwise noted, all fields in the Grant Pool JSON-LD Schema are REQUIRED. In particular, a grant pool MUST publish an `applicationsURI` field, which is described in more detail in the Applications section, below. If a grant system operates multiple grant pools, they MAY add additional elements to the array below.
 
 Grant Pool JSON-LD Schema
 ```json
@@ -57,7 +57,7 @@ Grant Pool JSON-LD Schema
     "grantPools": [
         {
             "type": "GrantPool",
-            "id": "<The CAIP-10 address of the grant pool contract OR the CAIP-10 address of the grants system contract + "?id=" + pool_counter.>",
+            "id": "<The id of the grant pool, in the format above.>",
             "name": "<The name of the grant pool.>",
             "description": "<A description of the grant pool.>",
             "isOpen": "<OPTIONAL: A Boolean yes/no indicating whether the grant pool is open to or seeking new applications.>",
@@ -77,7 +77,7 @@ Grant Pool JSON-LD Schema
 ## Projects
 Projects represent persistent projects, teams, or individuals that intend to submit applications to one or more grant pools or programs. In this specification, a project represents the “common” portion of an application for grant funding. In other words, to publish a `projectsURI` is to create an open application for funding.
 
-For efficient indexing, all projects adopting DAOIP-5, even individuals and teams not organized as DAOs, MUST publish a daoURI with the additional field "projectsURI" either via DAOIP-2 or through a trusted issuer via DAOIP-3. Unless otherwise noted, all fields in the Projects JSON-LD Schema are REQUIRED.
+For efficient indexing, all projects adopting DAOIP-5, even individuals and teams not organized as DAOs, MUST publish a daoURI with the additional field "projectsURI" either via DAOIP-2 or through a trusted issuer via DAOIP-3. 
 
 ```json
 {
@@ -88,7 +88,9 @@ For efficient indexing, all projects adopting DAOIP-5, even individuals and team
 }
 ```
 
-In this specification, an application is a subtype of a proposal in the sense of [DAOIP-2](DAOIP-2.md). This means that on-chain applications MUST publish an id of the form `CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the proposing team or individual and `PROPOSAL_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain proposals MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL.
+In this specification, a project is a subtype of a proposal in the sense of [DAOIP-2](DAOIP-2.md). This means that on-chain projects MUST publish an id of the form `CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the proposing team or individual and `PROPOSAL_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain projects MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL. 
+
+Unless otherwise noted, all fields in the Projects JSON-LD Schema are REQUIRED.
 
 Projects JSON-LD Schema
 ```json
@@ -99,7 +101,7 @@ Projects JSON-LD Schema
     "projects": [
         {
         "type": "Project",
-        "id": "<The uid of the proposal, in the format specified above.>",
+        "id": "<The id of the proposal, in the format specified above.>",
         "name": "<The name of the project.>",
         "description": "<A description of the project.>",
         "contentURI": "<A longer description of the project forming the core of a pitch for the project, including such things as activities proposed, milestones, team, impact assessment, past history, contact information, and so on.>",
@@ -144,7 +146,7 @@ Applications JSON-LD Schema
             "projectName": "<The name of the project.>",
             "createdAt": "<ISO DateTime>",
             "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
-            "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
+            "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stakeholders can discuss the grant.>",
             "fundsAsked": [
                 {
                     "amount": "<The amount of funding asked>",
@@ -215,40 +217,41 @@ In this case, Chiyo uses Gitcoin to publish. Following DAOIP-3, Gitcoin deploys 
 }
 ```
 
-Effectively, the data decodes into a string representing the address of Chiyo’s daoURI, as generated by Gitcoin as Chiyo’s issuer. Let’s say that Chiyo’s (temporary) daoURI is https://gitcoin.co/attestations/ChiyoShark13/daoURI/. Going to her `daoURI` then returns the following:
+Effectively, the data decodes into a string representing the address of Chiyo’s daoURI, as generated by Gitcoin as Chiyo’s issuer. Let’s say that Chiyo’s daoURI is now https://gitcoin.co/attestations/ChiyoShark13/daoURI/. Going to her `daoURI` then returns the following:
 
 ```json
 {
-  "@context": "http://www.daostar.org/schemas",
-  "type": "Person",
-  "name": "ChiyoShark13",
-  "projects": [
-    {
-      "type": "Project",
-      "id": "<eth:0x1234abcd?proposalId=1>",
-      "name": "Shoes Protocol",
-      "description": "We help people move around and understand each other.",
-      "contentURI": "https://gitcoin.co/projects/0xabcd1234cdef/",
-      "email": "chiyo.shark13@coolprojects.com>",
-      "membersURI": "",
-      	"attestationIssuers": [
-      		{
-      			"type": "AttestationIssuer",
-      			"name": "Gitcoin",
-      			"issuer": "<https://gitcoin.co/attestations/>",
-      		}
-      	],
-      "relevantTo": "",
-      "image": "",
-      "coverImage": ""
-    }
-  ],
+    "@context": "http://www.daostar.org/schemas",
+    "type": "Person",
+    "id": "eip155:1:0x1234abcd",
+    "name": "ChiyoShark13",
+    "projects": [
+        {
+            "type": "Project",
+            "id": "eip155:1:0x1234abcd?proposalId=1",
+            "name": "Shoes Protocol",
+            "description": "We help people move around and understand each other.",
+            "contentURI": "https://gitcoin.co/projects/0xabcd1234cdef/",
+            "email": "chiyo.shark13@coolprojects.com>",
+            "membersURI": "",
+            "attestationIssuers": [
+                {
+                    "type": "AttestationIssuer",
+                    "name": "Gitcoin",
+                    "issuer": "https://gitcoin.co/attestations/",
+                }
+            ],
+            "relevantTo": "",
+            "image": "",
+            "coverImage": ""
+        }
+    ],
 }
 ```
 
 Chiyo has now published a public project profile through Gitcoin, which is further indexed through her `daoURI`. Note that, in this case, Gitcoin has replaced `projectsURI` with `projects` (i.e. embedded the data from `projectsURI` directly into the JSON returned by `daoURI`) and `attestationIssuersURI` with `attestationIssuers` so that we do not need to break apart the data into three separate JSON requests.
 
-Now that Chiyo’s data is published through daoURI, it is indexed through publicly-available indexers and subgraphs and can be read by Charmverse and the Ethereum Foundation, among other grants. However, Chiyo
+Now that Chiyo’s data is published through daoURI, it is indexed through publicly-available indexers and subgraphs and can be read by Charmverse and the Ethereum Foundation, among other grants. However, Chiyo has not yet applied to any grants.
 
 In order for Chiyo to apply for grants, one of two things need to happen: she can apply directly to the grant pool using her profile, OR a grant pool can generate an application for her automatically based on analysis of her profile, grant content, and/or attestations and credentials.
 
@@ -261,43 +264,84 @@ In this case, she manually applies to two grant pools that she finds through Git
     "type": "DAO",
     "grantPools": [
         {
-        "type": "GrantPool",
-        "id": "eip155:424:0x1234abcd",
-        "name": "Web3 Community",
-        "applications": [
-            {
-                "type": "GrantApplication",
-                "id": "eip155:424:0x1234abcd?proposal=1.>",
-                "grantPoolsURI": "<A URI pointing to the grant pools published by the entity.>",
-                "grantPoolId": "<The id of the grant pool.>",
-                "grantPoolName": "<The name of the grant pool.>",
-                "projectsURI": "<The URI of an organization’s projects applying for grant funding.>",
-                "projectId": "<The id of the project.>",
-                "projectName": "<Shoes Protocol>",
-                "createdAt": "<2023-11-14T15:52:25Z>",
-                "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
-                "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stake can discuss the grant.>",
-                "fundsAsked": [
-                    {
-                        "amount": "5000”,
-                        "denomination": "USDC"
-                    }
-                ],
-                "fundsApproved": [
-                    {
-                        "amount": "”,
-                        "denomination": ""
-                    }
-                ],
-                "payoutAddress": {
-                	"type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
-                	"value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
-                },
-                "isEligible": true,
-                "isReviewed": false,
-                "isApproved": false,
-                "isPaid": false,
-                "payouts": "",
+            "type": "GrantPool",
+            "id": "eip155:424:0x1234abcd",
+            "name": "Web3 Community",
+            "applications": [
+                {
+                    "type": "GrantApplication",
+                    "id": "eip155:424:0x1234abcd?proposal=94",
+                    "grantPoolsURI": "https://explorer.gitcoin.com/rounds/",
+                    "grantPoolId": "eip155:424:0x1234abcd",
+                    "grantPoolName": "Web3 Community",
+                    "projectsURI": "https://gitcoin.co/attestations/ChiyoShark13/daoURI/",
+                    "projectId": "eth:0x1234abcd?proposalId=1",
+                    "projectName": "Shoes Protocol",
+                    "createdAt": "023-11-14T15:52:25Z",
+                    "contentURI": "https://gitcoin.co/projects/0x000xyz987"
+                    "discussionsTo": "",
+                    "fundsAsked": [
+                        {
+                            "amount": "",
+                            "denomination": ""
+                        }
+                    ],
+                    "fundsApproved": [
+                        {
+                            "amount": "",
+                            "denomination": ""
+                        }
+                    ],
+                    "payoutAddress": {
+                    	"type": "EthereumAddress",
+                    	"value": "0x1234abcd"
+                    },
+                    "isEligible": true,
+                    "isReviewed": false,
+                    "isApproved": false,
+                    "isPaid": false,
+                    "payouts": "",
+                }
+            ]
+        },
+        {
+            "type": "GrantPool",
+            "id": "eip155:1:0x2345bcde",
+            "name": "Metagov Research",
+            "applications": [
+                {
+                    "type": "GrantApplication",
+                    "id": "eip155:424:0x1234abcd?proposal=94",
+                    "grantPoolsURI": "https://explorer.gitcoin.com/rounds/",
+                    "grantPoolId": "eip155:1:0x2345bcde",
+                    "grantPoolName": "Metagov Research",
+                    "projectsURI": "https://gitcoin.co/attestations/ChiyoShark13/daoURI/",
+                    "projectId": "eth:0x1234abcd?proposalId=1",
+                    "projectName": "Shoes Protocol",
+                    "createdAt": "023-11-14T15:52:25Z",
+                    "contentURI": "https://gitcoin.co/projects/0x000uvw678"
+                    "discussionsTo": "",
+                    "fundsAsked": [
+                        {
+                            "amount": "5000",
+                            "denomination": "USDC"
+                        }
+                    ],
+                    "fundsApproved": [
+                        {
+                            "amount": "",
+                            "denomination": ""
+                        }
+                    ],
+                    "payoutAddress": {
+                    	"type": "EthereumAddress",
+                    	"value": "0x1234abcd"
+                    },
+                    "isEligible": true,
+                    "isReviewed": false,
+                    "isApproved": false,
+                    "isPaid": false,
+                    "payouts": "",
                 }
             ]
         }
@@ -305,7 +349,7 @@ In this case, she manually applies to two grant pools that she finds through Git
 }
 ```
 
-Chiyo goes on to win all three grants, and the data from each program can be indexed and fed to a shared grants database or service such as Karma’s Grant Accountability Protocol (GAP), which is itself DAOIP-5 compliant. Updates on GAP feedback to the shared database, which can then be audited by the grant programs.
+Further, in the process of applying through Gitcoin, Chiyo likely verified ownership over a Twitter and GitHub account. These serve as credentials that Gitcoin can publish as an issuer on behalf of Chiyo (note `attestationIssuers` above), which can then be used directly within the application systems of other grant pools.
 
 ## Grants system
 We contemplated introducing an additional grants system schema which would serve as a container for a single organization, foundation, or DAO to manage multiple grant pools (e.g. as part of a yearly grant or a fundraising round). But there are many potential management schemes for grant pools. Rather than introduce additional fields and architecture to support these systems, we decided to abstract that functionality into the organization / DAO itself and require only that the DAO publish a `grantPoolsURI` field. In other words, while we expect roles, permissions, and decision-making procedures to be defined at the level of a grant system, we decided not to include those in this specification because (1) we did not want to enforce a specific on-chain implementation of roles and permissions and (2) roles and permissions are sufficiently modular that they can specified in a separate specification.
@@ -328,13 +372,15 @@ We also discussed including a manager field to name the person, DAO, or entity m
 We considered adding an optional allowlist for both tokens and funders. The funder allow list can be important for KYC while the token allowlist allows an organization to control what kinds of contributions can be made to the grant pool (e.g. only stablecoins and the native token of the DAO). We decided that these fields could be added and tested in future specifications.
 
 ## Projects
-Applications to a grant pool are very similar to generic proposals to a DAO. However, individual projects often apply to multiple grant pools or multiple times to a single grant pool, for example multiple Gitcoin rounds or a co-funding round for a public good supported by many DAOs. For this purpose, we define projects separately from applications, and store them as an additional form of metadata attached to an organization, DAO, or other entity.
+Applications to a grant pool are very similar to generic proposals to a DAO. However, individual projects often apply to multiple grant pools or multiple times to a single grant pool, for example multiple Gitcoin rounds or a co-funding round for a public good supported by many DAOs. For this purpose, we define projects separately from applications, and store them as an additional form of metadata attached to the entity, organization, or DAO that hosts (and in principle, executes) the project. Note, however, that the majority of projects are proposals to _another_ entity, i.e. a grant pool, rather than to the entity that hosts the project.
 
-Thus a project represents the common, public portion of an organization’s grant application, whereas an application represents a particular proposal, at a specific time, by a particular project, to a particular grant pool. Project metadata contains the information that will be common between all applications (e.g. description, website, credentials, etc), while application metadata contains information relevant for that particular grant pool (e.g. responses to particular grant applications, the status of the application, etc.).
+A project can be understood as representing the common, public portion of an organization’s grant application, whereas an application represents a particular proposal, at a specific time, by a particular project, to a particular grant pool. Project metadata contains the information that will be common between all applications (e.g. description, website, credentials, etc), while application metadata contains information relevant for that particular grant pool (e.g. responses to particular grant applications, the status of the application, etc.).
 
-Projects can accumulate history and reputation, as well as reduce the amount of redundant information that needs to be entered on each application. It also helps grant pools to actively seek out projects rather than only passively accepting applications. 
+Projects can accumulate history and reputation (i.e. attestations) either on their own or as part of their host entity.
 
-Project data can be published by an entity or DAO that is applying to grant pools or by an independent issuer (often a grant system administrator such as Gitcoin or Allo) that helps submit project data as applications to multiple grant pools. Originally, we intended projectsURI to be published by a grant system operator, i.e. as a list of projects who had applied. However, in contemplating a “common application” as well as co-funding grants, we decided to allow projectsURI to be published by the applicants themselves. This makes project creation and maintenance permissionless and decentralized (a project can point projectsURI at a Markdown file hosted anywhere, e.g. on GitHub), while allowing grant programs to organize their internal application data in whatever way makes sense to them.
+Project data reduces the amount of redundant information that needs to be entered on each application. Insofar as an entity can either self-host (through daoURI) or published their project information through their preferred platform / issuer rather than across many, the data also helps maintain up-to-date data across grants. Project data also helps grant pools to actively seek out projects rather than only passively accepting applications. 
+
+Originally, we intended projectsURI to be published by a grant system operator, i.e. as a list of projects who had applied. However, in contemplating a “common application” as well as co-funding grants, we decided to allow projectsURI to be published by the applicants themselves. This makes project creation and maintenance permissionless and decentralized (a project can point projectsURI at a Markdown file hosted anywhere, e.g. on GitHub), while allowing grant programs to organize their internal application data in whatever way makes sense to them.
 
 A number of issues that we considered but either descoped or decided not to include:
 - we considered specifying a full “common application” interface that makes it easier to submit and vet applications as well as fields that might be useful for such a common application, but decided not to because it could be better scoped in another standard.
