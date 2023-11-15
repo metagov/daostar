@@ -11,14 +11,14 @@ created: 2023-11-14
 ---
 
 # Simple summary
-Common interfaces and data structures for grants management, including a common application for grants.
+Schemas and attestations for grants management.
 
 # Motivation
 As the Web3 space has grown in recent years, grant programs run by protocols and projects have themselves exploded in size and popularity. Over a billion dollars in capital have been deployed or committed, grant programs have come and gone, and many organizations are now assessing the progress and impact of their issued funding. 
 
 There have been [a wide range of approaches](https://docs.google.com/document/d/1CFD6ztSh2ggJSO-U3uEea92UVB1cRbvBlA1tfPxLKi8/edit?usp=sharing), from transparent (e.g. Aave) or closed (e.g. Ethereum Foundation and Solana Foundation) to communally architected (e.g. Stacks Foundation) to being launched by a compensated team (e.g. Mantle), from prospective (e.g. Uniswap Foundation) to retroactive (e.g. Optimism) to research-focused (e.g. Protocol Labs Research Grants) to quadratically funded (e.g. Gitcoin), to RFP-based (i.e. Protocol Labs, Uniswap Foundation, Solana Foundation, etc.). The diversity of thought on how to best run such programs has led to innovative approaches for grants management but has also fragmented capital and reduced transparency.
 
-This specification lays out a common set of on- and off-chain interfaces for grant programs looking to deploy funding and for projects looking to receive funding. It is intended to increase interoperability between grants tooling, improve the transparency of grant programs, and ultimately make grant programs more efficient for funders, administrators, and grantees. In particular, this specification lays the groundwork for a “common application” for grants as well as easier coordination between grants programs.
+This specification lays out a set of off-chain data schemas for grant programs looking to deploy funding and for projects looking to receive funding, as well as a simple attestations architecture. It is intended to increase interoperability between grants tooling, improve the transparency of grant programs, and ultimately make grant programs more efficient for funders, administrators, and grantees. In particular, this specification lays the groundwork for a “common application” for grants as well as easier coordination between grants programs.
 
 # Specification
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
@@ -60,8 +60,8 @@ Grant Pool JSON-LD Schema
             "id": "<The id of the grant pool, in the format above.>",
             "name": "<The name of the grant pool.>",
             "description": "<A description of the grant pool.>",
-            "isOpen": "<OPTIONAL: A Boolean yes/no indicating whether the grant pool is open to or seeking new applications.>",
-            "closeDate": "<OPTIONAL: The ISO DateTime at which the grant pool will stop taking new applications.>",
+            "isOpen": <OPTIONAL: A Boolean true/false indicating whether the grant pool is open to or seeking new applications.>,
+            "closeDate": "<OPTIONAL: The ISO DateTime at which point the grant pool will stop taking new applications.>",
             "applicationsURI": "<A URI pointing to current and past applications received by the grant pool, following the DAOIP-5 Applications JSON-LD Schema.>",
             "governanceURI": "<A URI pointing to additional information about the governance, requirements, and criteria for the grant, which SHOULD be a .md file.>",
             "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the grant pool, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
@@ -352,22 +352,20 @@ In this case, she manually applies to two grant pools that she finds through Git
 Further, in the process of applying through Gitcoin, Chiyo likely verified ownership over a Twitter and GitHub account. These serve as credentials that Gitcoin can publish as an issuer on behalf of Chiyo (note `attestationIssuers` above), which can then be used directly within the application systems of other grant pools.
 
 ## Grants system
-We contemplated introducing an additional grants system schema which would serve as a container for a single organization, foundation, or DAO to manage multiple grant pools (e.g. as part of a yearly grant or a fundraising round). But there are many potential management schemes for grant pools. Rather than introduce additional fields and architecture to support these systems, we decided to abstract that functionality into the organization / DAO itself and require only that the DAO publish a `grantPoolsURI` field. In other words, while we expect roles, permissions, and decision-making procedures to be defined at the level of a grant system, we decided not to include those in this specification because (1) we did not want to enforce a specific on-chain implementation of roles and permissions and (2) roles and permissions are sufficiently modular that they can specified in a separate specification.
+A grants system is simply the DAO, foundation, or other organization that governs a grant pool.
 
-We also considered having grant pools publish a `managerURI` field that, normatively, points at a daoURI.
+We contemplated introducing an additional grants system schema to help organizations manage multiple grant pools (e.g. as part of a yearly grant or a fundraising round). But there are many potential management schemes for grant pools. Rather than introduce additional fields and architecture to support these systems, we decided to abstract that functionality into the organization / DAO itself and require only that it publish a `grantPoolsURI` field. In other words, while we expect roles, permissions, and decision-making procedures to be defined at the level of a grant system, we decided not to include those in this specification because (1) we did not want to enforce a specific on-chain implementation of roles and permissions and (2) roles and permissions are sufficiently modular that they can specified in a separate specification.
 
-We decided that all organizations should declare a daoURI. Some organizations, e.g. L1 foundations may not have a single on-chain address that represents their governance.
+We also considered having grant pools publish a `managerURI` field that, normatively, points at a daoURI, but there is no established pattern for declaring links or relationships between contracts and it was beyond the scope of this specification to do so.
 
-Note that multiple organizations may report the same grant pool.
+Note that multiple organizations may report the same grant pool (and assign the same grant pool different ids).
 
 ## Grant pool
 The proposed grant pool design is designed to facilitate clear publication of the behavior, eligibility and decision-making criteria, and performance of grant pools while remaining flexible with respect to many different program designs including Gitcoin-style “rounds”, rolling applications/funding periods, retroactive funding, custom payout and refund logic, bounty programs and hackathons, and so on.
 
-In general, our design expects grant pools to publish significantly more ongoing performance information than projects. In this way, we pose grant pools as objects somewhat similar to investment portfolios. This is for two reasons: (1) to help potential applicants sort through relevant grant pools and (2) to foster productive forms of transparency in grants administration (not all transparency is desirable), especially to external donors, community governance, and fund partners. We believe this will lead to both more professionalization in grants administration and stronger outcomes from grants. Grant pools also occupy a clear position of power vis-a-vis projects, and can thus affect the behavior of many projects. By using this power wisely, a relatively small group of grant pools can create systematic change in the entire ecosystem.
+In general, our design expects grant pools to publish significantly more ongoing performance information than projects. In this way, we pose grant pools as objects somewhat similar to investment portfolios. This is for two reasons: (1) to help potential applicants sort through relevant grant pools and (2) to foster productive forms of transparency in grants administration, especially to external donors, community governance, and fund partners. We believe this will lead to both more professionalization in grants administration and stronger outcomes from grants. Grant pools also occupy a clear position of power vis-a-vis projects, and can thus affect the behavior of many projects. By using this power wisely, a relatively small group of grant pools can create systematic change in the entire ecosystem.
 
-We decided to just restrict the scope of grant pools to just on-chain instruments, i.e. those with a unique CAIP-10 address, though we briefly contemplated supporting other fundable objects as well, e.g. Paypal accounts, Stripe wallets, Open Collective collectives, and traditional bank accounts.
-
-We also discussed including a manager field to name the person, DAO, or entity managing the grant pool, but felt this aspect of governance was sufficiently abstracted in the grants system. 
+We considered restricting the scope of grant pools to just on-chain instruments, i.e. those with a unique CAIP-10 address. Ultimately it was not difficult to extend the specification to other fundable objects as well, e.g. Paypal accounts, Stripe wallets, Open Collective collectives, and traditional bank accounts.
 
 We considered adding an optional allowlist for both tokens and funders. The funder allow list can be important for KYC while the token allowlist allows an organization to control what kinds of contributions can be made to the grant pool (e.g. only stablecoins and the native token of the DAO). We decided that these fields could be added and tested in future specifications.
 
@@ -405,10 +403,10 @@ A key component of the grant process that is missing in the current specificatio
 An application can be thought of as a relation between one entity or DAO (the applicant) and another entity or DAO (the grant pool). We considered how to extend the proposal logic into a many-to-many relation, i.e. a proposal involving many projects (as in a joint application) as well as many grant pools (as in a co-funding round). While potentially useful, these transactions are much rarer than traditional grant applications. For the sake of scope we decided that this was better left for a different specification.
 
 ## Community consensus
-The specification above was based on discussions by a large working group of industry operators including Gitcoin, Solana, Optimism, OpenQ, Clr.fund, Questbook, DaoLens, Station, and others. It was also based on an extended study of different grant programs and grant tooling for DAOs and other Web3 projects. We have reproduced some of the diagrams associated with that research below. We will extend this section in future versions of this draft.
+The specification above was based on discussions by a large working group of industry operators including Gitcoin, Solana, Optimism, OpenQ, Clr.fund, Questbook, DaoLens, Station, and others, and at workshops located at ETH Denver 2023 and Devconnect 2023. It was also based on an extended study of different grant programs and grant tooling for DAOs and other Web3 projects.
 
 # Acknowledgements
-Thank you to Andrea Franz, Aditya Anand, Balazs Nemethi, Apoorv Nandan, Tina He, Carl Cervone, and Amandeep.
+We are grateful for helpful comments and suggestions from Andrea Franz, Aditya Anand, Balazs Nemethi, Apoorv Nandan, Tina He, Carl Cervone, and Amandeep.
 
 # Copyright
 Copyright and related rights waived via CC0.
