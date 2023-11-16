@@ -37,9 +37,9 @@ A grants system represents the top-level governance or administration of a grant
 ```json
 {
     "@context": "http://www.daostar.org/schemas",
-    "name": "<name of the entity>",
-    "type": "<entity type, e.g. DAO or Foundation>",
-    "grantPoolsURI": "<URI declaring any grant pools maintained by the entity>",
+    "name": "<The name of the entity.>",
+    "type": "<The entity type, e.g. DAO or Foundation.>",
+    "grantPoolsURI": "<A URI pointing to a JSON declaring any grant pools maintained by the entity, following the DAOIP-5 Grant Pool JSON-LD Schema.>",
 }
 ```
 
