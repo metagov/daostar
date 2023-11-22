@@ -185,7 +185,7 @@ The intention of this specification is to facilitate easier aggregation, transpa
 In particular, we hope that this specification will foster more collaboration across grant programs, and make it easier to maintain those collaborations. While there has been some inter-program collaboration, many of these efforts are driven socially rather than programmatically, at scale.
 
 ## Example: a common application
-Suppose Chiyo has an idea for an open-source project, “Shoes Protocol”, and wants to apply to three grant pools: Optimism via Charmverse, the Ethereum Foundation via their in-house system, and a Gitcoin grant round. Assume that Charmverse, Ethereum Foundation, and Gitcoin have all adopted DAOIP-5, i.e are publishing a `grantPoolsURI’ as part of daoURI.
+Suppose Chiyo has an idea for an open-source project, “Shoes Protocol”, and wants to apply to three grant pools: Optimism via Charmverse, the Ethereum Foundation via their in-house system, and a Gitcoin grant round. Assume that Charmverse, Ethereum Foundation, and Gitcoin have all adopted DAOIP-5, i.e are publishing a `grantPoolsURI` as part of daoURI.
 
 To apply, Chiyo first publishes a projectURI. She can do this by deploying a daoURI registration contract following daoURI, or by filling out a form via an issuer like Gitcoin or Charmverse in order to publish a projectURI (and daoURI) as an attestation.
 
