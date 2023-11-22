@@ -13,16 +13,17 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Index**
   * Contract: [0x4f2c9028fE7107d9f1A8a9CFf34aa2d3F28600fa](https://etherscan.io/address/0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa)
   * TheGraph: [daostar](https://thegraph.com/hosted-service/subgraph/ipatka/daostar)
-  * Version: 0.1
+  * Version: 1.0
 * **EIP4824Registration**
   * Contract: [0x2F8E0Eb8969715BdA8bf6e9b768850A1581fB358](https://etherscan.io/address/0x2f8e0eb8969715bda8bf6e9b768850a1581fb358)
-  * Version: 0.1
+  * Version: 1.0
+  ###### Deprecated
   * Contract: [0x58E593f2100Fa06dA34935C1B35Fd78Aaa32479a](https://etherscan.io/address/0x58e593f2100fa06da34935c1b35fd78aaa32479a)
   * Version: 0.0
 * **EIP4824RegistrationSummoner**
   * Contract: [0x2Dac5DBbF1D024c1E0D9c92D3AeDa7618e15aDd7](https://etherscan.io/address/0x2dac5dbbf1d024c1e0d9c92d3aeda7618e15add7)
-  * Version: 0.1
-    ###### Deprecated
+  * Version: 1.0
+  ###### Deprecated
    * Contract: [0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc](https://etherscan.io/address/0x37df3fc47c1c3a2acafd2dad9c1c00090a8655bc) 
   * Version: 0.0
 #### Optimism
