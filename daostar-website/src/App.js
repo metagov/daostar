@@ -165,8 +165,21 @@ function App() {
     arbitrumGoerliData?.registrationNetwork?.registrations || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
+
+// This object clones and modifies the mainnetV0 registration instances to change the network ID to "mainnetV0"
+// So that when we click on an old registration instance card we are able to view and edit its proprties
+// this allows to query mainnetV0 subgraph link
+
+  const allMainnetV0Registrations = mainnetv0Registrations.map(instance => ({
+      ...instance,
+      registrationNetwork: {
+          ...instance.registrationNetwork,
+          id: "mainnetV0"
+      }
+  }));
+  
   const allRegistrationInstances = mainnetRegistrations.concat(
-    mainnetv0Registrations,
+    allMainnetV0Registrations,
     goerliRegistrations,
     gnosisRegistrations,
     optimismGoerliRegistrations,
