@@ -174,7 +174,7 @@ function App() {
       ...instance,
       registrationNetwork: {
           ...instance.registrationNetwork,
-          id: "mainnetV0"
+          id: "ethereum"
       }
   }));
   
