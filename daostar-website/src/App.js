@@ -10,12 +10,13 @@ import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
-
+import useAxios  from 'axios-hooks';
 import queries from "./components/ExplorePage/queries/registrations";
 import "./App.css";
 import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
     uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
@@ -23,8 +24,9 @@ const mainnetOldClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const alchemyId = process.env.ALCHEMY_ID;
-const walletConnectId = process.env.WALLETCONNECT_ID;
+const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
+const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
+const token = process.env.REACT_APP_BEARER_TOKEN;
 
 const client = createClient(
   getDefaultClient({
@@ -34,6 +36,53 @@ const client = createClient(
 );
 
 function App() {
+
+  //DAODAOINT START
+
+  const apiUrl = 'https://search.daodao.zone/indexes/daos/documents?limit=10';
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+  };
+
+
+  const [daodaoRegistrationInstances, setDaoDao] = useState(undefined);
+  useEffect(() => {
+    async function getDAODAO() {
+      try {
+        const response = await axios.get(apiUrl, { headers });
+
+        // Axios automatically throws an error for non-2xx responses, so no need to check response.ok
+        const data = response.data;
+        const structuredData = data.results.map(item => ({
+          contractAddress: item.contractAddress,
+          name: item.value.config.name,
+          daoURI: item.value.config.dao_uri,
+          description: item.value.config.description,
+          id: item.value.voting_module,
+          createdAt: new Date(item.value.createdAt),
+          network: "daodao",
+          managerAddress: '',
+          standalone: 'true',
+          membersURI: 'Please refer DAO URI',
+          activityLogURI: 'Please refer DAO URI',
+          issuersURI: 'Please refer DAO URI',
+          proposalsURI: 'Please refer DAO URI',
+          governanceURI: 'Please refer DAO URI',
+        }));
+
+        console.log('Axios structured data:', structuredData);
+        setDaoDao(structuredData)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    getDAODAO();
+  }, []);
+
+
+  //DAODAOINT END
   const {
     loading,
     error,
@@ -113,15 +162,15 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  console.log({
-    mainnetData,
-    mainnetv0Data,
-    goerliData,
-    gnosisData,
-    optimismGoerliData,
-    arbitrumGoerliData,
-    chapelData,
-  });
+  // console.log({
+  //   mainnetData,
+  //   mainnetv0Data,
+  //   goerliData,
+  //   gnosisData,
+  //   optimismGoerliData,
+  //   arbitrumGoerliData,
+  //   chapelData,
+  // });
 
   if (
     error ||
@@ -185,7 +234,8 @@ function App() {
     optimismGoerliRegistrations,
     arbitrumGoerliRegistrations,
     chapelRegistrations,
-    optimismRegistrations
+    optimismRegistrations,
+    daodaoRegistrationInstances
   );
 
   const registrationInstances = allRegistrationInstances.filter(
