@@ -168,11 +168,11 @@ Applications JSON-LD Schema
             "isApproved": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been approved for funding by the grant pool.>,
             "isPaid": <OPTIONAL: A Boolean true/false indicating that an approved grant is fully paid, and no additional funds should be expected from the grant pool.>,
             "payouts": [ <OPTIONAL>
-            {
-            "type": "<The type of the payout transaction, e.g. CallDataEVM.>",
-            "value": {"<The values of the payout transaction, e.g. operation, from, to, value, data, and so on.>"}
-            "proof": "<The transaction hash or other evidence that the payout was made.>",
-            } 
+                {
+                "type": "<The type of the payout transaction, e.g. CallDataEVM.>",
+                "value": {"<The values of the payout transaction, e.g. operation, from, to, value, data, and so on.>"}
+                "proof": "<The transaction hash or other evidence that the payout was made.>",
+                } 
             ]
         }
     ]
