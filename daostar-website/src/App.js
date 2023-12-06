@@ -39,15 +39,21 @@ const client = createClient(
 function App() {
   //DAODAOINT START
 
-  const apiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=10";
+  const daodaoApiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=10"; //junos
+  const osmosisApiUrl = "https://search.daodao.zone/indexes/osmosis_daos/documents?limit=10"; //osmosis
+  const stargazeApiUrl = "https://search.daodao.zone/indexes/stargaze_daos/documents?limit=10"; // stargaze
+
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
 
   const [daodaoRegistrationInstances, setDaoDao] = useState(undefined);
+  const [osmosisDaoRegistrationInstances, setOsmosisDao] = useState(undefined);
+  const [stargazeDaoRegistrationInstances, setStargazeDao] = useState(undefined);
+
   useEffect(() => {
-    async function getDAODAO() {
+    async function getDAODAO(apiUrl, setDataFunction) {
       try {
         const response = await axios.get(apiUrl, { headers });
 
@@ -71,13 +77,16 @@ function App() {
         }));
 
         console.log("Axios structured data:", structuredData);
-        setDaoDao(structuredData);
+        setDataFunction(structuredData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
 
-    getDAODAO();
+    getDAODAO(daodaoApiUrl, setDaoDao);
+    getDAODAO(osmosisApiUrl, setOsmosisDao);
+    getDAODAO(stargazeApiUrl, setStargazeDao);
+
   }, []);
 
   //DAODAOINT END
@@ -218,7 +227,7 @@ function App() {
     },
   }));
   // Restructure data
-  const restructuredData = [
+  const restructuredJunosData = [
     {
       registrationNetwork: {
         __typename: "RegistrationNetwork",
@@ -244,27 +253,83 @@ function App() {
       },
     },
   ];
+
+
+  const restructuredOsmosisData = [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: "osmosis",
+        registrations: osmosisDaoRegistrationInstances.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.id,
+          daoName: item.name, // Use the name property for daoName
+          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
+          daoDescription: item.description,
+          daoURI: item.daoURI,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: item.managerAddress,
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: "osmosis",
+          },
+        })),
+      },
+    },
+  ];
+
+
+  const restructuredStargazeData = [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: "stargaze",
+        registrations: stargazeDaoRegistrationInstances.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.id,
+          daoName: item.name, // Use the name property for daoName
+          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
+          daoDescription: item.description,
+          daoURI: item.daoURI,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: item.managerAddress,
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: "stargaze",
+          },
+        })),
+      },
+    },
+  ];
   
 
 
   const allRegistrationInstances = mainnetRegistrations
     .concat(
     allMainnetV0Registrations,
-    // goerliRegistrations,
-    // gnosisRegistrations,
-    // optimismGoerliRegistrations,
-    // arbitrumGoerliRegistrations,
-    // chapelRegistrations,
-    // optimismRegistrations,
+    goerliRegistrations,
+    gnosisRegistrations,
+    optimismGoerliRegistrations,
+    arbitrumGoerliRegistrations,
+    chapelRegistrations,
+    optimismRegistrations,
     );
 
 
-  const daodaoInstances = restructuredData;
+  const daodaoInstances = restructuredJunosData;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
 
-  console.log("Restructured Data:", restructuredData);
+  // console.log("Restructured Data:", restructuredData);
 
   
 
@@ -272,7 +337,7 @@ function App() {
     // mainnetData,
     mainnetv0Data,
     mockExploreData,
-    restructuredData,
+    //restructuredData,
     // goerliData,
     // gnosisData,
     // optimismGoerliData,
