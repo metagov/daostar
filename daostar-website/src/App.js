@@ -39,7 +39,7 @@ const client = createClient(
 function App() {
   //DAODAOINT START
 
-  const apiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=10";
+  const apiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=100";
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
