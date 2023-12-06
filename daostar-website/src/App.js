@@ -56,7 +56,7 @@ function App() {
         const structuredData = data.results.map((item) => ({
           contractAddress: item.contractAddress,
           name: item.value.config.name,
-          daoURI: item.value.config.dao_uri,
+          daoURI: item.value.config.dao_uri || "",
           description: item.value.config.description,
           id: item.value.voting_module,
           createdAt: new Date(item.value.createdAt),
@@ -160,16 +160,7 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  console.log({
-    // mainnetData,
-    mainnetv0Data,
-    mockExploreData,
-    // goerliData,
-    // gnosisData,
-    // optimismGoerliData,
-    // arbitrumGoerliData,
-    // chapelData,
-  });
+ 
 
   if (
     error ||
@@ -227,30 +218,67 @@ function App() {
     },
   }));
   // Restructure data
-  const restructuredData = {
-    registrationNetwork: { id: "junos" },
-    registrations: daodaoRegistrationInstances,
-  };
-  const allRegistrationInstances = mainnetRegistrations
-    .concat(
-    allMainnetV0Registrations,
-    goerliRegistrations,
-    gnosisRegistrations,
-    optimismGoerliRegistrations,
-    arbitrumGoerliRegistrations,
-    chapelRegistrations,
-    optimismRegistrations,
-    );
-
+  const restructuredData = [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: "junos",
+        registrations: daodaoRegistrationInstances.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.id,
+          daoName: item.name, // Use the name property for daoName
+          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
+          daoDescription: item.description,
+          daoURI: item.daoURI,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: item.managerAddress,
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: "junos",
+          },
+        })),
+      },
+    },
+  ];
   
 
 
-  const daodaoInstances = mockExploreData;
+  const allRegistrationInstances = mainnetRegistrations
+    .concat(
+    allMainnetV0Registrations,
+    // goerliRegistrations,
+    // gnosisRegistrations,
+    // optimismGoerliRegistrations,
+    // arbitrumGoerliRegistrations,
+    // chapelRegistrations,
+    // optimismRegistrations,
+    );
+
+
+  const daodaoInstances = restructuredData;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
 
-  //console.log("Restructured Data:", restructuredData);
+  console.log("Restructured Data:", restructuredData);
+
+  
+
+  console.log({
+    // mainnetData,
+    mainnetv0Data,
+    mockExploreData,
+    restructuredData,
+    // goerliData,
+    // gnosisData,
+    // optimismGoerliData,
+    // arbitrumGoerliData,
+    // chapelData,
+  });
 
   return (
     <WagmiConfig client={client}>
