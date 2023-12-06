@@ -21,7 +21,8 @@ const RegistrationCard = ({
     registrationNetwork,
     registrationAddress,
     managerAddress,
-    standalone = false // whether this card is presented within the explore view or on its own page
+    standalone = false, // whether this card is presented within the explore view or on its own page
+    displayWithoutEdit = false
 }) => {
 
     const [cardScreen, setScreen] = useState('DISPLAY'); // DISPLAY | EDIT | UPDATED
@@ -52,6 +53,7 @@ const RegistrationCard = ({
                     activityLogURI={activityLogURI}
                     proposalsURI={proposalsURI}
                     governanceURI={governanceURI}
+                    displayWithoutEdit={displayWithoutEdit}
                 />
             )}
             {cardScreen === 'EDIT' && (

@@ -10,13 +10,14 @@ import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
-import useAxios  from 'axios-hooks';
+import useAxios from "axios-hooks";
 import queries from "./components/ExplorePage/queries/registrations";
 import "./App.css";
 import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { mockExploreData } from "./components/ExplorePage/mockExploreData";
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
     uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
@@ -36,15 +37,13 @@ const client = createClient(
 );
 
 function App() {
-
   //DAODAOINT START
 
-  const apiUrl = 'https://search.daodao.zone/indexes/daos/documents?limit=10';
+  const apiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=10";
   const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   };
-
 
   const [daodaoRegistrationInstances, setDaoDao] = useState(undefined);
   useEffect(() => {
@@ -54,7 +53,7 @@ function App() {
 
         // Axios automatically throws an error for non-2xx responses, so no need to check response.ok
         const data = response.data;
-        const structuredData = data.results.map(item => ({
+        const structuredData = data.results.map((item) => ({
           contractAddress: item.contractAddress,
           name: item.value.config.name,
           daoURI: item.value.config.dao_uri,
@@ -62,25 +61,24 @@ function App() {
           id: item.value.voting_module,
           createdAt: new Date(item.value.createdAt),
           network: "daodao",
-          managerAddress: '',
-          standalone: 'true',
-          membersURI: 'Please refer DAO URI',
-          activityLogURI: 'Please refer DAO URI',
-          issuersURI: 'Please refer DAO URI',
-          proposalsURI: 'Please refer DAO URI',
-          governanceURI: 'Please refer DAO URI',
+          managerAddress: "",
+          standalone: "true",
+          membersURI: "Please refer DAO URI",
+          activityLogURI: "Please refer DAO URI",
+          issuersURI: "Please refer DAO URI",
+          proposalsURI: "Please refer DAO URI",
+          governanceURI: "Please refer DAO URI",
         }));
 
-        console.log('Axios structured data:', structuredData);
-        setDaoDao(structuredData)
+        console.log("Axios structured data:", structuredData);
+        setDaoDao(structuredData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
     getDAODAO();
   }, []);
-
 
   //DAODAOINT END
   const {
@@ -162,15 +160,16 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  // console.log({
-  //   mainnetData,
-  //   mainnetv0Data,
-  //   goerliData,
-  //   gnosisData,
-  //   optimismGoerliData,
-  //   arbitrumGoerliData,
-  //   chapelData,
-  // });
+  console.log({
+    // mainnetData,
+    mainnetv0Data,
+    mockExploreData,
+    // goerliData,
+    // gnosisData,
+    // optimismGoerliData,
+    // arbitrumGoerliData,
+    // chapelData,
+  });
 
   if (
     error ||
@@ -196,7 +195,8 @@ function App() {
     optimismGoerliLoading ||
     arbitrumGoerliLoading ||
     chapelLoading ||
-    optimismLoading  )
+    optimismLoading
+  )
     return "loading...";
   const mainnetRegistrations =
     mainnetData?.registrationNetwork?.registrations || [];
@@ -215,19 +215,24 @@ function App() {
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
-// This object clones and modifies the mainnetV0 registration instances to change the network ID to "mainnetV0"
-// So that when we click on an old registration instance card we are able to view and edit its proprties
-// this allows to query mainnetV0 subgraph link
+  // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
+  // So that when we click on an old registration instance card we are able to view and edit its proprties
+  // this allows to query mainnetV0 subgraph link
 
-  const allMainnetV0Registrations = mainnetv0Registrations.map(instance => ({
-      ...instance,
-      registrationNetwork: {
-          ...instance.registrationNetwork,
-          id: "ethereum"
-      }
+  const allMainnetV0Registrations = mainnetv0Registrations.map((instance) => ({
+    ...instance,
+    registrationNetwork: {
+      ...instance.registrationNetwork,
+      id: "ethereum",
+    },
   }));
-  
-  const allRegistrationInstances = mainnetRegistrations.concat(
+  // Restructure data
+  const restructuredData = {
+    registrationNetwork: { id: "junos" },
+    registrations: daodaoRegistrationInstances,
+  };
+  const allRegistrationInstances = mainnetRegistrations
+    .concat(
     allMainnetV0Registrations,
     goerliRegistrations,
     gnosisRegistrations,
@@ -235,12 +240,17 @@ function App() {
     arbitrumGoerliRegistrations,
     chapelRegistrations,
     optimismRegistrations,
-    daodaoRegistrationInstances
-  );
+    );
 
+  
+
+
+  const daodaoInstances = mockExploreData;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
+
+  //console.log("Restructured Data:", restructuredData);
 
   return (
     <WagmiConfig client={client}>
@@ -268,7 +278,7 @@ function App() {
             <Route
               path="/explore"
               element={
-                <ExplorePage registrationInstances={registrationInstances} />
+                <ExplorePage registrationInstances={registrationInstances}  daodaoInstances={daodaoInstances} />
               }
             />
             <Route

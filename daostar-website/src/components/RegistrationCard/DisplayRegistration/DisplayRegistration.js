@@ -29,6 +29,7 @@ const DisplayRegistration = ({
   issuersURI,
   proposalsURI,
   governanceURI,
+  displayWithoutEdit
 }) => {
   const httpDaoURI = getHttpDaoURI(daoURI);
   if (network === "optimism-goerli") {
@@ -48,7 +49,7 @@ const DisplayRegistration = ({
           <h3>{name}</h3>
         </Link>
       )}
-      {standalone === true && (
+      {standalone === true && displayWithoutEdit === false && (
         <Button
           className="edit-reg-btn"
           icon="edit"
