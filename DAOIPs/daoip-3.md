@@ -99,10 +99,13 @@ Attestations communicating membership MUST declare the `MembershipAttestation` t
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
 	"expirationDate": "<ISO DateTime>",
 	"credentialSubject": {
+		"type": "<e.g. EthereumAddress, DIDAddress, ENSName, CAIP10Address, HTTPAddress>",
+		"id": "<subject's identifier, e.g. their Ethereum address, DID address, ENS address, CAIP-10 address, or HTTP address>",
 		"memberOf": {
 			"type": "DAO",
 			"id": "<the DAO's daoURI>",
 		}
+	}
 }
 ```
 
