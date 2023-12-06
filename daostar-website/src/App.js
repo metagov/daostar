@@ -57,7 +57,7 @@ function App() {
 
         // Axios automatically throws an error for non-2xx responses, so no need to check response.ok
         const data = response.data;
-        const structuredData = data.results.map((item) => ({
+        const structuredData = data?.results?.map((item) => ({
           contractAddress: item.contractAddress,
           name: item.value.config.name,
           daoURI: item.value.config.dao_uri || "",
@@ -214,7 +214,7 @@ function App() {
   // So that when we click on an old registration instance card we are able to view and edit its proprties
   // this allows to query mainnetV0 subgraph link
 
-  const allMainnetV0Registrations = mainnetv0Registrations.map((instance) => ({
+  const allMainnetV0Registrations = mainnetv0Registrations?.map((instance) => ({
     ...instance,
     registrationNetwork: {
       ...instance.registrationNetwork,
@@ -227,7 +227,7 @@ function App() {
       registrationNetwork: {
         __typename: "RegistrationNetwork",
         id: "junos",
-        registrations: daodaoRegistrationInstances.map((item) => ({
+        registrations: daodaoRegistrationInstances?.map((item) => ({
           __typename: "RegistrationInstance",
           id: item.id,
           daoName: item.name, // Use the name property for daoName
