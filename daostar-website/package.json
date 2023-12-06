@@ -49,6 +49,7 @@
     "typescript": "^5.2.2",
     "typewriter-effect": "^2.19.0",
     "validator": "^13.7.0",
+    "viem": "^1.19.11",
     "wagmi": "^0.12.19",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.1"
