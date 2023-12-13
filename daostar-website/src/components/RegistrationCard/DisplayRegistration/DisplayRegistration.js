@@ -3,6 +3,9 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import EtherscanLink from "./EtherscanLink/EtherscanLink";
 import URILink from "./URILink/URILink";
+import JunoAtomScanLink from "./Junochain/JunoAtomScanLink";
+import OsmosisAtomScanLink from "./Osmosis/OsmosisLink";
+import StargazeAtomScanLink from "./Stargaze/StargazeLink";
 
 const IPFS_GATEWAY = `https://ipfs.io/ipfs`;
 
@@ -29,16 +32,43 @@ const DisplayRegistration = ({
   issuersURI,
   proposalsURI,
   governanceURI,
+  displayWithoutEdit,
+  contractVersion,
 }) => {
   const httpDaoURI = getHttpDaoURI(daoURI);
   if (network === "optimism-goerli") {
     network = "optimismGoerli";
   }
 
-  if(network === 'arbitrum-goerli'){
-    network = 'arbitrumGoerli';
+  if (network === "arbitrum-goerli") {
+    network = "arbitrumGoerli";
   }
 
+  const renderNetworkLink = (network, address) => {
+    switch (network) {
+      case "Juno":
+        return <JunoAtomScanLink address={address} />;
+      case "Osmosis":
+        return <OsmosisAtomScanLink address={address} />;
+      case "Stargaze":
+        return <StargazeAtomScanLink address={address} />;
+      default:
+        return <EtherscanLink address={address} />;
+    }
+  };
+
+  const renderNetworkName = (network) => {
+    switch (network) {
+      case "mainnet":
+        return <span className="card-metadata-value">Ethereum Mainnet</span>;
+
+      case "ethereum":
+        return <span className="card-metadata-value">Ethereum Mainnet</span>;
+
+      default:
+        return <span className="card-metadata-value">{network}</span>;
+    }
+  };
   return (
     <Fragment>
       {standalone === true ? (
@@ -48,7 +78,7 @@ const DisplayRegistration = ({
           <h3>{name}</h3>
         </Link>
       )}
-      {standalone === true && (
+      {standalone === true && displayWithoutEdit === false && (
         <Button
           className="edit-reg-btn"
           icon="edit"
@@ -60,7 +90,7 @@ const DisplayRegistration = ({
       <div className="card-metadata">
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Contract address: </span>
-          <EtherscanLink address={contractAddress} />
+          {renderNetworkLink(network, contractAddress)}
         </p>
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">DAO URI: </span>
@@ -78,14 +108,18 @@ const DisplayRegistration = ({
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Manager address: </span>
           {managerAddress ? (
-            <EtherscanLink address={managerAddress} />
+            renderNetworkLink(network, managerAddress)
           ) : (
             <span className="card-metadata-value">None provided</span>
           )}
         </p>
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Network: </span>
-          <span className="card-metadata-value">{network}</span>
+          {renderNetworkName(network)}
+        </p>
+        <p className="bp4-text-small wizard-no-margin">
+          <span className="bp4-text-muted">Contract Version: </span>
+          <span className="card-metadata-value">{contractVersion}</span>
         </p>
       </div>
       <Divider />

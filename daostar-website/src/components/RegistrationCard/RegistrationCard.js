@@ -21,7 +21,8 @@ const RegistrationCard = ({
     registrationNetwork,
     registrationAddress,
     managerAddress,
-    standalone = false // whether this card is presented within the explore view or on its own page
+    standalone = false, // whether this card is presented within the explore view or on its own page
+    displayWithoutEdit = false
 }) => {
 
     const [cardScreen, setScreen] = useState('DISPLAY'); // DISPLAY | EDIT | UPDATED
@@ -31,6 +32,16 @@ const RegistrationCard = ({
     const [updatedData, setUpdatedData] = useState(null);
 
     const contractAddress = daoAddress;
+
+    const contractVersions = {
+        '0x177cc7d1658f240165fe1ded0f6731ca0c98ed08': '0.0',
+        '0x48d1981a86bf62f3f005b03dd106789fd2d28104': '0.0',
+        '0x90a48d5cf7343b08da12e067680b4c6dbfe551be': '0.0',
+    };
+    
+    const defaultContractVersion = '1.0';
+    
+    const contractVersion = contractVersions[id] || defaultContractVersion;
     
     const regCard = (
         <Card
@@ -52,6 +63,8 @@ const RegistrationCard = ({
                     activityLogURI={activityLogURI}
                     proposalsURI={proposalsURI}
                     governanceURI={governanceURI}
+                    displayWithoutEdit={displayWithoutEdit}
+                    contractVersion={contractVersion}
                 />
             )}
             {cardScreen === 'EDIT' && (

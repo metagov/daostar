@@ -10,12 +10,14 @@ import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { createHttpLink } from "apollo-link-http";
-
+import useAxios from "axios-hooks";
 import queries from "./components/ExplorePage/queries/registrations";
 import "./App.css";
 import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { mockExploreData } from "./components/ExplorePage/mockExploreData";
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
     uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
@@ -23,8 +25,9 @@ const mainnetOldClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const alchemyId = process.env.ALCHEMY_ID;
-const walletConnectId = process.env.WALLETCONNECT_ID;
+const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
+const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
+const token = process.env.REACT_APP_BEARER_TOKEN;
 
 const client = createClient(
   getDefaultClient({
@@ -32,8 +35,103 @@ const client = createClient(
     alchemyId,
   })
 );
+let  headers;
+
+const fetchAndStructureDAOs = async (apiUrl, network) => {
+  try {
+    const response = await axios.get(apiUrl, { headers });
+    const data = response.data;
+    return data?.results?.map((item) => ({
+      contractAddress: item.contractAddress,
+      name: item.value.config.name,
+      daoURI: item.value.config.dao_uri || "https://daodao.zone/dao/"+item.contractAddress,
+      description: item.value.config.description,
+      id: item.value.voting_module,
+      createdAt: new Date(item.value.createdAt),
+      network: network,
+      managerAddress: "",
+      standalone: "true",
+      membersURI: "https://daodao.zone/dao/"+item.contractAddress+"/members",
+      activityLogURI: "https://daodao.zone/dao/"+item.contractAddress,
+      issuersURI: "https://daodao.zone/dao/"+item.contractAddress,
+      proposalsURI: "https://daodao.zone/dao/"+item.contractAddress+"/proposals",
+      governanceURI: "https://daodao.zone/dao/"+item.contractAddress+"/subdaos",
+    }));
+  } catch (error) {
+    console.error(`Error fetching ${network} data:`, error);
+    return [];
+  }
+};
+
+function restructureDAOData(daoInstances, networkId) {
+  return [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: networkId,
+        registrations: daoInstances?.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.id,
+          daoName: item.name, 
+          daoAddress: item.contractAddress, 
+          daoDescription: item.description,
+          daoURI: item.daoURI,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: item.managerAddress,
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: item.contractAddress, 
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: networkId,
+          },
+        })),
+      },
+    },
+  ];
+}
+
 
 function App() {
+  //DAODAOINT START
+
+  if(token !== undefined) {
+    headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+  
+  }
+
+  const [daodaoInstances, setDaoDaoInstances] = useState([]);
+  const [osmosisInstances, setOsmosisInstances] = useState([]);
+  //const [stargazeInstances, setStargazeInstances] = useState([]);  
+  
+  useEffect(() => {
+    const fetchDAOs = async () => {
+      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=500', 'Juno');
+      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500', 'Osmosis');
+      //const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=500', 'Stargaze');
+
+      setDaoDaoInstances(daodaoData);
+      setOsmosisInstances(osmosisData);
+      //setStargazeInstances(stargazeData);
+
+      const restructuredDaodao = restructureDAOData(daodaoData, 'Juno');
+      const restructuredOsmosis = restructureDAOData(osmosisData, 'Osmosis');
+      //const restructuredStargaze = restructureDAOData(stargazeData, 'Stargaze');
+
+      setDaoDaoInstances(restructuredDaodao);
+      setOsmosisInstances(restructuredOsmosis);
+     // setStargazeInstances(restructuredStargaze);
+    };
+
+    fetchDAOs();
+  }, []);    
+
+
+  //DAODAOINT END
   const {
     loading,
     error,
@@ -113,15 +211,7 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  console.log({
-    mainnetData,
-    mainnetv0Data,
-    goerliData,
-    gnosisData,
-    optimismGoerliData,
-    arbitrumGoerliData,
-    chapelData,
-  });
+ 
 
   if (
     error ||
@@ -147,7 +237,8 @@ function App() {
     optimismGoerliLoading ||
     arbitrumGoerliLoading ||
     chapelLoading ||
-    optimismLoading  )
+    optimismLoading
+  )
     return "loading...";
   const mainnetRegistrations =
     mainnetData?.registrationNetwork?.registrations || [];
@@ -166,31 +257,50 @@ function App() {
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
-// This object clones and modifies the mainnetV0 registration instances to change the network ID to "mainnetV0"
-// So that when we click on an old registration instance card we are able to view and edit its proprties
-// this allows to query mainnetV0 subgraph link
+  // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
+  // So that when we click on an old registration instance card we are able to view and edit its proprties
+  // this allows to query mainnetV0 subgraph link
 
-  const allMainnetV0Registrations = mainnetv0Registrations.map(instance => ({
-      ...instance,
-      registrationNetwork: {
-          ...instance.registrationNetwork,
-          id: "ethereum"
-      }
+  const allMainnetV0Registrations = mainnetv0Registrations?.map((instance) => ({
+    ...instance,
+    registrationNetwork: {
+      ...instance.registrationNetwork,
+      id: "ethereum",
+    },
   }));
+
   
-  const allRegistrationInstances = mainnetRegistrations.concat(
+
+
+  const allRegistrationInstances = mainnetRegistrations
+    .concat(
     allMainnetV0Registrations,
     goerliRegistrations,
     gnosisRegistrations,
     optimismGoerliRegistrations,
     arbitrumGoerliRegistrations,
     chapelRegistrations,
-    optimismRegistrations
-  );
+    optimismRegistrations,
+    );
 
+
+  const daodaoRegInstances = daodaoInstances;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
+
+
+  
+
+  console.log({
+    mainnetData,
+    mainnetv0Data,
+    goerliData,
+    gnosisData,
+    optimismGoerliData,
+    arbitrumGoerliData,
+    chapelData,
+  });
 
   return (
     <WagmiConfig client={client}>
@@ -218,7 +328,7 @@ function App() {
             <Route
               path="/explore"
               element={
-                <ExplorePage registrationInstances={registrationInstances} />
+                <ExplorePage registrationInstances={registrationInstances}  junosInstances={daodaoInstances}  osmosisInstances={osmosisInstances}/>
               }
             />
             <Route
