@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@blueprintjs/core';
 import { Tooltip2 } from '@blueprintjs/popover2';
-import './EtherscanLink.css';
+import '../EtherscanLink/EtherscanLink.css';
 
 const JunoAtomScanLink = ({
     address
