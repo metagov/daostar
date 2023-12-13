@@ -13,7 +13,7 @@ export const filterRegistrations = (registration, filterVal = "") => {
   return true;
 };
 
-const ExplorePage = ({ registrationInstances, daodaoInstances }) => {
+const ExplorePage = ({ registrationInstances, junosInstances, osmosisInstances, stargazeInstances }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
 
@@ -26,7 +26,7 @@ const ExplorePage = ({ registrationInstances, daodaoInstances }) => {
     });
 
   // Handle when junos
-    const daodaoCards = daodaoInstances
+    const daodaoCards = junosInstances
   .flatMap((network) =>
     network.registrationNetwork.registrations.filter((reg) =>
       filterRegistrations(reg, filterVal)
@@ -36,6 +36,25 @@ const ExplorePage = ({ registrationInstances, daodaoInstances }) => {
     return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
   });
 
+    // Handle when junos
+    const stargazeDaoCards = stargazeInstances?.flatMap((network) =>
+    network.registrationNetwork.registrations.filter((reg) =>
+      filterRegistrations(reg, filterVal)
+    )
+  )
+  .map((registration, i) => {
+    return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
+  });
+
+    // Handle when junos
+    const osmosisDaoCards = osmosisInstances?.flatMap((network) =>
+    network.registrationNetwork.registrations.filter((reg) =>
+      filterRegistrations(reg, filterVal)
+    )
+  )
+  .map((registration, i) => {
+    return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
+  });
   return (
     <div className="explore-page">
       <div className="filter">
@@ -49,6 +68,10 @@ const ExplorePage = ({ registrationInstances, daodaoInstances }) => {
       <div className="dao-cards">{daoCards}</div>
       <br></br>
       <div className="dao-cards">{daodaoCards}</div>
+      <br></br>
+      <div className="dao-cards">{stargazeDaoCards}</div>
+      <br></br>
+      <div className="dao-cards">{osmosisDaoCards}</div>
     </div>
   );
 };

@@ -35,12 +35,67 @@ const client = createClient(
     alchemyId,
   })
 );
+let  headers;
+
+const fetchAndStructureDAOs = async (apiUrl, network) => {
+  try {
+    const response = await axios.get(apiUrl, { headers });
+    const data = response.data;
+    return data?.results?.map((item) => ({
+      contractAddress: item.contractAddress,
+      name: item.value.config.name,
+      daoURI: item.value.config.dao_uri || "https://daodao.zone/dao/"+item.contractAddress,
+      description: item.value.config.description,
+      id: item.value.voting_module,
+      createdAt: new Date(item.value.createdAt),
+      network: network,
+      managerAddress: "",
+      standalone: "true",
+      membersURI: "https://daodao.zone/dao/"+item.contractAddress+"/members",
+      activityLogURI: "https://daodao.zone/dao/"+item.contractAddress,
+      issuersURI: "https://daodao.zone/dao/"+item.contractAddress,
+      proposalsURI: "https://daodao.zone/dao/"+item.contractAddress+"/proposals",
+      governanceURI: "https://daodao.zone/dao/"+item.contractAddress+"/subdaos",
+    }));
+  } catch (error) {
+    console.error(`Error fetching ${network} data:`, error);
+    return [];
+  }
+};
+
+function restructureDAOData(daoInstances, networkId) {
+  return [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: networkId,
+        registrations: daoInstances?.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.id,
+          daoName: item.name, // Use the name property for daoName
+          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
+          daoDescription: item.description,
+          daoURI: item.daoURI,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: item.managerAddress,
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: networkId,
+          },
+        })),
+      },
+    },
+  ];
+}
+
 
 function App() {
   //DAODAOINT START
 
-  const apiUrl = "https://search.daodao.zone/indexes/daos/documents?limit=100";
-  let  headers;
   if(token !== undefined) {
     headers = {
       "Content-Type": "application/json",
@@ -49,40 +104,32 @@ function App() {
   
   }
 
-  const [daodaoRegistrationInstances, setDaoDao] = useState(undefined);
+  const [daodaoInstances, setDaoDaoInstances] = useState([]);
+  const [osmosisInstances, setOsmosisInstances] = useState([]);
+  const [stargazeInstances, setStargazeInstances] = useState([]);  
+  
   useEffect(() => {
-    async function getDAODAO() {
-      try {
-        const response = await axios.get(apiUrl, { headers });
+    const fetchDAOs = async () => {
+      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=10', 'Juno');
+      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=20', 'Osmosis');
+      const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=30', 'Stargaze');
 
-        // Axios automatically throws an error for non-2xx responses, so no need to check response.ok
-        const data = response.data;
-        const structuredData = data?.results?.map((item) => ({
-          contractAddress: item.contractAddress,
-          name: item.value.config.name,
-          daoURI: item.value.config.dao_uri || "",
-          description: item.value.config.description,
-          id: item.value.voting_module,
-          createdAt: new Date(item.value.createdAt),
-          network: "daodao",
-          managerAddress: "",
-          standalone: "true",
-          membersURI: "Please refer DAO URI",
-          activityLogURI: "Please refer DAO URI",
-          issuersURI: "Please refer DAO URI",
-          proposalsURI: "Please refer DAO URI",
-          governanceURI: "Please refer DAO URI",
-        }));
+      setDaoDaoInstances(daodaoData);
+      setOsmosisInstances(osmosisData);
+      setStargazeInstances(stargazeData);
 
-        console.log("Axios structured data:", structuredData);
-        setDaoDao(structuredData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+      const restructuredDaodao = restructureDAOData(daodaoData, 'Juno');
+      const restructuredOsmosis = restructureDAOData(osmosisData, 'Osmosis');
+      const restructuredStargaze = restructureDAOData(stargazeData, 'Stargaze');
 
-    getDAODAO();
-  }, []);
+      setDaoDaoInstances(restructuredDaodao);
+      setOsmosisInstances(restructuredOsmosis);
+      setStargazeInstances(restructuredStargaze);
+    };
+
+    fetchDAOs();
+  }, []);    
+
 
   //DAODAOINT END
   const {
@@ -221,54 +268,27 @@ function App() {
       id: "ethereum",
     },
   }));
-  // Restructure data
-  const restructuredData = [
-    {
-      registrationNetwork: {
-        __typename: "RegistrationNetwork",
-        id: "junos",
-        registrations: daodaoRegistrationInstances?.map((item) => ({
-          __typename: "RegistrationInstance",
-          id: item.id,
-          daoName: item.name, // Use the name property for daoName
-          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
-          daoDescription: item.description,
-          daoURI: item.daoURI,
-          governanceURI: item.governanceURI,
-          issuersURI: item.issuersURI,
-          managerAddress: item.managerAddress,
-          membersURI: item.membersURI,
-          proposalsURI: item.proposalsURI,
-          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
-          registrationNetwork: {
-            __typename: "RegistrationNetwork",
-            id: "junos",
-          },
-        })),
-      },
-    },
-  ];
+
   
 
 
   const allRegistrationInstances = mainnetRegistrations
     .concat(
     allMainnetV0Registrations,
-    // goerliRegistrations,
-    // gnosisRegistrations,
-    // optimismGoerliRegistrations,
-    // arbitrumGoerliRegistrations,
-    // chapelRegistrations,
-    // optimismRegistrations,
+    goerliRegistrations,
+    gnosisRegistrations,
+    optimismGoerliRegistrations,
+    arbitrumGoerliRegistrations,
+    chapelRegistrations,
+    optimismRegistrations,
     );
 
 
-  const daodaoInstances = restructuredData;
+  const daodaoRegInstances = daodaoInstances;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
 
-  console.log("Restructured Data:", restructuredData);
 
   
 
@@ -276,7 +296,6 @@ function App() {
     // mainnetData,
     mainnetv0Data,
     mockExploreData,
-    restructuredData,
     // goerliData,
     // gnosisData,
     // optimismGoerliData,
@@ -310,7 +329,7 @@ function App() {
             <Route
               path="/explore"
               element={
-                <ExplorePage registrationInstances={registrationInstances}  daodaoInstances={daodaoInstances} />
+                <ExplorePage registrationInstances={registrationInstances}  junosInstances={daodaoInstances}  stargazeInstances={stargazeInstances} osmosisInstances={osmosisInstances}/>
               }
             />
             <Route
