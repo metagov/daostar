@@ -33,7 +33,7 @@ const DisplayRegistration = ({
   proposalsURI,
   governanceURI,
   displayWithoutEdit,
-  contractVersion
+  contractVersion,
 }) => {
   const httpDaoURI = getHttpDaoURI(daoURI);
   if (network === "optimism-goerli") {
@@ -54,6 +54,19 @@ const DisplayRegistration = ({
         return <StargazeAtomScanLink address={address} />;
       default:
         return <EtherscanLink address={address} />;
+    }
+  };
+
+  const renderNetworkName = (network) => {
+    switch (network) {
+      case "mainnet":
+        return <span className="card-metadata-value">Ethreum Mainnet</span>;
+
+      case "ethereum":
+        return <span className="card-metadata-value">Ethreum Mainnet</span>;
+
+      default:
+        return <span className="card-metadata-value">{network}</span>;
     }
   };
   return (
@@ -102,7 +115,7 @@ const DisplayRegistration = ({
         </p>
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Network: </span>
-          <span className="card-metadata-value">{network}</span>
+          {renderNetworkName(network)}
         </p>
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Contract Version: </span>
