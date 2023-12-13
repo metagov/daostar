@@ -33,6 +33,7 @@ const DisplayRegistration = ({
   proposalsURI,
   governanceURI,
   displayWithoutEdit,
+  contractVersion
 }) => {
   const httpDaoURI = getHttpDaoURI(daoURI);
   if (network === "optimism-goerli") {
@@ -102,6 +103,10 @@ const DisplayRegistration = ({
         <p className="bp4-text-small wizard-no-margin">
           <span className="bp4-text-muted">Network: </span>
           <span className="card-metadata-value">{network}</span>
+        </p>
+        <p className="bp4-text-small wizard-no-margin">
+          <span className="bp4-text-muted">Contract Version: </span>
+          <span className="card-metadata-value">{contractVersion}</span>
         </p>
       </div>
       <Divider />
