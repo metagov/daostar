@@ -72,8 +72,8 @@ function restructureDAOData(daoInstances, networkId) {
         registrations: daoInstances?.map((item) => ({
           __typename: "RegistrationInstance",
           id: item.id,
-          daoName: item.name, // Use the name property for daoName
-          daoAddress: item.contractAddress, // Use the contractAddress property for daoAddress
+          daoName: item.name, 
+          daoAddress: item.contractAddress, 
           daoDescription: item.description,
           daoURI: item.daoURI,
           governanceURI: item.governanceURI,
@@ -81,7 +81,7 @@ function restructureDAOData(daoInstances, networkId) {
           managerAddress: item.managerAddress,
           membersURI: item.membersURI,
           proposalsURI: item.proposalsURI,
-          registrationAddress: item.contractAddress, // Use the contractAddress property for registrationAddress
+          registrationAddress: item.contractAddress, 
           registrationNetwork: {
             __typename: "RegistrationNetwork",
             id: networkId,
@@ -110,9 +110,9 @@ function App() {
   
   useEffect(() => {
     const fetchDAOs = async () => {
-      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=10', 'Juno');
-      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=20', 'Osmosis');
-      const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=30', 'Stargaze');
+      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=100', 'Juno');
+      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=100', 'Osmosis');
+      const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=100', 'Stargaze');
 
       setDaoDaoInstances(daodaoData);
       setOsmosisInstances(osmosisData);
