@@ -60,10 +60,10 @@ const DisplayRegistration = ({
   const renderNetworkName = (network) => {
     switch (network) {
       case "mainnet":
-        return <span className="card-metadata-value">Ethreum Mainnet</span>;
+        return <span className="card-metadata-value">Ethereum Mainnet</span>;
 
       case "ethereum":
-        return <span className="card-metadata-value">Ethreum Mainnet</span>;
+        return <span className="card-metadata-value">Ethereum Mainnet</span>;
 
       default:
         return <span className="card-metadata-value">{network}</span>;

@@ -13,7 +13,7 @@ export const filterRegistrations = (registration, filterVal = "") => {
   return true;
 };
 
-const ExplorePage = ({ registrationInstances, junosInstances, osmosisInstances, stargazeInstances }) => {
+const ExplorePage = ({ registrationInstances, junosInstances, osmosisInstances }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
 
@@ -36,17 +36,17 @@ const ExplorePage = ({ registrationInstances, junosInstances, osmosisInstances, 
     return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
   });
 
-    // Handle when junos
-    const stargazeDaoCards = stargazeInstances?.flatMap((network) =>
-    network.registrationNetwork.registrations.filter((reg) =>
-      filterRegistrations(reg, filterVal)
-    )
-  )
-  .map((registration, i) => {
-    return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
-  });
+    // Handle when stargaze
+  //   const stargazeDaoCards = stargazeInstances?.flatMap((network) =>
+  //   network.registrationNetwork.registrations.filter((reg) =>
+  //     filterRegistrations(reg, filterVal)
+  //   )
+  // )
+  // .map((registration, i) => {
+  //   return <RegistrationCard key={i} {...registration} standalone={true} displayWithoutEdit={true} />;
+  // });
 
-    // Handle when junos
+    // Handle when osmosis
     const osmosisDaoCards = osmosisInstances?.flatMap((network) =>
     network.registrationNetwork.registrations.filter((reg) =>
       filterRegistrations(reg, filterVal)

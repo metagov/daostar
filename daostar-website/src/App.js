@@ -106,25 +106,25 @@ function App() {
 
   const [daodaoInstances, setDaoDaoInstances] = useState([]);
   const [osmosisInstances, setOsmosisInstances] = useState([]);
-  const [stargazeInstances, setStargazeInstances] = useState([]);  
+  //const [stargazeInstances, setStargazeInstances] = useState([]);  
   
   useEffect(() => {
     const fetchDAOs = async () => {
-      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=100', 'Juno');
-      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=100', 'Osmosis');
-      const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=100', 'Stargaze');
+      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=500', 'Juno');
+      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500', 'Osmosis');
+      //const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=500', 'Stargaze');
 
       setDaoDaoInstances(daodaoData);
       setOsmosisInstances(osmosisData);
-      setStargazeInstances(stargazeData);
+      //setStargazeInstances(stargazeData);
 
       const restructuredDaodao = restructureDAOData(daodaoData, 'Juno');
       const restructuredOsmosis = restructureDAOData(osmosisData, 'Osmosis');
-      const restructuredStargaze = restructureDAOData(stargazeData, 'Stargaze');
+      //const restructuredStargaze = restructureDAOData(stargazeData, 'Stargaze');
 
       setDaoDaoInstances(restructuredDaodao);
       setOsmosisInstances(restructuredOsmosis);
-      setStargazeInstances(restructuredStargaze);
+     // setStargazeInstances(restructuredStargaze);
     };
 
     fetchDAOs();
@@ -293,14 +293,13 @@ function App() {
   
 
   console.log({
-    // mainnetData,
+    mainnetData,
     mainnetv0Data,
-    mockExploreData,
-    // goerliData,
-    // gnosisData,
-    // optimismGoerliData,
-    // arbitrumGoerliData,
-    // chapelData,
+    goerliData,
+    gnosisData,
+    optimismGoerliData,
+    arbitrumGoerliData,
+    chapelData,
   });
 
   return (
@@ -329,7 +328,7 @@ function App() {
             <Route
               path="/explore"
               element={
-                <ExplorePage registrationInstances={registrationInstances}  junosInstances={daodaoInstances}  stargazeInstances={stargazeInstances} osmosisInstances={osmosisInstances}/>
+                <ExplorePage registrationInstances={registrationInstances}  junosInstances={daodaoInstances}  osmosisInstances={osmosisInstances}/>
               }
             />
             <Route

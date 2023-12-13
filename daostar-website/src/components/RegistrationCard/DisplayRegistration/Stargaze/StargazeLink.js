@@ -18,7 +18,7 @@ const StargazeAtomScanLink = ({
             >
                 {address}
                 <Tooltip2
-                    content={'View on Etherscan'}
+                    content={'View on Atomscan'}
                     placement='top'
                 >
                     <Icon 
