@@ -69,8 +69,6 @@ const ExplorePage = ({ registrationInstances, junosInstances, osmosisInstances }
       <br></br>
       <div className="dao-cards">{daodaoCards}</div>
       <br></br>
-      <div className="dao-cards">{stargazeDaoCards}</div>
-      <br></br>
       <div className="dao-cards">{osmosisDaoCards}</div>
     </div>
   );

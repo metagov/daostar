@@ -110,8 +110,8 @@ function App() {
   
   useEffect(() => {
     const fetchDAOs = async () => {
-      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=500', 'Juno');
-      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500', 'Osmosis');
+      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=1000', 'Juno');
+      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=1000', 'Osmosis');
       //const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=500', 'Stargaze');
 
       setDaoDaoInstances(daodaoData);
