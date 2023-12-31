@@ -16,6 +16,25 @@
     color: #fff;
 }
 
+.card-description {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: 150px; /* This value can be adjusted */
+    overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
+
+    /* For Webkit browsers like Chrome/Safari */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For Internet Explorer/Edge */
+  -ms-overflow-style: none;
+
+  /* For Firefox */
+  scrollbar-width: none;
+  }
+
+  
 .wizard-row {
     margin: 16px 24px;
 }
