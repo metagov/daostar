@@ -28,6 +28,7 @@ const mainnetOldClient = new ApolloClient({
 const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
 const token = process.env.REACT_APP_BEARER_TOKEN;
+const stargazeToken = process.env.REACT_APP_STARGAZE_BEARER_TOKEN;
 
 const client = createClient(
   getDefaultClient({
@@ -35,27 +36,36 @@ const client = createClient(
     alchemyId,
   })
 );
-let  headers;
+let headers, stargaze_headers;
 
 const fetchAndStructureDAOs = async (apiUrl, network) => {
   try {
-    const response = await axios.get(apiUrl, { headers });
+    const requestHeaders = network === "Stargaze" ? stargaze_headers : headers;
+    const response = await axios.get(apiUrl, { headers: requestHeaders });
     const data = response.data;
-    return data?.results?.map((item) => ({
+
+    const itemsArray = network === "Stargaze" ? data.hits : data.results;
+
+    return itemsArray?.map((item) => ({
       contractAddress: item.contractAddress,
       name: item.value.config.name,
-      daoURI: item.value.config.dao_uri || "https://daodao.zone/dao/"+item.contractAddress,
+      daoURI:
+        item.value.config.dao_uri ||
+        "https://daodao.zone/dao/" + item.contractAddress,
       description: item.value.config.description,
       id: item.value.voting_module,
       createdAt: new Date(item.value.createdAt),
       network: network,
       managerAddress: "",
       standalone: "true",
-      membersURI: "https://daodao.zone/dao/"+item.contractAddress+"/members",
-      activityLogURI: "https://daodao.zone/dao/"+item.contractAddress,
-      issuersURI: "https://daodao.zone/dao/"+item.contractAddress,
-      proposalsURI: "https://daodao.zone/dao/"+item.contractAddress+"/proposals",
-      governanceURI: "https://daodao.zone/dao/"+item.contractAddress+"/subdaos",
+      membersURI:
+        "https://daodao.zone/dao/" + item.contractAddress + "/members",
+      activityLogURI: "https://daodao.zone/dao/" + item.contractAddress,
+      issuersURI: "https://daodao.zone/dao/" + item.contractAddress,
+      proposalsURI:
+        "https://daodao.zone/dao/" + item.contractAddress + "/proposals",
+      governanceURI:
+        "https://daodao.zone/dao/" + item.contractAddress + "/subdaos",
     }));
   } catch (error) {
     console.error(`Error fetching ${network} data:`, error);
@@ -72,8 +82,8 @@ function restructureDAOData(daoInstances, networkId) {
         registrations: daoInstances?.map((item) => ({
           __typename: "RegistrationInstance",
           id: item.id,
-          daoName: item.name, 
-          daoAddress: item.contractAddress, 
+          daoName: item.name,
+          daoAddress: item.contractAddress,
           daoDescription: item.description,
           daoURI: item.daoURI,
           governanceURI: item.governanceURI,
@@ -81,7 +91,7 @@ function restructureDAOData(daoInstances, networkId) {
           managerAddress: item.managerAddress,
           membersURI: item.membersURI,
           proposalsURI: item.proposalsURI,
-          registrationAddress: item.contractAddress, 
+          registrationAddress: item.contractAddress,
           registrationNetwork: {
             __typename: "RegistrationNetwork",
             id: networkId,
@@ -92,44 +102,57 @@ function restructureDAOData(daoInstances, networkId) {
   ];
 }
 
-
 function App() {
   //DAODAOINT START
 
-  if(token !== undefined) {
+  if (token !== undefined) {
     headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-  
+  }
+
+  if (stargazeToken !== undefined) {
+    stargaze_headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${stargazeToken}`,
+    };
   }
 
   const [daodaoInstances, setDaoDaoInstances] = useState([]);
   const [osmosisInstances, setOsmosisInstances] = useState([]);
-  //const [stargazeInstances, setStargazeInstances] = useState([]);  
-  
+  const [stargazeInstances, setStargazeInstances] = useState([]);
+
   useEffect(() => {
     const fetchDAOs = async () => {
-      const daodaoData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/daos/documents?limit=500', 'Juno');
-      const osmosisData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500', 'Osmosis');
-      //const stargazeData = await fetchAndStructureDAOs('https://search.daodao.zone/indexes/stargaze_daos/documents?limit=500', 'Stargaze');
+      const daodaoData = await fetchAndStructureDAOs(
+        "https://search.daodao.zone/indexes/daos/documents?limit=500",
+        "Juno"
+      );
+      const osmosisData = await fetchAndStructureDAOs(
+        "https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500",
+        "Osmosis"
+      );
+      const stargazeData = await fetchAndStructureDAOs(
+        "https://search.daodao.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS&limit=501",
+        "Stargaze"
+      );
 
       setDaoDaoInstances(daodaoData);
       setOsmosisInstances(osmosisData);
-      //setStargazeInstances(stargazeData);
+      setStargazeInstances(stargazeData);
 
-      const restructuredDaodao = restructureDAOData(daodaoData, 'Juno');
-      const restructuredOsmosis = restructureDAOData(osmosisData, 'Osmosis');
-      //const restructuredStargaze = restructureDAOData(stargazeData, 'Stargaze');
+      const restructuredDaodao = restructureDAOData(daodaoData, "Juno");
+      const restructuredOsmosis = restructureDAOData(osmosisData, "Osmosis");
+      const restructuredStargaze = restructureDAOData(stargazeData, "Stargaze");
 
       setDaoDaoInstances(restructuredDaodao);
       setOsmosisInstances(restructuredOsmosis);
-     // setStargazeInstances(restructuredStargaze);
+      setStargazeInstances(restructuredStargaze);
     };
 
     fetchDAOs();
-  }, []);    
-
+  }, []);
 
   //DAODAOINT END
   const {
@@ -211,8 +234,6 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
- 
-
   if (
     error ||
     goerliError ||
@@ -269,28 +290,20 @@ function App() {
     },
   }));
 
-  
-
-
-  const allRegistrationInstances = mainnetRegistrations
-    .concat(
+  const allRegistrationInstances = mainnetRegistrations.concat(
     allMainnetV0Registrations,
     goerliRegistrations,
     gnosisRegistrations,
     optimismGoerliRegistrations,
     arbitrumGoerliRegistrations,
     chapelRegistrations,
-    optimismRegistrations,
-    );
-
+    optimismRegistrations
+  );
 
   const daodaoRegInstances = daodaoInstances;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
   );
-
-
-  
 
   console.log({
     mainnetData,
@@ -328,7 +341,12 @@ function App() {
             <Route
               path="/explore"
               element={
-                <ExplorePage registrationInstances={registrationInstances}  junosInstances={daodaoInstances}  osmosisInstances={osmosisInstances}/>
+                <ExplorePage
+                  registrationInstances={registrationInstances}
+                  junosInstances={daodaoInstances}
+                  osmosisInstances={osmosisInstances}
+                  stargazeInstances={stargazeInstances}
+                />
               }
             />
             <Route
