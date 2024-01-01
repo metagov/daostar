@@ -19,7 +19,7 @@
 .card-description {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  max-height: 150px; /* This value can be adjusted */
+  max-height: 80px; /* This value can be adjusted */
   overflow-y: auto; /* Enables vertical scrolling if content exceeds max-height */
 
   /* For Webkit browsers like Chrome/Safari */
