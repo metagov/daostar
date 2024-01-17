@@ -37,7 +37,8 @@ const client = new ApolloClient({
                 chapel:`https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-bnb-bruno`,
                 optimism: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism`,
                 ethereum: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
-                junos: ""
+                junos: "",
+                arbitrum: "https://thegraph.com/hosted-service/subgraph/crazyyuan/daostar-arbitrum"
             },
             //defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",
