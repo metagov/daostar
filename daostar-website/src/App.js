@@ -233,7 +233,7 @@ function App() {
     error: gnosisError,
     data: gnosisData,
   } = gnosisRes;
-  
+
   const arbitrumRes = useQuery(queries.REGISTRATIONS, {
     context: { apiName: "arbitrum" },
     variables: { id: "arbitrum" },
@@ -332,6 +332,7 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
+    arbitrumData
   });
 
   return (
