@@ -236,7 +236,7 @@ function App() {
 
   const arbitrumRes = useQuery(queries.REGISTRATIONS, {
     context: { apiName: "arbitrum" },
-    variables: { id: "arbitrum" },
+    variables: { id: "arbitrum-one" },
   });
   const {
     loading: arbitrumLoading,
