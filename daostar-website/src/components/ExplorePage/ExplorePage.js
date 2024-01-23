@@ -3,6 +3,7 @@ import RegistrationCard from "../RegistrationCard/RegistrationCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 
+// Prelimnary check filter, if a DAO has no name, it won't be displayed
 export const filterRegistrations = (registration, filterVal = "") => {
   if (!registration.daoName) {
     return false;
@@ -13,20 +14,21 @@ export const filterRegistrations = (registration, filterVal = "") => {
   return true;
 };
 
+// Network Filter for EVM Chains
 export const NetworkFilterRegistrations = (registration, filterVal = "") => {
   console.log(registration.registrationNetwork.id);
   if (registration.registrationNetwork.id === filterVal) {
     return true;
   }
-  if (filterVal === "ethereum")
-  {
-    if (registration.registrationNetwork.id === filterVal | registration.registrationNetwork.id === "mainnet") {
+  if (filterVal === "ethereum") {
+    if (
+      (registration.registrationNetwork.id === filterVal) |
+      (registration.registrationNetwork.id === "mainnet")
+    ) {
       return true;
     }
   }
- 
 };
-
 
 const NetworkButtons = [
   { text: "All", filter: "all" },
@@ -40,7 +42,7 @@ const NetworkButtons = [
   { text: "Optimism", filter: "optimism" },
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
-  { text: "Stargaze", filter: "stargaze" }
+  { text: "Stargaze", filter: "stargaze" },
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
 
@@ -54,6 +56,7 @@ const ExplorePage = ({
   const onChangeFilter = (e) => setFilterVal(e.target.value);
   const [networkFilter, setNetworkFilter] = useState("all");
 
+  // Network Filter for Juno, Stargaze and Osmosis
   const filteredRegistrations = (instances) => {
     return instances
       .flatMap((network) =>
@@ -142,14 +145,14 @@ const ExplorePage = ({
     }
   };
 
-  //when evm networks
+  // Handle EVM networks
   const daoCards = registrationInstances
     .filter((reg) => filterRegistrations(reg, filterVal))
     .map((registration, i) => {
       return <RegistrationCard key={i} {...registration} />;
     });
 
-  // Handle when junos
+  // Handle Juno DAOs
   const daodaoCards = junosInstances
     .flatMap((network) =>
       network.registrationNetwork.registrations.filter((reg) =>
@@ -167,7 +170,7 @@ const ExplorePage = ({
       );
     });
 
-  //Handle when stargaze
+  // Handle Stargaze DAOs
   console.log(stargazeInstances);
   const stargazeDaoCards = stargazeInstances
     ?.flatMap((network) =>
@@ -186,7 +189,7 @@ const ExplorePage = ({
       );
     });
 
-  // Handle when osmosis
+  // Handle Osmosis DAOs
   const osmosisDaoCards = osmosisInstances
     ?.flatMap((network) =>
       network.registrationNetwork.registrations.filter((reg) =>
@@ -213,26 +216,20 @@ const ExplorePage = ({
           onChange={onChangeFilter}
         />
         <div>
-        {NetworkButtons.map((button, index) => (
-        <Button
-          key={index}
-          text={button.text}
-          onClick={() => setNetworkFilter(button.filter)}
-          className={networkFilter === button.filter ? "button-highlighted" : ""}
-        />
-      ))}
+          {NetworkButtons.map((button, index) => (
+            <Button
+              key={index}
+              text={button.text}
+              onClick={() => setNetworkFilter(button.filter)}
+              className={
+                networkFilter === button.filter ? "button-highlighted" : ""
+              }
+            />
+          ))}
         </div>
       </div>
 
       <div className="dao-cards">{renderCards()}</div>
-
-      {/* <div className="dao-cards">{daoCards}</div>
-      <br></br>
-      <div className="dao-cards">{daodaoCards}</div>
-      <br></br>
-      <div className="dao-cards">{osmosisDaoCards}</div>
-      <br></br>
-      <div className="dao-cards">{stargazeDaoCards}</div> */}
     </div>
   );
 };
