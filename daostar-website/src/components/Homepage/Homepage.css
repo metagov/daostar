@@ -72,6 +72,11 @@ h1.title {
     font-size: 16px;
 }
 
+.button-highlighted {
+    border: 1px solid var(--clr-accent) !important;
+    color: var(--clr-accent);
+  }
+
 @media screen and (max-width: 900px) {
     .info-section .info-container {
         flex-direction: column;

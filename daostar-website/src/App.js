@@ -234,6 +234,18 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
+  const arbitrumRes = useQuery(queries.REGISTRATIONS, {
+    context: { apiName: "arbitrum" },
+    variables: { id: "arbitrum-one" },
+  });
+  const {
+    loading: arbitrumLoading,
+    error: arbitrumError,
+    data: arbitrumData,
+  } = arbitrumRes;
+
+  
+
   if (
     error ||
     goerliError ||
@@ -241,7 +253,8 @@ function App() {
     arbitrumGoerliError ||
     chapelError ||
     optimismError ||
-    mainnetv0Error
+    mainnetv0Error ||
+    arbitrumError
   ) {
     console.error("Mainnet Error " + error);
     console.error("Mainnet v0 Error " + mainnetv0Error);
@@ -250,6 +263,8 @@ function App() {
     console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
     console.error("Chapel Error" + chapelError);
     console.error("Optimism Error" + optimismError);
+    console.error("Arbitrum Error" + arbitrumError);
+
   }
   if (
     loading ||
@@ -258,7 +273,8 @@ function App() {
     optimismGoerliLoading ||
     arbitrumGoerliLoading ||
     chapelLoading ||
-    optimismLoading
+    optimismLoading ||
+    arbitrumLoading
   )
     return "loading...";
   const mainnetRegistrations =
@@ -275,6 +291,8 @@ function App() {
     gnosisData?.registrationNetwork?.registrations || [];
   const arbitrumGoerliRegistrations =
     arbitrumGoerliData?.registrationNetwork?.registrations || [];
+  const arbitrumRegistrations =
+    arbitrumData?.registrationNetwork?.registrations || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
@@ -297,7 +315,8 @@ function App() {
     optimismGoerliRegistrations,
     arbitrumGoerliRegistrations,
     chapelRegistrations,
-    optimismRegistrations
+    optimismRegistrations,
+    arbitrumRegistrations
   );
 
   const daodaoRegInstances = daodaoInstances;
@@ -313,6 +332,7 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
+    arbitrumData
   });
 
   return (
