@@ -44,6 +44,10 @@ const DisplayRegistration = ({
     network = "arbitrumGoerli";
   }
 
+  if (network === "arbitrum-one") {
+    network = "arbitrum";
+  }
+
   const renderNetworkLink = (network, address) => {
     switch (network) {
       case "Juno":
