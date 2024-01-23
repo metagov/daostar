@@ -70,6 +70,7 @@ import utopiaLogo from '../../../img/logos/utopialabs.webp';
 import wildfireLogo from '../../../img/logos/wildfiredao.png';
 import wonderverseLogo from '../../../img/logos/wonderverse.png';
 import lxdaoLogo from '../../../img/logos/lxdao.jpg';
+import hatsLogo from '../../../img/logos/hats.png'
 
 const MemberLogos = (props) => {
     return (
@@ -104,6 +105,7 @@ const MemberLogos = (props) => {
             <a href="https://github.com/" target="_blank"><img src={githubLogo} alt="GitHub" /></a>
             <a href="https://gnosis.io/" target="_blank"><img src={gnosisLogo} alt="Gnosis" /></a>
             <a href="https://linktr.ee/Govrn" target="_blank"><img src={govrnLogo} alt="Govrn" /></a>
+            <a href="https://www.hatsprotocol.xyz/" target="_blank"><img src={hatsLogo} alt="Hats Protocol" /></a>
             <a href="https://interchain.io/" target="_blank"><img src={interchainLogo} alt="Interchain Foundation" /></a>
             <a href="https://kleros.io/" target="_blank"><img src={klerosLogo} alt="Kleros" /></a>
             <a href="https://kycdao.xyz/" target="_blank"><img src={kycdaoLogo} alt="kycDAO" /></a>
