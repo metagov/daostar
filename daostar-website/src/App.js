@@ -244,7 +244,18 @@ function App() {
     data: arbitrumData,
   } = arbitrumRes;
 
-  
+  const EASOptimismGoerliRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
+    context: { apiName: "easOptimismGoerli" },
+    variables: { 
+      schemaId: "0x5e7633bad97b4b8e8248b93aa8f9bfa6b905f7eeb70a8b2053b460f0a2d44f1f", 
+    },
+  });
+  const {
+    loading: EASOptimismGoerliLoading,
+    error: EASOptimismGoerliError,
+    data: EASOptimismGoerliData,
+  } = EASOptimismGoerliRes;
+  console.log(EASOptimismGoerliData)
 
   if (
     error ||
@@ -295,6 +306,9 @@ function App() {
     arbitrumData?.registrationNetwork?.registrations || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
+
+  const EASOptimismGoerliAttestations =
+    EASOptimismGoerliData?.attestations || [];
 
   // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
   // So that when we click on an old registration instance card we are able to view and edit its proprties
@@ -366,6 +380,7 @@ function App() {
                   junosInstances={daodaoInstances}
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
+                  easOptimismGoerli={EASOptimismGoerliAttestations}
                 />
               }
             />
