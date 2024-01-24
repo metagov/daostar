@@ -87,6 +87,10 @@ These contracts are used to register on DAOstar website.
     * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://testnet.bscscan.com/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
     * Version: 1.0.0
 
+### EAS Attestations
+
+#### Optimism Goerli
+- [Schema](https://optimism-goerli-bedrock.easscan.org/schema/view/0x5e7633bad97b4b8e8248b93aa8f9bfa6b905f7eeb70a8b2053b460f0a2d44f1f)
 
 ## How to add new network support for DAOstar
 
