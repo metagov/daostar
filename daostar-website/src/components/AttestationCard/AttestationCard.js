@@ -98,6 +98,9 @@ const DisplayAttestation = ({
             <span className="bp4-text-muted">DAO URI: </span>
             <Link target='_blank'  to={daoURI}>{daoURI}</Link>
           </p>
+          <p className="bp4-text-small wizard-no-margin">
+            <span className="bp4-text-muted">Network: Optimism Goerli</span>
+          </p>
         </div>
         <Divider />
         {decodedData && (
