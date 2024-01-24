@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RegistrationCard from "../RegistrationCard/RegistrationCard";
+import AttestationCard from "../AttestationCard/AttestationCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 
@@ -43,6 +44,8 @@ const NetworkButtons = [
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
+  { text: "EAS", filter: "easOptimismGoerli" },
+
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
 
@@ -51,6 +54,7 @@ const ExplorePage = ({
   junosInstances,
   osmosisInstances,
   stargazeInstances,
+  easOptimismGoerli
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
@@ -130,6 +134,11 @@ const ExplorePage = ({
           .map((registration, i) => (
             <RegistrationCard key={i} {...registration} />
           ));
+      case "easOptimismGoerli":
+        return easOptimismGoerli
+        .map((attestation, i) => (
+          <AttestationCard key={i} {...attestation} />
+        ));
       default:
         return (
           <>

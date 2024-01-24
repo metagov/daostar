@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-
+// This is the only queries file being used
 const REGISTRATIONS = gql`
     query Registrations($id: String) @api(contextKey: "apiName") {
         registrationNetwork(id: $id) {
@@ -76,4 +76,29 @@ const REGISTRATION = gql`
     }
 `
 
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD }
+const ATTESTATIONS_BY_SCHEMA = gql`
+ query AttestationsBySchema($schemaId: String!) @api(contextKey: "apiName") {
+    attestations(where: {
+      schemaId: { equals: $schemaId },
+    }) {
+      id
+      data
+      decodedDataJson
+      recipient
+      attester
+      time
+      timeCreated
+      expirationTime
+      revocationTime
+      refUID
+      revocable
+      revoked
+      txid
+      schemaId
+      ipfsHash
+      isOffchain
+    }
+  }
+`;
+
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA }
