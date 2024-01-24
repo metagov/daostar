@@ -6,7 +6,7 @@ features:
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
-    network: chapel
+    network: arbitrum-one
     source:
       abi: EIP4824Registration
     mapping:
@@ -25,11 +25,11 @@ templates:
 dataSources:
   - kind: ethereum
     name: EIP4824Index
-    network: chapel
+    network: arbitrum-one
     source:
       abi: EIP4824Index
       address: "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4"
-      startBlock: 32947350
+      startBlock: 171329384
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

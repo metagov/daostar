@@ -13,3 +13,5 @@ docs/_build
 
 /node_modules
 .idea
+*/**/artifacts
+*/**/build

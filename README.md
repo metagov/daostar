@@ -34,6 +34,8 @@ These contracts are used to register on DAOstar website.
 * **EIP4824RegistrationSummoner**
   * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://optimistic.etherscan.io/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
   * Version: 1.0.0
+
+
 #### Arbitrum
 * **EIP4824Index**:
   * Contract: [0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4](https://arbiscan.io/address/0x18cbb356cd64193b1a0ca49911fc72cb3d02a5e4)

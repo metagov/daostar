@@ -15,6 +15,11 @@ export class RegistrationInstance extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("registrationAddress", Value.fromBytes(Bytes.empty()));
+    this.set("daoAddress", Value.fromBytes(Bytes.empty()));
+    this.set("daoURI", Value.fromString(""));
+    this.set("registrationNetwork", Value.fromString(""));
   }
 
   save(): void {
@@ -29,12 +34,6 @@ export class RegistrationInstance extends Entity {
     }
   }
 
-  static loadInBlock(id: string): RegistrationInstance | null {
-    return changetype<RegistrationInstance | null>(
-      store.get_in_block("RegistrationInstance", id)
-    );
-  }
-
   static load(id: string): RegistrationInstance | null {
     return changetype<RegistrationInstance | null>(
       store.get("RegistrationInstance", id)
@@ -43,11 +42,7 @@ export class RegistrationInstance extends Entity {
 
   get id(): string {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -56,11 +51,7 @@ export class RegistrationInstance extends Entity {
 
   get registrationAddress(): Bytes {
     let value = this.get("registrationAddress");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set registrationAddress(value: Bytes) {
@@ -69,11 +60,7 @@ export class RegistrationInstance extends Entity {
 
   get daoAddress(): Bytes {
     let value = this.get("daoAddress");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
+    return value!.toBytes();
   }
 
   set daoAddress(value: Bytes) {
@@ -82,11 +69,7 @@ export class RegistrationInstance extends Entity {
 
   get daoURI(): string {
     let value = this.get("daoURI");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set daoURI(value: string) {
@@ -112,11 +95,7 @@ export class RegistrationInstance extends Entity {
 
   get registrationNetwork(): string {
     let value = this.get("registrationNetwork");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set registrationNetwork(value: string) {
@@ -264,6 +243,8 @@ export class RegistrationNetwork extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("chainId", Value.fromString(""));
   }
 
   save(): void {
@@ -278,12 +259,6 @@ export class RegistrationNetwork extends Entity {
     }
   }
 
-  static loadInBlock(id: string): RegistrationNetwork | null {
-    return changetype<RegistrationNetwork | null>(
-      store.get_in_block("RegistrationNetwork", id)
-    );
-  }
-
   static load(id: string): RegistrationNetwork | null {
     return changetype<RegistrationNetwork | null>(
       store.get("RegistrationNetwork", id)
@@ -292,53 +267,36 @@ export class RegistrationNetwork extends Entity {
 
   get id(): string {
     let value = this.get("id");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
   }
 
-  get registrations(): RegistrationInstanceLoader {
-    return new RegistrationInstanceLoader(
-      "RegistrationNetwork",
-      this.get("id")!.toString(),
-      "registrations"
-    );
+  get registrations(): Array<string> | null {
+    let value = this.get("registrations");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set registrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("registrations");
+    } else {
+      this.set("registrations", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
   get chainId(): string {
     let value = this.get("chainId");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
   set chainId(value: string) {
     this.set("chainId", Value.fromString(value));
-  }
-}
-
-export class RegistrationInstanceLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): RegistrationInstance[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<RegistrationInstance[]>(value);
   }
 }
