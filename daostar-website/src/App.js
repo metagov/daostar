@@ -102,6 +102,35 @@ function restructureDAOData(daoInstances, networkId) {
   ];
 }
 
+function restructureAragonDAOData(daoInstances, network) {
+  return [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: network,
+        registrations: daoInstances?.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.name,
+          daoName: item.name,
+          daoAddress: item.name,
+          daoDescription: item.description,
+          daoURI: `https://aragon-dao-uri.onrender.com//aragon_dao/${network}/${item.id}`,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: '',
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: '',
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: network,
+          },
+        })),
+      },
+    },
+  ];
+}
+
 function App() {
   //DAODAOINT START
 
@@ -122,6 +151,7 @@ function App() {
   const [daodaoInstances, setDaoDaoInstances] = useState([]);
   const [osmosisInstances, setOsmosisInstances] = useState([]);
   const [stargazeInstances, setStargazeInstances] = useState([]);
+  const [aragonBaseDAOs, setAragonBaseDAOs] = useState([])
 
   useEffect(() => {
     const fetchDAOs = async () => {
@@ -138,6 +168,12 @@ function App() {
         "Stargaze"
       );
 
+      const aragonBaseResponse = await axios.get("https://aragon-dao-uri.onrender.com/fetch_aragon_daos/base");
+      const aragonBaseData = aragonBaseResponse.data;
+      const aragonBD = restructureAragonDAOData(aragonBaseData, "Base")
+      setAragonBaseDAOs(aragonBD)
+    
+      
       setDaoDaoInstances(daodaoData);
       setOsmosisInstances(osmosisData);
       setStargazeInstances(stargazeData);
@@ -346,7 +382,8 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
-    arbitrumData
+    arbitrumData,
+    aragonBaseDAOs
   });
 
   return (

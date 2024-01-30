@@ -101,4 +101,14 @@ const ATTESTATIONS_BY_SCHEMA = gql`
   }
 `;
 
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA }
+const GET_ARAGON_DAOS = gql`
+  query GetDaos($network: String!) {
+    daos @rest(type: "Dao", path: "fetch_aragon_daos/{args.network}") {
+      id
+      daoURI
+      metadata
+    }
+  }
+`;
+
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, GET_ARAGON_DAOS }
