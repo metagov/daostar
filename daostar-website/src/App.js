@@ -114,7 +114,7 @@ function restructureAragonDAOData(daoInstances, network) {
           daoName: item.name,
           daoAddress: item.name,
           daoDescription: item.description,
-          daoURI: `https://aragon-dao-uri.onrender.com//aragon_dao/${network}/${item.id}`,
+          daoURI: `https://aragon-dao-uri.onrender.com/aragon_dao/${network}/${item.name}`,
           governanceURI: item.governanceURI,
           issuersURI: item.issuersURI,
           managerAddress: '',
