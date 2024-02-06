@@ -45,6 +45,7 @@ const NetworkButtons = [
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
   { text: "EAS OPGoerli", filter: "easOptimismGoerli" },
+  { text: "Aragon DAOs on Base", filter: "aragonBaseDAOS"}
 
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
@@ -54,13 +55,15 @@ const ExplorePage = ({
   junosInstances,
   osmosisInstances,
   stargazeInstances,
-  easOptimismGoerli
+  easOptimismGoerli,
+  aragonDAOs
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
   const [networkFilter, setNetworkFilter] = useState("all");
 
-  // Network Filter for Juno, Stargaze and Osmosis
+
+  // Network Filter for Juno, Stargaze and Osmosis and
   const filteredRegistrations = (instances) => {
     return instances
       .flatMap((network) =>
@@ -139,16 +142,18 @@ const ExplorePage = ({
         .map((attestation, i) => (
           <AttestationCard key={i} {...attestation} />
         ));
+      case "aragonBaseDAOS":
+        return filteredRegistrations(aragonDAOs);
       default:
         return (
           <>
             <div className="dao-cards">{daoCards}</div>
             <br></br>
-            <div className="dao-cards">{daodaoCards}</div>
+            <div className="dao-cards">{filteredRegistrations(junosInstances)}</div>
             <br></br>
-            <div className="dao-cards">{osmosisDaoCards}</div>
+            <div className="dao-cards">{filteredRegistrations(osmosisInstances)}</div>
             <br></br>
-            <div className="dao-cards">{stargazeDaoCards}</div>
+            <div className="dao-cards">{filteredRegistrations(stargazeInstances)}</div>
           </>
         );
     }
@@ -161,60 +166,7 @@ const ExplorePage = ({
       return <RegistrationCard key={i} {...registration} />;
     });
 
-  // Handle Juno DAOs
-  const daodaoCards = junosInstances
-    .flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
-    });
-
-  // Handle Stargaze DAOs
-  console.log(stargazeInstances);
-  const stargazeDaoCards = stargazeInstances
-    ?.flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
-    });
-
-  // Handle Osmosis DAOs
-  const osmosisDaoCards = osmosisInstances
-    ?.flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
-    });
+  
   return (
     <div className="explore-page">
       <div className="filter">

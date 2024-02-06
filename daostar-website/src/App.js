@@ -418,6 +418,7 @@ function App() {
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
                   easOptimismGoerli={EASOptimismGoerliAttestations}
+                  aragonDAOs={aragonBaseDAOs}
                 />
               }
             />
