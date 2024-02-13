@@ -19,7 +19,7 @@ These contracts are used to register on DAOstar website.
   * Version: 1.0
   * Contract: [0x58E593f2100Fa06dA34935C1B35Fd78Aaa32479a](https://etherscan.io/address/0x58e593f2100fa06da34935c1b35fd78aaa32479a) ( **Deprecated** )
   * Version: 0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
   * Contract: [0x2Dac5DBbF1D024c1E0D9c92D3AeDa7618e15aDd7](https://etherscan.io/address/0x2dac5dbbf1d024c1e0d9c92d3aeda7618e15add7)
   * Version: 1.0
   * Contract: [0x37dF3fC47C1c3A2acaFd2Dad9c1C00090a8655Bc](https://etherscan.io/address/0x37df3fc47c1c3a2acafd2dad9c1c00090a8655bc) ( **Deprecated** )
@@ -31,7 +31,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
   * Contract: [0x65D17d117C190f7A4cc784b56a17E3f7Edde5762](https://optimistic.etherscan.io/address/0x65D17d117C190f7A4cc784b56a17E3f7Edde5762)
   * Version: 1.0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
   * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://optimistic.etherscan.io/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
   * Version: 1.0.0
 
@@ -43,7 +43,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
   * Contract: [0x65D17d117C190f7A4cc784b56a17E3f7Edde5762](https://arbiscan.io/address/0x65D17d117C190f7A4cc784b56a17E3f7Edde5762)
   * Version: 1.0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
   * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://arbiscan.io/address/0x5c0340ad34f7284f9272e784ff76638e8ddb5de4)
   * Version: 1.0.0
 
@@ -55,7 +55,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
     * Contract: [0xAEefc45ad77242788FEE3e615642cD9c2c1261A8](https://goerli.etherscan.io/address/0xAEefc45ad77242788FEE3e615642cD9c2c1261A8)
     * Version: N/A
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
     * Contract: [0x3271B3479f7485DAdB2bD5FFF43EEb4367B1a91a](https://goerli.etherscan.io/address/0x3271b3479f7485dadb2bd5fff43eeb4367b1a91a)
     * Version: N/A
 #### Optimism-goerli
@@ -65,7 +65,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
     * Contract: [0xc9cb7ecedd8a6d544348512a53ff52abf4d9d863](https://goerli-optimism.etherscan.io/address/0xc9cb7ecedd8a6d544348512a53ff52abf4d9d863)
     * Version: 1.0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
     * Contract: [0x45E81552DEC1F57c18E3cbd69549252624b96D98](https://goerli-optimism.etherscan.io/address/0x45E81552DEC1F57c18E3cbd69549252624b96D98)
     * Version: 1.0.0
 #### Arbitrum-goerli
@@ -75,7 +75,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
     * Contract: [0x65D17d117C190f7A4cc784b56a17E3f7Edde5762](https://goerli.arbiscan.io/address/0x65D17d117C190f7A4cc784b56a17E3f7Edde5762)
     * Version: 1.0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
     * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://goerli.arbiscan.io/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
     * Version: 1.0.0
 #### BNB-bruno
@@ -85,7 +85,7 @@ These contracts are used to register on DAOstar website.
 * **EIP4824Registration**
     * Contract: [0x65D17d117C190f7A4cc784b56a17E3f7Edde5762](https://testnet.bscscan.com/address/0x65D17d117C190f7A4cc784b56a17E3f7Edde5762)
     * Version: 1.0.0
-* **EIP4824RegistrationSummoner**
+* **EIP4824RegistrationSummoner** (Entry Point)
     * Contract: [0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4](https://testnet.bscscan.com/address/0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4)
     * Version: 1.0.0
 
