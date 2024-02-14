@@ -25,6 +25,47 @@ const mainnetOldClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const SUBGRAPH_API_URL = {
+  arbitrum: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/arbitrum',
+  'arbitrum-goerli': 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/arbitrum-goerli',
+  base: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/base',
+  ethereum: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/ethereum',
+  goerli: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/goerli',
+  polygon: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/polygon',
+  sepolia: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/sepolia',
+  unsupported: undefined,
+};
+
+function useFetchAragonDAOs(network) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = SUBGRAPH_API_URL[network];
+        if (!apiUrl) {
+          throw new Error(`Unsupported network: ${network}`);
+        }
+        const response = await axios.get(apiUrl);
+        const structuredData = restructureAragonDAOData(response.data, network); // Adjust based on actual data structure
+        setData(structuredData);
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [network]);
+
+  return { data, loading, error };
+}
+
+
 const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
 const token = process.env.REACT_APP_BEARER_TOKEN;
@@ -134,7 +175,6 @@ function restructureAragonDAOData(daoInstances, network) {
 }
 
 function App() {
-  //DAODAOINT START
 
   if (token !== undefined) {
     headers = {
@@ -192,7 +232,6 @@ function App() {
     fetchDAOs();
   }, []);
 
-  //DAODAOINT END
   const {
     loading,
     error,
