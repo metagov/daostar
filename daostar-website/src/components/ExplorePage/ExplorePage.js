@@ -9,7 +9,7 @@ export const filterRegistrations = (registration, filterVal = "") => {
   if (!registration.daoName) {
     return false;
   }
-  if (filterVal !== "") {
+  if (filterVal !== "test" | filterVal !== "scam" | filterVal !== "") {
     return registration.daoName.toLowerCase().includes(filterVal.toLowerCase());
   }
   return true;
