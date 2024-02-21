@@ -5,24 +5,35 @@ import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
+// export const filterRegistrations = (registration, filterVal = "test") => {
+//   if (!registration.daoName) {
+//     return false;
+//   }
+//   if (filterVal !== "") {
+//     return registration.daoName.toLowerCase().includes(filterVal.toLowerCase());
+//   }
+//   return true;
+// };
+
 export const filterRegistrations = (registration, filterVal) => {
   // Check if daoName is present
   if (!registration.daoName) {
     return false;
   }
+  if (filterVal !== "") {
+    const daoNameLower = registration.daoName.toLowerCase();
 
-  // Convert daoName to lower case for case-insensitive comparison
-  const daoNameLower = registration.daoName.toLowerCase();
-
-  // List of words to filter out
-  const filterWords = ["scam", "test", "fuck", filterVal];
-
-  // Check if daoName contains any of the filter words
-  for (const filterWord of filterWords) {
-    if (daoNameLower.includes(filterWord)) {
-      return false; // Exclude if it contains a filter word
+    const filterWords = ["scam", "test", "fuck"];
+  
+    for (const filterWord of filterWords) {
+      if (daoNameLower.includes(filterWord)) {
+        return false; // Exclude if it contains a filter word
+      }
     }
+     return registration.daoName.toLowerCase().includes(filterVal.toLowerCase());
   }
+
+ 
 
   return true; // Include if it passes all checks
 };
