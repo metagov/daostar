@@ -5,37 +5,22 @@ import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
-// export const filterRegistrations = (registration, filterVal = "test") => {
-//   if (!registration.daoName) {
-//     return false;
-//   }
-//   if (filterVal !== "") {
-//     return registration.daoName.toLowerCase().includes(filterVal.toLowerCase());
-//   }
-//   return true;
-// };
-
-export const filterRegistrations = (registration, filterVal) => {
-  // Check if daoName is present
-  if (!registration.daoName) {
+export const filterRegistrations = (registration, filterVal = "") => {
+  // Check if daoName is present and not empty
+  if (!registration.daoName || registration.daoName.trim() === "") {
     return false;
   }
-  if (filterVal !== "") {
-    const daoNameLower = registration.daoName.toLowerCase();
 
-    const filterWords = ["scam", "test", "fuck"];
-  
-    for (const filterWord of filterWords) {
-      if (daoNameLower.includes(filterWord)) {
-        return false; // Exclude if it contains a filter word
-      }
-    }
-     return registration.daoName.toLowerCase().includes(filterVal.toLowerCase());
+  const daoNameLower = registration.daoName.toLowerCase();
+  const filterWords = ["scam", "test", "fuck"];
+
+  // Check for excluded words
+  if (filterWords.some(filterWord => daoNameLower.includes(filterWord))) {
+    return false;
   }
 
- 
-
-  return true; // Include if it passes all checks
+  // Check if a specific filter value is provided and included in the daoName
+  return filterVal === "" || daoNameLower.includes(filterVal.toLowerCase());
 };
 
 // Network Filter for EVM Chains
