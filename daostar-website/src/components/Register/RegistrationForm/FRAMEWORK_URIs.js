@@ -8,7 +8,10 @@ const FRAMEWORK_URIs = {
         proposalsURI: (address, network) => `https://services.daostar.org/api/v1/gnosis/proposals/${network}/${address}`,
     },
     snapshot: {
-        membersURI: (address, network) => `https://services.daostar.org/api/v1/boardroom/members/${network}/${address}`,
+        membersURI: (address, network) => {
+            const boardroomAddress = address.replace(/\.eth$/, '');
+            return `https://services.daostar.org/api/v1/boardroom/members/${network}/${boardroomAddress}`;
+      },
         proposalsURI: (address, network) => `https://services.daostar.org/api/v1/snapshot/proposals/${address}`,
     },
 }
