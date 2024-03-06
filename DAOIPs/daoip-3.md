@@ -46,7 +46,7 @@ A DAOIP-3 attestation MUST take the following form:
 }
 ```
 
-In particular, note all DAOIP-3 attestations take the form of verifiable credentials as per the the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/), where attestations are made about a subject via the `credentialSubject` object. In addition to the mandatory fields of a verifiable credential (`type`, `issuer`, and `credentialSubject`), note the mandatory inclusion of an `expirationDate` field on every attestation as well as `attestationURI`, which is the URI or request through which someone can reproduce the attestation.
+In particular, note all DAOIP-3 attestations take the form of verifiable credentials as per the the [W3C verifiable credential specification](https://w3c.github.io/vc-data-model/), where attestations are made about a subject via the `credentialSubject` object. In addition to the mandatory fields of a verifiable credential (`type`, `issuer`, and `credentialSubject`). note the mandatory inclusion of the URI or API request through which someone can reproduce the attestation. All attestations SHOULD include an `expirationDate` field.
 
 Other fields in the attestation, including additional properties of `credentialSubject`, should follow the schema specified by the attestation type.
 
@@ -390,12 +390,11 @@ The intended indexing flow for a service building on top of DAOIP-3 is:
 2. index data from `attestationIssuersURI` in order to discover (or cull) new issuers / service providers,
 3. pull data from `subjectAttestationsURI`, or through other endpoints listed through at `issuer`.
 
-
 ### Expiration
 
-Since attestations can be easily (and freely) issued by the DAO or by the issuer, we propose adding an expiry timestamp to the attestation schema. Having a (short-lived) self-expiring attestation avoids the rigmarole of maintaining a revocation registry and the underlying issues of trust and access to it.
+We originally wanted to make an expiry timestamp mandatory for all attestations; since attestations can be easily (and freely) issued by the DAO or by the issuer, having a (short-lived) self-expiring attestation avoids the rigmarole of maintaining a revocation registry and the underlying issues of trust and access to it. With self-revoking credentials, the problem of storing is partially solved: they can at any time be reissued by the DAO contract or the trusted party. The approach also adds flexibility for storage by the user themselves (e.g. via a browser extension, that could potentially automatically refresh expired credentials).
 
-With self-revoking credentials, the problem of storing is partially solved: they can at any time be reissued by the DAO contract or the trusted party. The approach also adds flexibility for storage by the user themselves (e.g. via a browser extension, that could potentially automatically refresh expired credentials).
+However, after feedback from potential adopters of the standard, we decided to make the expiration a recommendation rather than a mandatory component of the standard.
 
 ## Acknowledgements
 
