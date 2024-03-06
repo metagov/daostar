@@ -13,6 +13,7 @@ type RegistrationInstance @entity {
     activityLogURI: String
     managerAddress: String
     contractsRegistryURI: String
+    contractVersion: String
 }
 
 type RegistrationNetwork @entity {

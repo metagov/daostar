@@ -17,6 +17,7 @@ const REGISTRATIONS = gql`
                 activityLogURI
                 managerAddress
                 contractsRegistryURI
+                contractsVersion
                 registrationAddress
                 registrationNetwork {
                     id
@@ -68,6 +69,7 @@ const REGISTRATION = gql`
             activityLogURI
             managerAddress
             contractsRegistryURI
+            contractVersion
             registrationAddress
             registrationNetwork {
                 id
