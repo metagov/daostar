@@ -65,7 +65,7 @@ The last two methods (via an ENS name whose manager and resolver, or just resolv
 This standard was authored in consultation with contributors to ENS (including Blockful) as well as members of Verisign.
 
 ## Acknowledgements
-Thanks to Amandeep for comments.
+Thanks to Amandeep and Eugene Leventhal for helpful comments.
 
 ## Copyright
 Copyright and related rights waived via CC0.
