@@ -1,7 +1,7 @@
 ---
 daoip: 6
-title: daoURI via ENS or DNS
-description: Publish daoURI through ENS or DNS text records
+title: daoURI via ENS
+description: Publish daoURI through ENS text records
 discussions-to: https://github.com/metagov/daostar/discussions/211
 status: Draft
 type: 
@@ -11,10 +11,10 @@ created: 2024-3-11
 ---
 
 # Simple summary
-Publish and index daoURI through a text field on an entity’s ENS or DNS domain name.
+Publish and index daoURI through a text field on an entity’s ENS (or DNS) domain name.
 
 # Motivation
-ENS is a commonly-used platform for identity and namespace in Ethereum. Many DAOs possess ENS names. Many DAOs have also delegated management of their ENS name to a manager, similar to how registration contracts work in [DAOIP-2](daoip-2.md). This specification facilitates adoption of daoURI as specified in DAOIP-2 by specifying a method for a DAO or representative of a DAO to publish a daoURI by adding a simple TXT record to their ENS or DNS records.
+ENS is a commonly-used platform for identity and namespace in Ethereum. Many DAOs possess ENS names. Many DAOs have also delegated management of their ENS name to a manager, similar to how registration contracts work in [DAOIP-2](daoip-2.md). This specification facilitates adoption of daoURI as specified in DAOIP-2 by specifying a method for a DAO or representative of a DAO to publish a daoURI by adding a simple text record to their ENS (or DNS) records.
 
 # Specification
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
@@ -31,7 +31,7 @@ To set a daoURI through a DNS TXT record, set a TXT record of the following sort
 | -------------- | ----------- | ---- | ----------------------------------------- | --------- |
 | exampledao.com | TXT         | @    | daoURI=https://api.daostar.org/exampleDAO | Automatic |
 
-The owner of the domain name MAY also claim the domain name through ENS. This “DNS name on ENS” SHOULD be owned by, be managed by, resolve to, and be the primary name of the primacy governance contract of the DAO. If not, see the “Indexing priority” section.
+To associate this TXT record to an on-chain entity, the owner of the domain name MUST also claim the domain name through ENS. This “DNS name on ENS” SHOULD be owned by, be managed by, resolve to, and be the primary name of the primacy governance contract of the DAO. If not, see the “Indexing priority” section.
 
 Off-chain organizations MAY report daoURI or similar record directly through their DNS.
 
