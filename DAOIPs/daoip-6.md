@@ -11,7 +11,7 @@ created: 2024-3-11
 ---
 
 # Simple summary
-Publish and index daoURI through a text field on an entity’s ENS (or DNS) domain name.
+Publish and index daoURI through a text field on an entity’s ENS (or DNS) name.
 
 # Motivation
 ENS is a commonly-used platform for identity and namespace in Ethereum. Many DAOs possess ENS names. Many DAOs have also delegated management of their ENS name to a manager, similar to how registration contracts work in [DAOIP-2](daoip-2.md). This specification facilitates adoption of daoURI as specified in DAOIP-2 by specifying a method for a DAO or representative of a DAO to publish a daoURI by adding a simple text record to their ENS (or DNS) records.
