@@ -51,7 +51,7 @@ Suppose that a given DAO has its primary governance contract at address 0x123. T
 ## Rationale
 There are many methods through which a DAO can publish a daoURI (i.e. metadata about itself), each of which may only imperfectly reflect the DAO’s intent.
 
-The most trustworthy way of publishing a daoURI is through an on-chain registration contract (see [DAOIP-2](daoip-2.md)—in this case, it is clear that the data reflects the active will of the DAO. If the DAO inherits daoURI directly through its contract, then this is also trustworthy, though slightly less so as it typically reflects the decisions of a DAO framework rather than the DAO directly.
+The most trustworthy way of publishing a daoURI is through an on-chain registration contract (see [DAOIP-2](daoip-2.md)—in this case, it is clear that the data reflects the active will of the DAO.  It is also the primary way a DAO may “overwrite” any other daoURI that has previously been published, through any means. If the DAO inherits daoURI directly through its contract, then this is also trustworthy, though slightly less so as it typically reflects the decisions of a DAO framework rather than the DAO directly.
 
 The only way that a DAO’s governance contract can have a primary name on ENS is if the contract itself calls ENS, meaning that it needs to pass through an on-chain governance interaction. This suggests that it is also highly trustworthy.
 
@@ -60,6 +60,8 @@ A daoURI reported through an ENS name whose owner, manager, and resolver are all
 Service providers to a DAO, e.g. Snapshot, often publish relevant information including daoURI-style data, about the DAO. While not a reflection of the DAO’s own intent, it is often based on public, trustworthy data about the DAO. For additional rationale, see [DAOIP-3](daoip-3.md).
 
 The last two methods (via an ENS name whose manager and resolver, or just resolver, are set to the DAO’s primary governance contract) are not trustworthy. But they are still sometimes useful for publishing certain kinds of information. Obviously, anyone owning an ENS name can set the manager and resolver to a DAO’s primary governance contract, so these methods are susceptible to spam. However, this arrangement might be legitimate in some cases, e.g. because the DAO decides to hold certain assets in a separate treasury or governance contract.
+
+Note: while we wrote down an ordered list indicating the indexing priority, we also believe that it is often good for there to be many overlapping perspectives about a DAO, which in general may be organized in a decentralized manner with many distinct decision-making centers. Data reported from different sources about a DAO may add useful context in different ways, even if they do not obviously reflect the intent of the DAO itself.
 
 ### Community Consensus
 This standard was authored in consultation with contributors to ENS (including Blockful) as well as members of Verisign.
