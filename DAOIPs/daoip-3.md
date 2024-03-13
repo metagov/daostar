@@ -207,7 +207,7 @@ Membership attestations (see above) issued by an issuer listed by the DAO in `at
 
 An *attestation issuer*, or just issuer, is an entity that issues and manages attestations, sometimes but not always on behalf of some other entity. Issuers often provide services, host data about organizations and their members, or are trusted in some other way.
 
-Every issuer conforming to DAOIP-3 MUST implement an `issuer` endpoint describing the issuer and the endpoints that it publishes, following the Attestation Issuer JSON-LD Schema below.
+Every issuer conforming to DAOIP-3 MUST implement an issuer service that returns information about the issuer and the endpoints that it publishes, following the Attestation Issuer JSON-LD Schema below.
 
 Attestation Issuer JSON-LD Schema
 ```json
@@ -217,16 +217,17 @@ Attestation Issuer JSON-LD Schema
 	"name": "<name of the attestation issuer>",
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"description": "<description of the attestation issuer>",
+	"logo": "<link to logo of the issuer, usually a .jpg>",
 	"endpoints": {
 		"subjectAttestationsURI": "<URI of endpoint>",
 	},
-	"apiURI": "<URI to specification or documentation of the issuer's API>"
+	"apiDocsURI": "<URI to specification or documentation of the issuer's API>"
 }
 ```
 
-Within the `endpoint` property, issuers MUST publish the `subjectAttestationsURI` endpoint, which, in response to a request about an entity (typically identified through its `type` and `id` properties, but possibly through other fields such as `name`), returns an array of attestations about that entity.
+Issuers SHOULD publish a `name`, `description`, and `logo`. Within the `endpoint` property, issuers MUST publish the `subjectAttestationsURI` endpoint, which, in response to a request about an entity (typically identified through its `type` and `id` properties, but possibly through other fields such as `name`), returns an array of attestations about that entity.
 
-Issuers MAY choose to publish an API documentation specification through `apiURI`. If so, it is RECOMMENDED that they return a JSON or YAML object following the [OpenAPI specification](https://spec.openapis.org/oas/latest.html).
+Issuers MAY choose to publish an API documentation specification through `apiDocsURI`. If so, it is RECOMMENDED that they return a JSON or YAML object following the [OpenAPI specification](https://spec.openapis.org/oas/latest.html). 
 
 ### Subject Presentations
 An issuer MAY aggregate information from multiple attestations within a single *presentation* or *verifiable presentation*. If so, it MUST publish an endpoint `subjectPresentationURI` within the `endpoints` property. Further, aggregate information about members or contributions MUST take the form of arrays under the `memberOf` and `contributions` properties.
