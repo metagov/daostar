@@ -25,6 +25,47 @@ const mainnetOldClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const SUBGRAPH_API_URL = {
+  arbitrum: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/arbitrum',
+  'arbitrum-goerli': 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/arbitrum-goerli',
+  base: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/base',
+  ethereum: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/ethereum',
+  goerli: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/goerli',
+  polygon: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/polygon',
+  sepolia: 'https://aragon-dao-uri.onrender.com/fetch_aragon_daos/sepolia',
+  unsupported: undefined,
+};
+
+function useFetchAragonDAOs(network) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = SUBGRAPH_API_URL[network];
+        if (!apiUrl) {
+          throw new Error(`Unsupported network: ${network}`);
+        }
+        const response = await axios.get(apiUrl);
+        const structuredData = restructureAragonDAOData(response.data, network); // Adjust based on actual data structure
+        setData(structuredData);
+      } catch (error) {
+        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [network]);
+
+  return { data, loading, error };
+}
+
+
 const alchemyId = process.env.REACT_APP_ALCHEMY_ID;
 const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
 const token = process.env.REACT_APP_BEARER_TOKEN;
@@ -102,8 +143,38 @@ function restructureDAOData(daoInstances, networkId) {
   ];
 }
 
+function restructureAragonDAOData(daoInstances, network) {
+  const aragonNetwork = network.toLowerCase(); // Convert network to lowercase
+
+  return [
+    {
+      registrationNetwork: {
+        __typename: "RegistrationNetwork",
+        id: network,
+        registrations: daoInstances?.map((item) => ({
+          __typename: "RegistrationInstance",
+          id: item.name,
+          daoName: item.name,
+          daoAddress: item.name,
+          daoDescription: item.description,
+          daoURI: `https://aragon-dao-uri.onrender.com/aragon_dao/${aragonNetwork}/${item.name}`,
+          governanceURI: item.governanceURI,
+          issuersURI: item.issuersURI,
+          managerAddress: '',
+          membersURI: item.membersURI,
+          proposalsURI: item.proposalsURI,
+          registrationAddress: '',
+          registrationNetwork: {
+            __typename: "RegistrationNetwork",
+            id: network,
+          },
+        })),
+      },
+    },
+  ];
+}
+
 function App() {
-  //DAODAOINT START
 
   if (token !== undefined) {
     headers = {
@@ -122,6 +193,7 @@ function App() {
   const [daodaoInstances, setDaoDaoInstances] = useState([]);
   const [osmosisInstances, setOsmosisInstances] = useState([]);
   const [stargazeInstances, setStargazeInstances] = useState([]);
+  const [aragonBaseDAOs, setAragonBaseDAOs] = useState([])
 
   useEffect(() => {
     const fetchDAOs = async () => {
@@ -138,6 +210,12 @@ function App() {
         "Stargaze"
       );
 
+      const aragonBaseResponse = await axios.get("https://aragon-dao-uri.onrender.com/fetch_aragon_daos/base");
+      const aragonBaseData = aragonBaseResponse.data;
+      const aragonBD = restructureAragonDAOData(aragonBaseData, "Base")
+      setAragonBaseDAOs(aragonBD)
+    
+      
       setDaoDaoInstances(daodaoData);
       setOsmosisInstances(osmosisData);
       setStargazeInstances(stargazeData);
@@ -154,7 +232,6 @@ function App() {
     fetchDAOs();
   }, []);
 
-  //DAODAOINT END
   const {
     loading,
     error,
@@ -346,7 +423,8 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
-    arbitrumData
+    arbitrumData,
+    aragonBaseDAOs
   });
 
   return (
@@ -381,6 +459,7 @@ function App() {
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
                   easOptimismGoerli={EASOptimismGoerliAttestations}
+                  aragonDAOs={aragonBaseDAOs}
                 />
               }
             />
