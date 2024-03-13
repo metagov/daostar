@@ -1,0 +1,355 @@
+{
+  "@context": "http://www.daostar.org/schemas",
+  "type": "DAO",
+  "name": "Optimism Collective",
+  "contracts": [
+    {
+      "type": "EthereumAddress",
+      "id": "0xdE1FCfB0851916CA5101820A69b13a4E276bd81F",
+      "label": "AddressManager",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x25ace71c97B33Cc4729CF772ae268934F7ab5fA1",
+      "label": "L1CrossDomainMessengerProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x5a7749f83b81B301cAb5f48EB8516B986DAef23D",
+      "label": "L1ERC721BridgeProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x99C9fc46f92E8a1c0deC1b1747d010903E884bE1",
+      "label": "L1StandardBridgeProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xdfe97868233d1aa22e815a266982f2cf17685a27",
+      "label": "L2OutputOracleProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x75505a97BD334E7BD3C476893285569C4136Fa0F",
+      "label": "OptimismMintableERC20FactoryProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xbEb5Fc579115071764c7423A4f12eDde41f106Ed",
+      "label": "OptimismPortalProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x543bA4AADBAb8f9025686Bd03993043599c6fB04",
+      "label": "ProxyAdmin",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x229047fed2591dbec1eF1118d64F7aF3dB9EB290",
+      "label": "SystemConfigProxy",
+      "networkId": 1
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000016",
+      "label": "L2ToL1MessagePasser",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000007",
+      "label": "L2CrossDomainMessenger",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000010",
+      "label": "L2StandardBridge",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000014",
+      "label": "L2ERC721Bridge",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000011",
+      "label": "SequencerFeeVault",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000012",
+      "label": "OptimismMintableERC20Factory",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000017",
+      "label": "OptimismMintableERC721Factory",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000015",
+      "label": "L1Block",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x420000000000000000000000000000000000000F",
+      "label": "GasPriceOracle",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000001",
+      "label": "L1MessageSender",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000002",
+      "label": "DeployerWhitelist",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+      "label": "LegacyERC20ETH",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000013",
+      "label": "L1BlockNumber",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000000",
+      "label": "LegacyMessagePasser",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000018",
+      "label": "ProxyAdmin",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000019",
+      "label": "BaseFeeVault",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x420000000000000000000000000000000000001A",
+      "label": "L1FeeVault",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000042",
+      "label": "GovernanceToken",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000020",
+      "label": "SchemaRegistry",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000021",
+      "label": "EAS",
+      "networkId": 10
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x9bFE9c5609311DF1c011c47642253B78a4f33F4B",
+      "label": "AddressManager",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x58Cc85b8D04EA49cC6DBd3CbFFd00B4B8D6cb3ef",
+      "label": "L1CrossDomainMessengerProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xd83e03D576d23C9AEab8cC44Fa98d058D2176D1f",
+      "label": "L1ERC721BridgeProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xFBb0621E0B23b5478B630BD55a5f21f67730B0F1",
+      "label": "L1StandardBridgeProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x90E9c4f8a994a250F6aEfd61CAFb4F2e895D458F",
+      "label": "L2OutputOracleProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x868D59fF9710159C2B330Cc0fBDF57144dD7A13b",
+      "label": "OptimismMintableERC20FactoryProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x16Fc5058F25648194471939df75CF27A2fdC48BC",
+      "label": "OptimismPortalProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x189aBAAaa82DfC015A588A7dbaD6F13b1D3485Bc",
+      "label": "ProxyAdmin",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x034edD2A225f7f429A63E0f1D2084B9E0A93b538",
+      "label": "SystemConfigProxy",
+      "networkId": 11155111
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000016",
+      "label": "L2ToL1MessagePasser",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000007",
+      "label": "L2CrossDomainMessenger",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000010",
+      "label": "L2StandardBridge",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000014",
+      "label": "L2ERC721Bridge",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000011",
+      "label": "SequencerFeeVault",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000012",
+      "label": "OptimismMintableERC20Factory",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000017",
+      "label": "OptimismMintableERC721Factory",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000015",
+      "label": "L1Block",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x420000000000000000000000000000000000000F",
+      "label": "GasPriceOracle",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000001",
+      "label": "L1MessageSender",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000002",
+      "label": "DeployerWhitelist",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+      "label": "LegacyERC20ETH",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000013",
+      "label": "L1BlockNumber",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000000",
+      "label": "LegacyMessagePasser",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000018",
+      "label": "ProxyAdmin",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000019",
+      "label": "BaseFeeVault",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x420000000000000000000000000000000000001A",
+      "label": "L1FeeVault",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000042",
+      "label": "GovernanceToken",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000020",
+      "label": "SchemaRegistry",
+      "networkId": 11155420
+    },
+    {
+      "type": "EthereumAddress",
+      "id": "0x4200000000000000000000000000000000000021",
+      "label": "EAS",
+      "networkId": 11155420
+    }
+  ]
+}
