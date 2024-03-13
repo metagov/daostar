@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Geogrotesque';
+    src: url('/css/Geogrotesque-Medium.woff2') format('woff2'),
+        url('/css/Geogrotesque-Medium.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Geogrotesque';
+    src: url('/css/Geogrotesque-Regular.woff2') format('woff2'),
+        url('/css/Geogrotesque-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Global settings */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+:root {
+    --font: 'Geogrotesque', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
+}
+
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+    font-family: var(--font);
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: normal;
+    overflow-x: hidden;
+    background-image: url('/img/stars.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.wrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.parallax {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: fit-content;
+}
+
+.parallax--base {
+    transform: translateZ(0px);
+    z-index: 1;
+}
+
+.parallax--wrapper {
+    height: 100vh;
+    perspective: 1px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.parallax--minus2 {
+    transform: translateZ(-100px) scale(101);
+    z-index: 0;
+}
+
+#stars {
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/stars.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+#mesh {
+    width: 100%;
+    height: 140%;
+    display: flex;
+    align-items: stretch;
+    overflow-x: hidden;
+}
+
+#mesh img {
+    opacity: 0.25;
+    object-fit: cover;
+    width: 100%;
+}

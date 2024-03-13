@@ -70,6 +70,7 @@ export function handleNewURI(event: DAOURIUpdate): void {
                 registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
                 registrationInstance.contractsRegistryURI = contractsRegistryURI && contractsRegistryURI.kind == JSONValueKind.STRING ? contractsRegistryURI.toString() : ''
                 registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
+                registrationInstance.contractVersion = "1.0"; // Since we deploy graph for each contract address on different network, we can set the contractVersion for an instance.
                 registrationInstance.save() // For some reason this does not work without this additional save
             } else {
                 log.warning('IPFS data missing for : {}', [ipfsHash])
