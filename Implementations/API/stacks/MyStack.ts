@@ -48,6 +48,7 @@ export function MyStack({ stack }: StackContext) {
     },
   });
 
+
   // Show the API endpoint in the output
   stack.addOutputs({
     ApiEndpoint: api.url,

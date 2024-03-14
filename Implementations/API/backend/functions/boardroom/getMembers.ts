@@ -28,9 +28,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const cursor: string | undefined = event?.queryStringParameters?.cursor;
 
   const template = {
-    "@context": {
-      "@vocab": "http://daostar.org/",
-    },
+    "@context": "http://daostar.org/schemas",
     type: "DAO",
     name: name,
   };
