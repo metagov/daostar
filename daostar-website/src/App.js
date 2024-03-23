@@ -4,8 +4,9 @@ import Register from "./components/Register/Register";
 import TopNavigation from "./components/TopNavigation/TopNavigation";
 import RegistrationPage from "./components/RegistrationPage/RegistrationPage";
 import ExplorePage from "./components/ExplorePage/ExplorePage";
-import { WagmiConfig, createClient } from "wagmi";
-import { ConnectKitProvider, getDefaultClient } from "connectkit";
+import { WagmiConfig,createConfig } from "wagmi";
+import { mainnet, optimism, sepolia, optimismSepolia, arbitrum, bscTestnet } from "wagmi/chains";
+import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
@@ -30,11 +31,13 @@ const walletConnectId = process.env.REACT_APP_WALLETCONNECT_ID;
 const token = process.env.REACT_APP_BEARER_TOKEN;
 const stargazeToken = process.env.REACT_APP_STARGAZE_BEARER_TOKEN;
 
-const client = createClient(
-  getDefaultClient({
-    appName: "DAOstar",
-    alchemyId,
-  })
+const config = createConfig(
+    getDefaultConfig({
+      alchemyId: alchemyId,
+      walletConnectProjectId: walletConnectId,
+      appName: "DAOstar",
+      chains: [mainnet,optimism,optimismSepolia,arbitrum,bscTestnet],
+    })
 );
 let headers, stargaze_headers;
 
@@ -246,8 +249,8 @@ function App() {
 
   const EASOptimismGoerliRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
     context: { apiName: "easOptimismGoerli" },
-    variables: { 
-      schemaId: "0x5e7633bad97b4b8e8248b93aa8f9bfa6b905f7eeb70a8b2053b460f0a2d44f1f", 
+    variables: {
+      schemaId: "0x5e7633bad97b4b8e8248b93aa8f9bfa6b905f7eeb70a8b2053b460f0a2d44f1f",
     },
   });
   const {
@@ -350,7 +353,7 @@ function App() {
   });
 
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <ConnectKitProvider
         mode="dark"
         customTheme={{

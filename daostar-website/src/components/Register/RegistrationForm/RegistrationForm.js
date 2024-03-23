@@ -8,20 +8,27 @@ import {
   FormGroup,
   HTMLSelect,
   InputGroup,
+  Switch,
 } from "@blueprintjs/core";
 import FRAMEWORK_URIs from "./FRAMEWORK_URIs";
+import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
+import { useSigner } from "../../../utils/wagmi-utils";
+import { useAccount, useNetwork } from "wagmi";
 
 const networkIds = {
   mainnet: 1,
-  goerli: 5,
-  optimismGoerli: 420,
-  arbitrumGoerli: 421613,
+  optimismSepolia: 11155420,
+  // sepolia: 11155111
   chapel: 97,
   optimism: 10,
   arbitrum: 42161,
 };
 
 const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
+  const {address,isConnected} = useAccount();
+  const signer = useSigner();
+  const {chain} = useNetwork();
+
   const [daoContractNetwork, setDaoContractNetwork] = useState("mainnet");
   const onChangeDaoContractNetwork = (e) => {
     setDaoContractNetwork(e.target.value);
@@ -83,8 +90,17 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     }
   };
 
+  const [registerByEAS, setRegisterByEAS] = useState(false);
+  const onChangeRegisterType = (e) => {
+    setErrors(null);
+    setRegisterByEAS(!registerByEAS);
+  };
+
   const [daoName, setDaoName] = useState("");
   const onChangeDaoName = (e) => setDaoName(e.target.value);
+
+  const [daoURI, setDaoURI] = useState("");
+  const onChangeDAOURI = (e) => setDaoURI(e.target.value)
 
   const [daoDescription, setDaoDescription] = useState("");
   const onChangeDaoDescription = (e) => setDaoDescription(e.target.value);
@@ -143,6 +159,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const [registrationError, setRegError] = useState(null);
 
   const [validationErrors, setErrors] = useState(null);
+
+  const [registerLoading, setRegisterLoading] = useState(false);
 
   const [
     {
@@ -243,6 +261,65 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     }
   };
 
+  const onRegisterByEAS = async () => {
+    const errors = [];
+    if (daoName === "") {
+      errors.push(`DAO must have a name`);
+    }
+    if (daoURI === "" || !validator.isURL(daoURI)) {
+      errors.push(`DAO URI must be a valid URI`);
+    }
+    if(!isConnected) {
+      errors.push(`Please connect wallet`);
+    }
+    if(!(chain.id === 10 || chain.id === 11155420)) {
+      errors.push(`Just support for Optimism`);
+    }
+
+    // todo optimism eas schema
+    let easscanURL = ''
+    let schemaUid = '';
+    if(chain.id === 11155420) {
+      easscanURL = "https://optimism-sepolia.easscan.org/schema/view";
+      schemaUid = '0xf90c716cef83b64e4b9cbf5babeb4ee65662e2081535afd76cad37dde744c2dd';
+    }
+
+    if (errors.length > 0) {
+      setErrors(errors);
+      window.scrollTo(0, 0);
+    } else {
+      setErrors(null);
+    }
+
+    setRegisterLoading(true);
+
+    const schemaEncoder = new SchemaEncoder("string daoName,string daoURI");
+    const data = [
+      { name: 'daoName', value: daoName, type: 'string' },
+      { name: 'daoURI', value: daoURI, type: 'string' },
+    ];
+    const encodedData = schemaEncoder.encodeData(data);
+
+    const eas = new EAS('0x4200000000000000000000000000000000000021');
+    eas.connect(signer);
+
+    const attestation = await eas.attest({
+      schema: schemaUid,
+      data: {
+        recipient: address,
+        expirationTime: 0,
+        revocable: true,
+        refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
+        data: encodedData,
+        value: 0,
+      },
+    });
+    console.log("attest:",attestation);
+    setRegisterLoading(false);
+
+    window.location.href = `${easscanURL}/${schemaUid}`;
+  };
+
   const EthNetworksSelect = (
     <HTMLSelect
       style={{ minWidth: 140 }}
@@ -252,10 +329,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       options={[
         { label: "Mainnet", value: "mainnet" },
         { label: "Optimism", value: "optimism" },
-        { label: "Goerli", value: "goerli" },
+        { label: "Optimism Sepolia", value: "optimismSepolia" },
         { label: "Arbitrum", value: "arbitrum" },
-        { label: "Optimism-Goerli", value: "optimismGoerli" },
-        { label: "Arbitrum-Goerli", value: "arbitrumGoerli" },
         { label: "BNB Bruno", value: "chapel" },
       ]}
     />
@@ -291,7 +366,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
 
   return (
     <Fragment>
-      <h3>Register your DAO</h3>
+      <div style={{display: "flex", justifyContent: "space-between", alignItems:"baseline", paddingRight:"20px"}}>
+        <h3>Register your DAO</h3>
+        <Switch checked={registerByEAS} alignIndicator={'right'} labelElement={<label>Register through EAS</label>} large onChange={onChangeRegisterType} />
+      </div>
       {validationErrors && (
         <Fragment>
           <Divider vertical />
@@ -299,155 +377,195 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         </Fragment>
       )}
       <Divider vertical={true} />
-      <div className="wizard-row wizard-row-flex">
-        <FormGroup label="Contract address">{EthNetworksSelect}</FormGroup>
-        <InputGroup
-          fill
-          placeholder="Enter DAO address or id (eg ENS for snapshot)"
-          value={daoContractAddress}
-          onChange={onChangeDaoContractAddress}
-          disabled={daoFramework !== "custom" ? false : true}
-        />
-      </div>
-      <div className="wizard-row">
-        <FormGroup label="Name" labelFor="name" fill>
-          <InputGroup
-            fill
-            id="name"
-            placeholder="Enter DAO name"
-            value={daoName}
-            onChange={onChangeDaoName}
-          />
-        </FormGroup>
-      </div>
-      <div className="wizard-row">
-        <FormGroup label="Description" labelFor="description" fill>
-          <InputGroup
-            fill
-            id="description"
-            placeholder="Enter DAO description"
-            value={daoDescription}
-            onChange={onChangeDaoDescription}
-          />
-        </FormGroup>
-      </div>
-      <div className="wizard-row">
-        <FormGroup label="Framework" labelFor="framework" fill>
-          {FrameworkSelect}
-        </FormGroup>
-      </div>
-      <div className="wizard-row">
-        <Divider />
-      </div>
-      <div>
-        <div className="wizard-row">
-          <FormGroup label="Members URI" labelFor="members-uri" fill>
-            <InputGroup
-              fill
-              id="members-uri"
-              value={daoMembersURI}
-              placeholder="Enter URI to members"
-              onChange={onChangeMembersURI}
-            />
-          </FormGroup>
-        </div>
-        <div className="wizard-row">
-          <FormGroup label="Activity Log URI" labelFor="activity-log-uri" fill>
-            <InputGroup
-              fill
-              id="activity-log-uri"
-              placeholder="Enter URI to activity log"
-              value={daoActivityURI}
-              onChange={onChangeActivityURI}
-            />
-          </FormGroup>
-        </div>
-        <div className="wizard-row">
-          <FormGroup label="Proposals URI" labelFor="proposals-uri" fill>
-            <InputGroup
-              fill
-              id="proposals-uri"
-              placeholder="Enter URI to proposals"
-              value={daoProposalsURI}
-              onChange={onChangeProposalsURI}
-            />
-          </FormGroup>
-        </div>
-        <div className="wizard-row">
-          <FormGroup label="Issuers URI" labelFor="proposals-uri" fill>
-            <InputGroup
-              fill
-              id="issuer-uri"
-              placeholder="Enter URI for Issuers"
-              value={daoIssuersURI}
-              onChange={onChangeIssuersURI}
-            />
-          </FormGroup>
-        </div>
-        <div className="wizard-row">
-          <FormGroup
-            label="Contracts Registry URI (optional)"
-            labelFor="contracts-registry-uri"
-            fill
-          >
-            <InputGroup
-              fill
-              id="contracts-registry-uri"
-              placeholder="Enter URI to contracts registry"
-              value={daoContractsRegistryURI}
-              onChange={onChangeContractsRegistryURI}
-            />
-          </FormGroup>
-        </div>
-      </div>
-      <div className="wizard-row">
-        <FormGroup
-          label="Manager address (optional)"
-          labelFor="manager-address"
-          fill
-        >
-          <InputGroup
-            fill
-            id="manager-address"
-            placeholder="Enter address of DAO manager"
-            value={daoManagerAddress}
-            onChange={onChangeDaoManager}
-          />
-        </FormGroup>
-      </div>
-      <div className="wizard-row">
-        <FormGroup
-          label="Governance document (optional)"
-          labelFor="governance-document"
-          fill
-        >
-          <InputGroup
-            fill
-            id="governance-document"
-            placeholder="Enter URI to governance document (.md)"
-            value={daoGovURI}
-            onChange={onChangeDaoGovURI}
-          />
-        </FormGroup>
-      </div>
-      <Divider vertical={true} />
-      {registrationError && (
-        <div className="wizard-row wizard-center">
-          <Callout intent="danger">{registrationError}</Callout>
-        </div>
+
+      {!registerByEAS && (
+          <div style={{width:'100%'}}>
+            <div className="wizard-row wizard-row-flex">
+              <FormGroup label="Contract address">{EthNetworksSelect}</FormGroup>
+              <InputGroup
+                  fill
+                  placeholder="Enter DAO address or id (eg ENS for snapshot)"
+                  value={daoContractAddress}
+                  onChange={onChangeDaoContractAddress}
+                  disabled={daoFramework !== "custom" ? false : true}
+              />
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Name" labelFor="name" fill>
+                <InputGroup
+                    fill
+                    id="name"
+                    placeholder="Enter DAO name"
+                    value={daoName}
+                    onChange={onChangeDaoName}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Description" labelFor="description" fill>
+                <InputGroup
+                    fill
+                    id="description"
+                    placeholder="Enter DAO description"
+                    value={daoDescription}
+                    onChange={onChangeDaoDescription}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Framework" labelFor="framework" fill>
+                {FrameworkSelect}
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <Divider />
+            </div>
+            <div>
+              <div className="wizard-row">
+                <FormGroup label="Members URI" labelFor="members-uri" fill>
+                  <InputGroup
+                      fill
+                      id="members-uri"
+                      value={daoMembersURI}
+                      placeholder="Enter URI to members"
+                      onChange={onChangeMembersURI}
+                  />
+                </FormGroup>
+              </div>
+              <div className="wizard-row">
+                <FormGroup label="Activity Log URI" labelFor="activity-log-uri" fill>
+                  <InputGroup
+                      fill
+                      id="activity-log-uri"
+                      placeholder="Enter URI to activity log"
+                      value={daoActivityURI}
+                      onChange={onChangeActivityURI}
+                  />
+                </FormGroup>
+              </div>
+              <div className="wizard-row">
+                <FormGroup label="Proposals URI" labelFor="proposals-uri" fill>
+                  <InputGroup
+                      fill
+                      id="proposals-uri"
+                      placeholder="Enter URI to proposals"
+                      value={daoProposalsURI}
+                      onChange={onChangeProposalsURI}
+                  />
+                </FormGroup>
+              </div>
+              <div className="wizard-row">
+                <FormGroup label="Issuers URI" labelFor="proposals-uri" fill>
+                  <InputGroup
+                      fill
+                      id="issuer-uri"
+                      placeholder="Enter URI for Issuers"
+                      value={daoIssuersURI}
+                      onChange={onChangeIssuersURI}
+                  />
+                </FormGroup>
+              </div>
+              <div className="wizard-row">
+                <FormGroup
+                    label="Contracts Registry URI (optional)"
+                    labelFor="contracts-registry-uri"
+                    fill
+                >
+                  <InputGroup
+                      fill
+                      id="contracts-registry-uri"
+                      placeholder="Enter URI to contracts registry"
+                      value={daoContractsRegistryURI}
+                      onChange={onChangeContractsRegistryURI}
+                  />
+                </FormGroup>
+              </div>
+            </div>
+            <div className="wizard-row">
+              <FormGroup
+                  label="Manager address (optional)"
+                  labelFor="manager-address"
+                  fill
+              >
+                <InputGroup
+                    fill
+                    id="manager-address"
+                    placeholder="Enter address of DAO manager"
+                    value={daoManagerAddress}
+                    onChange={onChangeDaoManager}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup
+                  label="Governance document (optional)"
+                  labelFor="governance-document"
+                  fill
+              >
+                <InputGroup
+                    fill
+                    id="governance-document"
+                    placeholder="Enter URI to governance document (.md)"
+                    value={daoGovURI}
+                    onChange={onChangeDaoGovURI}
+                />
+              </FormGroup>
+            </div>
+            <Divider vertical={true} />
+            {registrationError && (
+                <div className="wizard-row wizard-center">
+                  <Callout intent="danger">{registrationError}</Callout>
+                </div>
+            )}
+            <div className="wizard-row wizard-center">
+              <Button
+                  intent="primary"
+                  text="Register"
+                  loading={sendingRegistration}
+                  onClick={onRegister}
+              />
+              <br />
+              <p className="bp4-text-small wizard-no-margin">
+                Registering will generate a DAO URI
+              </p>
+            </div>
+          </div>
       )}
-      <div className="wizard-row wizard-center">
-        <Button
-          intent="primary"
-          text="Register"
-          loading={sendingRegistration}
-          onClick={onRegister}
-        />
-        <br />
-        <p className="bp4-text-small wizard-no-margin">
-          Registering will generate a DAO URI
-        </p>
-      </div>
+      {registerByEAS && (
+          <div style={{width:'100%'}}>
+            <div className="wizard-row">
+              <FormGroup label="DAO Name" labelFor="dao-name" fill>
+                <InputGroup
+                    fill
+                    id="dao-name"
+                    placeholder="Enter DAO name"
+                    value={daoName}
+                    onChange={onChangeDaoName}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="DAO URI" labelFor="dao-uri" fill>
+                <InputGroup
+                    fill
+                    id="dao-uri"
+                    value={daoURI}
+                    placeholder="Enter DAO URI"
+                    onChange={onChangeDAOURI}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row wizard-center">
+              <Button
+                  intent="primary"
+                  text="Register"
+                  loading={registerLoading}
+                  onClick={onRegisterByEAS}
+              />
+            </div>
+          </div>
+      )}
+
     </Fragment>
   );
 };
