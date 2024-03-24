@@ -52,7 +52,7 @@ const NetworkButtons = [
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
-  { text: "EAS OPGoerli", filter: "easOptimismGoerli" },
+  { text: "EAS OPSepolia", filter: "easOptimismGoerli" },
 
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
