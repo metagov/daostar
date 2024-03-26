@@ -22,7 +22,7 @@ const Register = (props) => {
 
     const [registrationScreen, setRegistrationScreen] = useState('REGISTER'); // REGISTER | REG_RECEIVED
     const onToggleRegScreen = (screen) => setRegistrationScreen(screen);
-    
+
     const [registrationData, setRegistrationData] = useState(null);
 
     return (
@@ -30,7 +30,7 @@ const Register = (props) => {
             <div className='centered-wizard'>
                 <Card className='wizard-card'>
                     {registrationScreen === 'REGISTER' && (
-                        <RegistrationForm 
+                        <RegistrationForm
                             toggleRegScreen={onToggleRegScreen}
                             setRegistrationData={setRegistrationData}
                         />
@@ -38,10 +38,11 @@ const Register = (props) => {
                     {registrationScreen === 'REG_RECEIVED' && (
                         <RegistrationReceived {...registrationData} />
                     )}
+
                 </Card>
             </div>
         </div>
-        
+
     )
 }
 

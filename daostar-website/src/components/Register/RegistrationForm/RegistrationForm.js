@@ -9,11 +9,16 @@ import {
   HTMLSelect,
   InputGroup,
   Switch,
+  Dialog, DialogBody, DialogFooter,AnchorButton
 } from "@blueprintjs/core";
+import { Tooltip2 } from "@blueprintjs/popover2"
 import FRAMEWORK_URIs from "./FRAMEWORK_URIs";
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { useSigner } from "../../../utils/wagmi-utils";
-import { useAccount, useNetwork } from "wagmi";
+import { useAccount, useNetwork, useContractRead } from "wagmi";
+import { ethers } from 'ethers';
+
+import RegistrationContract from "../../../abi/EASRegistrationContract";
 
 const networkIds = {
   mainnet: 1,
@@ -28,6 +33,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const {address,isConnected} = useAccount();
   const signer = useSigner();
   const {chain} = useNetwork();
+  const [showEASRegisterDialog, setShowEASRegisterDialog] = useState(false);
+  const [attestationURL, setAttestationURL] = useState('');
 
   const [daoContractNetwork, setDaoContractNetwork] = useState("mainnet");
   const onChangeDaoContractNetwork = (e) => {
@@ -273,15 +280,17 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       errors.push(`Please connect wallet`);
     }
     if(!(chain.id === 10 || chain.id === 11155420)) {
-      errors.push(`Just support for Optimism`);
+      errors.push(`Switch to Optimism mainnet`);
     }
 
     // todo optimism eas schema
     let easscanURL = ''
     let schemaUid = '';
+    let registrationContract = '';
     if(chain.id === 11155420) {
       easscanURL = "https://optimism-sepolia.easscan.org/schema/view";
       schemaUid = '0xf90c716cef83b64e4b9cbf5babeb4ee65662e2081535afd76cad37dde744c2dd';
+      registrationContract = '0xF124Aca94e664Bfd5373feA9E2410FD799a8a08B'
     }
 
     if (errors.length > 0) {
@@ -291,7 +300,23 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       setErrors(null);
     }
 
+    // test
+    // setAttestationURL(`${easscanURL}/${schemaUid}`);
+    // setShowEASRegisterDialog(true);
+    // return;
+
     setRegisterLoading(true);
+
+    // check authority
+    const contract = new ethers.Contract(registrationContract, RegistrationContract, signer);
+    const memberRole = await contract.MEMBER_ROLE();
+    const isMember = await contract.hasRole(memberRole,address);
+
+    if(!isMember) {
+      setErrors(['you have no authorization']);
+      setRegisterLoading(false);
+      return;
+    }
 
     const schemaEncoder = new SchemaEncoder("string daoName,string daoURI");
     const data = [
@@ -303,22 +328,31 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     const eas = new EAS('0x4200000000000000000000000000000000000021');
     eas.connect(signer);
 
-    const attestation = await eas.attest({
-      schema: schemaUid,
-      data: {
-        recipient: address,
-        expirationTime: 0,
-        revocable: true,
-        refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
-        data: encodedData,
-        value: 0,
-      },
-    });
-    console.log("attest:",attestation);
-    setRegisterLoading(false);
-
-    window.location.href = `${easscanURL}/${schemaUid}`;
+    try {
+      const attestation = await eas.attest({
+        schema: schemaUid,
+        data: {
+          recipient: address,
+          expirationTime: 0,
+          revocable: true,
+          refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
+          data: encodedData,
+          value: 0,
+        },
+      });
+      setAttestationURL(`${easscanURL}/${schemaUid}`);
+      setShowEASRegisterDialog(true);
+    } catch (e) {
+      console.log("attest error:",e);
+      setErrors([`Register Error. ${e}`]);
+    } finally {
+      setRegisterLoading(false);
+    }
   };
+
+  const onHandleCloseEASRegisterDialog = () => {
+    setShowEASRegisterDialog(false);
+  }
 
   const EthNetworksSelect = (
     <HTMLSelect
@@ -531,7 +565,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             </div>
           </div>
       )}
-      {registerByEAS && (
+      {registerByEAS && !showEASRegisterDialog && (
           <div style={{width:'100%'}}>
             <div className="wizard-row">
               <FormGroup label="DAO Name" labelFor="dao-name" fill>
@@ -555,13 +589,43 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                 />
               </FormGroup>
             </div>
-            <div className="wizard-row wizard-center">
+            <div style={{display:"flex", justifyContent:'space-between', margin: '40px 24px'}}>
+              <AnchorButton
+                  href={`https://docs.daostar.org/How%20To's/DifferentPaths`}
+                  target="_blank"
+                  icon="link"
+                  text='Get More Details'
+                  small={true}
+                  fill={false}
+              />
               <Button
                   intent="primary"
                   text="Register"
                   loading={registerLoading}
                   onClick={onRegisterByEAS}
               />
+            </div>
+          </div>
+      )}
+      {registerByEAS && showEASRegisterDialog && (
+          <div style={{ width:'100%'}}>
+            <div style={{margin:"40px 24px",display:"flex",justifyContent:"center"}}>
+              <p style={{fontSize:"15px"}}>
+                <strong>
+                  Congratulations, DAO registered.
+                </strong>
+              </p>
+            </div>
+            <div style={{margin:"60px 24px",display:"flex",justifyContent:"center"}}>
+              <AnchorButton
+                  intent="primary"
+                  href={attestationURL}
+                  target="_blank"
+                  icon="share"
+                  fill={false}
+              >
+                View onchain
+              </AnchorButton>
             </div>
           </div>
       )}
