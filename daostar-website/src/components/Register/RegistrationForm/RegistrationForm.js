@@ -284,9 +284,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     }
 
     // todo optimism eas schema
-    let easscanURL = ''
-    let schemaUid = '';
-    let registrationContract = '';
+    let easscanURL = 'https://optimism.easscan.org/schema/view'
+    let schemaUid = '0x857c6d99d9ae98f49b23dda1a718639510ea6f6a7a80b4ca97a7801e29807e5e';
+    let registrationContract = '0xb35AA0cB89eC35f04c30E19B736b8ae1904EC26b';
     if(chain.id === 11155420) {
       easscanURL = "https://optimism-sepolia.easscan.org/schema/view";
       schemaUid = '0xf90c716cef83b64e4b9cbf5babeb4ee65662e2081535afd76cad37dde744c2dd';
