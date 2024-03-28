@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.daostar.org/schemas",
+  "type": "DAO",
+  "name": "Treasure",
+  "contracts": [
+    {
+      "type": "Address",
+      "id": "0xEc834bD1F492a8Bd5aa71023550C44D4fB14632A",
+      "label": "Treasury",
+      "networkId": 1
+    },
+    {
+      "type": "Address",
+      "id": "0xb2F011FD7f663C37B2936e3Bd921d3ACcB90B416",
+      "label": "Marketplace",
+      "networkId": 1
+    },
+    {
+      "type": "Address",
+      "id": "0x4ef220fC6d1C8951AaB7b804b5b5EED21D7A5150",
+      "label": "Operations Account",
+      "networkId": 1
+    },
+    {
+      "type": "Address",
+      "id": "0x0eB5B03c0303f2F47cD81d7BE4275AF8Ed347576",
+      "label": "Treasury",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0xDb6Ab450178bAbCf0e467c1F3B436050d907E233",
+      "label": "Marketplace",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x482729215AAF99B3199E41125865821ed5A4978a",
+      "label": "Ecofund",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x4D3aAA252850EE7C82b299CB5778925BBE92f1fC",
+      "label": "Contributor Allocation",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x81FA605235E4c32d8b440eEBE43D82e9E083166b",
+      "label": "Mining",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x64bFB08217B30b70f287a1B7f0670BDD49F8A13f",
+      "label": "Staking/LP",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0xE8409cd2aBae06871D166E808D75aDdb0537033A",
+      "label": "Developer",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x7700D22D373Bb433B56705914D114144e8caDad3",
+      "label": "Operations Account",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x1054E9D9091dC55a1738F9c8Fc0c79E59E222804",
+      "label": "Community Grants",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x3Fe5d6AE3470b2De09eD062Ac78444E44Aa0cACe",
+      "label": "Community Gamification Fund",
+      "networkId": 42161
+    },
+    {
+      "type": "Address",
+      "id": "0x45236EB7C47a68aE63f62F7e38f7C2F864f2Ad14",
+      "label": "Community Ecosystem Fund",
+      "networkId": 42161
+    }
+  ]
+}
