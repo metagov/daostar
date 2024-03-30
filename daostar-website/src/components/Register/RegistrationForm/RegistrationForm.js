@@ -35,6 +35,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const {chain} = useNetwork();
   const [showEASRegisterDialog, setShowEASRegisterDialog] = useState(false);
   const [attestationURL, setAttestationURL] = useState('');
+  const [easNetworkID, setEasNetworkID] = useState(1);
+  const onChangeEASNetworkID = (e) => {
+    setEasNetworkID(e.target.value);
+  };
 
   const [daoContractNetwork, setDaoContractNetwork] = useState("mainnet");
   const onChangeDaoContractNetwork = (e) => {
@@ -114,6 +118,15 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
 
   const [daoMembersURI, setDaoMembersURI] = useState("");
   const onChangeMembersURI = (e) => setDaoMembersURI(e.target.value);
+
+  const [contractAddress, setContractAddress] = useState("");
+  const onChangeContractAddress = (e) => setContractAddress(e.target.value)
+
+  const [issuerName, setIssuerName] = useState("");
+  const onChangeIssuerName = (e) => setIssuerName(e.target.value)
+
+  const [issuerDescription, setIssuerDescription] = useState("");
+  const onChangeIssuerDescription = (e) => setIssuerDescription(e.target.value)
 
   const [daoIssuersURI, setDaoIssuersURI] = useState("");
   const onChangeIssuersURI = (e) => setDaoIssuersURI(e.target.value);
@@ -289,7 +302,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     let registrationContract = '0xb35AA0cB89eC35f04c30E19B736b8ae1904EC26b';
     if(chain.id === 11155420) {
       easscanURL = "https://optimism-sepolia.easscan.org/schema/view";
-      schemaUid = '0xf90c716cef83b64e4b9cbf5babeb4ee65662e2081535afd76cad37dde744c2dd';
+      schemaUid = '0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504';
       registrationContract = '0xF124Aca94e664Bfd5373feA9E2410FD799a8a08B'
     }
 
@@ -318,10 +331,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       return;
     }
 
-    const schemaEncoder = new SchemaEncoder("string daoName,string daoURI");
+    const schemaEncoder = new SchemaEncoder("uint256 networkID,string daoName,string daoURI,address contractAddress,string issuerName,string issuerDescription");
     const data = [
+      { name: 'networkID', value: easNetworkID, type: 'uint256' },
       { name: 'daoName', value: daoName, type: 'string' },
       { name: 'daoURI', value: daoURI, type: 'string' },
+      { name: 'contractAddress', value: contractAddress, type: 'address' },
+      { name: 'issuerName', value: issuerName, type: 'string' },
+      { name: 'issuerDescription', value: issuerDescription, type: 'string' },
     ];
     const encodedData = schemaEncoder.encodeData(data);
 
@@ -567,6 +584,21 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       )}
       {registerByEAS && !showEASRegisterDialog && (
           <div style={{width:'100%'}}>
+            <div className="wizard-row wizard-row-flex">
+              <FormGroup label="Network">
+                <HTMLSelect
+                    style={{ minWidth: 140 }}
+                    iconProps={{ icon: "caret-down", color: "#fff" }}
+                    value={easNetworkID}
+                    onChange={onChangeEASNetworkID}
+                    options={[
+                      { label: "Ethereum", value: 1 },
+                      { label: "Optimism", value: 10 },
+                      { label: "Arbitrum", value: 42161 },
+                    ]}
+                />
+              </FormGroup>
+            </div>
             <div className="wizard-row">
               <FormGroup label="DAO Name" labelFor="dao-name" fill>
                 <InputGroup
@@ -586,6 +618,39 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                     value={daoURI}
                     placeholder="Enter DAO URI"
                     onChange={onChangeDAOURI}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Contract Address" labelFor="contract-address" fill>
+                <InputGroup
+                    fill
+                    id="contract-address"
+                    value={contractAddress}
+                    placeholder="Enter Contract Address"
+                    onChange={onChangeContractAddress}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Issuer Name" labelFor="issuer-name" fill>
+                <InputGroup
+                    fill
+                    id="issuer-name"
+                    value={issuerName}
+                    placeholder="Enter Issuer Name"
+                    onChange={onChangeIssuerName}
+                />
+              </FormGroup>
+            </div>
+            <div className="wizard-row">
+              <FormGroup label="Issuer Description" labelFor="issuer-description" fill>
+                <InputGroup
+                    fill
+                    id="issuer-description"
+                    value={issuerDescription}
+                    placeholder="Enter Issuer Description"
+                    onChange={onChangeIssuerDescription}
                 />
               </FormGroup>
             </div>
