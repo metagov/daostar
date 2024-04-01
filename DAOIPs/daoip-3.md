@@ -35,7 +35,7 @@ A DAOIP-3 attestation MUST take the following form:
 
 ```json
 {
-	"@context": ["https://daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": ["VerifiableCredential", "Attestation", "<the type of the attestation if any>"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
@@ -56,7 +56,7 @@ An attestation type (or attestation schema) MUST be specified in the Attestation
 Attestation Type JSON-LD Schema
 ```json
 {
-	"@context": "https://daostar.org/schemas",
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": "AttestationType",
 	"name": "<name of the attestation type>",
 	"content": [
@@ -76,7 +76,7 @@ If an issuer wishes to extend the attestation framework to attestations about th
 
 ```json
 {
-	"@context": ["https://daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": ["VerifiableCredential", "Attestation", "<the type of the attestation>"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
@@ -93,7 +93,7 @@ Attestations communicating membership MUST declare the `MembershipAttestation` t
 
 ```json
 {
-	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
@@ -115,7 +115,7 @@ A contribution is some event, artifact, or behavior that has been made by some e
 
 ```json
 {
-	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": ["VerifiableCredential", "Attestation", "ContributionAttestation"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
@@ -156,7 +156,7 @@ An issuer may publish a version of `daoURI` on behalf of a DAO as an attestation
 
 ```json
 {
-	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"type": ["VerifiableCredential", "Attestation", "daoURIAttestation"],
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"attestationURI": "<the URI or API request from which someone can obtain the attestation>",
@@ -181,7 +181,7 @@ All DAOs conforming to DAOIP-3 MUST implement the `attestationIssuersURI` field 
 }
 ```
 
-The target of `attestationIssuersURI` MUST return an array of entities, each represented by an `issuer` which issues attestations on behalf of the DAO.
+When dereferenced, `attestationIssuersURI` MUST return an array of entities, each represented by an `issuer` which issues attestations on behalf of the DAO.
 
 ```json
 {
@@ -236,7 +236,7 @@ The example below shows such a presentation:
 
 ```json
 {
-	"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+	"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 	"expirationDate": "<ISO DateTime>",
 	"issuer": "<URI returning data conforming to the Attestation Issuer JSON-LD Schema>",
 	"credentialSubject": {
@@ -272,7 +272,7 @@ Our user logs into Avenue using (the address that owns) `josh.eth`. When a third
 ```json
 [
 	{
-		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
 		"issuer": "<Avenue's issuer URI>",
 		"attestationURI": "<a URI maintained by Avenue from which someone can obtain this attestation>",
@@ -297,7 +297,7 @@ Any contributions the user allows to be publicly shared will also be available t
 ```json
 [
 	{
-		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
 		"issuer": "<Avenue's issuer URI>",
 		"attestationURI": "<Avenue's subjectAttestationsURI>",
@@ -312,7 +312,7 @@ Any contributions the user allows to be publicly shared will also be available t
 		}
 	},
 	{
-		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 		"type": ["VerifiableCredential", "Attestation", "ContributionAttestation"],
 		"issuer": "<Avenue's issuer URI>",
 		"attestationURI": "<Govrn's subjectAttestationsURI>",
@@ -348,7 +348,7 @@ This is represented by returning the following data in Disco's `subjectAttestati
 ```json
 [
 	{
-		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
 		"issuer": "<Disco's issuer URI>",
 		"attestationURI": "<Avenue's subjectAttestationsURI>",
@@ -363,7 +363,7 @@ This is represented by returning the following data in Disco's `subjectAttestati
 		}
 	},
 	{
-		"@context": ["http://www.daostar.org/schemas", "https://www.w3.org/ns/credentials/v2"],
+		"@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
 		"type": ["VerifiableCredential", "Attestation", "MembershipAttestation"],
 		"issuer": "<Disco's issuer URI>",
 		"attestationURI": "<Disco's subjectAttestationsURI>",
