@@ -8,7 +8,7 @@ assignees: 'Rashmi-278'
 ---
 
 ## What is the DAO registration link?
-A clear and concise description of what the problem is. Tell us why we should be working on this. Ex. I'm always frustrated when [...]
+ex: https://daostar.org/registration/mainnet:0x455a2b757b39cf4208eb019da9efd291a6af8bd1
 
 ## Reasons for reporting this DAO Registrations
 
