@@ -339,8 +339,8 @@ function validateAll(fields) {
   validationErrors = validateAll(fields);
 
   if (!isConnected) validationErrors.push(`Please connect wallet`);
-  if (!(easNetworkID === chain.id && (chain.id === 10 || chain.id === 11155420))) {
-    validationErrors.push(`Switch to Optimism mainnet or testnet`);
+  if (!(chain.id === 10 || chain.id === 11155420))) {
+    validationErrors.push(`Switch to Optimism Mainnet`);
 }
   if (validationErrors.length > 0) {
       setErrors(validationErrors);
