@@ -90,8 +90,12 @@ const DisplayRegistration = ({
       )}
       <Divider />
       <div className="card-metadata">
+      <p className="bp4-text-small wizard-no-margin">
+          <span className="bp4-text-muted">Registration Contract: </span>
+          {renderNetworkLink(network, id)}
+        </p>
         <p className="bp4-text-small wizard-no-margin">
-          <span className="bp4-text-muted">Contract address: </span>
+          <span className="bp4-text-muted">Contract Owner: </span>
           {renderNetworkLink(network, contractAddress)}
         </p>
         <p className="bp4-text-small wizard-no-margin">
@@ -108,7 +112,7 @@ const DisplayRegistration = ({
           </span>
         </p>
         <p className="bp4-text-small wizard-no-margin">
-          <span className="bp4-text-muted">Manager address: </span>
+          <span className="bp4-text-muted">Manager Address: </span>
           {managerAddress ? (
             renderNetworkLink(network, managerAddress)
           ) : (

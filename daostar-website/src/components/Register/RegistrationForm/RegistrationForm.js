@@ -328,19 +328,19 @@ function validateAll(fields) {
       let registrationContract = chain.id === 11155420 ? '0xF124Aca94e664Bfd5373feA9E2410FD799a8a08B' : '0xb35AA0cB89eC35f04c30E19B736b8ae1904EC26b';
     
     const fields = [
-      { name: 'networkID', value: easNetworkID, type: 'uint256', errorMessage: "Network ID must be provided" },
-      { name: 'daoName', value: daoName, type: 'string', errorMessage: "DAO must have a name" },
-      { name: 'daoURI', value: daoURI, type: 'string', validator: validator.isURL, errorMessage: "DAO URI must be a valid URI" },
-      { name: 'contractAddress', value: contractAddress, validator: validator.isEthereumAddress, type: 'address', errorMessage: "Contract address must be a valid Ethereum address" },
-      { name: 'issuerName', value: issuerName, type: 'string', errorMessage: "Issuer name must be provided" },
-      { name: 'issuerDescription', value: issuerDescription, type: 'string', errorMessage: "Issuer description must be provided" },
+      { name: 'DAO NetworkID', value: easNetworkID, type: 'uint256', errorMessage: "Network ID of Contract Address must be provided" },
+      { name: 'DAO Name', value: daoName, type: 'string', errorMessage: "DAO must have a name" },
+      { name: 'DAO URI', value: daoURI, type: 'string', validator: validator.isURL, errorMessage: "DAO URI must be a valid URI" },
+      { name: 'Contract Address', value: contractAddress, validator: validator.isEthereumAddress, type: 'address', errorMessage: "Contract address must be a valid Ethereum address" },
+      { name: 'Issuer Name', value: issuerName, type: 'string', errorMessage: "Issuer name must be provided" },
+      { name: 'Issuer Description', value: issuerDescription, type: 'string', errorMessage: "Issuer description must be provided" },
   ];
 
   validationErrors = validateAll(fields);
 
-  if (!isConnected) validationErrors.push(`Please connect wallet`);
-  if (!(easNetworkID === chain.id && (chain.id === 10 || chain.id === 11155420))) {
-    validationErrors.push(`Switch to Optimism mainnet or testnet`);
+  if (!isConnected) validationErrors.push(`Please connect your wallet to Optimism Mainnet`);
+  if (!(chain.id === 10 || chain.id === 11155420)) {
+    validationErrors.push(`Switch to Optimism Mainnet`);
 }
   if (validationErrors.length > 0) {
       setErrors(validationErrors);
@@ -616,7 +616,7 @@ function validateAll(fields) {
       {registerByEAS && !showEASRegisterDialog && (
           <div style={{width:'100%'}}>
             <div className="wizard-row wizard-row-flex">
-              <FormGroup label="Network">
+              <FormGroup label="DAO Network ID">
                 <HTMLSelect
                     style={{ minWidth: 140 }}
                     iconProps={{ icon: "caret-down", color: "#fff" }}
@@ -653,7 +653,7 @@ function validateAll(fields) {
               </FormGroup>
             </div>
             <div className="wizard-row">
-              <FormGroup label="Contract Address" labelFor="contract-address" fill>
+              <FormGroup label="DAO Contract Address" labelFor="contract-address" fill>
                 <InputGroup
                     fill
                     id="contract-address"
