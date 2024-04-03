@@ -37,7 +37,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const [attestationURL, setAttestationURL] = useState('');
   const [easNetworkID, setEasNetworkID] = useState(1);
   const onChangeEASNetworkID = (e) => {
-    setEasNetworkID(e.target.value);
+    const networkID = parseInt(e.target.value, 10);
+
+    setEasNetworkID(networkID);
   };
 
   const [daoContractNetwork, setDaoContractNetwork] = useState("mainnet");
@@ -281,71 +283,98 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     }
   };
 
+  function validateField(spec) {
+    const { name, value, validator, errorMessage, type } = spec;
+
+    // Handling undefined or empty values
+    if (value === undefined || value === '') {
+        return errorMessage || `Empty value for field "${name}"`;
+    }
+
+    // Directly using validator for specific checks
+    if (validator && !validator(value)) {
+        return errorMessage || `Invalid value for field "${name}"`;
+    }
+
+    if (type === 'uint256' && (!Number.isInteger(value) || value < 0)) {
+        return `Invalid type for field "${name}". Expected uint256, got ${typeof value} got ${value}`;
+    }
+    if (type === 'string' && typeof value !== 'string') {
+        return `Invalid type for field "${name}". Expected string, got ${typeof value}`;
+    }
+
+    return null; 
+}
+
+function validateAll(fields) {
+    const errors = fields.map(validateField).filter(error => error !== null);
+    return errors;
+}
+
+
   const onRegisterByEAS = async () => {
-    const errors = [];
-    if (daoName === "") {
-      errors.push(`DAO must have a name`);
-    }
-    if (daoURI === "" || !validator.isURL(daoURI)) {
-      errors.push(`DAO URI must be a valid URI`);
-    }
-    if(!isConnected) {
-      errors.push(`Please connect wallet`);
-    }
-    if(!(chain.id === 10 || chain.id === 11155420)) {
-      errors.push(`Switch to Optimism mainnet`);
-    }
+    let validationErrors = [];
 
-    // todo optimism eas schema
-    let easscanURL = 'https://optimism.easscan.org/schema/view'
-    let schemaUid = '0x1b1837dfb994702896d5d19bb0d66cf16ea30d8523765b938ec029088f90f904';
-    let registrationContract = '0xb35AA0cB89eC35f04c30E19B736b8ae1904EC26b';
-    if(chain.id === 11155420) {
-      easscanURL = "https://optimism-sepolia.easscan.org/schema/view";
-      schemaUid = '0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504';
-      registrationContract = '0xF124Aca94e664Bfd5373feA9E2410FD799a8a08B'
-    }
-
-    if (errors.length > 0) {
-      setErrors(errors);
+    if (!isConnected || !chain) {
+      validationErrors.push(`Please connect your wallet and ensure chain information is available.`);
+      setErrors(validationErrors);
       window.scrollTo(0, 0);
-    } else {
-      setErrors(null);
-    }
-
-    // test
-    // setAttestationURL(`${easscanURL}/${schemaUid}`);
-    // setShowEASRegisterDialog(true);
-    // return;
-
-    setRegisterLoading(true);
-
-    // check authority
-    const contract = new ethers.Contract(registrationContract, RegistrationContract, signer);
-    const memberRole = await contract.MEMBER_ROLE();
-    const isMember = await contract.hasRole(memberRole,address);
-
-    if(!isMember) {
-      setErrors(['you have no authorization']);
-      setRegisterLoading(false);
       return;
-    }
+  }
 
-    const schemaEncoder = new SchemaEncoder("uint256 networkID,string daoName,string daoURI,address contractAddress,string issuerName,string issuerDescription");
-    const data = [
-      { name: 'networkID', value: easNetworkID, type: 'uint256' },
-      { name: 'daoName', value: daoName, type: 'string' },
-      { name: 'daoURI', value: daoURI, type: 'string' },
-      { name: 'contractAddress', value: contractAddress, type: 'address' },
-      { name: 'issuerName', value: issuerName, type: 'string' },
-      { name: 'issuerDescription', value: issuerDescription, type: 'string' },
-    ];
-    const encodedData = schemaEncoder.encodeData(data);
+      // Setting Environment based on chain ID
+      let easscanURL = chain.id === 11155420 ? "https://optimism-sepolia.easscan.org/schema/view" : 'https://optimism.easscan.org/schema/view';
+      let schemaUid = chain.id === 11155420 ? '0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504' : '0x1b1837dfb994702896d5d19bb0d66cf16ea30d8523765b938ec029088f90f904';
+      let registrationContract = chain.id === 11155420 ? '0xF124Aca94e664Bfd5373feA9E2410FD799a8a08B' : '0xb35AA0cB89eC35f04c30E19B736b8ae1904EC26b';
+    
+    const fields = [
+      { name: 'networkID', value: easNetworkID, type: 'uint256', errorMessage: "Network ID must be provided" },
+      { name: 'daoName', value: daoName, type: 'string', errorMessage: "DAO must have a name" },
+      { name: 'daoURI', value: daoURI, type: 'string', validator: validator.isURL, errorMessage: "DAO URI must be a valid URI" },
+      { name: 'contractAddress', value: contractAddress, validator: validator.isEthereumAddress, type: 'address', errorMessage: "Contract address must be a valid Ethereum address" },
+      { name: 'issuerName', value: issuerName, type: 'string', errorMessage: "Issuer name must be provided" },
+      { name: 'issuerDescription', value: issuerDescription, type: 'string', errorMessage: "Issuer description must be provided" },
+  ];
 
-    const eas = new EAS('0x4200000000000000000000000000000000000021');
-    eas.connect(signer);
+  validationErrors = validateAll(fields);
 
+  if (!isConnected) validationErrors.push(`Please connect wallet`);
+  if (!(easNetworkID === chain.id && (chain.id === 10 || chain.id === 11155420))) {
+    validationErrors.push(`Switch to Optimism mainnet or testnet`);
+}
+  if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      window.scrollTo(0, 0);
+      return;
+  }
+
+  const data = fields.map(({ name, value, type }) => ({ name, value, type }));
+
+  let encodedData;
+  try {
+      const schemaEncoder = new SchemaEncoder("uint256 networkID,string daoName,string daoURI,address contractAddress,string issuerName,string issuerDescription");
+      encodedData = schemaEncoder.encodeData(data);
+  } catch (error) {
+      console.error(`Data encoding error: ${error.message}`);
+      setErrors([`Data encoding error: ${error.message}`]);
+      return;
+  }
+
+  
+    setRegisterLoading(true);
+  
     try {
+      // Checking authority
+      const contract = new ethers.Contract(registrationContract, RegistrationContract, signer);
+      const memberRole = await contract.MEMBER_ROLE();
+      const isMember = await contract.hasRole(memberRole, address);
+  
+      if (!isMember) throw new Error('You have no authorization.');
+  
+      const eas = new EAS('0x4200000000000000000000000000000000000021');
+      eas.connect(signer);
+  
+      // Performing attestation
       const attestation = await eas.attest({
         schema: schemaUid,
         data: {
@@ -357,15 +386,17 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           value: 0,
         },
       });
+  
       setAttestationURL(`${easscanURL}/${schemaUid}`);
       setShowEASRegisterDialog(true);
     } catch (e) {
-      console.log("attest error:",e);
-      setErrors([`Register Error. ${e}`]);
+      console.error("Attest error:", e);
+      setErrors([`Register Error. ${e.message || e.toString()}`]);
     } finally {
       setRegisterLoading(false);
     }
   };
+  
 
   const onHandleCloseEASRegisterDialog = () => {
     setShowEASRegisterDialog(false);
