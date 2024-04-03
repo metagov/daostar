@@ -19,10 +19,7 @@ const registrationIdsToFilter = [
     '0xeedfdd3c75674977efc43cfda3aba6662cd5c64e', // Test PR 166
     '0xc12f8d46d4865d64d3878091d22df3d7b8f6aef4', // Lily DAO
     '0xa8d9c7f125a438b6028eb91f75c2ae6981ccd4d9', // Test OP Mainnet
-
-
-
-
+    '0x0fcd80c7c504d56eb9b0fcd5d342352b99580b23', // Lodestar duplicate registration
 ];
 
 export default registrationIdsToFilter;
