@@ -399,7 +399,7 @@ function App() {
                   junosInstances={daodaoInstances}
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
-                  easOptimismGoerli={EASAttestations}
+                  easAttestations={EASAttestations}
                 />
               }
             />

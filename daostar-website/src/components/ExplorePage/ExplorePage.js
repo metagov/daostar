@@ -52,7 +52,7 @@ const NetworkButtons = [
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
-  { text: "EAS OPSepolia", filter: "easOptimismGoerli" },
+  { text: "EAS", filter: "easAttestations" },
 
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
@@ -62,7 +62,7 @@ const ExplorePage = ({
   junosInstances,
   osmosisInstances,
   stargazeInstances,
-  easOptimismGoerli
+  easAttestations
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
@@ -142,8 +142,8 @@ const ExplorePage = ({
           .map((registration, i) => (
             <RegistrationCard key={i} {...registration} />
           ));
-      case "easOptimismGoerli":
-        return easOptimismGoerli
+      case "easAttestations":
+        return easAttestations
         .map((attestation, i) => (
           <AttestationCard key={i} {...attestation} />
         ));
