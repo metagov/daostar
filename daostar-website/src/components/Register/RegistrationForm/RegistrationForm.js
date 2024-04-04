@@ -776,7 +776,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <FormGroup label={
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
                   DAO URI
-                  <Tooltip2 content={"URI compliant with EIP-4824"}>
+                  <Tooltip2 content={"URI compliant with EIP-4824. Create DAO URI daostar.org/register by submitting DAO Registration form"}>
                     <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
                   </Tooltip2>
                 </div>
