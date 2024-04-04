@@ -247,19 +247,31 @@ function App() {
     data: arbitrumData,
   } = arbitrumRes;
 
-  const EASOptimismGoerliRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
-    context: { apiName: "easOptimismGoerli" },
+  const EASOptimismSepoliaiRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
+    context: { apiName: "easOptimismSepolia" },
     variables: {
       schemaId: "0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504",
     },
   });
   const {
-    loading: EASOptimismGoerliLoading,
-    error: EASOptimismGoerliError,
-    data: EASOptimismGoerliData,
-  } = EASOptimismGoerliRes;
-  console.log(EASOptimismGoerliData)
+    loading: EASOptimismSepoliaLoading,
+    error: EASOptimismSepoliaError,
+    data: EASOptimismSepoliaData,
+  } = EASOptimismSepoliaiRes;
+  console.log(EASOptimismSepoliaData)
 
+  const EASOptimismRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
+    context: { apiName: "easOptimism" },
+    variables: {
+      schemaId: "0x1b1837dfb994702896d5d19bb0d66cf16ea30d8523765b938ec029088f90f904",
+    },
+  });
+  const {
+    loading: EASOptimismLoading,
+    error: EASOptimismError,
+    data: EASOptimismData,
+  } = EASOptimismRes;
+  console.log(EASOptimismData)
   if (
     error ||
     goerliError ||
@@ -310,8 +322,11 @@ function App() {
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
-  const EASOptimismGoerliAttestations =
-    EASOptimismGoerliData?.attestations || [];
+  const EASOptimismSepoliaAttestations =
+    EASOptimismSepoliaData?.attestations || [];
+
+    const EASOptimismAttestations =
+    EASOptimismData?.attestations || [];
 
   // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
   // So that when we click on an old registration instance card we are able to view and edit its proprties
@@ -336,6 +351,7 @@ function App() {
     arbitrumRegistrations
   );
 
+  const EASAttestations = EASOptimismAttestations.concat(EASOptimismSepoliaAttestations);
   const daodaoRegInstances = daodaoInstances;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
@@ -383,7 +399,7 @@ function App() {
                   junosInstances={daodaoInstances}
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
-                  easOptimismGoerli={EASOptimismGoerliAttestations}
+                  easOptimismGoerli={EASAttestations}
                 />
               }
             />

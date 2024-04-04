@@ -38,7 +38,9 @@ const client = new ApolloClient({
                 optimism: `https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-optimism`,
                 ethereum: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
                 arbitrum: "https://api.thegraph.com/subgraphs/name/crazyyuan/daostar-arbitrum",
-                easOptimismGoerli:"https://optimism-sepolia.easscan.org/graphql"
+                easOptimismSepolia:"https://optimism-sepolia.easscan.org/graphql",
+                easOptimism:"https://optimism.easscan.org/graphql"
+
             },
             //defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",
