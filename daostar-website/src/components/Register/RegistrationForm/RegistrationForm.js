@@ -386,7 +386,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     if (!isConnected)
       validationErrors.push(`Please connect your wallet to Optimism Mainnet`);
     if (!(chain.id === 10 || chain.id === 11155420)) {
-      validationErrors.push(`Switch to Optimism Mainnet`);
+      validationErrors.push(`Switch to Optimism Mainnet on your connected wallet`);
     }
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
