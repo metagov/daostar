@@ -34,6 +34,13 @@ const DisplayAttestation = ({
     const daoName = decodedData.find(item => item.name === "daoName")?.value.value || "Unknown DAO";
     const daoURI = decodedData.find(item => item.name === "daoURI")?.value.value || "https://daostar.org/registration";
 
+    let decodedDataArray = Array.isArray(decodedData) ? decodedData : [decodedData];
+    function ensureArray(data) {
+      if (!data) return []; // Return an empty array if data is falsy (e.g., undefined or null)
+      return Array.isArray(data) ? data : [data];
+    }
+    
+    decodedDataArray = ensureArray(decodedData);
 
     return (
     <Card
@@ -98,23 +105,27 @@ const DisplayAttestation = ({
             <span className="bp4-text-muted">DAO URI: </span>
             <Link target='_blank'  to={daoURI}>{daoURI}</Link>
           </p>
-          <p className="bp4-text-small wizard-no-margin" style={{marginTop: '3px'}}>
-            <span className="bp4-text-muted">Network: </span>
-            <span className="card-metadata-value">Optimism Goerli</span>
-
-          </p>
         </div>
         <Divider />
-        {decodedData && (
-          <div className="card-metadata">
-            <h6>Decoded Data:</h6>
-            {decodedData.map((item, index) => (
-              <p key={index} className="bp4-text-large">
-                <strong>{item.name}:</strong> {item.value.value}
-              </p>
-            ))}
-          </div>
-        )}
+        <div className="card-metadata">
+  <h6>Decoded Data:</h6>
+  {decodedDataArray.map((item, index) => {
+    let value;
+    if (item.name === 'networkID') {
+      // Convert hex to decimal for networkID
+      value = parseInt(item.value?.value?.hex ?? item.value?.value, 16).toString();
+    } else {
+      // For other items, use the original logic to determine the value
+      value = item.value?.value?.hex ?? item.value?.value ?? 'N/A';
+    }
+    return (
+      <p key={index} className="bp4-text-large" style={{ marginBottom: '10px' }}>
+        <strong>{item.name}:</strong> {value}
+      </p>
+    );
+  })}
+</div>
+
       </Fragment>
       </Card>
     );
