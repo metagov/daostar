@@ -250,7 +250,7 @@ function App() {
   const EASOptimismGoerliRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
     context: { apiName: "easOptimismGoerli" },
     variables: {
-      schemaId: "0xf90c716cef83b64e4b9cbf5babeb4ee65662e2081535afd76cad37dde744c2dd",
+      schemaId: "0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504",
     },
   });
   const {
