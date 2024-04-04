@@ -60,6 +60,7 @@ import smartContractResearchLogo from '../../../img/logos/scrf.png';
 import snapshotLogo from '../../../img/logos/snapshot.jpeg';
 import solanaLogo from '../../../img/logos/solana.png';
 import spruceLogo from '../../../img/logos/spruce.jpeg';
+import samudaiLogo from '../../../img/logos/samudai.png'
 import stationLogo from '../../../img/logos/station.jpg';
 import superDAOlogo from '../../../img/logos/superdao.png';
 import syndicateLogo from '../../../img/logos/syndicate.jpeg';
@@ -131,6 +132,7 @@ const MemberLogos = (props) => {
             <a href="https://www.radicalxchange.org/" target="_blank"><img src={radicalxchangeLogo} alt="RadicalxChange" /></a>
             <a href="https://radicle.xyz/" target="_blank"><img src={radicleLogo} alt="Radicle" /></a>
             <a href="https://sismo.io/" target="_blank"><img src={sismoLogo} alt="Sismo" /></a>
+            <a href='https://samudai.xyz' target='_blank'><img src={samudaiLogo} alt='Samudai' /></a>
             <a href="https://www.smartcontractresearch.org/" target="_blank"><img src={smartContractResearchLogo} alt="Smart Contract Research Forum" /></a>
             <a href="https://snapshot.org/" target="_blank"><img src={snapshotLogo} alt="Snapshot" /></a>
             <a href="https://solana.com/" target="_blank"><img src={solanaLogo} alt="Solana" /></a>
