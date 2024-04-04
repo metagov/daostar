@@ -740,7 +740,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       {registerByEAS && !showEASRegisterDialog && (
         <div style={{ width: "100%" }}>
           <div className="wizard-row wizard-row-flex">
-            <FormGroup label="DAO Network ID">
+            <FormGroup label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  DAO Network ID
+                  <Tooltip2 content={"Network on which DAO Governance exists"}>
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                  </Tooltip2>
+                </div>
+              }>
               <HTMLSelect
                 style={{ minWidth: 140 }}
                 iconProps={{ icon: "caret-down", color: "#fff" }}
@@ -766,7 +773,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             </FormGroup>
           </div>
           <div className="wizard-row">
-            <FormGroup label="DAO URI" labelFor="dao-uri" fill>
+            <FormGroup label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  DAO URI
+                  <Tooltip2 content={"URI compliant with EIP-4824"}>
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                  </Tooltip2>
+                </div>
+              } labelFor="dao-uri" fill>
               <InputGroup
                 fill
                 id="dao-uri"
@@ -778,7 +792,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           </div>
           <div className="wizard-row">
             <FormGroup
-              label="DAO Contract Address"
+              label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  DAO Contract Address
+                  <Tooltip2 content={"DAO Governance Contract Address"}>
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                  </Tooltip2>
+                </div>
+              }
               labelFor="contract-address"
               fill
             >
@@ -792,7 +813,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             </FormGroup>
           </div>
           <div className="wizard-row">
-            <FormGroup label="Issuer Name" labelFor="issuer-name" fill>
+            <FormGroup label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  Issuer Name
+                  <Tooltip2 content={"Attestation issuer name"}>
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                  </Tooltip2>
+                </div>
+              } labelFor="issuer-name" fill>
               <InputGroup
                 fill
                 id="issuer-name"
@@ -804,7 +832,14 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           </div>
           <div className="wizard-row">
             <FormGroup
-              label="Issuer Description"
+              label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  Issuer Description
+                  <Tooltip2 content={"Attestation issuer description"}>
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                  </Tooltip2>
+                </div>
+              }
               labelFor="issuer-description"
               fill
             >
