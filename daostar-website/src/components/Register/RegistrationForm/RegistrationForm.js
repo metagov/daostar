@@ -443,7 +443,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       setShowEASRegisterDialog(true);
     } catch (e) {
       console.error("Attest error:", e);
-      setErrors([`Register Error. ${e.message || e.toString()}`]);
+      setErrors([`${e.message || e.toString()}`]);
     } finally {
       setRegisterLoading(false);
     }
