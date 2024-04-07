@@ -420,7 +420,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       const memberRole = await contract.MEMBER_ROLE();
       const isMember = await contract.hasRole(memberRole, address);
 
-      if (!isMember) throw new Error("You have no authorization.");
+      if (!isMember) throw new Error("You have no authorization. Request (https://forms.gle/d8nGkfKbpnbPJa8J6) to get added to the schema allowlist");
 
       const eas = new EAS("0x4200000000000000000000000000000000000021");
       eas.connect(signer);
@@ -743,7 +743,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <FormGroup label={
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
                   DAO Network ID
-                  <Tooltip2 content={"Network on which DAO Governance exists"}>
+                  <Tooltip2 content={"Network on which DAO's governance contract/main treasury exists"}>
                     <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
                   </Tooltip2>
                 </div>
@@ -757,6 +757,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
                   { label: "Ethereum", value: 1 },
                   { label: "Optimism", value: 10 },
                   { label: "Arbitrum", value: 42161 },
+                  { label: "Avalanche", value: 43114 },
+                  { label: "BNB", value: 56 },
+                  { label: "Polygon", value: 137 },
                 ]}
               />
             </FormGroup>
@@ -776,7 +779,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <FormGroup label={
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
                   DAO URI
-                  <Tooltip2 content={"URI compliant with EIP-4824. Create DAO URI daostar.org/register by submitting DAO Registration form"}>
+                  <Tooltip2 content={"URI compliant with EIP-4824. You can use daostar.org/register to create a daoURI"}>
                     <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
                   </Tooltip2>
                 </div>
@@ -795,7 +798,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
               label={
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
                   DAO Contract Address
-                  <Tooltip2 content={"DAO Governance Contract Address"}>
+                  <Tooltip2 content={"DAO's governance/main treasury contract address"}>
                     <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
                   </Tooltip2>
                 </div>
@@ -860,7 +863,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             }}
           >
             <AnchorButton
-              href={`https://docs.daostar.org/How%20To's/DifferentPaths`}
+              href={`https://docs.daostar.org/How%20To's/DifferentPaths#3-eas-attestations`}
               target="_blank"
               icon="link"
               text="Get More Details"

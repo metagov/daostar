@@ -36,7 +36,7 @@ const config = createConfig(
       alchemyId: alchemyId,
       walletConnectProjectId: walletConnectId,
       appName: "DAOstar",
-      chains: [mainnet,optimism,optimismSepolia,arbitrum,bscTestnet],
+      chains: [optimism,mainnet,optimismSepolia,arbitrum,bscTestnet],
     })
 );
 let headers, stargaze_headers;
