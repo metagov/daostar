@@ -19,7 +19,20 @@ const registrationIdsToFilter = [
     '0xeedfdd3c75674977efc43cfda3aba6662cd5c64e', // Test PR 166
     '0xc12f8d46d4865d64d3878091d22df3d7b8f6aef4', // Lily DAO
     '0xa8d9c7f125a438b6028eb91f75c2ae6981ccd4d9', // Test OP Mainnet
+    '0xa88ff2b0f100b3fdbb1e52dd951d3bc64c5fceab', // Lily DAO OP Goerlu
     '0x0fcd80c7c504d56eb9b0fcd5d342352b99580b23', // Lodestar duplicate registration
 ];
+
+export const filterEASbyId = [
+    '0xd8a6a62285604abb37ace1c3b08d3b9ddae177f59c29ead274c98d5384711e01', //test 2
+'0x1cd5d9364748a56b1ccd75357af1c94f0572391b283c44737b95e6843d1122b6', //test DAO
+'0xd537e5fc1d8bfae5b1bf8d3c2fcd996b6193115d5e76c97d7eac95819e675f16', //hh
+'0x3ca06ddfe224e6f7ce00dbc4ff3a64ed6c52b2400ef3d633c68c88f99933df04', //daoui
+'0xdfb41aff88b8570cfa6da02083d280915bb090d8ed5e195ce7b40b98d88667ab', //test
+'0x8e095714505cca969a448d7ecf3a27f6ac4e37c1eef4816ca4787ae04f98f6c9', //test
+'0x8499c5e98f9abb3646514ca9a6fad3d9f94363c899e33db875df484ee5546037', //test
+'0x49fdb1a98528ab64f9eb739ae1fe639bef92db4ac50897ee8e0839b5e4263978', //strike team dao 5
+]; // List of names to exclude
+
 
 export default registrationIdsToFilter;

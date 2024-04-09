@@ -3,6 +3,7 @@ import RegistrationCard from "../RegistrationCard/RegistrationCard";
 import AttestationCard from "../AttestationCard/AttestationCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
+import { filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
 export const filterRegistrations = (registration, filterVal = "") => {
@@ -144,6 +145,7 @@ const ExplorePage = ({
           ));
       case "easAttestations":
         return easAttestations
+        .filter(attestation => !filterEASbyId.includes(attestation.id)) // Filter out attestation by name
         .map((attestation, i) => (
           <AttestationCard key={i} {...attestation} />
         ));

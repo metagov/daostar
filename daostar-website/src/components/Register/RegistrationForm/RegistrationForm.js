@@ -420,7 +420,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       const memberRole = await contract.MEMBER_ROLE();
       const isMember = await contract.hasRole(memberRole, address);
 
-      if (!isMember) throw new Error("You have no authorization. Request (https://forms.gle/d8nGkfKbpnbPJa8J6) to get added to the schema allowlist");
+      if (!isMember) throw new Error("You have no authorization. Click  <a href='https://forms.gle/d8nGkfKbpnbPJa8J6' target='_blank'>here</a>to get added to the schema allowlist");
 
       const eas = new EAS("0x4200000000000000000000000000000000000021");
       eas.connect(signer);
