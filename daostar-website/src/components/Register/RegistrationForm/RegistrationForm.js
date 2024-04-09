@@ -316,6 +316,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
 
   const onRegisterByEAS = async () => {
     let validationErrors = [];
+    // Clear errors when the user is about to correct the issue or retry
+    setErrors([]);
 
     if (!isConnected || !chain) {
       validationErrors.push(
@@ -452,6 +454,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const onHandleCloseEASRegisterDialog = () => {
     setShowEASRegisterDialog(false);
   };
+
+ 
 
   const EthNetworksSelect = (
     <>
