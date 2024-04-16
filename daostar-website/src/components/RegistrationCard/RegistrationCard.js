@@ -20,6 +20,7 @@ const RegistrationCard = ({
     activityLogURI = '',
     registrationNetwork,
     registrationAddress,
+    contractVersion,
     managerAddress,
     standalone = false, // whether this card is presented within the explore view or on its own page
     displayWithoutEdit = false
@@ -41,7 +42,7 @@ const RegistrationCard = ({
     
     const defaultContractVersion = '1.0';
     
-    const contractVersion = contractVersions[id] || defaultContractVersion;
+    const displayContractVersion = contractVersions[id] || contractVersion;
     
     const regCard = (
         <Card
@@ -64,7 +65,7 @@ const RegistrationCard = ({
                     proposalsURI={proposalsURI}
                     governanceURI={governanceURI}
                     displayWithoutEdit={displayWithoutEdit}
-                    contractVersion={contractVersion}
+                    contractVersion={displayContractVersion}
                 />
             )}
             {cardScreen === 'EDIT' && (
