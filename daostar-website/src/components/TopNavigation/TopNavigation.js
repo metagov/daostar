@@ -19,7 +19,8 @@ const TopNavigation = ({
                 <HashLink to='/#standard'>Standard</HashLink>
                 <a href='/register'>Register</a>
                 <Link to='/explore'>Explore</Link>
-                <HashLink to='/#build'>Build</HashLink>
+                <a href='https://docs.daostar.org/'>Build</a>
+                <a href='https://daostar.substack.com'>Universe</a>
                 <ConnectWallet />
             </nav>
         </header>
