@@ -14,6 +14,7 @@ const RegistrationReceived = ({
   const { isOpen, open } = useWeb3Modal();
   // Registration Summoner Contract Addresses
   const factoryContracts = {
+    arbitrum: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
     mainnet: `0x2dac5dbbf1d024c1e0d9c92d3aeda7618e15add7`,
     goerli: `0x3271b3479f7485dadb2bd5fff43eeb4367b1a91a`,
     gnosis: `0x4f2c9028fe7107d9f1a8a9cff34aa2d3f28600fa`,
@@ -22,7 +23,6 @@ const RegistrationReceived = ({
     arbitrumGoerli: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
     chapel:`0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
     optimism: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
-    arbitrum: `0x5C0340AD34f7284f9272E784FF76638E8dDb5dE4`,
   };
 
   const regContract = new ethers.Contract(
