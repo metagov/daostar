@@ -51,7 +51,7 @@ const RegistrationReceived = ({
   if(daoContractNetwork === 'arbitrum-goerli'){
     daoContractNetwork = 'arbitrumGoerli';
   }
-
+  console.log(daoContractNetwork);
   return (
     <Fragment>
       <h3>
