@@ -1,8 +1,8 @@
 ---
 daoip: 7
 title: Attestation Schema Registry for EAS
-description: A registry of schemas conforming to DAOIP-3 on Ethereum Attestation Service (EAS)
-discussions-to: https://github.com/metagov/daostar/discussions/51
+description: A registry of schemas on Ethereum Attestation Service(EAS), conforming to DAOIP-3.
+discussions-to: https://github.com/metagov/daostar/discussions/228
 status: Draft
 type: 
 category: 
@@ -10,11 +10,11 @@ author: Amandeep <aman@daostar.org>, Joshua Tan <josh@metagov.org>
 created: 2024-04-25
 ---
 # Simple summary
-A registry of schemas conforming to DAOIP-3 on Ethereum Attestation Service. 
+A registry of schemas on Ethereum Attestation Service, conforming to DAOIP-3.  
 
 # Motivation
-[DAOIP-3](https://github.com/metagov/daostar/blob/main/DAOIPs/daoip-3.md) composes with daoURI ([DAOIP-2 / EIP-4824](https://github.com/metagov/daostar/blob/main/DAOIPs/daoip-2.md)) in order to specify a permissionless attestation framework so that service providers and other entities can publish information about the DAO and its members. To meet the rising usage of Ethereum Attestation Service ([EAS](https://attest.org/)) among DAOs and tooling providers, DAOIP-7 creates a registry, referred to as DAO Schema Registry, to keep track of EAS schemas that comply with DAOIP-3 and, by extension, the verifiable credential standard. Notably, this specification ensures that attestations made through compliant EAS schemas will be interoperable with attestations and credentials not issued through EAS. 
-Accompanying this standard is a DAO Attestation List website to further improve the visibility and usability of DAO-related attestations. 
+[DAOIP-3](https://github.com/metagov/daostar/blob/main/DAOIPs/daoip-3.md) composes with daoURI ([DAOIP-2 / EIP-4824](https://github.com/metagov/daostar/blob/main/DAOIPs/daoip-2.md)) in order to specify a permissionless attestation framework so that service providers and other entities can publish information about the DAO and its members. To meet the rising usage of Ethereum Attestation Service ([EAS](https://attest.org/)) among DAOs and tooling providers, DAOIP-7 creates a registry, referred to hereon as **DAO Schema Registry**, that'll keep track of EAS schemas which comply with DAOIP-3 and, by extension, the verifiable credential standard. Notably, this specification ensures that attestations made through compliant EAS schemas will be interoperable with attestations and credentials not issued through EAS. 
+Accompanying this standard is a **DAO Attestation List website** to further improve the visibility and usability of DAO-related attestations. 
 
 # Specification
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
@@ -41,16 +41,18 @@ An attestation issuer SHOULD register their schemas here by providing:
 
 `Schema UID`: {UIDs} of the schemas the attestation issuer wishes to register
 `Schema Description`: {descriptions} of the schemas the attestation issuer wishes to register
-`Network ID`: {network IDs} of the schemas the attestation issuer wishes to register (refer)
-`Issuer Name`: name of the attestation issuer
-`Issuer Description`: description of the attestation issuer
-`Logo`: link to attestation issuer’s logo. Enter NA if not available.
-`apiDocsURI`: link to the attestation issuer’s API documentation.  Enter NA if not available
+`Network ID`: {network IDs} of the schemas the attestation issuer wishes to register ([refer](https://chainlist.org/))
+`Issuer Name`: name of the attestation issuer 
+`Issuer Description`: description of the attestation issuer 
+`Logo`: link to attestation issuer’s logo. Enter NA if not available 
+`apiDocsURI`: link to the attestation issuer’s API documentation.  Enter NA if not available 
 
 # Rationale
-The registry defined above is an opt-in, public repository for EAS schemas conforming to DAOIP-3. Together with the DAO Attestation Lists website, it enhances the context and usability of DAO-related attestations on EAS. 
+The registry set-up above is an opt-in, public repository for EAS schemas conforming to DAOIP-3. Together with the DAO Attestation Lists website, it enhances the context and usability of DAO-related attestations on EAS. 
 
-You may note that in this specification, compliance with DAOIP-3 has been ensured in a lightweight manner. Specifically, we have refrained from mandating the `Attestations JSON-LD Schema` defined by DAOIP-3 at the EAS schema level, or requiring each attestation issuer to publish a separate Attestation Issuer endpoint following the `Attestation Issuer JSON-LD Schema` defined by DAOIP-3, or predefining `attestation types` as in DAOIP-3. This is a result of EAS’s architecture and the primitives it assures by default. 
+By ensuring that only registrations from schema owners will be considered valid, we have scam-protection for the registry. And by maintaining the DAO Attestation Lists Website, we hope to give more visibility to DAO activity happening through EAS. Often times, the gap between an ok-data economy and an interoperable data-economy is good facilitation. 
+
+You may note that in this specification, compliance with DAOIP-3 has been ensured in a rather lightweight manner. Specifically, we have refrained from mandating the `Attestations JSON-LD Schema` defined by DAOIP-3 at each EAS schema level, or requiring each attestation issuer to publish a separate Attestation Issuer endpoint following the `Attestation Issuer JSON-LD Schema` defined by DAOIP-3, or predefining `attestation types` as in DAOIP-3. This is a result of EAS’s architecture and the primitives it makes available by default. 
 
 For example, consider the `Attestations JSON-LD Schema` specified by DAOIP-3:
 ```json
@@ -67,12 +69,12 @@ For example, consider the `Attestations JSON-LD Schema` specified by DAOIP-3:
 ```
 Evaluating the above JSON in the light of EAS reveals that: 
 
-- every EAS attestation is directly linked to the schema it utilized and thereby, to the schema owner. As the registry stores a record of the schema owner, it is unnecessary to have an “issuer” field in every attestation;
--  every EAS attestation, by default, has an attestation UID using which someone can obtain the attestation. Hence it is unnecessary to include an attestationURI in each attestation;
--  expiration date of any EAS attestation can be set as well as retrieved without it being enforced at the schema level;
--  context can be set via the the EAS-context-attestation method, hence setting it at the schema level is not required;
--  credentialSubject is part of the explicit and implicit structure of the verifiable credential standard and thus of DAOIP-3, which organizes all attestations as declarations about an entity. EAS does not natively call out a credentialSubject, however, we ALWAYS expect the data in your attestation to reference one or more "subjects'', per the VC standard. Additionally, as we have removed all components that ensure interoperability at the schema level, we expect each field simply being a credentialSubject property. There may be exceptions to this;
--  note that each schema is in essence an attestation type. Hence it seemed best not to pre-define them due to the diversity of use cases supported by EAS. 
+- every EAS attestation is directly linked to the schema it utilizes and thereby, to the schema owner. As anyone can query the registry for information on the schema owner, it is unnecessary to have an `issuer` field in every attestation;
+-  every EAS attestation, by default, has an attestation UID using which anyone can obtain the data associated to the attestation. This can essentially be treated as the `attestationURI` of each attestation;
+-  `expirationDate` of any EAS attestation can be set as well as retrieved without it being enforced at the schema level;
+-  `context` can be set via the the EAS-context-attestation method, hence setting it at the schema level is not required;
+-  `credentialSubject` is part of the explicit and implicit structure of the verifiable credential standard and thus of DAOIP-3, which organizes all attestations as declarations about an entity. EAS does not natively call out a credentialSubject, however, we ALWAYS expect the data in your attestation to reference one or more "subjects", per the VC standard. Additionally, as we have removed all components that ensure interoperability at the schema level, we expect each field (other than `context`, if it is an inline field) simply being a `credentialSubject` property. There may be exceptions to this;
+-  note that each schema is in essence an attestation type. Hence it seemed best not to pre-define `attestation types` due to the diversity of schemas supported by EAS. 
 
 Consider the `Attestation Issuer URI` defined by DAOIP-3: 
 
@@ -92,7 +94,7 @@ Consider the `Attestation Issuer URI` defined by DAOIP-3:
 ```
 Note that the registry essentially captures this information. The only difference is that instead of every attestation issuer hosting this endpoint on their own, they can simply attest a copy of this info to the registry. As EAS provides a GraphQL API to query attestations about an entity, and since the registry will store all schemas by the issuer, it eliminates the need for a separate `subjectAttestationsURI`. 
 
-Note that an attestation issuer may have deployed EAS schemas using more than one address. While they may use multiple wallets to add their schemas to the registry, the front-end may not make a distinction between them. 
+Note that an attestation issuer may have deployed EAS schemas using more than one address. The front-end (DAO Attestation List website) aims to aggregate all of them under the same _issuer profile_. 
 
 To summarize, the environment DAOIP-3 was authored to operate in is very different from the environment EAS provides. When it comes to EAS, attestations are by default connected to each other and to the schemas they use, which are by default connected to the schema owner. DAOIP-3 does not assume this interconnectedness, which is why it mandated each attestation to establish a connection with the issuer and include details like expiration date at the schema level. When we operate on EAS’s backdrop, this is not necessary. But, the DAO Schema Registry, specified above adds a missing piece to EAS - a repository of schemas conforming to a particular standard (DAOIP-3), which is more or less a repository of DAO builders utilizing EAS. 
 
