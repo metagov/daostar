@@ -23,7 +23,7 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 A DAOIP-7 compliant EAS schema MUST declare an associated context. In other words, it must take the following form:
 ```json
 {
-"@context": ["https://www.w3.org/ns/credentials/v2", "https://daostar.org/schemas","],
+"@context": ["https://www.w3.org/ns/credentials/v2", "https://daostar.org/schemas"],
 	"mySubjectProperty": "<mySubjectValue>",
 }
 ```
