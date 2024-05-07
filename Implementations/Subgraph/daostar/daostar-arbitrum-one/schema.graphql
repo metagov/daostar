@@ -1,0 +1,9 @@
+type NewRegistration @entity(immutable: true) {
+  id: Bytes!
+  daoAddress: Bytes! # address
+  daoURI: String! # string
+  registration: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: EIP-4824 Registration
+    network: arbitrum-one
+    source:
+      address: "0x5c0340ad34f7284f9272e784ff76638e8ddb5de4"
+      abi: EIP-4824 Registration
+      startBlock: 171330893
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NewRegistration
+      abis:
+        - name: EIP-4824 Registration
+          file: ./abis/EIP-4824 Registration.json
+      eventHandlers:
+        - event: NewRegistration(indexed address,string,address)
+          handler: handleNewRegistration
+      file: ./src/eip-4824-registration.ts
