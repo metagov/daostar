@@ -32,7 +32,7 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
 }
 
 export function handleNewURI(event: DAOURIUpdate): void {
-    let registrationAddress = event.address.toHex()
+    let registrationAddress = event.params.daoAddress.toHex()
     let registrationInstance = RegistrationInstance.load(registrationAddress)
 
     if (!registrationInstance) log.warning('Invalid Registration: {}', [registrationAddress])
