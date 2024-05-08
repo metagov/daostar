@@ -1,6 +1,6 @@
 import { newMockEvent } from "matchstick-as"
 import { ethereum, Address } from "@graphprotocol/graph-ts"
-import { NewRegistration } from "../generated/EIP-4824 Registration/EIP-4824 Registration"
+import { NewRegistration } from "../generated/EIP4824Registration.json/EIP4824Registration.json"
 
 export function createNewRegistrationEvent(
   daoAddress: Address,

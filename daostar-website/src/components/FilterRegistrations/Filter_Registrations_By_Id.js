@@ -21,6 +21,10 @@ const registrationIdsToFilter = [
     '0xa8d9c7f125a438b6028eb91f75c2ae6981ccd4d9', // Test OP Mainnet
     '0xa88ff2b0f100b3fdbb1e52dd951d3bc64c5fceab', // Lily DAO OP Goerlu
     '0x0fcd80c7c504d56eb9b0fcd5d342352b99580b23', // Lodestar duplicate registration
+    '0xc521f2511c9294f80ed6b0607c59a760534118e4',
+    '0x8e3eb988fe9dae0e294c833388af8bd64fcbeec3',
+    '0x40010a93fc9df1620d0e4f26fed2b4b6f28c4318',
+    '0x0d4e9fd02ea0f12682d33046b27a04b07f509a39',
 ];
 
 export const filterEASbyId = [

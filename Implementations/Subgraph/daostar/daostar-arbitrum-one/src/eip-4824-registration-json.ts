@@ -1,4 +1,4 @@
-import { NewRegistration as NewRegistrationEvent } from "../generated/EIP-4824 Registration/EIP-4824 Registration"
+import { NewRegistration as NewRegistrationEvent } from "../generated/EIP4824Registration.json/EIP4824Registration.json"
 import { NewRegistration } from "../generated/schema"
 
 export function handleNewRegistration(event: NewRegistrationEvent): void {

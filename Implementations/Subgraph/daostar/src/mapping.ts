@@ -32,7 +32,8 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
 }
 
 export function handleNewURI(event: DAOURIUpdate): void {
-    let registrationAddress = event.params.daoAddress.toHex()
+
+    let registrationAddress = event.address.toHex()
     let registrationInstance = RegistrationInstance.load(registrationAddress)
 
     if (!registrationInstance) log.warning('Invalid Registration: {}', [registrationAddress])
@@ -79,4 +80,5 @@ export function handleNewURI(event: DAOURIUpdate): void {
         // TODO resolve IPFS here
         registrationInstance.save()
     }
+
 }

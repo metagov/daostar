@@ -5,11 +5,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: EIP-4824 Registration
+    name: EIP4824Registration.json
     network: arbitrum-one
     source:
       address: "0x5c0340ad34f7284f9272e784ff76638e8ddb5de4"
-      abi: EIP-4824 Registration
+      abi: EIP4824Registration.json
       startBlock: 171330893
     mapping:
       kind: ethereum/events
@@ -18,9 +18,9 @@ dataSources:
       entities:
         - NewRegistration
       abis:
-        - name: EIP-4824 Registration
-          file: ./abis/EIP-4824 Registration.json
+        - name: EIP4824Registration.json
+          file: ./abis/EIP4824Registration.json.json
       eventHandlers:
         - event: NewRegistration(indexed address,string,address)
           handler: handleNewRegistration
-      file: ./src/eip-4824-registration.ts
+      file: ./src/eip-4824-registration-json.ts

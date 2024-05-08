@@ -8,9 +8,9 @@ import {
 } from "matchstick-as/assembly/index"
 import { Address } from "@graphprotocol/graph-ts"
 import { NewRegistration } from "../generated/schema"
-import { NewRegistration as NewRegistrationEvent } from "../generated/EIP-4824 Registration/EIP-4824 Registration"
-import { handleNewRegistration } from "../src/eip-4824-registration"
-import { createNewRegistrationEvent } from "./eip-4824-registration-utils"
+import { NewRegistration as NewRegistrationEvent } from "../generated/EIP4824Registration.json/EIP4824Registration.json"
+import { handleNewRegistration } from "../src/eip-4824-registration-json"
+import { createNewRegistrationEvent } from "./eip-4824-registration-json-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0

@@ -14,7 +14,7 @@
         "build": "graph build",
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar",
         "deploy:optimism": "graph deploy --node https://api.thegraph.com/deploy/ crazyyuan/daostar-optimism",
-        "deploy:arbitrum": "graph deploy --node https://api.thegraph.com/deploy/ crazyyuan/daostar-arbitrum",
+        "deploy:arbitrum": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-arbitrum-one",
         "deploy:goerli": "graph deploy --node https://api.thegraph.com/deploy/ ipatka/daostar-goerli",
         "deploy:optimism-goerli": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-optimism-goerli",
         "deploy:gnosis": "graph deploy --node https://api.thegraph.com/deploy/ rashmi-278/daostar-gnosis",

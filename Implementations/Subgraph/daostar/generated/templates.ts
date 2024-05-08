@@ -3,7 +3,7 @@
 import {
   Address,
   DataSourceTemplate,
-  DataSourceContext
+  DataSourceContext,
 } from "@graphprotocol/graph-ts";
 
 export class EIP4824Registration extends DataSourceTemplate {
@@ -15,7 +15,7 @@ export class EIP4824Registration extends DataSourceTemplate {
     DataSourceTemplate.createWithContext(
       "EIP4824Registration",
       [address.toHex()],
-      context
+      context,
     );
   }
 }
