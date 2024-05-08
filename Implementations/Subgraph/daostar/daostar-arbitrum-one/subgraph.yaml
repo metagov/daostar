@@ -5,22 +5,31 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: EIP4824Registration.json
+    name: EIP4824Index
     network: arbitrum-one
     source:
-      address: "0x5c0340ad34f7284f9272e784ff76638e8ddb5de4"
-      abi: EIP4824Registration.json
-      startBlock: 171330893
+      address: "0x18CbB356cd64193b1a0CA49911fc72CB3D02a5E4"
+      abi: EIP4824Index
+      startBlock: 171329384
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - NewRegistration
+        - DAOURIRegistered
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
       abis:
-        - name: EIP4824Registration.json
-          file: ./abis/EIP4824Registration.json.json
+        - name: EIP4824Index
+          file: ./abis/EIP4824Index.json
       eventHandlers:
-        - event: NewRegistration(indexed address,string,address)
-          handler: handleNewRegistration
-      file: ./src/eip-4824-registration-json.ts
+        - event: DAOURIRegistered(address)
+          handler: handleDAOURIRegistered
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+      file: ./src/eip-4824-index.ts
