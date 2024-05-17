@@ -1,5 +1,4 @@
 const registrationIdsToFilter = [
-
     '0x170b1eb094571c154ff822145b8cdb3afb852b4c', // Testnet bnb bruno
     '0x4e656b8859548075cd4d922809129bfda9920b8e', // Testnet arb goerli
     '0xfe0c8cfa51eed09259eb4926df24ba26dda6230d', // Lyra demo without issuer uri

@@ -12,6 +12,13 @@ export const filterRegistrations = (registration, filterVal = "") => {
     return false;
   }
 
+  if (!registration.daoName || registration.daoName.trim() === "") {
+    return false;
+  }
+ // Omit dev test address
+  if (!registration.daoAddress === "0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA") {
+    return false;
+  }
   const daoNameLower = registration.daoName.toLowerCase();
   const filterWords = ["scam", "test", "fuck"];
 
