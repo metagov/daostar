@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/metagov/daostar#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "create-react-app": "^5.0.1"
   }
 }
