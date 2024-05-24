@@ -272,6 +272,24 @@ function App() {
     data: EASOptimismData,
   } = EASOptimismRes;
   console.log(EASOptimismData)
+
+
+  const ENSQueryRes = useQuery(queries.ENS_QUERY, {
+    context: { apiName: "ensTextRecords" },
+    variables: {
+      "where": {
+        "value_not": null,
+        "key_starts_with_nocase": "com.github",
+        "key_ends_with_nocase": "com.github"
+      }
+    },
+  });
+  const {
+    loading: ENSQueryResLoading,
+    error: ENSQueryResError,
+    data: ENSQueryResData,
+  } = ENSQueryRes;
+  console.log(ENSQueryResData)
   if (
     error ||
     goerliError ||

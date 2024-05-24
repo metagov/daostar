@@ -101,4 +101,22 @@ const ATTESTATIONS_BY_SCHEMA = gql`
   }
 `;
 
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA }
+
+
+
+const ENS_QUERY = gql `
+query TextChangeds($where: TextChanged_filter) @api(contextKey: "apiName"){
+  textChangeds(where: $where) {
+    id
+    key
+    value
+    resolver {
+      addr {
+        id
+      }
+      address
+    }
+  }
+}
+`;
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY }
