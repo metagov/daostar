@@ -53,7 +53,7 @@ const DisplayENSTextRecord = ({
           <p className="bp4-text-small wizard-no-margin">
             <span className="bp4-text-muted">DAO URI: </span>
             {daoURI}
-          </p> */}
+          </p>
         </div>
       </Fragment>
     </Card>
