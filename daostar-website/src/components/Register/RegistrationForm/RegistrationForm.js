@@ -448,9 +448,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       // Get new attestation UID
 
       const newAttestationUID = await attestationTx.wait();
-      const attestationTxResponse = await attestationTx.tx();
 
-      if (newAttestationUID && attestationTxResponse) {
+      if (newAttestationUID) {
         setAttestationURL(`${easscanURL}/${schemaUid}`);
         setAttestationUID(newAttestationUID)
         setShowEASRegisterDialog(true);
