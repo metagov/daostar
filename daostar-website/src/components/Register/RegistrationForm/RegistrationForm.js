@@ -395,6 +395,9 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (validationErrors.length === 0) {
+      setErrors(null);
+    }
 
     const data = fields.map(({ name, value, type }) => ({ name, value, type }));
 
