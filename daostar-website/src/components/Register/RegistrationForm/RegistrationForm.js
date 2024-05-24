@@ -39,6 +39,8 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const [showEASRegisterDialog, setShowEASRegisterDialog] = useState(false);
   const [attestationUID, setAttestationUID] = useState(null)
   const [attestationURL, setAttestationURL] = useState("");
+  const [attestationScanURL, setAttestationScanURL] = useState("");
+
   const [easNetworkID, setEasNetworkID] = useState(1);
   const onChangeEASNetworkID = (e) => {
     const networkID = parseInt(e.target.value, 10);
@@ -334,6 +336,11 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       chain.id === 11155420
         ? "https://optimism-sepolia.easscan.org/schema/view"
         : "https://optimism.easscan.org/schema/view";
+
+    let easscanAttestationURL =
+      chain.id === 11155420
+        ? "https://optimism-sepolia.easscan.org/attestation/view"
+        : "https://optimism.easscan.org/attestation/view";
     let schemaUid =
       chain.id === 11155420
         ? "0x306fda1c3128d08699d4c5b4e3f397fa31c8f5927b0e751f40f45ee1273ac504"
@@ -451,6 +458,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
 
       if (newAttestationUID) {
         setAttestationURL(`${easscanURL}/${schemaUid}`);
+        setAttestationScanURL(`${easscanAttestationURL}/${newAttestationUID}`)
         setAttestationUID(newAttestationUID)
         setShowEASRegisterDialog(true);
       }
@@ -925,16 +933,13 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <p style={{ fontSize: "15px" }}>
               <strong>Congratulations, DAO registered.</strong>
             </p>
-            <p style={{ fontSize: "18px" }}>
-              <strong>{attestationUID} Attestation Confirmed</strong>
-            </p>
-            
           </div>
           <div
             style={{
               margin: "60px 24px",
               display: "flex",
               justifyContent: "center",
+              gap: "12px"
             }}
           >
             <AnchorButton
@@ -944,7 +949,16 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
               icon="share"
               fill={false}
             >
-              View onchain
+              View Schema
+            </AnchorButton>
+            <AnchorButton
+              intent="primary"
+              href={attestationScanURL}
+              target="_blank"
+              icon="share"
+              fill={false}
+            >
+              View Attestation
             </AnchorButton>
           </div>
         </div>
