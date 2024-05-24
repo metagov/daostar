@@ -37,6 +37,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
   const signer = useSigner();
   const { chain } = useNetwork();
   const [showEASRegisterDialog, setShowEASRegisterDialog] = useState(false);
+  const [attestationUID, setAttestationUID] = useState(null)
   const [attestationURL, setAttestationURL] = useState("");
   const [easNetworkID, setEasNetworkID] = useState(1);
   const onChangeEASNetworkID = (e) => {
@@ -431,7 +432,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       eas.connect(signer);
 
       // Performing attestation
-      const attestation = await eas.attest({
+      const attestationTx = await eas.attest({
         schema: schemaUid,
         data: {
           recipient: address,
@@ -444,8 +445,18 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         },
       });
 
-      setAttestationURL(`${easscanURL}/${schemaUid}`);
-      setShowEASRegisterDialog(true);
+      // Get new attestation UID
+
+      const newAttestationUID = await attestationTx.wait();
+      const attestationTxResponse = await attestationTx.tx();
+
+      if (newAttestationUID && attestationTxResponse) {
+        setAttestationURL(`${easscanURL}/${schemaUid}`);
+        setAttestationUID(newAttestationUID)
+        setShowEASRegisterDialog(true);
+      }
+
+
     } catch (e) {
       console.error("Attest error:", e);
       setErrors([`${e.message || e.toString()}`]);
@@ -915,6 +926,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <p style={{ fontSize: "15px" }}>
               <strong>Congratulations, DAO registered.</strong>
             </p>
+            <p style={{ fontSize: "18px" }}>
+              <strong>{attestationUID} Attestation Confirmed</strong>
+            </p>
+            
           </div>
           <div
             style={{
