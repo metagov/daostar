@@ -105,20 +105,13 @@ const ATTESTATIONS_BY_SCHEMA = gql`
 
 
 const ENS_QUERY = gql `
-query TextChangeds($where: TextChanged_filter, $first: Int)  @api(contextKey: "apiName"){
-  textChangeds(where: $where, first: $first) {
-    id
-    key
-    value
-    resolver {
-        domain {
-          name
-          resolvedAddress {
-            id
-          }
+query Domains($where: Domain_filter, $first: Int)  @api(contextKey: "apiName"){
+    domains(where: $where, first: $first) {
+        name
+        resolvedAddress {
+          id
         }
       }
-  }
 }
 `;
 export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY }

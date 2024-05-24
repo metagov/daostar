@@ -3,14 +3,12 @@ import { Card, Divider } from '@blueprintjs/core';
 import '../AttestationCard/AttestationCard.css';
 
 const DisplayENSTextRecord = ({
-  id,
-  key,
-  value,
-  resolver
+ name,
+ resolvedAddress
 }) => {
-  const daoName = resolver?.domain?.name ?? "Unknown DAO";
-  const daoAddress = resolver?.domain?.resolvedAddress?.id ?? "Unknown DAO";
-  const daoURI = value ? value : "https://daostar.org/registration";
+  const daoName = name ?? "Unknown DAO";
+  const daoAddress = resolvedAddress?.id ?? "Unknown DAO";
+  // const daoURI = value ? value : "https://daostar.org/registration";
 
   return (
     <Card className='wizard-card attestation-card'>
@@ -20,16 +18,16 @@ const DisplayENSTextRecord = ({
         <div className="card-metadata">
           <p className="bp4-text-small wizard-no-margin">
             <span className="bp4-text-muted">ENS ID: </span>
-            {id}
+            {daoName}
           </p>
           <p className="bp4-text-small wizard-no-margin">
             <span className="bp4-text-muted">DAO Address: </span>
             {daoAddress}
           </p>
-          <p className="bp4-text-small wizard-no-margin">
+          {/* <p className="bp4-text-small wizard-no-margin">
             <span className="bp4-text-muted">DAO URI: </span>
             {daoURI}
-          </p>
+          </p> */}
         </div>
       </Fragment>
     </Card>

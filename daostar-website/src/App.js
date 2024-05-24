@@ -278,11 +278,11 @@ function App() {
     context: { apiName: "ensTextRecords" },
     variables: {
       "where": {
-        "value_not": null,
-        "key_starts_with_nocase": "daouri",
-        "key_ends_with_nocase": "daouri"
+        "resolver_": {
+          "texts_contains_nocase": ["daouri"]
+        }
       },
-      "first": 5
+      "first": null
     },
   });
   const {
@@ -348,7 +348,7 @@ function App() {
     EASOptimismData?.attestations || [];
 
     const ENSTextRecords =
-    ENSQueryResData?.textChangeds || [];
+    ENSQueryResData?.domains|| [];
   // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
   // So that when we click on an old registration instance card we are able to view and edit its proprties
   // this allows to query mainnetV0 subgraph link
