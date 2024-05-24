@@ -12,6 +12,7 @@
     "@blueprintjs/core": "^4.11.5",
     "@blueprintjs/icons": "^4.16.0",
     "@blueprintjs/popover2": "^1.12.0",
+    "@ensdomains/ensjs": "^3.7.0",
     "@ethereum-attestation-service/eas-sdk": "1.4.0",
     "@ethersproject/providers": "^5.7.2",
     "@habx/apollo-multi-endpoint-link": "^2.9.0",
