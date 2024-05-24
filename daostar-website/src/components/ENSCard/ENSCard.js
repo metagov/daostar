@@ -24,10 +24,10 @@ const DisplayENSTextRecord = ({
             <span className="bp4-text-muted">DAO Address: </span>
             {daoAddress}
           </p>
-          {/* <p className="bp4-text-small wizard-no-margin">
+          <p className="bp4-text-small wizard-no-margin" style={{ fontStyle: 'italic'}}>
             <span className="bp4-text-muted">DAO URI: </span>
-            {daoURI}
-          </p> */}
+            DAO URI Info will be displayed soon
+          </p>
         </div>
       </Fragment>
     </Card>
