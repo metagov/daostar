@@ -1,14 +1,40 @@
-import React, { Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Card, Divider } from '@blueprintjs/core';
 import '../AttestationCard/AttestationCard.css';
+import { createPublicClient, http } from 'viem';
+import { mainnet } from 'viem/chains';
+import { addEnsContracts } from '@ensdomains/ensjs';
+import { getTextRecord } from '@ensdomains/ensjs/public';
+
+const client = createPublicClient({
+  chain: addEnsContracts(mainnet),
+  transport: http(),
+});
 
 const DisplayENSTextRecord = ({
- name,
- resolvedAddress
+  name,
+  resolvedAddress
 }) => {
+  const [daoURI, setDaoURI] = useState("Loading...");
   const daoName = name ?? "Unknown DAO";
   const daoAddress = resolvedAddress?.id ?? "Unknown DAO";
-  // const daoURI = value ? value : "https://daostar.org/registration";
+
+  useEffect(() => {
+    const fetchDaoURI = async () => {
+      try {
+        const uri = await getTextRecord(client, {
+          name,
+          key: 'daouri',
+        });
+        setDaoURI(uri || "https://daostar.org/registration");
+      } catch (error) {
+        console.error("Error fetching DAO URI:", error);
+        setDaoURI("https://daostar.org/registration");
+      }
+    };
+
+    fetchDaoURI();
+  }, [name]);
 
   return (
     <Card className='wizard-card attestation-card'>
@@ -24,10 +50,10 @@ const DisplayENSTextRecord = ({
             <span className="bp4-text-muted">DAO Address: </span>
             {daoAddress}
           </p>
-          {/* <p className="bp4-text-small wizard-no-margin">
+          <p className="bp4-text-small wizard-no-margin">
             <span className="bp4-text-muted">DAO URI: </span>
             {daoURI}
-          </p> */}
+          </p>
         </div>
       </Fragment>
     </Card>
