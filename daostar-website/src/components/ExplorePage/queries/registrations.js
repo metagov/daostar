@@ -105,17 +105,19 @@ const ATTESTATIONS_BY_SCHEMA = gql`
 
 
 const ENS_QUERY = gql `
-query TextChangeds($where: TextChanged_filter) @api(contextKey: "apiName"){
-  textChangeds(where: $where) {
+query TextChangeds($where: TextChanged_filter, $first: Int)  @api(contextKey: "apiName"){
+  textChangeds(where: $where, first: $first) {
     id
     key
     value
     resolver {
-      addr {
-        id
+        domain {
+          name
+          resolvedAddress {
+            id
+          }
+        }
       }
-      address
-    }
   }
 }
 `;

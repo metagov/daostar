@@ -279,9 +279,10 @@ function App() {
     variables: {
       "where": {
         "value_not": null,
-        "key_starts_with_nocase": "com.github",
-        "key_ends_with_nocase": "com.github"
-      }
+        "key_starts_with_nocase": "daouri",
+        "key_ends_with_nocase": "daouri"
+      },
+      "first": 5
     },
   });
   const {
@@ -346,6 +347,8 @@ function App() {
     const EASOptimismAttestations =
     EASOptimismData?.attestations || [];
 
+    const ENSTextRecords =
+    ENSQueryResData?.textChangeds || [];
   // This object clones and modifies the mainnetV0 registration instances to change the network ID to "ethereum"
   // So that when we click on an old registration instance card we are able to view and edit its proprties
   // this allows to query mainnetV0 subgraph link
@@ -418,6 +421,7 @@ function App() {
                   osmosisInstances={osmosisInstances}
                   stargazeInstances={stargazeInstances}
                   easAttestations={EASAttestations}
+                  ENSTextRecords={ENSTextRecords}
                 />
               }
             />
