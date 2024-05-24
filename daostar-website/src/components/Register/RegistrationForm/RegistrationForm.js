@@ -422,7 +422,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
       const memberRole = await contract.MEMBER_ROLE();
       const isMember = await contract.hasRole(memberRole, address);
 
-      if (!isMember) throw new Error("You have no authorization. Click  <a href='https://forms.gle/d8nGkfKbpnbPJa8J6' target='_blank'>here</a>to get added to the schema allowlist");
+      if (!isMember) throw new Error(`You have no authorization. Request authorization to get added to the schema allowlist`);
 
       const eas = new EAS("0x4200000000000000000000000000000000000021");
       eas.connect(signer);
@@ -455,7 +455,7 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
     setShowEASRegisterDialog(false);
   };
 
- 
+
 
   const EthNetworksSelect = (
     <>
@@ -535,10 +535,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           <div className="wizard-row wizard-row-flex">
             <FormGroup
               label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   Contract address
                   <Tooltip2 content={"DAO Contract Address or ENS name"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
                   </Tooltip2>
                 </div>
               }
@@ -577,13 +577,13 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           </div>
           <div className="wizard-row">
             <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
-                  Framework
-                  <Tooltip2 content={"DAO Governance Framework"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
-                  </Tooltip2>
-                </div>
-              } labelFor="framework" fill>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
+                Framework
+                <Tooltip2 content={"DAO Governance Framework"}>
+                  <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
+                </Tooltip2>
+              </div>
+            } labelFor="framework" fill>
               {FrameworkSelect}
             </FormGroup>
           </div>
@@ -593,10 +593,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           <div>
             <div className="wizard-row">
               <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   Members URI
                   <Tooltip2 content={"Information about the members of DAO"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
                   </Tooltip2>
                 </div>
               } labelFor="members-uri" fill>
@@ -612,11 +612,11 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <div className="wizard-row">
               <FormGroup
                 label={
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                     Activity Log URI
                     <Tooltip2 content={"Information about general DAO governance activity and discussions"}
-                    position="auto">
-                      <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
+                      position="auto">
+                      <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
                     </Tooltip2>
                   </div>
                 }
@@ -634,10 +634,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             </div>
             <div className="wizard-row">
               <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   Proposals URI
                   <Tooltip2 content={"Information on DAO proposals and their status"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
                   </Tooltip2>
                 </div>
               } labelFor="proposals-uri" fill>
@@ -652,10 +652,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             </div>
             <div className="wizard-row">
               <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   Issuers URI
                   <Tooltip2 content={"Information about the Issuer of the DAO URI"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
                   </Tooltip2>
                 </div>
               } labelFor="proposals-uri" fill>
@@ -671,10 +671,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
             <div className="wizard-row">
               <FormGroup
                 label={
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                     Contract registry URI (optional)
                     <Tooltip2 content={"Information about all the DAO and treasury contracts"}>
-                      <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px'}} />
+                      <Icon icon="info-sign" size={12} style={{ paddingBottom: '3px' }} />
                     </Tooltip2>
                   </div>
                 }
@@ -745,13 +745,13 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
         <div style={{ width: "100%" }}>
           <div className="wizard-row wizard-row-flex">
             <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
-                  DAO Network ID
-                  <Tooltip2 content={"Network on which DAO's governance contract/main treasury exists"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
-                  </Tooltip2>
-                </div>
-              }>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
+                DAO Network ID
+                <Tooltip2 content={"Network on which DAO's governance contract/main treasury exists"}>
+                  <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
+                </Tooltip2>
+              </div>
+            }>
               <HTMLSelect
                 style={{ minWidth: 140 }}
                 iconProps={{ icon: "caret-down", color: "#fff" }}
@@ -781,13 +781,13 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           </div>
           <div className="wizard-row">
             <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
-                  DAO URI
-                  <Tooltip2 content={"URI compliant with EIP-4824. You can use daostar.org/register to create a daoURI"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
-                  </Tooltip2>
-                </div>
-              } labelFor="dao-uri" fill>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
+                DAO URI
+                <Tooltip2 content={"URI compliant with EIP-4824. You can use daostar.org/register to create a daoURI"}>
+                  <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
+                </Tooltip2>
+              </div>
+            } labelFor="dao-uri" fill>
               <InputGroup
                 fill
                 id="dao-uri"
@@ -800,10 +800,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           <div className="wizard-row">
             <FormGroup
               label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   DAO Contract Address
                   <Tooltip2 content={"DAO's governance/main treasury contract address"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
                   </Tooltip2>
                 </div>
               }
@@ -821,13 +821,13 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           </div>
           <div className="wizard-row">
             <FormGroup label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
-                  Issuer Name
-                  <Tooltip2 content={"Attestation issuer name"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
-                  </Tooltip2>
-                </div>
-              } labelFor="issuer-name" fill>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
+                Issuer Name
+                <Tooltip2 content={"Attestation issuer name"}>
+                  <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
+                </Tooltip2>
+              </div>
+            } labelFor="issuer-name" fill>
               <InputGroup
                 fill
                 id="issuer-name"
@@ -840,10 +840,10 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
           <div className="wizard-row">
             <FormGroup
               label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px'  }} >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} >
                   Issuer Description
                   <Tooltip2 content={"Attestation issuer description"}>
-                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px'}} />
+                    <Icon icon="info-sign" size={12} style={{ paddingBottom: '2px' }} />
                   </Tooltip2>
                 </div>
               }
@@ -866,16 +866,33 @@ const RegistrationForm = ({ toggleRegScreen, setRegistrationData }) => {
               margin: "40px 24px",
             }}
           >
-            <AnchorButton
-              href={`https://docs.daostar.org/How%20To's/DifferentPaths#3-eas-attestations`}
-              target="_blank"
-              icon="link"
-              text="Get More Details"
-              small={true}
-              fill={false}
-            />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column', // Default to column layout
+                gap: '8px', // Add gap between buttons
+              }}
+            >
+              <AnchorButton
+                href="https://docs.daostar.org/How%20To's/DifferentPaths#3-eas-attestations"
+                target="_blank"
+                icon="link"
+                text="Get More Details"
+                small={true}
+                fill={false}
+              />
+              <AnchorButton
+                href="https://forms.gle/d8nGkfKbpnbPJa8J6"
+                target="_blank"
+                icon="link"
+                text="Request Authorization"
+                small={true}
+                fill={false}
+              />
+            </div>
             <Button
               intent="primary"
+              style={{ padding: "20px 40px" }}
               text="Register"
               loading={registerLoading}
               onClick={onRegisterByEAS}
