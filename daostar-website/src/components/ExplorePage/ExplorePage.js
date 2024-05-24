@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RegistrationCard from "../RegistrationCard/RegistrationCard";
 import AttestationCard from "../AttestationCard/AttestationCard";
+import ENSCard from "../ENSCard/ENSCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 import { filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
@@ -61,6 +62,7 @@ const NetworkButtons = [
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
   { text: "EAS", filter: "easAttestations" },
+  { text: "ENS", filter: "ensTextRecords"}
 
 ];
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
@@ -70,7 +72,8 @@ const ExplorePage = ({
   junosInstances,
   osmosisInstances,
   stargazeInstances,
-  easAttestations
+  easAttestations,
+  ENSTextRecords
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
@@ -156,6 +159,11 @@ const ExplorePage = ({
         .map((attestation, i) => (
           <AttestationCard key={i} {...attestation} />
         ));
+      case "ensTextRecords":
+          return ENSTextRecords
+          .map((textRecord, i) => (
+            <ENSCard key={i} {...textRecord} />
+          ));
       default:
         return (
           <>
