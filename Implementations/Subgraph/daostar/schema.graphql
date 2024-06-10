@@ -1,22 +1,26 @@
 type RegistrationInstance @entity {
-    id: ID!
-    registrationAddress: Bytes!
-    daoAddress: Bytes!
-    daoURI: String! # string
-    daoName: String
-    registrationNetwork: RegistrationNetwork!
-    daoDescription: String
-    membersURI: String
-    issuersURI: String
-    proposalsURI: String
-    governanceURI: String
-    activityLogURI: String
-    managerAddress: String
-    contractsRegistryURI: String
+  id: ID!
+  daoAddress: Bytes!
+  registrationNetwork: RegistrationNetwork! @relation
+  registrationAddress: Bytes!
+  daoURI: String!
+}
+
+type DAOMetadata @entity {
+  id: ID!
+  daoName: String!
+  daoDescription: String!
+  membersURI: String!
+  issuersURI: String!
+  proposalsURI: String!
+  governanceURI: String!
+  activityLogURI: String!
+  contractsRegistryURI: String!
+  managerAddress: String!
 }
 
 type RegistrationNetwork @entity {
-    id: ID!
-    registrations: [RegistrationInstance!] @derivedFrom(field: "registrationNetwork")
-    chainId: String!
+  id: ID!
+  registrations: [RegistrationInstance!] @derivedFrom(field: "registrationNetwork")
+  chainId: String!
 }

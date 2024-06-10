@@ -1,8 +1,8 @@
-import { BigInt, ipfs, json, JSONValueKind, log, dataSource } from '@graphprotocol/graph-ts'
+import { BigInt, log, dataSource, json, Bytes, JSONValueKind } from '@graphprotocol/graph-ts'
 import { DAOURIRegistered } from '../generated/EIP4824Index/EIP4824Index'
 import { DAOURIUpdate } from '../generated/templates/EIP4824Registration/EIP4824Registration'
-import { RegistrationInstance, RegistrationNetwork } from '../generated/schema'
-import { EIP4824Registration } from '../generated/templates'
+import { RegistrationInstance, RegistrationNetwork, DAOMetadata } from '../generated/schema'
+import { EIP4824Registration, DAOMetadataTemplate } from '../generated/templates'
 import { getChainId } from './getChainId'
 
 export function handleNewRegistration(event: DAOURIRegistered): void {
@@ -11,7 +11,7 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
     let registrationNetwork = RegistrationNetwork.load(chainName)
     if (!registrationNetwork) {
         registrationNetwork = new RegistrationNetwork(chainName)
-        registrationNetwork.chainId = getChainId().toString();
+        registrationNetwork.chainId = getChainId().toString()
         registrationNetwork.save()
     }
 
@@ -23,7 +23,7 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
         EIP4824Registration.create(event.params.daoAddress)
         let newAddress = event.params.daoAddress.toHex()
         registrationInstance = new RegistrationInstance(newAddress)
-        registrationInstance.registrationNetwork = chainName
+        registrationInstance.registrationNetwork = registrationNetwork.id // Set the relationship correctly
         registrationInstance.registrationAddress = event.params.daoAddress
         registrationInstance.daoAddress = event.params.daoAddress
         registrationInstance.daoURI = 'placeholder'
@@ -32,53 +32,92 @@ export function handleNewRegistration(event: DAOURIRegistered): void {
 }
 
 export function handleNewURI(event: DAOURIUpdate): void {
-
     let registrationAddress = event.address.toHex()
     let registrationInstance = RegistrationInstance.load(registrationAddress)
 
-    if (!registrationInstance) log.warning('Invalid Registration: {}', [registrationAddress])
-    else {
+    if (!registrationInstance) {
+        log.warning('Invalid Registration: {}', [registrationAddress])
+    } else {
         registrationInstance.daoAddress = event.params.daoAddress
         if (event.params.daoURI) {
             registrationInstance.daoURI = event.params.daoURI
             const ipfsHash = event.params.daoURI.substring(event.params.daoURI.length - 46)
             log.info('Fetching ipfs data for: {}', [ipfsHash])
-            let ipfsData = ipfs.cat(ipfsHash)
-            if (ipfsData) {
-                log.debug('IPFS data found for : {}', [ipfsHash])
-                let daoMetadata = json.fromBytes(ipfsData).toObject()
-
-                const daoName = daoMetadata.get('name')
-                log.info('My name is: {}', [daoName ? daoName.toString() : 'unknown'])
-                const daoDescription = daoMetadata.get('description')
-                log.info('My description is: {}', [
-                    daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : 'unknown',
-                ])
-                const membersURI = daoMetadata.get('membersURI')
-                const issuersURI = daoMetadata.get('issuersURI')
-                const proposalsURI = daoMetadata.get('proposalsURI')
-                const governanceURI = daoMetadata.get('governanceURI')
-                const activityLogURI = daoMetadata.get('activityLogURI')
-                const managerAddress = daoMetadata.get('managerAddress');
-                const contractsRegistryURI = daoMetadata.get('contractsRegistryURI');
-
-                registrationInstance.daoName = daoName && daoName.kind == JSONValueKind.STRING ? daoName.toString() : ''
-                registrationInstance.daoDescription = daoDescription && daoDescription.kind == JSONValueKind.STRING ? daoDescription.toString() : ''
-                registrationInstance.membersURI = membersURI && membersURI.kind == JSONValueKind.STRING ? membersURI.toString() : ''
-                registrationInstance.issuersURI = issuersURI && issuersURI.kind == JSONValueKind.STRING ? issuersURI.toString() : ''
-                registrationInstance.proposalsURI = proposalsURI && proposalsURI.kind == JSONValueKind.STRING ? proposalsURI.toString() : ''
-                registrationInstance.governanceURI = governanceURI && governanceURI.kind == JSONValueKind.STRING ? governanceURI.toString() : ''
-                registrationInstance.activityLogURI = activityLogURI && activityLogURI.kind == JSONValueKind.STRING ? activityLogURI.toString() : ''
-                registrationInstance.contractsRegistryURI = contractsRegistryURI && contractsRegistryURI.kind == JSONValueKind.STRING ? contractsRegistryURI.toString() : ''
-                registrationInstance.managerAddress = managerAddress && managerAddress.kind == JSONValueKind.STRING ? managerAddress.toString() : ''
-                registrationInstance.save() // For some reason this does not work without this additional save
-            } else {
-                log.warning('IPFS data missing for : {}', [ipfsHash])
-            }
+            DAOMetadataTemplate.create(ipfsHash) // Spawning the file data source template
         }
-        registrationInstance.daoURI = event.params.daoURI
-        // TODO resolve IPFS here
         registrationInstance.save()
     }
+}
 
+// Handler to process the fetched file from IPFS
+export function handleDAOMetadata(content: Bytes): void {
+    let metadata = new DAOMetadata(dataSource.stringParam())
+    const value = json.fromBytes(content).toObject()
+
+    if (value) {
+        let daoName = value.get('name')
+        if (daoName !== null && daoName.kind === JSONValueKind.STRING) {
+            metadata.daoName = daoName.toString()
+        } else {
+            metadata.daoName = ''
+        }
+
+        let daoDescription = value.get('description')
+        if (daoDescription !== null && daoDescription.kind === JSONValueKind.STRING) {
+            metadata.daoDescription = daoDescription.toString()
+        } else {
+            metadata.daoDescription = ''
+        }
+
+        let membersURI = value.get('membersURI')
+        if (membersURI !== null && membersURI.kind === JSONValueKind.STRING) {
+            metadata.membersURI = membersURI.toString()
+        } else {
+            metadata.membersURI = ''
+        }
+
+        let issuersURI = value.get('issuersURI')
+        if (issuersURI !== null && issuersURI.kind === JSONValueKind.STRING) {
+            metadata.issuersURI = issuersURI.toString()
+        } else {
+            metadata.issuersURI = ''
+        }
+
+        let proposalsURI = value.get('proposalsURI')
+        if (proposalsURI !== null && proposalsURI.kind === JSONValueKind.STRING) {
+            metadata.proposalsURI = proposalsURI.toString()
+        } else {
+            metadata.proposalsURI = ''
+        }
+
+        let governanceURI = value.get('governanceURI')
+        if (governanceURI !== null && governanceURI.kind === JSONValueKind.STRING) {
+            metadata.governanceURI = governanceURI.toString()
+        } else {
+            metadata.governanceURI = ''
+        }
+
+        let activityLogURI = value.get('activityLogURI')
+        if (activityLogURI !== null && activityLogURI.kind === JSONValueKind.STRING) {
+            metadata.activityLogURI = activityLogURI.toString()
+        } else {
+            metadata.activityLogURI = ''
+        }
+
+        let contractsRegistryURI = value.get('contractsRegistryURI')
+        if (contractsRegistryURI !== null && contractsRegistryURI.kind === JSONValueKind.STRING) {
+            metadata.contractsRegistryURI = contractsRegistryURI.toString()
+        } else {
+            metadata.contractsRegistryURI = ''
+        }
+
+        let managerAddress = value.get('managerAddress')
+        if (managerAddress !== null && managerAddress.kind === JSONValueKind.STRING) {
+            metadata.managerAddress = managerAddress.toString()
+        } else {
+            metadata.managerAddress = ''
+        }
+
+        metadata.save()
+    }
 }

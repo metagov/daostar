@@ -3,6 +3,7 @@ schema:
   file: ./schema.graphql
 features:
   - ipfsOnEthereumContracts
+
 templates:
   - name: EIP4824Registration
     kind: ethereum/contract
@@ -11,7 +12,7 @@ templates:
       abi: EIP4824Registration
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/mapping.ts
       entities:
@@ -22,6 +23,18 @@ templates:
       eventHandlers:
         - event: DAOURIUpdate(address,string)
           handler: handleNewURI
+
+  - name: DAOMetadataTemplate
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mapping.ts
+      handler: handleDAOMetadata
+      entities:
+        - DAOMetadata
+      abis: []  # No ABIs required for file data sources
+
 dataSources:
   - kind: ethereum
     name: EIP4824Index
@@ -32,7 +45,7 @@ dataSources:
       startBlock: 171329384
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - NewRegistration
