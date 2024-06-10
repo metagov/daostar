@@ -19,3 +19,13 @@ export class EIP4824Registration extends DataSourceTemplate {
     );
   }
 }
+
+export class DAOMetadataTemplate extends DataSourceTemplate {
+  static create(cid: string): void {
+    DataSourceTemplate.create("DAOMetadataTemplate", [cid]);
+  }
+
+  static createWithContext(cid: string, context: DataSourceContext): void {
+    DataSourceTemplate.createWithContext("DAOMetadataTemplate", [cid], context);
+  }
+}

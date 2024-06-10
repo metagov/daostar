@@ -54,19 +54,6 @@ export class RegistrationInstance extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get registrationAddress(): Bytes {
-    let value = this.get("registrationAddress");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set registrationAddress(value: Bytes) {
-    this.set("registrationAddress", Value.fromBytes(value));
-  }
-
   get daoAddress(): Bytes {
     let value = this.get("daoAddress");
     if (!value || value.kind == ValueKind.NULL) {
@@ -78,36 +65,6 @@ export class RegistrationInstance extends Entity {
 
   set daoAddress(value: Bytes) {
     this.set("daoAddress", Value.fromBytes(value));
-  }
-
-  get daoURI(): string {
-    let value = this.get("daoURI");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
-  }
-
-  set daoURI(value: string) {
-    this.set("daoURI", Value.fromString(value));
-  }
-
-  get daoName(): string | null {
-    let value = this.get("daoName");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set daoName(value: string | null) {
-    if (!value) {
-      this.unset("daoName");
-    } else {
-      this.set("daoName", Value.fromString(<string>value));
-    }
   }
 
   get registrationNetwork(): string {
@@ -123,140 +80,189 @@ export class RegistrationInstance extends Entity {
     this.set("registrationNetwork", Value.fromString(value));
   }
 
-  get daoDescription(): string | null {
+  get registrationAddress(): Bytes {
+    let value = this.get("registrationAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set registrationAddress(value: Bytes) {
+    this.set("registrationAddress", Value.fromBytes(value));
+  }
+
+  get daoURI(): string {
+    let value = this.get("daoURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set daoURI(value: string) {
+    this.set("daoURI", Value.fromString(value));
+  }
+}
+
+export class DAOMetadata extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save DAOMetadata entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type DAOMetadata must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
+      );
+      store.set("DAOMetadata", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): DAOMetadata | null {
+    return changetype<DAOMetadata | null>(
+      store.get_in_block("DAOMetadata", id),
+    );
+  }
+
+  static load(id: string): DAOMetadata | null {
+    return changetype<DAOMetadata | null>(store.get("DAOMetadata", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get daoName(): string {
+    let value = this.get("daoName");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set daoName(value: string) {
+    this.set("daoName", Value.fromString(value));
+  }
+
+  get daoDescription(): string {
     let value = this.get("daoDescription");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set daoDescription(value: string | null) {
-    if (!value) {
-      this.unset("daoDescription");
-    } else {
-      this.set("daoDescription", Value.fromString(<string>value));
-    }
+  set daoDescription(value: string) {
+    this.set("daoDescription", Value.fromString(value));
   }
 
-  get membersURI(): string | null {
+  get membersURI(): string {
     let value = this.get("membersURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set membersURI(value: string | null) {
-    if (!value) {
-      this.unset("membersURI");
-    } else {
-      this.set("membersURI", Value.fromString(<string>value));
-    }
+  set membersURI(value: string) {
+    this.set("membersURI", Value.fromString(value));
   }
 
-  get issuersURI(): string | null {
+  get issuersURI(): string {
     let value = this.get("issuersURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set issuersURI(value: string | null) {
-    if (!value) {
-      this.unset("issuersURI");
-    } else {
-      this.set("issuersURI", Value.fromString(<string>value));
-    }
+  set issuersURI(value: string) {
+    this.set("issuersURI", Value.fromString(value));
   }
 
-  get proposalsURI(): string | null {
+  get proposalsURI(): string {
     let value = this.get("proposalsURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set proposalsURI(value: string | null) {
-    if (!value) {
-      this.unset("proposalsURI");
-    } else {
-      this.set("proposalsURI", Value.fromString(<string>value));
-    }
+  set proposalsURI(value: string) {
+    this.set("proposalsURI", Value.fromString(value));
   }
 
-  get governanceURI(): string | null {
+  get governanceURI(): string {
     let value = this.get("governanceURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set governanceURI(value: string | null) {
-    if (!value) {
-      this.unset("governanceURI");
-    } else {
-      this.set("governanceURI", Value.fromString(<string>value));
-    }
+  set governanceURI(value: string) {
+    this.set("governanceURI", Value.fromString(value));
   }
 
-  get activityLogURI(): string | null {
+  get activityLogURI(): string {
     let value = this.get("activityLogURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set activityLogURI(value: string | null) {
-    if (!value) {
-      this.unset("activityLogURI");
-    } else {
-      this.set("activityLogURI", Value.fromString(<string>value));
-    }
+  set activityLogURI(value: string) {
+    this.set("activityLogURI", Value.fromString(value));
   }
 
-  get managerAddress(): string | null {
-    let value = this.get("managerAddress");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set managerAddress(value: string | null) {
-    if (!value) {
-      this.unset("managerAddress");
-    } else {
-      this.set("managerAddress", Value.fromString(<string>value));
-    }
-  }
-
-  get contractsRegistryURI(): string | null {
+  get contractsRegistryURI(): string {
     let value = this.get("contractsRegistryURI");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set contractsRegistryURI(value: string | null) {
-    if (!value) {
-      this.unset("contractsRegistryURI");
+  set contractsRegistryURI(value: string) {
+    this.set("contractsRegistryURI", Value.fromString(value));
+  }
+
+  get managerAddress(): string {
+    let value = this.get("managerAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
     } else {
-      this.set("contractsRegistryURI", Value.fromString(<string>value));
+      return value.toString();
     }
+  }
+
+  set managerAddress(value: string) {
+    this.set("managerAddress", Value.fromString(value));
   }
 }
 
