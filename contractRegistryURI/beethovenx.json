@@ -1,3 +1,4 @@
+[
   {
     "@context": "http://www.daostar.org/schemas",
     "type": "DAO",
@@ -184,4 +185,5 @@
         "networkId": 1
       }
     ]
-  }
+  },
+]
