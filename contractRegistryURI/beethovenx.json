@@ -1,1 +1,187 @@
-
+  {
+    "@context": "http://www.daostar.org/schemas",
+    "type": "DAO",
+    "name": "Fantomnetwork",
+    "contracts": [
+      {
+        "type": "Address",
+        "id": "0x20dd72Ed959b6147912C2e529F0a0C651c33c9ce",
+        "label": "Vault",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x60467cb225092cE0c989361934311175f437Cf53",
+        "label": "WeightedPoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xB2ED595Afc445b47Db7043bEC25e772bf0FA1fbb",
+        "label": "WeightedPoolV2Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xd678b6Acd834Cc969Bb19Ce82727f2a541fb7941",
+        "label": "WeightedPoolV3Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xb841Df73861E65E6D61a80F503F095a91ce75e15",
+        "label": "WeightedPoolV4Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x92b377187bcCC6556FceD2f1e6DAd65850C20630",
+        "label": "WeightedPool2TokensFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x55df810876354Fc3e249f701Dd78DeDE57991F8D",
+        "label": "StablePoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x5AdAF6509BCEc3219455348AC45d6D3261b1A990",
+        "label": "StablePoolV2Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x0E2AFa0b5F9174750d4E84Bf9798f89b79Bd5bF4",
+        "label": "StablePhantomPoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xB384A86F2Fd7788720db42f9daa60fc07EcBeA06",
+        "label": "ComposableStablePoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x5AdAF6509BCEc3219455348AC45d6D3261b1A990",
+        "label": "ComposableStablePoolV2Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x911566c808bF00acB200B418564440A2Af177548",
+        "label": "ComposableStablePoolV3Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x5c3094982cF3c97A06b7d62A6f7669F14a199B19",
+        "label": "ComposableStablePoolV4Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x23F03a4fb344d8B98833d2ACe093cc305E03474f",
+        "label": "ComposableStablePoolV5Factory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x1F73AE6ED391A2b1e84Ff988A1Bb5394B78a4A71",
+        "label": "YearnLinearPoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x2C774732c93CE393eC8125bDA49fb3737Ae6F473",
+        "label": "LiquidityBootstrappingPoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x70b55Af71B29c5Ca7e67bD1995250364C4bE5554",
+        "label": "MetastablePoolFactory",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x974D3FF709D84Ba44cde3257C0B5B0b14C081Ce9",
+        "label": "Authorizer",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xC6920d3a369E7c8BD1A22DbE385e11d1F7aF948F",
+        "label": "ProtocolFeesCollector",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xF24Bcf4d1e507740041C9cFd2DddB29585aDCe1e",
+        "label": "Beets Token",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x8d038dA833b154EBcFB7965a9eE7C4Ad72671b21",
+        "label": "BeetsProxyOFTV2",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x8166994d9ebBe5829EC86Bd81258149B87faCfd3",
+        "label": "MasterChef",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xB5CaEe3CD5d86c138f879B3abC5B1bebB63c6471",
+        "label": "Timelock (MasterChef Owner)",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xfcef8a994209d6916EB2C86cDD2AFD60Aa6F54b1",
+        "label": "BeetsBar (fBEETS)",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xbC8a71C75ffbd2807c021F4F81a8832392dEF93c",
+        "label": "CopperProxy (LGE)",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x1ed6411670c709F4e163854654BD52c74E66D7eC",
+        "label": "Reliquary",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x0faa25293a36241c214f3760c6ff443e1b731981",
+        "label": "Batch Relayer",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0xa1e849b1d6c2fd31c63eef7822e9e0632411ada7",
+        "label": "Fantom Treasury",
+        "networkId": 250
+      },
+      {
+        "type": "Address",
+        "id": "0x2a185c8a3c63d7bfe63ad5d950244ffe9d0a4b60",
+        "label": "Optimism Treasury",
+        "networkId": 10
+      },
+       {
+        "type": "Address",
+        "id": "0xea06e1b4259730724885a39ce3ca670efb020e26",
+        "label": "Ethereum Treasury",
+        "networkId": 1
+      }
+    ]
+  }
