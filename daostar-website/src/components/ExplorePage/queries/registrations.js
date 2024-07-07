@@ -75,6 +75,22 @@ const REGISTRATION = gql`
           }
     }
 `
+const GET_REGISTRATIONS_ID = gql`
+query Daometadata_collection @api(contextKey: "apiName") {
+  daometadata_collection {
+    daoName
+    governanceURI
+    id
+    issuersURI
+    managerAddress
+    membersURI
+    proposalsURI
+    activityLogURI
+    contractsRegistryURI
+    daoDescription
+  }
+}
+`;
 
 const ATTESTATIONS_BY_SCHEMA = gql`
  query AttestationsBySchema($schemaId: String!) @api(contextKey: "apiName") {
@@ -114,4 +130,4 @@ query Domains($where: Domain_filter, $first: Int)  @api(contextKey: "apiName"){
       }
 }
 `;
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY }
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS_ID }

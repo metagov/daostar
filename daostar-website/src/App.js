@@ -237,7 +237,7 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  const arbitrumRes = useQuery(queries.REGISTRATIONS, {
+  const arbitrumRes = useQuery(queries.GET_REGISTRATIONS_ID, {
     context: { apiName: "arbitrum" },
     variables: { id: "arbitrum-one" },
   });
@@ -246,6 +246,8 @@ function App() {
     error: arbitrumError,
     data: arbitrumData,
   } = arbitrumRes;
+
+
 
   const EASOptimismSepoliaiRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
     context: { apiName: "easOptimismSepolia" },
@@ -369,7 +371,7 @@ function App() {
     arbitrumGoerliRegistrations,
     chapelRegistrations,
     optimismRegistrations,
-    arbitrumRegistrations
+    // arbitrumRegistrations
   );
 
   const EASAttestations = EASOptimismAttestations.concat(EASOptimismSepoliaAttestations);
@@ -386,7 +388,7 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
-    arbitrumData
+    arbitrumData,
   });
 
   return (
