@@ -15,7 +15,7 @@ templates:
       language: wasm/assemblyscript
       file: EIP4824Index/EIP4824Index.wasm
       entities:
-        - Registration
+        - RegistrationInstance
       abis:
         - name: EIP4824Registration
           file: EIP4824Registration/abis/EIP4824Registration.json
@@ -31,6 +31,7 @@ templates:
       handler: handleDAOMetadata
       entities:
         - DAOMetadata
+        - RegistrationInstance
       abis: []
 dataSources:
   - kind: ethereum
@@ -45,7 +46,6 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - NewRegistration
         - RegistrationInstance
       abis:
         - name: EIP4824Index

@@ -4,6 +4,7 @@ type RegistrationInstance @entity {
   registrationNetwork: RegistrationNetwork! @relation
   registrationAddress: Bytes!
   daoURI: String!
+  daoMetadata: DAOMetadata @relation
 }
 
 type DAOMetadata @entity {
@@ -17,6 +18,7 @@ type DAOMetadata @entity {
   activityLogURI: String!
   contractsRegistryURI: String!
   managerAddress: String!
+  registrationInstance: RegistrationInstance! @derivedFrom(field: "daoMetadata")
 }
 
 type RegistrationNetwork @entity {

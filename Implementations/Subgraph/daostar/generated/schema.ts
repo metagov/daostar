@@ -105,6 +105,23 @@ export class RegistrationInstance extends Entity {
   set daoURI(value: string) {
     this.set("daoURI", Value.fromString(value));
   }
+
+  get daoMetadata(): string | null {
+    let value = this.get("daoMetadata");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set daoMetadata(value: string | null) {
+    if (!value) {
+      this.unset("daoMetadata");
+    } else {
+      this.set("daoMetadata", Value.fromString(<string>value));
+    }
+  }
 }
 
 export class DAOMetadata extends Entity {
@@ -263,6 +280,14 @@ export class DAOMetadata extends Entity {
 
   set managerAddress(value: string) {
     this.set("managerAddress", Value.fromString(value));
+  }
+
+  get registrationInstance(): RegistrationInstanceLoader {
+    return new RegistrationInstanceLoader(
+      "DAOMetadata",
+      this.get("id")!.toString(),
+      "registrationInstance",
+    );
   }
 }
 

@@ -16,7 +16,7 @@ templates:
       language: wasm/assemblyscript
       file: ./src/mapping.ts
       entities:
-        - Registration
+        - RegistrationInstance
       abis:
         - name: EIP4824Registration
           file: ./abis/EIP4824Registration.json
@@ -33,6 +33,7 @@ templates:
       handler: handleDAOMetadata
       entities:
         - DAOMetadata
+        - RegistrationInstance
       abis: []  # No ABIs required for file data sources
 
 dataSources:
@@ -48,7 +49,6 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - NewRegistration
         - RegistrationInstance
       abis:
         - name: EIP4824Index

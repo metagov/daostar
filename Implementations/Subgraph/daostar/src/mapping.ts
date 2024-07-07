@@ -51,7 +51,12 @@ export function handleNewURI(event: DAOURIUpdate): void {
 
 // Handler to process the fetched file from IPFS
 export function handleDAOMetadata(content: Bytes): void {
-    let metadata = new DAOMetadata(dataSource.stringParam())
+    let metadataId = dataSource.stringParam()
+    let metadata = DAOMetadata.load(metadataId)
+    if (!metadata) {
+        metadata = new DAOMetadata(metadataId)
+    }
+
     const value = json.fromBytes(content).toObject()
 
     if (value) {
@@ -119,5 +124,12 @@ export function handleDAOMetadata(content: Bytes): void {
         }
 
         metadata.save()
+
+        // Update the registration instance with the metadata relationship
+        let registrationInstance = RegistrationInstance.load(metadataId)
+        if (registrationInstance) {
+            registrationInstance.daoMetadata = metadata.id
+            registrationInstance.save()
+        }
     }
 }
