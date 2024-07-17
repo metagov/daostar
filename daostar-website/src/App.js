@@ -237,7 +237,7 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  const arbitrumRes = useQuery(queries.GET_REGISTRATIONS_ID, {
+  const arbitrumRes = useQuery(queries.GET_REGISTRATIONS, {
     context: { apiName: "arbitrum" },
     variables: { id: "arbitrum-one" },
   });
@@ -339,7 +339,7 @@ function App() {
   const arbitrumGoerliRegistrations =
     arbitrumGoerliData?.registrationNetwork?.registrations || [];
   const arbitrumRegistrations =
-    arbitrumData?.registrationNetwork?.registrations || [];
+    arbitrumData?.registrationInstances || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
@@ -424,6 +424,7 @@ function App() {
                   stargazeInstances={stargazeInstances}
                   easAttestations={EASAttestations}
                   ENSTextRecords={ENSTextRecords}
+                  sunriseInstances={arbitrumRegistrations}
                 />
               }
             />

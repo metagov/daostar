@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import RegistrationCard from "../RegistrationCard/RegistrationCard";
+import RegistrationLeanCard from "../RegistrationCard/RegistrationLeanCard";
 import AttestationCard from "../AttestationCard/AttestationCard";
 import ENSCard from "../ENSCard/ENSCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 import { filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
+import RegistrationCard from "../RegistrationCard/RegistrationCard";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
 export const filterRegistrations = (registration, filterVal = "") => {
@@ -13,18 +14,16 @@ export const filterRegistrations = (registration, filterVal = "") => {
     return false;
   }
 
-  if (!registration.daoName || registration.daoName.trim() === "") {
+  // Omit dev test address
+  if (registration.daoAddress === "0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA") {
     return false;
   }
- // Omit dev test address
-  if (!registration.daoAddress === "0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA") {
-    return false;
-  }
+
   const daoNameLower = registration.daoName.toLowerCase();
   const filterWords = ["scam", "test", "fuck"];
 
   // Check for excluded words
-  if (filterWords.some(filterWord => daoNameLower.includes(filterWord))) {
+  if (filterWords.some((filterWord) => daoNameLower.includes(filterWord))) {
     return false;
   }
 
@@ -34,18 +33,18 @@ export const filterRegistrations = (registration, filterVal = "") => {
 
 // Network Filter for EVM Chains
 export const NetworkFilterRegistrations = (registration, filterVal = "") => {
-  console.log(registration.registrationNetwork.id);
   if (registration.registrationNetwork.id === filterVal) {
     return true;
   }
   if (filterVal === "ethereum") {
     if (
-      (registration.registrationNetwork.id === filterVal) |
-      (registration.registrationNetwork.id === "mainnet")
+      registration.registrationNetwork.id === filterVal ||
+      registration.registrationNetwork.id === "mainnet"
     ) {
       return true;
     }
   }
+  return false;
 };
 
 const NetworkButtons = [
@@ -62,9 +61,9 @@ const NetworkButtons = [
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
   { text: "EAS", filter: "easAttestations" },
-  { text: "ENS", filter: "ensTextRecords"}
-
+  { text: "ENS", filter: "ensTextRecords" },
 ];
+
 NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
 
 const ExplorePage = ({
@@ -73,11 +72,15 @@ const ExplorePage = ({
   osmosisInstances,
   stargazeInstances,
   easAttestations,
-  ENSTextRecords
+  ENSTextRecords,
+  sunriseInstances,
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
   const [networkFilter, setNetworkFilter] = useState("all");
+
+  console.log("Sunrise Instances");
+  console.log(sunriseInstances);
 
   // Network Filter for Juno, Stargaze and Osmosis
   const filteredRegistrations = (instances) => {
@@ -88,12 +91,7 @@ const ExplorePage = ({
         )
       )
       .map((registration, i) => (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
+        <RegistrationLeanCard key={i} {...registration} />
       ));
   };
 
@@ -106,10 +104,9 @@ const ExplorePage = ({
       case "stargaze":
         return filteredRegistrations(stargazeInstances);
       case "arbitrum-one":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "arbitrum-one"))
+        return sunriseInstances
           .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
+            <RegistrationLeanCard key={i} {...registration} />
           ));
       case "chapel":
         return registrationInstances
@@ -133,7 +130,7 @@ const ExplorePage = ({
         return registrationInstances
           .filter((reg) => NetworkFilterRegistrations(reg, "ethereum"))
           .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
+            <RegistrationCard key={i} {...registration} /> // Convert to lean card
           ));
       case "optimism":
         return registrationInstances
@@ -155,15 +152,14 @@ const ExplorePage = ({
           ));
       case "easAttestations":
         return easAttestations
-        .filter(attestation => !filterEASbyId.includes(attestation.id)) // Filter out attestation by name
-        .map((attestation, i) => (
-          <AttestationCard key={i} {...attestation} />
-        ));
-      case "ensTextRecords":
-          return ENSTextRecords
-          .map((textRecord, i) => (
-            <ENSCard key={i} {...textRecord} />
+          .filter((attestation) => !filterEASbyId.includes(attestation.id)) // Filter out attestation by name
+          .map((attestation, i) => (
+            <AttestationCard key={i} {...attestation} />
           ));
+      case "ensTextRecords":
+        return ENSTextRecords.map((textRecord, i) => (
+          <ENSCard key={i} {...textRecord} />
+        ));
       default:
         return (
           <>
@@ -194,18 +190,11 @@ const ExplorePage = ({
       )
     )
     .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
+      return <RegistrationCard key={i} {...registration}      standalone={true}
+      displayWithoutEdit={true} />;
     });
 
   // Handle Stargaze DAOs
-  console.log(stargazeInstances);
   const stargazeDaoCards = stargazeInstances
     ?.flatMap((network) =>
       network.registrationNetwork.registrations.filter((reg) =>
@@ -213,14 +202,8 @@ const ExplorePage = ({
       )
     )
     .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
+      return <RegistrationCard key={i} {...registration}  standalone={true}
+      displayWithoutEdit={true} />;
     });
 
   // Handle Osmosis DAOs
@@ -231,15 +214,10 @@ const ExplorePage = ({
       )
     )
     .map((registration, i) => {
-      return (
-        <RegistrationCard
-          key={i}
-          {...registration}
-          standalone={true}
-          displayWithoutEdit={true}
-        />
-      );
+      return <RegistrationCard key={i} {...registration} standalone={true}
+      displayWithoutEdit={true} />;
     });
+
   return (
     <div className="explore-page">
       <div className="filter">
