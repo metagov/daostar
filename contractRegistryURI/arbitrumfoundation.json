@@ -207,6 +207,16 @@
             "description": "L1 base fee contract on Nova"
         },
         {
+            "id": "nova:42170:0x509386DbF5C0BE6fd68Df97A05fdB375136c32De",
+            "name": "L1 Surplus Fee",
+            "description": "L1 surplus fee contract on Nova"
+        },
+        {
+            "id": "nova:42170:0x9fCB6F75D99029f28F6F4a1d277bae49c5CAC79f",
+            "name": "L2 Base Fee",
+            "description": "L2 base fee contract on Nova"
+        },
+        {
             "id": "nova:42170:0x3B68a689c929327224dBfCe31C1bf72Ffd2559Ce",
             "name": "L2 Surplus Fee",
             "description": "L2 surplus fee contract on Nova"
