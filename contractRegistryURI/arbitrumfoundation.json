@@ -1,1 +1,218 @@
+{
+    "@context": "https://www.daostar.org/schemas",
+    "contracts": [
+        {
+            "id": "arb-one:42161:0x912CE59144191C1204E64559FE8253a0e49E6548",
+            "name": "$ARB Token",
+            "description": "Primary token for Arb One"
+        },
+        {
+            "id": "ethereum:1:0xB50721BCf8d664c30412Cfbc6cf7a15145234ad1",
+            "name": "$ARB Token (bridged)",
+            "description": "Bridged token on Ethereum"
+        },
+        {
+            "id": "nova:42170:0xf823C3cD3CeBE0a1fA952ba88Dc9EEf8e0Bf46AD",
+            "name": "$ARB Token (bridged)",
+            "description": "Bridged token on Nova"
+        },
+        {
+            "id": "arb-goerli:421613:0xF861378B543525ae0C47d33C90C954Dc774Ac1F9",
+            "name": "$ARB Token (testnet)",
+            "description": "Testnet token on Arb Goerli"
+        },
+        {
+            "id": "arb-one:42161:0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9",
+            "name": "Token Distributor",
+            "description": "Contract for distributing tokens on Arb One (self-destructed)"
+        },
+        {
+            "id": "arb-one:42161:0xF3FC178157fb3c87548bAA86F9d24BA38E649B58",
+            "name": "DAO Treasury",
+            "description": "Treasury for Arb DAO on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x15533b77981cDa0F85c4F9a485237DF4285D6844",
+            "name": "Foundation Vesting Budget Wallet",
+            "description": "Vesting budget wallet on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xCaD7828a19b363A2B44717AFB1786B5196974D8E",
+            "name": "$ARB Gateway (Arb1)",
+            "description": "Gateway contract on Arb One"
+        },
+        {
+            "id": "ethereum:1:0xbbcE8aA77782F13D4202a230d978F361B011dB27",
+            "name": "$ARB Gateway (L1)",
+            "description": "Gateway contract on Ethereum"
+        },
+        {
+            "id": "nova:42170:0xbf544970E6BD77b21C6492C281AB60d0770451F4",
+            "name": "$ARB Gateway (Nova)",
+            "description": "Gateway contract on Nova"
+        },
+        {
+            "id": "arb-goerli:421613:0x584d4D9bED1bEb39f02bb51dE07F493D3A5CdaA0",
+            "name": "$ARB Gateway (L2 testnet)",
+            "description": "Gateway contract on Arb Goerli"
+        },
+        {
+            "id": "goerli:5:0x33A7991a70AD174822ddfa2618Df9C8f17c04563",
+            "name": "$ARB Gateway (L1 testnet)",
+            "description": "Gateway contract on Goerli"
+        },
+        {
+            "id": "arb-one:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9",
+            "name": "Core Governor",
+            "description": "Core governor contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x789fC99093B09aD01C34DC7251D0C89ce743e5a4",
+            "name": "Treasury Governor",
+            "description": "Treasury governor contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xCF57572261c7c2BCF21ffD220ea7d1a27D40A827",
+            "name": "Arb One Upgrade Executor",
+            "description": "Upgrade executor for Arb One"
+        },
+        {
+            "id": "nova:42170:0x86a02dD71363c440b21F4c0E5B2Ad01Ffe1A7482",
+            "name": "Nova Upgrade Executor",
+            "description": "Upgrade executor for Nova"
+        },
+        {
+            "id": "ethereum:1:0x3ffFbAdAF827559da092217e474760E2b2c3CeDd",
+            "name": "L1 Upgrade Executor",
+            "description": "Upgrade executor for Ethereum"
+        },
+        {
+            "id": "arb-one:42161:0x34d45e99f7D8c45ed05B5cA72D54bbD1fb3F98f0",
+            "name": "L2 Core Timelock",
+            "description": "Core timelock on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xbFc1FECa8B09A5c5D3EFfE7429eBE24b9c09EF58",
+            "name": "L2 Treasury Timelock (ETH treasury)",
+            "description": "Treasury timelock on Arb One"
+        },
+        {
+            "id": "ethereum:1:0xE6841D92B0C345144506576eC13ECf5103aC7f49",
+            "name": "L1 Timelock",
+            "description": "Timelock on Ethereum"
+        },
+        {
+            "id": "arb-one:42161:0x423552c0F05baCCac5Bfa91C6dCF1dc53a0A1641",
+            "name": "Security Council (Arb One, emergency)",
+            "description": "Emergency security council on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xADd68bCb0f66878aB9D37a447C7b9067C5dfa941",
+            "name": "Security Council (Arb One, non-emergency)",
+            "description": "Non-emergency security council on Arb One"
+        },
+        {
+            "id": "ethereum:1:0xF06E95eF589D9c38af242a8AAee8375f14023F85",
+            "name": "Security Council (L1, emergency)",
+            "description": "Emergency security council on Ethereum"
+        },
+        {
+            "id": "nova:42170:0xc232ee726E3C51B86778BB4dBe61C52cC07A60F3",
+            "name": "Security Council (Nova, emergency)",
+            "description": "Emergency security council on Nova"
+        },
+        {
+            "id": "arb-one:42161:0x8a1cDA8dee421cD06023470608605934c16A05a0",
+            "name": "Nominee Election Governor",
+            "description": "Nominee election governor on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x467923B9AE90BDB36BA88eCA11604D45F13b712C",
+            "name": "Member Election Governor",
+            "description": "Member election governor on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xD509E5f5aEe2A205F554f36E8a7d56094494eDFC",
+            "name": "Manager",
+            "description": "Manager contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x7481716f05E315Fc4C4a64E56DcD9bc1D6F24C0a",
+            "name": "Upgrade Exec Route Builder",
+            "description": "Upgrade execution route builder on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x6f3a242cA91A119F872f0073BC14BC8a74a315Ad",
+            "name": "Member Removal Governor",
+            "description": "Member removal governor on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x9BF7b8884Fa381a45f8CB2525905fb36C996297a",
+            "name": "Member Sync Action",
+            "description": "Member sync action on Arb One"
+        },
+        {
+            "id": "ethereum:1:0x9BF7b8884Fa381a45f8CB2525905fb36C996297a",
+            "name": "Member Sync Action",
+            "description": "Member sync action on Ethereum"
+        },
+        {
+            "id": "nova:42170:0x9BF7b8884Fa381a45f8CB2525905fb36C996297a",
+            "name": "Member Sync Action",
+            "description": "Member sync action on Nova"
+        },
+        {
+            "id": "arb-one:42161:0x1D62fFeB72e4c360CcBbacf7c965153b00260417",
+            "name": "Constitution Hash",
+            "description": "Constitution hash on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xdb216562328215E010F819B5aBe947bad4ca961e",
+            "name": "Arb One Proxy Admin",
+            "description": "Proxy admin for Arb One"
+        },
+        {
+            "id": "nova:42170:0xf58eA15B20983116c21b05c876cc8e6CDAe5C2b9",
+            "name": "Nova Proxy Admin",
+            "description": "Proxy admin for Nova"
+        },
+        {
+            "id": "ethereum:1:0x5613AF0474EB9c528A34701A5b1662E3C8FA0678",
+            "name": "L1 Proxy Admin",
+            "description": "Proxy admin for Ethereum"
+        },
+        {
+            "id": "arb-one:42161:0xE6ec2174539a849f9f3ec973C66b333eD08C0c18",
+            "name": "L1 Base Fee",
+            "description": "L1 base fee contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x2E041280627800801E90E9Ac83532fadb6cAd99A",
+            "name": "L1 Surplus Fee",
+            "description": "L1 surplus fee contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0xbF5041Fc07E1c866D15c749156657B8eEd0fb649",
+            "name": "L2 Base Fee",
+            "description": "L2 base fee contract on Arb One"
+        },
+        {
+            "id": "arb-one:42161:0x32e7AF5A8151934F3787d0cD59EB6EDd0a736b1d",
+            "name": "L2 Surplus Fee",
+            "description": "L2 surplus fee contract on Arb One"
+        },
+        {
+            "id": "nova:42170:0xc9722CfDDFbC6aF4E77023E8B5Bd87489EFEbf5F",
+            "name": "L1 Base Fee",
+            "description": "L1 base fee contract on Nova"
+        },
+        {
+            "id": "nova:42170:0x3B68a689c929327224dBfCe31C1bf72Ffd2559Ce",
+            "name": "L2 Surplus Fee",
+            "description": "L2 surplus fee contract on Nova"
+        }
+    ]
+}
 
+
+        
