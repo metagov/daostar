@@ -57,7 +57,7 @@ const DisplayRegistration = ({
       case "Stargaze":
         return <StargazeAtomScanLink address={address} />;
       default:
-        return <EtherscanLink address={address} />;
+        return <EtherscanLink address={address} network={network} />;
     }
   };
 

@@ -4,10 +4,23 @@ import { Tooltip2 } from '@blueprintjs/popover2';
 import './EtherscanLink.css';
 
 const EtherscanLink = ({
-    address
+    address,
+    network = 'ethereum' // default network is ethereum
 }) => {
 
-    const url = `https://etherscan.io/address/${address}`;
+    const getUrl = (network, address) => {
+        switch (network) {
+            case 'optimism':
+                return `https://optimistic.etherscan.io/address/${address}`;
+            case 'arbitrum':
+                return `https://arbiscan.io/address/${address}`;
+            case 'ethereum':
+            default:
+                return `https://etherscan.io/address/${address}`;
+        }
+    };
+
+    const url = getUrl(network, address);
 
     return (
         <div className='etherscan-link'>
@@ -15,10 +28,11 @@ const EtherscanLink = ({
                 href={url} 
                 className='no-underline'
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 {address}
                 <Tooltip2
-                    content={'View on Etherscan'}
+                    content={`View on ${network === 'optimism' ? 'Optimistic Etherscan' : 'Etherscan'}`}
                     placement='top'
                 >
                     <Icon 
@@ -33,7 +47,7 @@ const EtherscanLink = ({
                 </Tooltip2>
             </a>
         </div>
-    )
-}
+    );
+};
 
 export default EtherscanLink;
