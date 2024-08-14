@@ -24,6 +24,8 @@ function getLibrary(provider) {
     return new Web3Provider(provider);
 }
 
+const theGraphApiKey = process.env.REACT_APP_THEGRAPH_API_KEY;
+
 
 const client = new ApolloClient({
     link: ApolloLink.from([
@@ -40,7 +42,7 @@ const client = new ApolloClient({
                 arbitrum: "https://api.studio.thegraph.com/query/74263/daostar-arbitrum-one/version/latest",
                 easOptimismSepolia:"https://optimism-sepolia.easscan.org/graphql",
                 easOptimism:"https://optimism.easscan.org/graphql",
-                ensTextRecords: "https://api.thegraph.com/subgraphs/name/ensdomains/ens"
+                ensTextRecords: `https://gateway.thegraph.com/api/${theGraphApiKey}/subgraphs/id/5XqPmWe6gjyrJtFn9cLy237i4cWw2j9HcUJEXsP5qGtH`
             },
             //defaultEndpoint: 'https://api.thegraph.com/subgraphs/name/ipatka/daostar',
             httpSuffix: "",
