@@ -10,63 +10,51 @@ const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
 }
 
-const RegistrationPage = () => {
-    const { regID } = useParams();
-    const network = regID.split(':')[0];
-    const address = regID.split(':')[1];
-    const lean = regID.split(':')[2]
-    
-    console.log({ network, address, lean });
+const RegistrationLeanPage = (
+    instance,
+) => {
+    console.log("Lean Card");
+    console.log(instance.daoAddress);
+    // const { regID } = useQueryParams();
+    // const network = regID.split(':')[0];
+    // const address = regID.split(':')[1];
+    // // const lean = regID.split(':')[2]
+    // const lean = true
+    // // console.log({ network, address, lean });
 
-    const { loading, error, data } = useQuery(queries.REGISTRATION, {
-        context: { apiName: network },
-        variables: { id: address },
-    });
+    // const { loading, error, data } = useQuery(queries.REGISTRATION, {
+    //     context: { apiName: network },
+    //     variables: { id: address },
+    // });
 
-    if (loading) {
-        return (
-            <div className="centered-wizard">
-                <Card className="wizard-card" style={{ height: 120 }}>
-                    <div className="wizard-center wizard-row">
-                        <Spinner color="fff" />
-                    </div>
-                </Card>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="centered-wizard">
+    //             <Card className="wizard-card" style={{ height: 120 }}>
+    //                 <div className="wizard-center wizard-row">
+    //                     <Spinner color="fff" />
+    //                 </div>
+    //             </Card>
+    //         </div>
+    //     );
+    // }
 
-    if (error) return <p>Error!</p>;
+    // if (error) return <p>Error!</p>;
 
-    console.log('reg data', data);
+    // console.log('reg data', data);
 
-    const { registrationInstance } = data;
+    // const { registrationInstance } = data;
 
     return (
-        <div className="centered-wizard">
-            <Card className="wizard-card">
-                {lean ? (
+            <Card className="wizard-card registration-card">
                     <DisplayLeanRegistration
-                        id={registrationInstance.id}
-                        network={registrationInstance.registrationNetwork.id}
-                        daoURI={registrationInstance.daoURI}
-                        contractAddress={registrationInstance.daoAddress}
+                        id={instance.id}
+                        daoURI={instance.daoURI}
+                        contractAddress={instance.daoAddress}
                         contractVersion="1.0" // or you can dynamically fetch the version if available
                     />
-                ) : (
-                    <RegistrationCard
-                        contractAddress={registrationInstance.daoAddress}
-                        standalone={true}
-                        {...registrationInstance}
-                    />
-                )}
             </Card>
-            <div className="wizard-center" style={{ marginTop: 36 }}>
-                <Link to="/explore">
-                    <Button large text="Explore all DAOs" />
-                </Link>
-            </div>
-        </div>
     );
 };
 
-export default RegistrationPage;
+export default RegistrationLeanPage;

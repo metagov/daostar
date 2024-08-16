@@ -91,7 +91,7 @@ const ExplorePage = ({
         )
       )
       .map((registration, i) => (
-        <RegistrationLeanCard key={i} {...registration} />
+        <RegistrationCard key={i} {...registration} displayWithoutEdit={true} standalone={true} />
       ));
   };
 
@@ -105,6 +105,7 @@ const ExplorePage = ({
         return filteredRegistrations(stargazeInstances);
       case "arbitrum-one":
         return sunriseInstances
+          .filter((registration) => registration.daoAddress.toLowerCase() !== "0xdeb9e5915db81011c549799a9ea37ede4d72efba") // Remove while testing 
           .map((registration, i) => (
             <RegistrationLeanCard key={i} {...registration} />
           ));
