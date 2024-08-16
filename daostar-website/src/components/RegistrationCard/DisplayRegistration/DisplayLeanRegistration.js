@@ -48,7 +48,7 @@ const DisplayLeanRegistration = ({
 
     const { loading, error, data } = useQuery(queries.GET_DAOMETA_DATA, {
         variables: { daometadataId: uri_hash },
-        context: { apiName: "arbitrum" },
+        context: { apiName: network },
         skip: !uri_hash || uri_hash.length !== 46,
     });
 

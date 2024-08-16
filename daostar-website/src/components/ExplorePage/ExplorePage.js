@@ -95,6 +95,32 @@ const ExplorePage = ({
       ));
   };
 
+  const isValidDaoURI = (daoURI) => {
+    // Ensure daoURI is a valid IPFS URI (ipfs:// or https://ipfs.io/ipfs/)
+    return (
+        (daoURI.startsWith("ipfs://") && daoURI.length >= 53) || 
+        (daoURI.startsWith("https://ipfs.io/ipfs/") && daoURI.length >= 67)
+    );
+};
+
+const filteredRegistrationsSunrise = sunriseInstances
+    .filter((registration) => {
+        // Exclude the specific DAO address
+        if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
+            return false;
+        }
+        
+        // Check if the daoURI is in a valid format
+        if (!isValidDaoURI(registration.daoURI)) {
+            return false;
+        }
+
+        return true;
+    })
+    .map((registration, i) => (
+        <RegistrationLeanCard key={i} {...registration} />
+    ));
+
   const renderCards = () => {
     switch (networkFilter) {
       case "juno":
@@ -104,11 +130,7 @@ const ExplorePage = ({
       case "stargaze":
         return filteredRegistrations(stargazeInstances);
       case "arbitrum-one":
-        return sunriseInstances
-          .filter((registration) => registration.daoAddress.toLowerCase() !== "0xdeb9e5915db81011c549799a9ea37ede4d72efba") // Remove while testing 
-          .map((registration, i) => (
-            <RegistrationLeanCard key={i} {...registration} />
-          ));
+        return filteredRegistrationsSunrise
       case "chapel":
         return registrationInstances
           .filter((reg) => NetworkFilterRegistrations(reg, "chapel"))
