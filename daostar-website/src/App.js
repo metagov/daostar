@@ -18,7 +18,8 @@ import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { mockExploreData } from "./components/ExplorePage/mockExploreData";
+import RegistrationLeanPage from "./components/RegistrationPage/RegistrationLeanPage";
+
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
     uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
@@ -237,7 +238,7 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  const arbitrumRes = useQuery(queries.REGISTRATIONS, {
+  const arbitrumRes = useQuery(queries.GET_REGISTRATIONS, {
     context: { apiName: "arbitrum" },
     variables: { id: "arbitrum-one" },
   });
@@ -246,6 +247,8 @@ function App() {
     error: arbitrumError,
     data: arbitrumData,
   } = arbitrumRes;
+
+
 
   const EASOptimismSepoliaiRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
     context: { apiName: "easOptimismSepolia" },
@@ -337,7 +340,7 @@ function App() {
   const arbitrumGoerliRegistrations =
     arbitrumGoerliData?.registrationNetwork?.registrations || [];
   const arbitrumRegistrations =
-    arbitrumData?.registrationNetwork?.registrations || [];
+    arbitrumData?.registrationInstances || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
@@ -369,7 +372,7 @@ function App() {
     arbitrumGoerliRegistrations,
     chapelRegistrations,
     optimismRegistrations,
-    arbitrumRegistrations
+    // arbitrumRegistrations
   );
 
   const EASAttestations = EASOptimismAttestations.concat(EASOptimismSepoliaAttestations);
@@ -386,7 +389,7 @@ function App() {
     optimismGoerliData,
     arbitrumGoerliData,
     chapelData,
-    arbitrumData
+    arbitrumData,
   });
 
   return (
@@ -412,6 +415,7 @@ function App() {
             <Route path="/eye" element={<Eye />} />
             <Route path="/register" element={<Register />} />
             <Route path="/registration/:regID" element={<RegistrationPage />} />
+            <Route path="/registration/l2/:regID" element={<RegistrationLeanPage />} />
             <Route
               path="/explore"
               element={
@@ -422,6 +426,7 @@ function App() {
                   stargazeInstances={stargazeInstances}
                   easAttestations={EASAttestations}
                   ENSTextRecords={ENSTextRecords}
+                  sunriseInstances={arbitrumRegistrations}
                 />
               }
             />

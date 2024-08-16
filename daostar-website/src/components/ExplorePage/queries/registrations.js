@@ -75,6 +75,53 @@ const REGISTRATION = gql`
           }
     }
 `
+const GET_REGISTRATIONS = gql`
+query RegistrationInstances @api(contextKey: "apiName") {
+  registrationInstances {
+    id
+    daoAddress
+    registrationNetwork {
+      chainId
+      id
+    }
+    registrationAddress
+    daoURI
+  }
+}
+`;
+
+const GET_DAOMETA_DATA = gql`
+  query Daometadata($daometadataId: ID!)  @api(contextKey: "apiName") {
+    daometadata(id: $daometadataId) {
+      id
+      daoName
+      daoDescription
+      membersURI
+      issuersURI
+      proposalsURI
+      governanceURI
+      activityLogURI
+      contractsRegistryURI
+      managerAddress
+    }
+  }
+`;
+
+
+const GET_REG_INSTANCE = gql`
+query RegistrationInstance($registrationInstanceId: ID!)   @api(contextKey: "apiName"){
+  registrationInstance(id: $registrationInstanceId) {
+    id
+    daoAddress
+    registrationNetwork {
+      id
+      chainId
+    }
+    registrationAddress
+    daoURI
+  }
+}
+`;
 
 const ATTESTATIONS_BY_SCHEMA = gql`
  query AttestationsBySchema($schemaId: String!) @api(contextKey: "apiName") {
@@ -114,4 +161,4 @@ query Domains($where: Domain_filter, $first: Int)  @api(contextKey: "apiName"){
       }
 }
 `;
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY }
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS, GET_DAOMETA_DATA, GET_REG_INSTANCE }
