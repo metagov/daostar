@@ -18,7 +18,7 @@ const getHttpDaoURI = (daoURI) => {
     return daoURI;
 };
 
-const DisplayLeanRegistration = ({
+const EditLeanRegistration = ({
     id,
     network,
     contractAddress,

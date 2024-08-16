@@ -42,6 +42,10 @@ const DisplayLeanRegistration = ({
     const httpDaoURI = getHttpDaoURI(daoURI);
     let uri_hash = daoURI.length >= 46 ? daoURI.substr(-46) : daoURI;
 
+    // let sanitizedDaoURI = daoURI.trim().replace(/^"|"$/g, '');
+    // let uri_hash = sanitizedDaoURI.length >= 46 ? sanitizedDaoURI.substr(-46) : sanitizedDaoURI;
+
+
     const { loading, error, data } = useQuery(queries.GET_DAOMETA_DATA, {
         variables: { daometadataId: uri_hash },
         context: { apiName: "arbitrum" },

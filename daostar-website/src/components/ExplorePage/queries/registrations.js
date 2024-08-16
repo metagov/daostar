@@ -107,6 +107,22 @@ const GET_DAOMETA_DATA = gql`
   }
 `;
 
+
+const GET_REG_INSTANCE = gql`
+query RegistrationInstance($registrationInstanceId: ID!)   @api(contextKey: "apiName"){
+  registrationInstance(id: $registrationInstanceId) {
+    id
+    daoAddress
+    registrationNetwork {
+      id
+      chainId
+    }
+    registrationAddress
+    daoURI
+  }
+}
+`;
+
 const ATTESTATIONS_BY_SCHEMA = gql`
  query AttestationsBySchema($schemaId: String!) @api(contextKey: "apiName") {
     attestations(where: {
@@ -145,4 +161,4 @@ query Domains($where: Domain_filter, $first: Int)  @api(contextKey: "apiName"){
       }
 }
 `;
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS, GET_DAOMETA_DATA }
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS, GET_DAOMETA_DATA, GET_REG_INSTANCE }

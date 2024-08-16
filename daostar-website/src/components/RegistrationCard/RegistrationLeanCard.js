@@ -10,7 +10,7 @@ const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
 }
 
-const RegistrationLeanPage = (
+const RegistrationLeanCard = (
     instance,
 ) => {
     console.log("Lean Card");
@@ -57,4 +57,4 @@ const RegistrationLeanPage = (
     );
 };
 
-export default RegistrationLeanPage;
+export default RegistrationLeanCard;

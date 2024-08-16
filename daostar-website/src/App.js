@@ -18,7 +18,8 @@ import "./bp4-theme.css";
 import Eye from "./components/Homepage/Eye/Eye";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { mockExploreData } from "./components/ExplorePage/mockExploreData";
+import RegistrationLeanPage from "./components/RegistrationPage/RegistrationLeanPage";
+
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
     uri: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",
@@ -414,6 +415,7 @@ function App() {
             <Route path="/eye" element={<Eye />} />
             <Route path="/register" element={<Register />} />
             <Route path="/registration/:regID" element={<RegistrationPage />} />
+            <Route path="/registration/l2/:regID" element={<RegistrationLeanPage />} />
             <Route
               path="/explore"
               element={
