@@ -74,11 +74,42 @@ const DisplayLeanRegistration = ({
         console.log(id, network, contractAddress, daoURI, contractVersion);
         console.log("No data returned for DAO Metadata ID:", uri_hash);
         return (
-            <div className="card-metadata card-metadata-row">
-                <div className="card-metadata-item">
-                    <p>No data available for this DAO Metadata ID.</p>
-                </div>
+            <Fragment>
+                <Link to={`/registration/l2/${network}:${id}`} className="underline">
+                <h3>DAO</h3>
+            </Link>
+            <Divider />
+            <div className="card-metadata">
+                <p className="bp4-text-small wizard-no-margin">
+                    <span className="bp4-text-muted">Registration Contract: </span>
+                    {renderNetworkLink(network, id)}
+                </p>
+                <p className="bp4-text-small wizard-no-margin">
+                    <span className="bp4-text-muted">Contract Owner: </span>
+                    {renderNetworkLink(network, contractAddress)}
+                </p>
+                <p className="bp4-text-small wizard-no-margin">
+                    <span className="bp4-text-muted">DAO URI: </span>
+                    <span className="card-metadata-value">
+                        <a
+                            href={httpDaoURI}
+                            target="_blank"
+                            className="no-underline"
+                            rel="noreferrer"
+                        >
+                            {httpDaoURI}
+                        </a>
+                    </span>
+                </p>
+                <p className="bp4-text-small wizard-no-margin">
+                    <span className="bp4-text-muted">Contract Version: </span>
+                    <span className="card-metadata-value">{contractVersion}</span>
+                </p>
             </div>
+            <div className="card-metadata">
+            <p>No data available for this DAO Metadata ID.</p>
+            </div>
+            </Fragment>
         );
     }
 
@@ -97,7 +128,7 @@ const DisplayLeanRegistration = ({
     const lean = true;
     return (
         <Fragment>
-            <Link to={`/registration/${network}:${id}:${lean}`} className="underline">
+            <Link to={`/registration/l2/${network}:${id}`} className="underline">
                 <h3>{daoName}</h3>
             </Link>
             <Divider />
