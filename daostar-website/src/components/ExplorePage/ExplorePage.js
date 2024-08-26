@@ -54,7 +54,6 @@ const NetworkButtons = [
   { text: "BNB Bruno", filter: "chapel" },
   { text: "Ethereum", filter: "ethereum" },
   { text: "Gnosis", filter: "gnosis" },
-  { text: "Goerli", filter: "goerli" },
   { text: "Juno", filter: "juno" },
   { text: "Optimism", filter: "optimism" },
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
@@ -74,6 +73,7 @@ const ExplorePage = ({
   easAttestations,
   ENSTextRecords,
   sunriseInstances,
+  sunriseNetworkInstances
 }) => {
   const [filterVal, setFilterVal] = useState("");
   const onChangeFilter = (e) => setFilterVal(e.target.value);
@@ -103,23 +103,32 @@ const ExplorePage = ({
     );
 };
 
-const filteredRegistrationsSunrise = sunriseInstances
+const filteredRegistrationsSunrise = (sunriseInstances, networkFilterValue = "") => {
+  return sunriseInstances
     .filter((registration) => {
-        // Exclude the specific DAO address
-        if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
-            return false;
-        }
-        
-        // Check if the daoURI is in a valid format
-        if (!isValidDaoURI(registration.daoURI)) {
-            return false;
-        }
+      // Exclude the specific DAO address
+      if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
+        return false;
+      }
 
+      // Check if the daoURI is in a valid format
+      if (!isValidDaoURI(registration.daoURI)) {
+        return false;
+      }
+
+      // Apply network filter based on the networkFilterValue
+      if (registration.registrationNetwork.id === networkFilterValue) {
         return true;
+      }
+
     })
     .map((registration, i) => (
-        <RegistrationLeanCard key={i} {...registration} />
+      <RegistrationLeanCard key={i} {...registration} />
     ));
+};
+
+console.log("gnnosis", registrationInstances
+  .filter((reg) => NetworkFilterRegistrations(reg, "gnosis")))
 
   const renderCards = () => {
     switch (networkFilter) {
@@ -130,31 +139,20 @@ const filteredRegistrationsSunrise = sunriseInstances
       case "stargaze":
         return filteredRegistrations(stargazeInstances);
       case "arbitrum-one":
-        return filteredRegistrationsSunrise
+        return filteredRegistrationsSunrise(sunriseNetworkInstances, "arbitrum-one")
       case "chapel":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "chapel"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
-          ));
-      case "goerli":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "goerli"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
-          ));
+        return filteredRegistrationsSunrise(sunriseNetworkInstances, "chapel")
+      // case "goerli":
+      //   return registrationInstances
+      //     .filter((reg) => NetworkFilterRegistrations(reg, "goerli"))
+      //     .map((registration, i) => (
+      //       <RegistrationCard key={i} {...registration} />
+      //     ));
       case "gnosis":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "gnosis"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
-          ));
+        return filteredRegistrationsSunrise(sunriseNetworkInstances, "gnosis")
       case "ethereum":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "ethereum"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} /> // Convert to lean card
-          ));
+        return filteredRegistrationsSunrise(sunriseNetworkInstances, "mainnet")
+
       case "optimism":
         return registrationInstances
           .filter((reg) => NetworkFilterRegistrations(reg, "optimism"))

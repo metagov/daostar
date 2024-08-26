@@ -163,10 +163,13 @@ function App() {
     loading,
     error,
     data: mainnetData,
-  } = useQuery(queries.REGISTRATIONS, {
+  } = useQuery(queries.SUNRISE_REGISTRATIONS, {
     context: { apiName: "mainnet" },
-    variables: { id: "mainnet" },
+    variables: { registrationNetworkId: "mainnet" },
+    fetchPolicy: 'network-only',
   });
+console.log("Mainnet DATA");
+console.log(mainnetData);
 
   const {
     loading: mainnetv0Loading,
@@ -206,10 +209,12 @@ function App() {
     data: goerliData,
   } = goerliRes;
 
-  const gnosisRes = useQuery(queries.REGISTRATIONS, {
+  const gnosisRes = useQuery(queries.SUNRISE_REGISTRATIONS, {
     context: { apiName: "gnosis" },
-    variables: { id: "gnosis" },
+    variables: { registrationNetworkId: "gnosis" },
+    fetchPolicy: 'network-only',
   });
+
   const {
     loading: optimismLoading,
     error: optimismError,
@@ -238,17 +243,17 @@ function App() {
     data: gnosisData,
   } = gnosisRes;
 
-  const arbitrumRes = useQuery(queries.GET_REGISTRATIONS, {
+  const arbitrumRes = useQuery(queries.SUNRISE_REGISTRATIONS, {
     context: { apiName: "arbitrum" },
-    variables: { id: "arbitrum-one" },
+    variables: { registrationNetworkId: "arbitrum-one" },
+    fetchPolicy: 'network-only',
   });
+  
   const {
     loading: arbitrumLoading,
     error: arbitrumError,
     data: arbitrumData,
   } = arbitrumRes;
-
-
 
   const EASOptimismSepoliaiRes = useQuery(queries.ATTESTATIONS_BY_SCHEMA, {
     context: { apiName: "easOptimismSepolia" },
@@ -326,7 +331,7 @@ function App() {
   )
     return "loading...";
   const mainnetRegistrations =
-    mainnetData?.registrationNetwork?.registrations || [];
+    mainnetData?.registrationNetwork?.registrations|| [];
   const mainnetv0Registrations =
     mainnetv0Data?.registrationNetwork?.registrations || [];
   const goerliRegistrations =
@@ -336,11 +341,11 @@ function App() {
   const optimismRegistrations =
     optimismData?.registrationNetwork?.registrations || [];
   const gnosisRegistrations =
-    gnosisData?.registrationNetwork?.registrations || [];
+    gnosisData?.registrationNetwork?.registrations  || [];
   const arbitrumGoerliRegistrations =
     arbitrumGoerliData?.registrationNetwork?.registrations || [];
   const arbitrumRegistrations =
-    arbitrumData?.registrationInstances || [];
+    arbitrumData?.registrationNetwork?.registrations || [];
   const chapelRegistrations =
     chapelData?.registrationNetwork?.registrations || [];
 
@@ -367,10 +372,7 @@ function App() {
   const allRegistrationInstances = mainnetRegistrations.concat(
     allMainnetV0Registrations,
     goerliRegistrations,
-    gnosisRegistrations,
-    optimismGoerliRegistrations,
     arbitrumGoerliRegistrations,
-    chapelRegistrations,
     optimismRegistrations,
     // arbitrumRegistrations
   );
@@ -379,6 +381,12 @@ function App() {
   const daodaoRegInstances = daodaoInstances;
   const registrationInstances = allRegistrationInstances.filter(
     (instance) => !registrationIdsToFilter.includes(instance.id)
+  );
+
+  const sunriseNetworkInstances = gnosisRegistrations.concat(
+    chapelRegistrations,
+    mainnetRegistrations,
+    arbitrumRegistrations
   );
 
   console.log({
@@ -427,6 +435,7 @@ function App() {
                   easAttestations={EASAttestations}
                   ENSTextRecords={ENSTextRecords}
                   sunriseInstances={arbitrumRegistrations}
+                  sunriseNetworkInstances={sunriseNetworkInstances}
                 />
               }
             />

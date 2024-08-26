@@ -90,6 +90,23 @@ query RegistrationInstances @api(contextKey: "apiName") {
 }
 `;
 
+const SUNRISE_REGISTRATIONS = gql`
+query RegistrationNetwork($registrationNetworkId: ID!) @api(contextKey: "apiName") {
+  registrationNetwork(id: $registrationNetworkId) {
+    id
+    registrations {
+      id
+      daoAddress
+      registrationAddress
+      daoURI
+      registrationNetwork {
+        id
+      }
+    }
+  }
+}
+`;
+
 const GET_DAOMETA_DATA = gql`
   query Daometadata($daometadataId: ID!)  @api(contextKey: "apiName") {
     daometadata(id: $daometadataId) {
@@ -161,4 +178,4 @@ query Domains($where: Domain_filter, $first: Int)  @api(contextKey: "apiName"){
       }
 }
 `;
-export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS, GET_DAOMETA_DATA, GET_REG_INSTANCE }
+export default { REGISTRATIONS, REGISTRATION, REGISTRATIONSOLD, ATTESTATIONS_BY_SCHEMA, ENS_QUERY, GET_REGISTRATIONS, GET_DAOMETA_DATA, GET_REG_INSTANCE, SUNRISE_REGISTRATIONS }

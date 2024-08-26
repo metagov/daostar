@@ -14,6 +14,7 @@ const RegistrationLeanCard = (
     instance,
 ) => {
     let network = instance.registrationNetwork.id;
+    console.log(instance.id);
     if (network === "arbitrum-one");
     {
         network = "arbitrum"
