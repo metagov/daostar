@@ -14,10 +14,10 @@ export const filterRegistrations = (registration, filterVal = "") => {
     return false;
   }
 
-  // Omit dev test address
-  if (registration.daoAddress === "0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA") {
-    return false;
-  }
+  // // Omit dev test address
+  // if (registration.daoAddress === "0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA") {
+  //   return false;
+  // }
 
   const daoNameLower = registration.daoName.toLowerCase();
   const filterWords = ["scam", "test", "fuck"];
@@ -107,9 +107,9 @@ const filteredRegistrationsSunrise = (sunriseInstances, networkFilterValue = "")
   return sunriseInstances
     .filter((registration) => {
       // Exclude the specific DAO address
-      if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
-        return false;
-      }
+      // if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
+      //   return false;
+      // }
 
       // Check if the daoURI is in a valid format
       if (!isValidDaoURI(registration.daoURI)) {
