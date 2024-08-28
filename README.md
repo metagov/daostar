@@ -54,19 +54,6 @@ We follow industry best practices for secure development:
 - **Static and Dynamic Analysis**: The project undergoes both static and dynamic code analysis to identify and mitigate vulnerabilities.
 - **Vulnerability Reporting**: Report vulnerabilities via GitHub Issues or by emailing rashmi@daostar.org, mendes@daostar.org, josh@daostar.org, aman@daostar.org.
 
-### Reporting
-
-If you encounter a bug or wish to report a vulnerability, we encourage you to take the following steps:
-
-- **Bug Reports**: Please open an issue on our [GitHub repository](https://github.com/metagov/daostar/issues) with details about the bug, steps to reproduce, and any other relevant information.
-- **Vulnerability Reports**: If you discover a security vulnerability, we ask that you report it privately by emailing the following addresses:
-  - Rashmi V Abbigeri: [rashmi@daostar.org](mailto:rashmi@daostar.org)
-  - Fernando Mendes: [mendes@daostar.org](mailto:mendes@daostar.org)
-  - Josh: [josh@daostar.org](mailto:josh@daostar.org)
-  - Aman: [aman@daostar.org](mailto:aman@daostar.org)
-
-We take all reports seriously and will work to address any issues as quickly as possible.
-
 ### Reporting and Release Notes
 
 We publish a release every month, detailing the changes and updates made to the project. These releases are documented in the [Releases section](https://github.com/metagov/daostar/releases) of our GitHub repository.
