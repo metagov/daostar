@@ -1,6 +1,5 @@
 # DAOstar: DAO Standards
 
-![FLOSS Best Practices](https://bestpractices.coreinfrastructure.org/projects/YOUR_PROJECT_ID/badge)  
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Introduction
