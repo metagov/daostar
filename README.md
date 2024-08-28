@@ -70,12 +70,7 @@ We take all reports seriously and will work to address any issues as quickly as 
 ### Reporting and Release Notes
 
 We publish a release every month, detailing the changes and updates made to the project. These releases are documented in the [Releases section](https://github.com/metagov/daostar/releases) of our GitHub repository.
-
-## Additional Information
-
-- **Working Build System**: We use Netlify and GitHub CI/CD for our build and deployment pipeline.
-- **Communication Channels**: Discussions and proposals are handled via GitHub Issues, ensuring transparency and openness.
-- **Maintained Project**: The project is actively maintained with commits and updates made on a weekly or bi-weekly basis.
+The project is actively maintained with commits and updates made on a weekly or bi-weekly basis.
 
 ---
 
