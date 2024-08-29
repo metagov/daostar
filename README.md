@@ -54,6 +54,8 @@ We follow industry best practices for secure development:
 - **Static and Dynamic Analysis**: The project undergoes both static and dynamic code analysis to identify and mitigate vulnerabilities.
 - **Vulnerability Reporting**: Report vulnerabilities via GitHub Issues or by emailing rashmi@daostar.org, mendes@daostar.org, josh@daostar.org, aman@daostar.org.
 
+Know more at, [SECURITY.md](SECURITY.md)
+
 ### Reporting and Release Notes
 
 We publish a release every month, detailing the changes and updates made to the project. These releases are documented in the [Releases section](https://github.com/metagov/daostar/releases) of our GitHub repository.
