@@ -59,6 +59,7 @@ const NetworkButtons = [
   { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
+  { text: "Sepolia", filter: "sepolia" },
   { text: "EAS", filter: "easAttestations" },
   { text: "ENS", filter: "ensTextRecords" },
 ];
@@ -152,7 +153,8 @@ console.log("gnnosis", registrationInstances
         return filteredRegistrationsSunrise(sunriseNetworkInstances, "gnosis")
       case "ethereum":
         return filteredRegistrationsSunrise(sunriseNetworkInstances, "mainnet")
-
+      case "sepolia":
+          return filteredRegistrationsSunrise(sunriseNetworkInstances, "sepolia")
       case "optimism":
         return registrationInstances
           .filter((reg) => NetworkFilterRegistrations(reg, "optimism"))
