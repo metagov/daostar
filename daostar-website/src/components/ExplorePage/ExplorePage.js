@@ -106,10 +106,10 @@ const ExplorePage = ({
 const filteredRegistrationsSunrise = (sunriseInstances, networkFilterValue = "") => {
   return sunriseInstances
     .filter((registration) => {
-      // Exclude the specific DAO address
-      // if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
-      //   return false;
-      // }
+      //Exclude the specific DAO address
+      if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
+        return false;
+      }
 
       // Check if the daoURI is in a valid format
       if (!isValidDaoURI(registration.daoURI)) {
