@@ -158,10 +158,16 @@ const ExplorePage = ({
 
       case "optimism":
         return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "optimism"))
+          .filter(
+            (reg) =>
+              NetworkFilterRegistrations(reg, "optimism") &&
+              reg.daoAddress !== "0xdeb9e5915db81011c549799a9ea37ede4d72efba" &&
+              reg.id !== "0xdf732f01c22a0d06bf48f511ff6171b956bf9022" // Filter out specific daoAddress
+          )
           .map((registration, i) => (
             <RegistrationCard key={i} {...registration} />
           ));
+
       case "optimism-goerli":
         return registrationInstances
           .filter((reg) => NetworkFilterRegistrations(reg, "optimism-goerli"))
