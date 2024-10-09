@@ -44,5 +44,11 @@ export const filterEASbyId = [
 '0x49fdb1a98528ab64f9eb739ae1fe639bef92db4ac50897ee8e0839b5e4263978', //strike team dao 5
 ]; // List of names to exclude
 
-
+export const filterEASbyAttester = [
+    '0x88e50e06efB2B748E2B9670d2a6668237167382B',
+    '0x7AcE0b7a0cFb2980aa25310af5c2602144d58db2',
+    '0xe4d2fe8258cBFDC2E1773944e6Db300cf90CFead',
+    '0xe4d2fe8258cBFDC2E1773944e6Db300cf90CFead',
+    '0xED54F4371b3b3A09b8f4Cdec68D2068804B72Db7'
+]
 export default registrationIdsToFilter;

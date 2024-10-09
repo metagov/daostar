@@ -4,7 +4,7 @@ import AttestationCard from "../AttestationCard/AttestationCard";
 import ENSCard from "../ENSCard/ENSCard";
 import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
-import { filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
+import { filterEASbyAttester, filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
 import RegistrationCard from "../RegistrationCard/RegistrationCard";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
@@ -35,6 +35,9 @@ export const filterRegistrations = (registration, filterVal = "") => {
 export const NetworkFilterRegistrations = (registration, filterVal = "") => {
   if (registration.registrationNetwork.id === filterVal) {
     return true;
+  }
+  if (registration.registrationNetwork.daoAddress === '0xDeb9e5915Db81011C549799A9EA37EdE4d72EFBA') {
+    return false;
   }
   if (filterVal === "ethereum") {
     if (
@@ -98,37 +101,37 @@ const ExplorePage = ({
   const isValidDaoURI = (daoURI) => {
     // Ensure daoURI is a valid IPFS URI (ipfs:// or https://ipfs.io/ipfs/)
     return (
-        (daoURI.startsWith("ipfs://") && daoURI.length >= 53) || 
-        (daoURI.startsWith("https://ipfs.io/ipfs/") && daoURI.length >= 67)
+      (daoURI.startsWith("ipfs://") && daoURI.length >= 53) ||
+      (daoURI.startsWith("https://ipfs.io/ipfs/") && daoURI.length >= 67)
     );
-};
+  };
 
-const filteredRegistrationsSunrise = (sunriseInstances, networkFilterValue = "") => {
-  return sunriseInstances
-    .filter((registration) => {
-      //Exclude the specific DAO address
-      if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
-        return false;
-      }
+  const filteredRegistrationsSunrise = (sunriseInstances, networkFilterValue = "") => {
+    return sunriseInstances
+      .filter((registration) => {
+        //Exclude the specific DAO address
+        if (registration.daoAddress.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") {
+          return false;
+        }
 
-      // Check if the daoURI is in a valid format
-      if (!isValidDaoURI(registration.daoURI)) {
-        return false;
-      }
+        // Check if the daoURI is in a valid format
+        if (!isValidDaoURI(registration.daoURI)) {
+          return false;
+        }
 
-      // Apply network filter based on the networkFilterValue
-      if (registration.registrationNetwork.id === networkFilterValue) {
-        return true;
-      }
+        // Apply network filter based on the networkFilterValue
+        if (registration.registrationNetwork.id === networkFilterValue) {
+          return true;
+        }
 
-    })
-    .map((registration, i) => (
-      <RegistrationLeanCard key={i} {...registration} />
-    ));
-};
+      })
+      .map((registration, i) => (
+        <RegistrationLeanCard key={i} {...registration} />
+      ));
+  };
 
-console.log("gnnosis", registrationInstances
-  .filter((reg) => NetworkFilterRegistrations(reg, "gnosis")))
+  console.log("gnnosis", registrationInstances
+    .filter((reg) => NetworkFilterRegistrations(reg, "gnosis")))
 
   const renderCards = () => {
     switch (networkFilter) {
@@ -173,10 +176,15 @@ console.log("gnnosis", registrationInstances
           ));
       case "easAttestations":
         return easAttestations
-          .filter((attestation) => !filterEASbyId.includes(attestation.id)) // Filter out attestation by name
+          .filter(
+            (attestation) =>
+              !filterEASbyAttester.includes(attestation.attester) && // Filter out by attester
+              !filterEASbyId.includes(attestation.id) // Filter out by attestation ID
+          )
           .map((attestation, i) => (
             <AttestationCard key={i} {...attestation} />
           ));
+
       case "ensTextRecords":
         return ENSTextRecords.map((textRecord, i) => (
           <ENSCard key={i} {...textRecord} />
@@ -211,8 +219,8 @@ console.log("gnnosis", registrationInstances
       )
     )
     .map((registration, i) => {
-      return <RegistrationCard key={i} {...registration}      standalone={true}
-      displayWithoutEdit={true} />;
+      return <RegistrationCard key={i} {...registration} standalone={true}
+        displayWithoutEdit={true} />;
     });
 
   // Handle Stargaze DAOs
@@ -223,8 +231,8 @@ console.log("gnnosis", registrationInstances
       )
     )
     .map((registration, i) => {
-      return <RegistrationCard key={i} {...registration}  standalone={true}
-      displayWithoutEdit={true} />;
+      return <RegistrationCard key={i} {...registration} standalone={true}
+        displayWithoutEdit={true} />;
     });
 
   // Handle Osmosis DAOs
@@ -236,7 +244,7 @@ console.log("gnnosis", registrationInstances
     )
     .map((registration, i) => {
       return <RegistrationCard key={i} {...registration} standalone={true}
-      displayWithoutEdit={true} />;
+        displayWithoutEdit={true} />;
     });
 
   return (
