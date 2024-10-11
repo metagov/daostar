@@ -13,8 +13,6 @@ created: 2023-11-14
 # Simple summary
 Schemas and attestations for grants management.
 
-![](https://green-beautiful-basilisk-157.mypinata.cloud/ipfs/QmUJWUd25iybU3qXxM6ATAnXmvv3pGQ6bEPLubuLDYqoh3)
-
 # Motivation
 As the Web3 space has grown in recent years, grant programs run by protocols and projects have themselves exploded in size and popularity. Over a billion dollars in capital have been deployed or committed, grant programs have come and gone, and many organizations are now assessing the progress and impact of their issued funding. 
 
@@ -32,6 +30,8 @@ This specification is organized into four main components:
 4. Applications
 
 While eligibility and compliance flows (including KYC) are important in grants systems, we decided to not include them within the scope of the current specification. Similarly, we have decided not to standardize interactions with voting and payout systems, though these are also common aspects of grants.
+
+![](https://green-beautiful-basilisk-157.mypinata.cloud/ipfs/QmUJWUd25iybU3qXxM6ATAnXmvv3pGQ6bEPLubuLDYqoh3)
 
 ## Grants systems
 A grants system represents the top-level governance or administration of a grant pool or grant program, typically identified as an organization such as a foundation or DAO. All organizations and entities adopting DAOIP-5, even those not deployed or organized as DAOs, MUST publish a daoURI with the additional field `grantPoolsURI` either via DAOIP-2 or through a trusted issuer via DAOIP-3. This bootstraps indexing and discovery of grant pools via the existing on-chain indexing infrastructure for daoURI.
