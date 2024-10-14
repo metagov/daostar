@@ -19,7 +19,7 @@
 
 .dao-cards-all { 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust card size */
+    grid-template-columns: repeat(2, minmax(300px, 1fr)); /* Adjust card size */
     grid-gap: 20px; /* Add space between cards */
     justify-content: center; /* Center the grid */
     padding: 20px;
