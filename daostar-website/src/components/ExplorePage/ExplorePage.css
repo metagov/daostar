@@ -17,6 +17,14 @@
     margin-bottom: 56px;
 }
 
+.dao-cards-all { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust card size */
+    grid-gap: 20px; /* Add space between cards */
+    justify-content: center; /* Center the grid */
+    padding: 20px;
+}
+
 @media (max-width: 950px) {
     .explore-page {
         max-width: 80%;
@@ -25,5 +33,8 @@
     .explore-page .dao-cards .bp4-card {
         max-width: none;
     }
-    
+
+    .dao-cards-all {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust card size for smaller screens */
+    }
 }
