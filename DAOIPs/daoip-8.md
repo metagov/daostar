@@ -55,10 +55,32 @@ The following set of controls are authored for protocol DAOs, i.e DAOs that cont
 
 ---
 
-## Call to action
+## Contribution Guide & Call to Action
 
-These controls are a community-driven initiative. Additional concerns warrant further discussion and research. Below are some areas that need further exploration:
+We welcome community contributions to improve DAOIP-8! Here’s how you can contribute:
+
+1. **Fork the Repository:**
+   - Visit [DAOIP-8 on GitHub](https://github.com/metagov/daostar/edit/main/DAOIPs/daoip-8.md) and fork the repository.
+
+2. **Make Your Changes:**
+   - Edit the file to make improvements, fix errors, or add new controls.
+   - Ensure your changes are clear, concise, and align with the purpose of the standard.
+
+3. **Submit a Pull Request (PR):**
+   - Once you've made your changes, create a pull request explaining the modifications.
+   - Add a brief description of why your changes are necessary or how they enhance the standard.
+
+4. **Review Process:**
+   - Your PR will be reviewed by maintainers.
+     
+5. **Join the Discussion:**
+   - For major changes or new ideas, consider starting a discussion in the issues section to gather feedback before submitting a PR.
+
+Thank you for helping improve DAOIP-8!
+
+**Below are some areas that need further exploration:**
 
 * Development of proposal testing frameworks.
-* How do DAOs execute white hat safe harbor agreements?
-* Additional context on vulnerability management - if DAO code/applications become vulnerable to attack via known CVEs or outdated dependencies, how does the DAO identify, track, and remediate those? This includes proactive as well as reactive controls such as: pen testing, contract audits, CVE severity remediation timelines, proactive vulnerability scanning, access/audit log reviews and/or SIEM monitoring. 
+* Creation of DAO specific policies for vendor management, vulnerability management, etc. 
+* How can DAOs execute white hat safe harbor agreements?
+* How to better enforce the controls defined above?
