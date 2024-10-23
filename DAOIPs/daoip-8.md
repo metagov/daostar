@@ -1,6 +1,6 @@
 ---
 daoip: 8
-title: Recommended governance controls for DAOs
+title: Recommended controls for DAOs (aka, DAO Security Standard)
 description: A collection of recommended controls and policies for addressing various areas of vaguery surrounding DAO governance.
 discussions-to: 
 status: Draft
