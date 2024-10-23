@@ -10,11 +10,21 @@ author: Amandeep <aman@daostar.org>, eth.limo <hello@eth.limo>, Raf Solari <raf@
 created: 2024-10-22
 ---
 
-## DAO Governance
+## Introduction
 
-DAO security is a multi-faceted concept. In the analysis below, we have considered multiple angles, including data transparency, decentralized ownership, vendor management, defense against governance attacks, physical security policy, etc. While the absence of some of these (for example, a physical security policy for delegates and key stakeholders) can lead to a critical security incident, others (for example, data transparency) may not have an immediate side effect. Even so, it may lead to second-order effects (e.g., low data transparency → loss of quality contributors → governance takeover).
+DAO security is a multi-faceted concept. Because of their decentralized nature, security measures vary across DAOs. DAOIP-8 aims to establish a minimum viable security standard among DAOs. Our intention is to ensure that at least the controls defined in this guide are standard practice in all organizations, irrespective of their scale. In writing this, we have considered data transparency, decentralized ownership, proposal safety, vendor management, defense against governance attacks, physical security, code upgrades, and other angles. While the absence of some of these (for example, a physical security policy for delegates) can lead to a critical security incident, others (for example, data transparency) may not have an immediate side effect. Even so, it may lead to second-order effects (e.g., low data transparency → loss of quality contributors → governance takeover). Hence, all DAOs are recommended to make their best effort to follow the controls outlined below.
 
-Note that we also have a separate section for protocol DAOs, i.e, DAOs that control an on-chain protocol. All DAOs, whether or not they are a protocol DAO, are advised to consider the controls detailed in the first section.
+Please note that this guide is a work in progress. It should not be taken as the gold standard when it comes to DAO security, but rather as the minimum. Several sections (for example, _vendor management policy_, or _incident response_) need to be polished to fit the design of your DAO. Security practices in web2 organizations are generally more mature than in web3 organizations like DAOs. Therefore, many of the templates and inspiration documents referenced have web2 origins. We urge DAOs to modify them considering their unique properties.
+
+Controls below are categorized into: 
+1. `[MANDATORY]`: includes measures that are critical to ensuring DAO security.
+2. `[RECOMMENDED]`: includes measures that may not have an immediate effect, but have second-order security effects.
+
+We recommend following both categories of controls to ensure maximum security in your DAO.
+
+The second section is for _protocol DAOs_, i.e., DAOs that control an on-chain protocol. All DAOs, whether or not they are a _protocol DAO_, are advised to consider the controls detailed in the first section.
+
+Community contributions are essential for the ongoing evolution of this guide. Kindly refer to the contribution guide below for instructions.
 
 ## DAO Controls
 
