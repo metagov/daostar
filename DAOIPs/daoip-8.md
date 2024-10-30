@@ -10,7 +10,11 @@ author: Amandeep <aman@daostar.org>, eth.limo <hello@eth.limo>, Raf Solari <raf@
 created: 2024-10-22
 ---
 
-## Introduction
+# Simple Summary
+
+A set of applicable controls for increasing DAO security
+
+# Motivation
 
 DAO security is a multi-faceted concept. Because of their decentralized nature, security measures vary across DAOs. DAOIP-8 aims to establish a minimum viable security standard among DAOs. Our intention is to ensure that at least the controls defined in this guide are standard practice in all organizations, irrespective of their scale. In writing this, we have considered data transparency, decentralized ownership, proposal safety, vendor management, defense against governance attacks, physical security, code upgrades, and other angles. While the absence of some of these (for example, a physical security policy for delegates) can lead to a critical security incident, others (for example, data transparency) may not have an immediate side effect. Even so, it may lead to second-order effects (e.g., low data transparency → loss of quality contributors → governance takeover). Hence, all DAOs are recommended to make their best effort to follow the controls outlined below.
 
@@ -25,6 +29,10 @@ We recommend following both categories of controls to ensure maximum security in
 The second section is for _protocol DAOs_, i.e., DAOs that control an on-chain protocol. All DAOs, whether or not they are a _protocol DAO_, are advised to consider the controls detailed in the first section.
 
 Community contributions are essential for the ongoing evolution of this guide. Kindly refer to the contribution guide below for instructions.
+
+# Specification
+
+The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
 ## DAO Controls
 
@@ -55,7 +63,7 @@ The following set of controls are authored for protocol DAOs, i.e DAOs that cont
 
 ---
 
-## Contribution Guide & Call to Action
+# Discussions, Contribution Guide & Call to Action
 
 We welcome community contributions to improve DAOIP-8! Here’s how you can contribute:
 
@@ -74,7 +82,7 @@ We welcome community contributions to improve DAOIP-8! Here’s how you can cont
    - Your PR will be reviewed by maintainers.
      
 5. **Join the Discussion:**
-   - For major changes or new ideas, consider starting a discussion in the issues section to gather feedback before submitting a PR.
+   - For major changes or new ideas, consider starting a discussion in this telegram group first (invite link: https://t.me/+3vBZY4NhWBhmN2U9)
 
 Thank you for helping improve DAOIP-8!
 
