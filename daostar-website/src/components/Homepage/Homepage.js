@@ -152,9 +152,9 @@ const Homepage = ({registrationInstances}) => {
                                         className="btn"
                                         target="_blank"
                                     >
-                                        Sign up for community call
+                                        Join our community
                                     </a>
-                                    <p>Every two weeks on Thursday, 11am ET.</p>
+                                    <p>Share your thoughts and engage with the teamgit </p>
                                 </div>
                                 <div className='button-info-group'>
                                     <a 
