@@ -154,7 +154,7 @@ const Homepage = ({registrationInstances}) => {
                                     >
                                         Join our community
                                     </a>
-                                    <p>Share your thoughts and engage with the teamgit </p>
+                                    <p>Share your thoughts and engage with the team</p>
                                 </div>
                                 <div className='button-info-group'>
                                     <a 
