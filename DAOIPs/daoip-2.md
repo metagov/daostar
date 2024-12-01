@@ -16,20 +16,20 @@ An API standard for decentralized autonomous organizations (DAOs), focused on re
 
 ## Motivation
 
-DAOs, since being invoked in the Ethereum whitepaper, have been vaguely defined. This has led to a wide range of patterns but little standardization or interoperability between the frameworks and tools that have emerged. Standardization and interoperability are necessary to support a variety of use-cases. In particular, a standard daoURI, similar to tokenURI in [ERC-721](./eip-721), will enhance DAO discoverability, legibility, proposal simulation, and interoperability between tools. More consistent data across the ecosystem is also a prerequisite for future DAO standards.
+DAOs, since being invoked in the Ethereum whitepaper, have been vaguely defined. This has led to a wide range of patterns but little standardization or interoperability between the frameworks and tools that have emerged. Standardization and interoperability are necessary to support a variety of use-cases. In particular, a standard daoURI, similar to tokenURI in [ERC-721](https://eips.ethereum.org/EIPS/eip-721), will enhance DAO discoverability, legibility, proposal simulation, and interoperability between tools. More consistent data across the ecosystem is also a prerequisite for future DAO standards.
 
 ## Specification
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
-Every contract implementing this EIP MUST implement the [ERC-4824](./eip-4824) interface below:
+Every contract implementing this EIP MUST implement the `IERC4824` interface below:
 
 ```solidity
 pragma solidity ^0.8.1;
 
 /// @title ERC-4824 DAOs
 /// @dev See <https://eips.ethereum.org/EIPS/eip-4824>
-interface IERC-4824 {
+interface IERC4824 {
     event DAOURIUpdate(address daoAddress, string daoURI);
 
     /// @notice A distinct Uniform Resource Identifier (URI) pointing to a JSON object following the "ERC-4824 DAO JSON-LD Schema". This JSON file splits into four subsidiary URIs: membersURI, proposalsURI, activityLogURI, and governanceURI. The membersURI SHOULD point to a JSON file that conforms to the "ERC-4824 Members JSON-LD Schema". The proposalsURI SHOULD point to a JSON file that conforms to the "ERC-4824 Proposals JSON-LD Schema". The activityLogURI SHOULD point to a JSON file that conforms to the "ERC-4824 Activity Log JSON-LD Schema". The governanceURI SHOULD point to a flatfile, normatively a .md file. Each of the JSON files named above MAY be statically-hosted or dynamically-generated. The content of subsidiary JSON files MAY be directly embedded as a JSON object directly within the top-level DAO JSON, in which case the relevant field MUST be renamed to remove the "URI" suffix. For example, "membersURI" would be renamed to "members", "proposalsURI" would be renamed to "proposals", and so on.
@@ -53,99 +53,20 @@ The DAO JSON-LD Schema mentioned above:
 }
 ```
 
-A DAO MAY inherit the interface above or it MAY create an external registration contract that is compliant with this EIP. If a DAO creates an external registration contract, the registration contract MUST store the DAO’s primary address.
+A DAO MAY inherit the `IERC4824` interface above or it MAY create an external registration contract that is compliant with this EIP. Whether the DAO inherits the above interface or it uses an external registration contract, the DAO SHOULD define a method for and implement some access control logic to enable efficient updating for daoURI. If a DAO creates an external registration contract, the registration contract MUST store the DAO’s primary address, typically the address of the primary governance contract. See the reference implementation of external registration contract in the attached assets folder to this EIP.
 
-```solidity
-pragma solidity ^0.8.1;
-
-/// @title ERC-4824 Common Interfaces for DAOs
-/// @dev See <https://eips.ethereum.org/EIPS/eip-4824>
-/// @title ERC-4824: DAO Registration
-contract ERC-4824Registration is IERC-4824, AccessControl {
-    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
-
-    string private _daoURI;
-
-    address daoAddress;
-
-    constructor() {
-        daoAddress = address(0xdead);
-    }
-
-    /// @notice Set the initial DAO URI and offer manager role to an address
-    /// @dev Throws if initialized already
-    /// @param _daoAddress The primary address for a DAO
-    /// @param _manager The address of the URI manager
-    /// @param daoURI_ The URI which will resolve to the governance docs
-    function initialize(
-        address _daoAddress,
-        address _manager,
-        string memory daoURI_,
-        address _ERC-4824Index
-    ) external {
-        initialize(_daoAddress, daoURI_, _ERC-4824Index);
-        _grantRole(MANAGER_ROLE, _manager);
-    }
-
-    /// @notice Set the initial DAO URI
-    /// @dev Throws if initialized already
-    /// @param _daoAddress The primary address for a DAO
-    /// @param daoURI_ The URI which will resolve to the governance docs
-    function initialize(
-        address _daoAddress,
-        string memory daoURI_,
-        address _ERC-4824Index
-    ) public {
-        if (daoAddress != address(0)) revert AlreadyInitialized();
-        daoAddress = _daoAddress;
-        _setURI(daoURI_);
-
-        _grantRole(DEFAULT_ADMIN_ROLE, _daoAddress);
-        _grantRole(MANAGER_ROLE, _daoAddress);
-
-        ERC-4824Index(_ERC-4824Index).logRegistration(address(this));
-    }
-
-    /// @notice Update the URI for a DAO
-    /// @dev Throws if not called by dao or manager
-    /// @param daoURI_ The URI which will resolve to the governance docs
-    function setURI(string memory daoURI_) public onlyRole(MANAGER_ROLE) {
-        _setURI(daoURI_);
-    }
-
-    function _setURI(string memory daoURI_) internal {
-        _daoURI = daoURI_;
-        emit DAOURIUpdate(daoAddress, daoURI_);
-    }
-
-    function daoURI() external view returns (string memory daoURI_) {
-        return _daoURI;
-    }
-
-    function supportsInterface(
-        bytes4 interfaceId
-    ) public view virtual override returns (bool) {
-        return
-            interfaceId == type(IERC-4824).interfaceId ||
-            super.supportsInterface(interfaceId);
-    }
-}
-```
-
-Whether the DAO inherits the above interface or it uses an external registration contract, it SHOULD define a method for and implement some access control logic to enable efficient updating for daoURI.
-
-If a given field has no value (for example, `description`), it SHOULD be removed rather than left with an empty or `null` value.
+When reporting information in the DAO JSON-LD Schema, if a given field has no value (for example, `description`), it SHOULD be removed rather than left with an empty or `null` value.
 
 ### Indexing
 
-If a DAO inherits the ERC-4824 interface from a 4824-compliant DAO factory, then the DAO factory SHOULD incorporate a call to an indexer contract as part of the DAO's initialization to enable efficient network indexing. If the DAO is [ERC-165](./eip-165)-compliant, the factory can do this without additional permissions. If the DAO is _not_ compliant with ERC-165, the factory SHOULD first obtain access control rights to the indexer contract and then call logRegistration directly with the address of the new DAO and the daoURI of the new DAO. Note that any user, including the DAO itself, MAY call logRegistration and submit a registration for a DAO which inherits the ERC-4824 interface and which is also ERC-165-compliant.
+If a DAO inherits the `IERC4824` interface from a 4824-compliant DAO factory, then the DAO factory SHOULD incorporate a call to an indexer contract as part of the DAO's initialization to enable efficient network indexing. If the DAO is [ERC-165](./eip-165)-compliant, the factory can do this without additional permissions. If the DAO is _not_ compliant with ERC-165, the factory SHOULD first obtain access control rights to the indexer contract and then call `logRegistration` directly with the address of the new DAO and the daoURI of the new DAO. Note that any user, including the DAO itself, MAY call `logRegistration` and submit a registration for a DAO which inherits the `IERC4824` interface and which is also ERC-165-compliant.
 
 ```solidity
 pragma solidity ^0.8.1;
 
-error ERC-4824InterfaceNotSupported();
+error ERC4824InterfaceNotSupported();
 
-contract ERC-4824Index is AccessControl {
+contract ERC4824Index is AccessControl {
     using ERC165Checker for address;
 
     bytes32 public constant REGISTRATION_ROLE = keccak256("REGISTRATION_ROLE");
@@ -164,8 +85,8 @@ contract ERC-4824Index is AccessControl {
     }
 
     function logRegistration(address daoAddress) external {
-        if (!daoAddress.supportsInterface(type(IERC-4824).interfaceId))
-            revert ERC-4824InterfaceNotSupported();
+        if (!daoAddress.supportsInterface(type(IERC4824).interfaceId))
+            revert ERC4824InterfaceNotSupported();
         emit DAOURIRegistered(daoAddress);
     }
 }
@@ -178,7 +99,7 @@ daoURIs may be published directly in the DAO's contract or through a call to a c
 
 ### Members
 
-Members JSON-LD Schema. Every contract implementing this EIP SHOULD implement a membersURI pointing to a JSON object satisfying this schema.
+Members JSON-LD Schema. Every contract implementing this EIP SHOULD implement a membersURI pointing to a JSON object satisfying this schema. Below, DID refers to [Decentralized Identifiers](https://www.w3.org/TR/2022/REC-did-core-20220719/).
 
 ```json
 {
@@ -195,7 +116,7 @@ Members JSON-LD Schema. Every contract implementing this EIP SHOULD implement a 
 }
 ```
 
-For example, for an address on Ethereum Mainnet, the CAIP-10 address would be of the form `eip155:1:0x1234abcd`, while the DID address would be of the form `did:ethr:0x1234abcd`.
+For example, for an address on Ethereum Mainnet, the [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/ad0cfebc45a4b8368628340bf22aefb2a5edcab7/CAIPs/caip-10.md) address would be of the form `eip155:1:0x1234abcd`, while the DID address would be of the form `did:ethr:0x1234abcd`.
 
 ### Proposals
 
@@ -229,7 +150,7 @@ In particular, any on-chain proposal MUST be associated to an id of the form CAI
 }
 ```
 
-When deferenced, `contentURI` should return the content (i.e. the text) of the proposal. Similarly, `discussionURI` should return a discussion link, whether a forum post, Discord channel, or Twitter thread.
+When deferenced, contentURI should return the content (i.e. the text) of the proposal. Similarly, discussionURI should return a discussion link, whether a forum post, Discord channel, or Twitter thread.
 
 ### Activity Log
 
@@ -258,9 +179,9 @@ Activity Log JSON-LD Schema. Every contract implementing this EIP SHOULD impleme
 
 Contracts JSON-LD Schema. Every contract implementing this EIP SHOULD implement a contractsURI pointing to a JSON object satisfying this schema.
 
-`contractsURI` is especially important for DAOs with distinct or decentralized governance occurring across multiple different contracts, possibly across several chains. Multiple addresses may report the same daoURI.
+contractsURI is especially important for DAOs with distinct or decentralized governance occurring across multiple different contracts, possibly across several chains. Multiple addresses may report the same daoURI.
 
-To prevent spam or spoofing, all DAOs adopting this specification SHOULD publish through `contractsURI` the address of every contract associated to the DAO, including but not limited to those that inherit the ERC-4824 interface or those that interact with an ERC-4824 registration factory contract. Note that this includes the contract address(es) of any actual registration contracts deployed through a registration factory.
+To prevent spam or spoofing, all DAOs adopting this specification SHOULD publish through contractsURI the address of every contract associated to the DAO, including but not limited to those that inherit the `IERC4824` interface or those that interact with a registration factory contract. Note that this includes the contract address(es) of any actual registration contracts deployed through a registration factory.
 
 ```json
 {
@@ -290,7 +211,7 @@ The content of subsidiary JSON files MAY be directly embedded as a JSON object d
 
 Fields which are not appended with URI MAY be appended with a URI, for example `name` and `description` may be renamed to `nameURI` and `descriptionURI`, in which case the dereferenced URI MUST return a JSON-LD object containing the `"@context": "https://www.daostar.org/schemas"` field and the original key-value pair.
 
-For example, `descriptionURI` should return:
+For example, descriptionURI should return:
 ```json
 {
     "@context": "https://www.daostar.org/schemas",
@@ -302,7 +223,7 @@ For example, `descriptionURI` should return:
 
 Entities which are not DAOs or which do not wish to identify as DAOs MAY still publish daoURIs. If so, they SHOULD use a different value for the `type` field than "DAO", for example "Organization", "Foundation", "Person", or, most broadly, "Entity".
 
-Entities which are not DAOs or which do not wish to identify as DAOs MAY also publish metadata information through an off-chain `orgURI` or `entityURI`, which are aliases of `daoURI`. If these entities are reporting their URI through an on-chain smart contract or registration, however, they MUST retain the ERC-4824 `daoURI` interface in order to enable network indexing.
+Entities which are not DAOs or which do not wish to identify as DAOs MAY also publish metadata information through an off-chain orgURI or entityURI, which are aliases of daoURI. If these entities are reporting their URI through an on-chain smart contract or registration, however, they MUST retain `IERC4824`'s daoURI in order to enable network indexing.
 
 The Entity JSON-LD Schema:
 
@@ -344,9 +265,9 @@ We encourage extensions of the Membership JSON-LD Schema, e.g. for DAOs that wis
 
 ### proposalsURI
 
-Proposals have become a standard way for the members of a DAO to trigger on-chain actions, e.g. sending out tokens as part of grant or executing arbitrary code in an external contract. In practice, however, many DAOs are governed by off-chain decision-making systems on platforms such as Discourse, Discord, or Snapshot, where off-chain proposals may function as signaling mechanisms for an administrator or as a prerequisite for a later on-chain vote. (To be clear, on-chain votes may also serve as non-binding signaling mechanisms or as “binding” signals leading to some sort of off-chain execution.) The schema we propose is intended to support both on-chain and off-chain proposals, though DAOs themselves may choose to report only on-chain, only off-chain, or some custom mix of proposal types.
+Proposals have become a standard way for the members of a DAO to trigger on-chain actions, e.g. sending out tokens as part of a grant or executing arbitrary code in an external contract. In practice, however, many DAOs are governed by off-chain decision-making systems on platforms such as Discourse, Discord, or Snapshot, where off-chain proposals may function as signaling mechanisms for an administrator or as a prerequisite for a later on-chain vote. (To be clear, on-chain votes may also serve as non-binding signaling mechanisms or as “binding” signals leading to some sort of off-chain execution.) The schema we propose is intended to support both on-chain and off-chain proposals, though DAOs themselves may choose to report only on-chain, only off-chain, or some custom mix of proposal types.
 
-**Proposal ID**. Every unique on-chain proposal MUST be associated to a proposal ID of the form CAIP10_ADDRESS + “?proposalId=” + PROPOSAL_COUNTER, where PROPOSAL_COUNTER is an arbitrary string which is unique per CAIP10_ADDRESS. Note that PROPOSAL_COUNTER may not be the same as the on-chain representation of the proposal; however, each PROPOSAL_COUNTER should be unique per CAIP10_ADDRESS, such that the proposal ID is a globally unique identifier. We endorse the CAIP-10 standard to support multi-chain / layer 2 proposals and the “?proposalId=” query syntax to suggest off-chain usage.
+**Proposal ID**. In the specification, we state that every unique on-chain proposal must be associated to a proposal ID of the form CAIP10_ADDRESS + “?proposalId=” + PROPOSAL_COUNTER, where PROPOSAL_COUNTER is an arbitrary string which is unique per CAIP10_ADDRESS. Note that PROPOSAL_COUNTER may not be the same as the on-chain representation of the proposal; however, each PROPOSAL_COUNTER should be unique per CAIP10_ADDRESS, such that the proposal ID is a globally unique identifier. We endorse the CAIP-10 standard to support multi-chain / layer 2 proposals and the “?proposalId=” query syntax to suggest off-chain usage.
 
 **ContentURI**. In many cases, a proposal will have some (off-chain) content such as a forum post or a description on a voting platform which predates or accompanies the actual proposal.
 
@@ -379,9 +300,9 @@ _Alternative names considered: description, readme, constitution_
 
 ### contractsURI
 
-Over the course of community conversations, multiple parties raised the need to report on, audit, and index the different contracts belonging to a given DAO. Some of these contracts are deployed as part of the modular design of a single DAO framework, e.g. the core, voting, and timelock contracts within Open Zeppelin / Compound Governor. In other cases, a DAO might deploy multiple multsigs as treasuries and/or multiple subDAOs that are effectively controlled by the DAO. `contractsURI` offers a generic way of declaring these many instruments so that they can be efficiently aggregated by an indexer.
+Over the course of community conversations, multiple parties raised the need to report on, audit, and index the different contracts belonging to a given DAO. Some of these contracts are deployed as part of the modular design of a single DAO framework, e.g. the core, voting, and timelock contracts within Open Zeppelin / Compound Governor. In other cases, a DAO might deploy multiple multsigs as treasuries and/or multiple subDAOs that are effectively controlled by the DAO. contractsURI offers a generic way of declaring these many instruments so that they can be efficiently aggregated by an indexer.
 
-`contractsURI` is also important for spam prevention or spoofing. Some DAOs may spread governance power and control across multiple different governance contracts, possibly across several chains. To capture this reality, multiple addresses may wish to report the same daoURI, or different daoURIs with the same name<!-- or the same ID-->. However, unauthorized addresses may try to report the same daoURI or name<!--, or ID -->. Additional contract information can prevent attacks of this sort by allowing indexers to weed out spam information.
+contractsURI is also important for spam prevention or spoofing. Some DAOs may spread governance power and control across multiple different governance contracts, possibly across several chains. To capture this reality, multiple addresses may wish to report the same daoURI, or different daoURIs with the same name<!-- or the same ID-->. However, unauthorized addresses may try to report the same daoURI or name<!--, or ID -->. Additional contract information can prevent attacks of this sort by allowing indexers to weed out spam information.
 
 _Alternative names considered: contractsRegistry, contractsList_
 
@@ -393,9 +314,9 @@ Further, given the emergence of patterns such as subDAOs and DAOs of DAOs in lar
 
 ### **Community Consensus**
 
-The initial draft standard was developed as part of the DAOstar One roundtable series, which included representatives from all major EVM-based DAO frameworks (Aragon, Compound, DAOstack, Gnosis, Moloch, OpenZeppelin, and Tribute), a wide selection of DAO tooling developers, as well as several major DAOs. Thank you to all the participants of the roundtable. We would especially like to thank Auryn Macmillan, Fabien of Snapshot, Selim Imoberdorf, Lucia Korpas, and Mehdi Salehi for their contributions.
+The initial draft standard was developed as part of the DAOstar roundtable series, which included representatives from all major EVM-based DAO frameworks (Aragon, Compound, DAOstack, Gnosis, Moloch, OpenZeppelin, and Tribute), a wide selection of DAO tooling developers, as well as several major DAOs. Thank you to all the participants of the roundtable. We would especially like to thank Fabien of Snapshot, Jake Hartnell, Auryn Macmillan, Selim Imoberdorf, Lucia Korpas, and Mehdi Salehi for their contributions.
 
-In-person events will be held at Schelling Point 2022 and at ETHDenver 2022, where we hope to receive more comments from the community. We also plan to schedule a series of community calls through early 2022.
+In-person events for community comment were held at Schelling Point 2022, ETHDenver 2022, ETHDenver 2023, DAO Harvard 2023, DAO Stanford 2023 (also known as the Science of Blockchains Conference DAO Workshop). The team also hosted over 50 biweekly community calls as part of the DAOstar project.
 
 ## Backwards Compatibility
 
