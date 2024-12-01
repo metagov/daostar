@@ -22,7 +22,7 @@ DAOs, since being invoked in the Ethereum whitepaper, have been vaguely defined.
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
-Every contract implementing this EIP MUST implement the `IERC4824` interface below:
+Every contract implementing this DAOIP MUST implement the `IERC4824` interface below:
 
 ```solidity
 pragma solidity ^0.8.1;
@@ -53,13 +53,13 @@ The DAO JSON-LD Schema mentioned above:
 }
 ```
 
-A DAO MAY inherit the `IERC4824` interface above or it MAY create an external registration contract that is compliant with this EIP. Whether the DAO inherits the above interface or it uses an external registration contract, the DAO SHOULD define a method for and implement some access control logic to enable efficient updating for daoURI. If a DAO creates an external registration contract, the registration contract MUST store the DAO’s primary address, typically the address of the primary governance contract. See the reference implementation of external registration contract in the attached assets folder to this EIP.
+A DAO MAY inherit the `IERC4824` interface above or it MAY create an external registration contract that is compliant with this DAOIP. Whether the DAO inherits the above interface or it uses an external registration contract, the DAO SHOULD define a method for and implement some access control logic to enable efficient updating for daoURI. If a DAO creates an external registration contract, the registration contract MUST store the DAO’s primary address, typically the address of the primary governance contract. See the reference implementation of external registration contract in the attached assets folder to this DAOIP.
 
 When reporting information in the DAO JSON-LD Schema, if a given field has no value (for example, `description`), it SHOULD be removed rather than left with an empty or `null` value.
 
 ### Indexing
 
-If a DAO inherits the `IERC4824` interface from a 4824-compliant DAO factory, then the DAO factory SHOULD incorporate a call to an indexer contract as part of the DAO's initialization to enable efficient network indexing. If the DAO is [ERC-165](./eip-165)-compliant, the factory can do this without additional permissions. If the DAO is _not_ compliant with ERC-165, the factory SHOULD first obtain access control rights to the indexer contract and then call `logRegistration` directly with the address of the new DAO and the daoURI of the new DAO. Note that any user, including the DAO itself, MAY call `logRegistration` and submit a registration for a DAO which inherits the `IERC4824` interface and which is also ERC-165-compliant.
+If a DAO inherits the `IERC4824` interface from a 4824-compliant DAO factory, then the DAO factory SHOULD incorporate a call to an indexer contract as part of the DAO's initialization to enable efficient network indexing. If the DAO is [ERC-165](https://eips.ethereum.org/EIPS/eip-165)-compliant, the factory can do this without additional permissions. If the DAO is _not_ compliant with ERC-165, the factory SHOULD first obtain access control rights to the indexer contract and then call `logRegistration` directly with the address of the new DAO and the daoURI of the new DAO. Note that any user, including the DAO itself, MAY call `logRegistration` and submit a registration for a DAO which inherits the `IERC4824` interface and which is also ERC-165-compliant.
 
 ```solidity
 pragma solidity ^0.8.1;
@@ -92,14 +92,14 @@ contract ERC4824Index is AccessControl {
 }
 ```
 
-If a DAO uses an external registration contract, the DAO SHOULD use a common registration factory contract linked to a common indexer to enable efficient network indexing. See the reference implementation of the factory contract in the attached assets folder to this EIP.
+If a DAO uses an external registration contract, the DAO SHOULD use a common registration factory contract linked to a common indexer to enable efficient network indexing. See the reference implementation of the factory contract in the attached assets folder to this DAOIP.
 
 #### Indexing priority
 daoURIs may be published directly in the DAO's contract or through a call to a common registration factory contract. In cases where both occur, the daoURI (and all sub-URIs) published through a call to a registration factory contract SHOULD take precedence. If there are multiple registrations, the most recent registration SHOULD take precedence.
 
 ### Members
 
-Members JSON-LD Schema. Every contract implementing this EIP SHOULD implement a membersURI pointing to a JSON object satisfying this schema. Below, DID refers to [Decentralized Identifiers](https://www.w3.org/TR/2022/REC-did-core-20220719/).
+Members JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement a membersURI pointing to a JSON object satisfying this schema. Below, DID refers to [Decentralized Identifiers](https://www.w3.org/TR/2022/REC-did-core-20220719/).
 
 ```json
 {
@@ -120,7 +120,7 @@ For example, for an address on Ethereum Mainnet, the [CAIP-10](https://github.co
 
 ### Proposals
 
-Proposals JSON-LD Schema. Every contract implementing this EIP SHOULD implement a proposalsURI pointing to a JSON object satisfying this schema.
+Proposals JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement a proposalsURI pointing to a JSON object satisfying this schema.
 
 In particular, any on-chain proposal MUST be associated to an id of the form CAIP10_ADDRESS + “?proposalId=” + PROPOSAL_COUNTER, where CAIP10_ADDRESS is an address following the CAIP-10 standard and PROPOSAL_COUNTER is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain proposals MAY use a similar id format where CAIP10_ADDRESS is replaced with an appropriate URI or URL.
 
@@ -154,7 +154,7 @@ When deferenced, contentURI should return the content (i.e. the text) of the pro
 
 ### Activity Log
 
-Activity Log JSON-LD Schema. Every contract implementing this EIP SHOULD implement a activityLogURI pointing to a JSON object satisfying this schema.
+Activity Log JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement a activityLogURI pointing to a JSON object satisfying this schema.
 
 ```json
 {
@@ -177,7 +177,7 @@ Activity Log JSON-LD Schema. Every contract implementing this EIP SHOULD impleme
 
 ### Contracts
 
-Contracts JSON-LD Schema. Every contract implementing this EIP SHOULD implement a contractsURI pointing to a JSON object satisfying this schema.
+Contracts JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement a contractsURI pointing to a JSON object satisfying this schema.
 
 contractsURI is especially important for DAOs with distinct or decentralized governance occurring across multiple different contracts, possibly across several chains. Multiple addresses may report the same daoURI.
 
@@ -330,4 +330,4 @@ Indexers that rely on the data returned by the URI should take caution if DAOs r
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
