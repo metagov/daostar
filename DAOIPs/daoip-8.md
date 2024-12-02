@@ -18,13 +18,27 @@ A set of applicable controls for improving DAO security
 
 DAO security is a multi-faceted concept. Because of their decentralized nature, security measures vary across DAOs. DAOIP-8 aims to establish a minimum viable security standard among DAOs. Our intention is to ensure that at least the controls defined in this guide are standard practice in all organizations, irrespective of their scale. In writing this, we have considered data transparency, decentralized ownership, proposal safety, vendor management, defense against governance attacks, physical security, code upgrades, and other angles. While the absence of some of these (for example, a physical security policy for delegates) can lead to a critical security incident, others (for example, data transparency) may not have an immediate side effect. Even so, it may lead to second-order effects (e.g., low data transparency → loss of quality contributors → governance takeover). Hence, all DAOs are recommended to make their best effort to follow the controls outlined below.
 
-Please note that this guide is a work in progress. It should not be taken as the gold standard when it comes to DAO security, but rather as the minimum. Several sections (for example, _vendor management policy_, or _incident response_) need to be polished to fit the design of your DAO. Security practices in web2 organizations are generally more mature than in web3 organizations like DAOs. Therefore, many of the templates and inspiration documents referenced have web2 origins. We urge DAOs to modify them considering their unique properties.
+Please note that this guide is a work in progress. It should not be taken as the gold standard when it comes to DAO security, but rather as the minimum. Several sections (for example, _vendor management policy_, or _incident response_) need to be polished to fit the design of your DAO. Security practices in Web2 organizations are generally more mature than in Web3 organizations like DAOs. Therefore, many of the templates and inspiration documents referenced have Web2 origins. We urge DAOs to modify them considering their unique properties.
+
+# Scope and Intent
+
+This document is intended to provide a set of recommended controls and best practices for DAOs to establish the basic foundations of a _Technical Governance_ framework. This guide is in no way exhaustive and does not explicitly focus on prescriptive implementation details, but rather defines and describes core precepts which can be further expounded upon by contributors and stakeholders.
+
+The intention is to tackle the dilemma of _Technical Governance_ as it relates to DAOs and their usage of services and technologies which are either directly or indirectly related to the DAO's operations, for example, GitHub or GitLab repositories, cloud services, and other third-party providers. These external dependencies introduce novel complexities without clear boundaries relating to technical asset ownership and management. In addition to more traditional Web2 assets, DAOs also need to take on-chain assets into account when considering their security posture by defining and implementing specific controls around code security, vulnerability management, incident response, auditing, etc.
+
+This guide encourages DAOs to ask the question: "If we can successfully govern a treasury, why can we not also govern our own technical footprint, operations, and security posture?" This resource aims to provide a starting point for DAOs to begin to answer this question.
+
+While complete decentralization is the ultimate goal, it is important to recognize that the DAO ecosystem is still in its infancy and explicitly relies upon a myriad of centralized infrastructures and services in order to operate. These aforementioned dependencies are not typically taken into consideration when discussing DAO governance and thus present unique challenges to DAOs in terms of security and operational risks.
+
+# Categories of Controls
 
 Controls below are categorized into: 
 1. `[MANDATORY]`: includes measures that are critical to ensuring DAO security.
 2. `[RECOMMENDED]`: includes measures that may not have an immediate effect, but have second-order security effects.
 
 We recommend following both categories of controls to ensure maximum security in your DAO.
+
+The first section is applicable for _all DAOs_, irrespective of their type.
 
 The second section is for _protocol DAOs_, i.e., DAOs that control an on-chain protocol. All DAOs, whether or not they are a _protocol DAO_, are advised to consider the controls detailed in the first section.
 
