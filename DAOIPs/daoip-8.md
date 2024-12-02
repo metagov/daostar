@@ -20,9 +20,9 @@ DAO security is a multi-faceted concept. Because of their decentralized nature, 
 
 Please note that this guide is a work in progress. It should not be taken as the gold standard when it comes to DAO security, but rather as the minimum. Several sections (for example, _vendor management policy_, or _incident response_) need to be polished to fit the design of your DAO. Security practices in Web2 organizations are generally more mature than in Web3 organizations like DAOs. Therefore, many of the templates and inspiration documents referenced have Web2 origins. We urge DAOs to modify them considering their unique properties.
 
-# Scope and Intent
+# Technical Governance
 
-This document is intended to provide a set of recommended controls and best practices for DAOs to establish the basic foundations of a _Technical Governance_ framework. This guide is in no way exhaustive and does not explicitly focus on prescriptive implementation details, but rather defines and describes core precepts which can be further expounded upon by contributors and stakeholders.
+In addition to the recommended best practices described above, this document is also intended to provide a set of recommended controls and best practices for DAOs to establish the basic foundations of a _Technical Governance_ framework. This guide is in no way exhaustive and does not explicitly focus on prescriptive implementation details, but rather defines and describes core precepts which can be further expounded upon by contributors and stakeholders.
 
 The intention is to tackle the dilemma of _Technical Governance_ as it relates to DAOs and their usage of services and technologies which are either directly or indirectly related to the DAO's operations, for example, GitHub or GitLab repositories, cloud services, and other third-party providers. These external dependencies introduce novel complexities without clear boundaries relating to technical asset ownership and management. In addition to more traditional Web2 assets, DAOs also need to take on-chain assets into account when considering their security posture by defining and implementing specific controls around code security, vulnerability management, incident response, auditing, etc.
 
