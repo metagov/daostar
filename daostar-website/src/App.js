@@ -19,6 +19,7 @@ import Eye from "./components/Homepage/Eye/Eye";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RegistrationLeanPage from "./components/RegistrationPage/RegistrationLeanPage";
+import SchemaPage from "./components/SchemaPage/schemaPage";
 
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
@@ -422,6 +423,7 @@ console.log(mainnetData);
           <Routes>
             <Route path="/eye" element={<Eye />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/schemas" element={<SchemaPage />} />
             <Route path="/registration/:regID" element={<RegistrationPage />} />
             <Route path="/registration/l2/:regID" element={<RegistrationLeanPage />} />
             <Route
