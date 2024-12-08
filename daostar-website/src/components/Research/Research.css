@@ -1,0 +1,286 @@
+.research-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.research-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.research-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.research-header p {
+  color: var(--placeholder-color);
+  font-size: 1.1rem;
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.research-card {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.research-card h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.research-card p {
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.research-card .date {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 15px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-bottom: 15px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.view-pdf-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-pdf-btn:hover {
+  background-color: #1976D2;
+}
+
+.pdf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pdf-modal-content {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  width: 40vw;
+  height: 90vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--placeholder-color);
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.close-button:hover {
+  color: #fff;
+  background: var(--card-bg-hover);
+}
+
+.pdf-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--card-bg-hover);
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.top-controls {
+  margin-bottom: 1rem;
+}
+
+.bottom-controls {
+  margin-top: 1rem;
+}
+
+.pdf-controls button {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pdf-controls button:hover:not(:disabled) {
+  background: var(--primary-color-hover);
+}
+
+.pdf-controls button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pdf-controls span {
+  color: var(--placeholder-color);
+  font-size: 0.9rem;
+}
+
+.zoom-btn {
+  background: #6c757d !important;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: #5a6268 !important;
+}
+
+/* PDF Document container */
+.react-pdf__Document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: auto;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: var(--placeholder-color);
+}
+
+/* Error state */
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: #dc3545;
+}
+
+/* Make the PDF page responsive */
+.react-pdf__Page {
+  max-width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--card-bg);
+  margin: 1rem 0;
+}
+
+.react-pdf__Page canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+.view-pdf-btn.bottom-right {
+  position: static;
+  margin: 0 auto;
+  display: block;
+}
+
+.language-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.language-btn {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.language-btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+} 
