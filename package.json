@@ -19,5 +19,9 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "create-react-app": "^5.0.1"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^4.9.155",
+    "react-pdf": "^9.1.1"
   }
 }
