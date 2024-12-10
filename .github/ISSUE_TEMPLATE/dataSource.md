@@ -1,5 +1,5 @@
 ---
-name: "Task: Sourcing Grant System's Data into Data Lake and DAOIP-5 Compliance"
+name: "Sourcing Grant System's Data into Data Lake and DAOIP-5 Compliance"
 about: "Checklist for sourcing grant system's data and ensuring DAOIP-5 compliance"
 title: "[Task] Sourcing Data: [Grant System Name]"
 labels: ["task", "data integration", "DAOIP-5"]
