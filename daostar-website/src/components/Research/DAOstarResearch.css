@@ -26,49 +26,52 @@
 /* Style for research card */
 .research-card {
     width: 300px;
-    height: 400px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-}
-
-.card-title {
+    overflow: hidden; /* Ensure content does not overflow */
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-}
+    overflow: hidden;
+  }
+  
 
 /* Limit card description to 3 lines */
 .card-description {
-    overflow: hidden;
+    overflow: hidden; /* Hide overflowing content */
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-line-clamp: 4; /* Limit description to 4 lines */
     -webkit-box-orient: vertical;
-}
-
-.card-metadata {
-    padding: 12px 16px;
-}
-
-/* Align buttons */
-.button-group {
+  }
+  
+  .card-metadata {
+    flex-grow: 1;
+    overflow: hidden; /* Prevent overflow for metadata */
+  }
+  
+  .button-group {
     display: flex;
     gap: 8px;
     margin-top: 8px;
-    justify-content: start;
-}
+  }
+  
 
-.action-buttons {
+  .action-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     margin-top: 16px;
-}
-
-.view-pdf-btn {
-    margin-left: auto;
-}
+  }
+  
+  .view-pdf-btn {
+    margin-top: auto;
+  }
 
 /* Modal styling for PDF viewer */
 .pdf-modal {

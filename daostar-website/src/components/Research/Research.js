@@ -57,25 +57,20 @@ const PDFViewer = memo(({ url, onClose }) => {
 
 const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOptions, setLanguage }) => {
   return (
-    <Card className="wizard-card attestation-card">
-      <h3>{title}</h3>
+    <Card className="research-card">
+      <h3 className="card-title">{title}</h3>
       <Divider />
       <div className="card-metadata">
-        <p className="bp4-text-small">
-          <span className="bp4-text-muted">Published: </span>{date}
-        </p>
+  
         {languageOptions ? (
           <>
-            <p>{description[languageOptions.current]}</p>
-
-            <div className="language-controls">
-
+            <p className="card-description">{description[languageOptions.current]}</p>
+            <div className="button-group">
               {Object.keys(description).map((lang) => (
                 <Button
                   key={lang}
                   className={`secondary ${languageOptions.current === lang ? "active" : ""}`}
                   onClick={() => setLanguage(lang)}
-                  style={{ marginTop: '8px', marginRight: '4px' }}
                 >
                   {lang}
                 </Button>
@@ -83,14 +78,18 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
             </div>
           </>
         ) : (
-          <p>{description}</p>
+          <p className="card-description">{description}</p>
         )}
       </div>
+      <p className="bp4-text-small">
+          <span className="bp4-text-muted">Published: </span>{date}
+        </p>
       <Divider />
-      <Button className="primary" onClick={onView} style={{ marginTop: '8px', marginLeft: '16px' }}
-      >
-        View PDF
-      </Button>
+      <div className="action-buttons">
+        <Button className="primary view-pdf-btn" onClick={onView}>
+          View PDF
+        </Button>
+      </div>
     </Card>
   );
 };
