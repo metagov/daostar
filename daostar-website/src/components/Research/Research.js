@@ -60,11 +60,18 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
     <Card className="research-card">
       <h3 className="card-title">{title}</h3>
       <Divider />
-      <div className="card-metadata">
-  
-        {languageOptions ? (
-          <>
+      <div className="card-content">
+        <div className="card-description-container">
+          {languageOptions ? (
             <p className="card-description">{description[languageOptions.current]}</p>
+          ) : (
+            <p className="card-description">{description}</p>
+          )}
+        
+        </div>gi
+        {languageOptions && (
+          <div className="language-section">
+            <p className="bp4-text-small">Languages:</p>
             <div className="button-group">
               {Object.keys(description).map((lang) => (
                 <Button
@@ -76,14 +83,12 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
                 </Button>
               ))}
             </div>
-          </>
-        ) : (
-          <p className="card-description">{description}</p>
+          </div>
         )}
       </div>
       <p className="bp4-text-small">
-          <span className="bp4-text-muted">Published: </span>{date}
-        </p>
+            <span className="bp4-text-muted">Published: </span>{date}
+          </p>
       <Divider />
       <div className="action-buttons">
         <Button className="primary view-pdf-btn" onClick={onView}>
@@ -93,6 +98,9 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
     </Card>
   );
 };
+
+
+
 
 const Research = () => {
   const [selectedPaper, setSelectedPaper] = useState(null);

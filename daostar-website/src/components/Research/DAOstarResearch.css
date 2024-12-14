@@ -24,11 +24,13 @@
 }
 
 /* Style for research card */
+/* Research Card Styling */
 .research-card {
     width: 300px;
     height: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     overflow: hidden; /* Ensure content does not overflow */
   }
   
@@ -41,37 +43,53 @@
     overflow: hidden;
   }
   
-
-/* Limit card description to 3 lines */
-.card-description {
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure left alignment */
+    gap: 8px;
+  }
+  
+  .card-description-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    text-align: left; /* Ensure text is left-aligned */
+    margin: 0; /* Remove unnecessary margins */
     overflow: hidden; /* Hide overflowing content */
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Limit description to 4 lines */
+    -webkit-line-clamp: 5; /* Show exactly 5 lines */
     -webkit-box-orient: vertical;
+    max-height: 10em; /* Approximate height for 5 lines */
   }
   
-  .card-metadata {
-    flex-grow: 1;
-    overflow: hidden; /* Prevent overflow for metadata */
+  
+  .bp4-text-small {
+    font-size: 12px;
+    color: #cbcaca;
+    margin: 0;
   }
   
-  .button-group {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-  }
-  
-
   .action-buttons {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end; /* Right-align the View PDF button */
     margin-top: 16px;
   }
   
-  .view-pdf-btn {
+
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+.view-pdf-btn {
     margin-top: auto;
-  }
+}
 
 /* Modal styling for PDF viewer */
 .pdf-modal {
