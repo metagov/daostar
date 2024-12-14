@@ -140,7 +140,7 @@ const Research = () => {
     <div className="explore-page">
       <h1>Research Reports</h1>
       <p>Explore our latest research and insights on DAOs and decentralized governance.</p>
-      <div className="registration-card">
+      <div className="research-card-outlay">
         {researchPapers.map((paper, index) => (
           <ResearchCard
             key={index}
