@@ -62,43 +62,37 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
       <Divider />
       <div className="card-content">
         <div className="card-description-container">
-          {languageOptions ? (
-            <p className="card-description">{description[languageOptions.current]}</p>
-          ) : (
-            <p className="card-description">{description}</p>
-          )}
-        
-        </div>gi
-        {languageOptions && (
-          <div className="language-section">
-            <p className="bp4-text-small">Languages:</p>
-            <div className="button-group">
-              {Object.keys(description).map((lang) => (
-                <Button
-                  key={lang}
-                  className={`secondary ${languageOptions.current === lang ? "active" : ""}`}
-                  onClick={() => setLanguage(lang)}
-                >
-                  {lang}
-                </Button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-      <p className="bp4-text-small">
+          <p className="card-description">{description}</p>
+          <p className="bp4-text-small">
             <span className="bp4-text-muted">Published: </span>{date}
           </p>
+        </div>
+      </div>
       <Divider />
       <div className="action-buttons">
-        <Button className="primary view-pdf-btn" onClick={onView}>
+        {languageOptions && (
+          <div className="button-group">
+            {Object.keys(pdfUrl).map((lang) => (
+              <Button
+                key={lang}
+                className={`secondary ${languageOptions.current === lang ? "active" : ""}`}
+                onClick={() => setLanguage(lang)}
+              >
+                {lang}
+              </Button>
+            ))}
+          </div>
+        )}
+        <Button
+          className="primary view-pdf-btn"
+          onClick={() => onView(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl)}
+        >
           View PDF
         </Button>
       </div>
     </Card>
   );
 };
-
 
 
 
@@ -115,10 +109,7 @@ const Research = () => {
     },
     {
       title: "The State of DAOs in Taiwan",
-      description: {
-        Mandarin: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance and community engagement.",
-        English: "The English version of the comprehensive report on DAOs in Taiwan, covering governance and community aspects.",
-      },
+      description: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance and community engagement.",
       pdfUrl: {
         Mandarin: "/reports/taiwan_mandarin.pdf",
         English: "/reports/taiwan_english.pdf",
@@ -157,10 +148,8 @@ const Research = () => {
             description={paper.description}
             pdfUrl={paper.pdfUrl}
             date={paper.date}
-            onView={() => setSelectedPaper({
-              pdfUrl: typeof paper.pdfUrl === "string" ? paper.pdfUrl : paper.pdfUrl[taiwanLanguage],
-            })}
-            languageOptions={paper.title === "The State of DAOs in Taiwan" ? { current: taiwanLanguage } : null}
+            onView={(url) => setSelectedPaper({ pdfUrl: url })}
+            languageOptions={paper.pdfUrl.Mandarin ? { current: taiwanLanguage } : null}
             setLanguage={setTaiwanLanguage}
           />
         ))}
