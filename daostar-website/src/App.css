@@ -432,6 +432,22 @@ footer {
 .btn.secondary:hover { 
   box-shadow: 5px 5px 0 0 var(--clr-secondary); 
 }
+.primary {
+  border: 1px solid var(--clr-accent) !important;
+  color: var(--clr-accent);
+}
+.secondary {
+  border: 1px solid var(--clr-secondary) !important;
+  color: var(--clr-secondary);
+}
+.primary:hover {
+  color: var(--clr-accent);
+  background-color: var(--clr-dark);
+  border: 1px solid var(--clr-accent) !important;
+  box-shadow: 5px 5px 0 0 var(--clr-accent); 
+  transition: 0.5s;
+}
+
 
 /* Spline */
 canvas { width: 100%; height: 100%; outline: none; z-index: 10; }

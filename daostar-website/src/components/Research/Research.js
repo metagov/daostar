@@ -1,41 +1,36 @@
-import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-import './Research.css';
+import React, { useState, memo } from "react";
+import { Card, Button, Divider } from "@blueprintjs/core";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import './DAOstarResearch.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs`
+pdfjs.GlobalWorkerOptions.workerSrc = "//unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs";
 
-const PDFViewer = ({ url, onClose }) => {
+const PDFViewer = memo(({ url, onClose }) => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.0);
+  const [scale, setScale] = useState(2.0);
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-  console.log("PDF URL:", url);
+  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
 
   return (
     <div className="pdf-modal">
       <div className="pdf-modal-content">
         <button className="close-button" onClick={onClose}>&times;</button>
         <div className="pdf-controls top-controls">
-          <button 
-            onClick={() => setScale(s => Math.max(0.5, s - 0.1))}
-            className="zoom-btn"
-          >
+          <Button onClick={() => setScale((s) => Math.max(0.5, s - 0.1))} className="zoom-btn">
             Zoom Out
-          </button>
+          </Button>
           <span>{Math.round(scale * 100)}%</span>
-          <button 
-            onClick={() => setScale(s => Math.min(2, s + 0.1))}
-            className="zoom-btn"
-          >
+          <Button onClick={() => setScale((s) => Math.min(2, s + 0.1))} className="zoom-btn">
             Zoom In
-          </button>
-          <a href={url} download className="download-btn">Download</a>
+          </Button>
+
+          <a href={url} download className="secondary download-btn">
+            <Button>
+              Download
+            </Button>
+          </a>
         </div>
         <div className="pdf-document">
           <Document
@@ -44,13 +39,13 @@ const PDFViewer = ({ url, onClose }) => {
             loading={<div className="loading">Loading PDF...</div>}
             error={<div className="error">Failed to load PDF. Please try again.</div>}
           >
-            {Array.from(new Array(numPages), (el, index) => (
-              <Page 
+            {Array.from(new Array(numPages), (_, index) => (
+              <Page
                 key={`page_${index + 1}`}
-                pageNumber={index + 1} 
+                pageNumber={index + 1}
                 scale={scale}
-                renderTextLayer={true}
-                renderAnnotationLayer={true}
+                renderTextLayer
+                renderAnnotationLayer
               />
             ))}
           </Document>
@@ -58,110 +53,115 @@ const PDFViewer = ({ url, onClose }) => {
       </div>
     </div>
   );
+});
+
+const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOptions, setLanguage }) => {
+  return (
+    <Card className="research-card">
+      <h3 className="card-title">{title}</h3>
+      <Divider />
+      <div className="card-content">
+        <div className="card-description-container">
+          <p className="card-description">{description}</p>
+          <p className="bp4-text-small">
+            <span className="bp4-text-muted">Published: </span>{date}
+          </p>
+        </div>
+      </div>
+      <Divider />
+      <div className="action-buttons">
+        {languageOptions && (
+          <div className="button-group">
+            {Object.keys(pdfUrl).map((lang) => (
+              <Button
+                key={lang}
+                className={`secondary ${languageOptions.current === lang ? "active" : ""}`}
+                onClick={() => setLanguage(lang)}
+              >
+                {lang}
+              </Button>
+            ))}
+          </div>
+        )}
+        <Button
+          className="primary view-pdf-btn"
+          onClick={() => onView(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl)}
+        >
+          View PDF
+        </Button>
+      </div>
+    </Card>
+  );
 };
+
+
 
 const Research = () => {
   const [selectedPaper, setSelectedPaper] = useState(null);
-  const [taiwanLanguage, setTaiwanLanguage] = useState('Mandarin');
+  const [taiwanLanguage, setTaiwanLanguage] = useState("Mandarin");
 
   const researchPapers = [
     {
-        title: "The State of DAOs in Singapore",
-        description: "An analysis of the DAO ecosystem in Singapore, highlighting regulatory and innovation trends.",
-        pdfUrl: "/reports/singapore.pdf",
-        date: "Aug 2024"
+      title: "The State of DAOs in Singapore",
+      description: "An analysis of the DAO ecosystem in Singapore, highlighting regulatory and innovation trends.",
+      pdfUrl: "/reports/singapore.pdf",
+      date: "Aug 2024",
     },
     {
       title: "The State of DAOs in Taiwan",
-      description: {
-        Mandarin: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance and community engagement.",
-        English: "The English version of the comprehensive report on DAOs in Taiwan, covering governance and community aspects."
-      },
+      description: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance and community engagement.",
       pdfUrl: {
         Mandarin: "/reports/taiwan_mandarin.pdf",
-        English: "/reports/taiwan_english.pdf"
+        English: "/reports/taiwan_english.pdf",
       },
-      date: "Nov 2024"
+      date: "Nov 2024",
     },
     {
       title: "The State of DAOs in Korea",
       description: "A comprehensive report on the development and challenges of DAOs in Korea.",
       pdfUrl: "/reports/korea.pdf",
-      date: "Oct 2024"
+      date: "Oct 2024",
     },
     {
       title: "The State of DAOs in Japan",
       description: "Exploring the unique aspects of DAOs in Japan, including cultural and regulatory impacts.",
       pdfUrl: "/reports/japan.pdf",
-      date: "April 2024"
+      date: "April 2024",
     },
     {
       title: "The DAO Policy Trilemma",
       description: "An exploration of the policy challenges faced by DAOs, proposing potential solutions.",
       pdfUrl: "/reports/trilemma.pdf",
-      date: "April 2024"
-    }
+      date: "April 2024",
+    },
   ];
 
   return (
-    <div className="research-container">
-      <div className="research-header">
-        <h1>Research Reports</h1>
-        <p>Explore our latest research and insights on DAOs and decentralized governance.</p>
-      </div>
-      
-      <div className="research-grid">
+    <div className="explore-page">
+      <h1>Research Reports</h1>
+      <p>Explore our latest research and insights on DAOs and decentralized governance.</p>
+      <div className="registration-card">
         {researchPapers.map((paper, index) => (
-          <div key={index} className="research-card">
-            <h2>{paper.title}</h2>
-            <p className="date">{paper.date}</p>
-            {paper.title === "The State of DAOs in Taiwan" ? (
-              <>
-                <p>{paper.description.Mandarin}</p>
-                <div className="language-buttons">
-                  <button 
-                    className={`language-btn ${taiwanLanguage === 'Mandarin' ? 'active' : ''}`}
-                    onClick={() => setTaiwanLanguage('Mandarin')}
-                  >
-                    Mandarin
-                  </button>
-                  <button 
-                    className={`language-btn ${taiwanLanguage === 'English' ? 'active' : ''}`}
-                    onClick={() => setTaiwanLanguage('English')}
-                  >
-                    English
-                  </button>
-                </div>
-                <button 
-                  className="view-pdf-btn bottom-right"
-                  onClick={() => setSelectedPaper({ ...paper, pdfUrl: paper.pdfUrl[taiwanLanguage] })}
-                >
-                  View PDF
-                </button>
-              </>
-            ) : (
-              <>
-                <p>{paper.description}</p>
-                <button 
-                  className="view-pdf-btn bottom-right"
-                  onClick={() => setSelectedPaper(paper)}
-                >
-                  View PDF
-                </button>
-              </>
-            )}
-          </div>
+          <ResearchCard
+            key={index}
+            title={paper.title}
+            description={paper.description}
+            pdfUrl={paper.pdfUrl}
+            date={paper.date}
+            onView={(url) => setSelectedPaper({ pdfUrl: url })}
+            languageOptions={paper.pdfUrl.Mandarin ? { current: taiwanLanguage } : null}
+            setLanguage={setTaiwanLanguage}
+          />
         ))}
       </div>
-
       {selectedPaper && (
-        <PDFViewer 
-          url={selectedPaper.pdfUrl} 
-          onClose={() => setSelectedPaper(null)} 
+        <PDFViewer
+          url={selectedPaper.pdfUrl}
+          onClose={() => setSelectedPaper(null)}
         />
       )}
     </div>
   );
 };
 
-export default Research; 
+export default Research;

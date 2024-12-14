@@ -1,0 +1,182 @@
+/* Updated layout for research cards */
+.registration-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.registration-card .wizard-card {
+    width: 100%;
+}
+
+@media (max-width: 950px) {
+    .registration-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .registration-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Research Card Styling */
+.research-card {
+    width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    overflow: hidden;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-description-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    text-align: left; /* Ensure text is left-aligned */
+    margin: 0 0 8px 0; /* Space between description and published date */
+    overflow: hidden; /* Hide overflowing content */
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Show a maximum of 4 lines */
+    -webkit-box-orient: vertical;
+    max-height: 4.8em; /* Approximate height for 4 lines */
+  }
+ 
+  .secondary.active {
+    background-color:  rgba(66, 142, 255, 1);
+    color: white;
+    border-color: rgba(66, 142, 255, 1);
+  }
+
+  .bp4-text-small {
+    font-size: 12px;
+    color: #9c9c9c;
+    margin: 0;
+  }
+  
+  .language-section {
+    margin-top: 8px;
+  }
+  
+  .language-section p {
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between; /* Space between language buttons and View PDF button */
+    align-items: center; /* Align buttons vertically */
+    margin-top: 16px;
+  }
+  
+  .view-pdf-btn {
+    padding: 8px 16px;
+    margin-left: auto; /* Push the View PDF button to the far right */
+}
+  
+
+/* Modal styling for PDF viewer */
+.pdf-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 80%;
+    height: 90%;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-modal-content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.pdf-document {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.download-btn {
+    text-decoration: none;
+    margin: 0px 40px;
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 950px) {
+    .explore-page {
+        max-width: 80%;
+    }
+
+    .research-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .pdf-modal {
+        width: 95%;
+        height: 90%;
+    }
+
+    .registration-card {
+        grid-template-columns: 1fr;
+    }
+}
