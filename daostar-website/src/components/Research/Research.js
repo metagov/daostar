@@ -109,7 +109,7 @@ const Research = () => {
     },
     {
       title: "The State of DAOs in Taiwan",
-      description: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance and community engagement.",
+      description: "An in-depth analysis of the DAO landscape in Taiwan, focusing on local governance.",
       pdfUrl: {
         Mandarin: "/reports/taiwan_mandarin.pdf",
         English: "/reports/taiwan_english.pdf",
