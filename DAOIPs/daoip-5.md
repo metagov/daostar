@@ -171,9 +171,9 @@ Applications JSON-LD Schema
             "isPaid": <OPTIONAL: A Boolean true/false indicating that an approved grant is fully paid, and no additional funds should be expected from the grant pool.>,
             "payouts": [ <OPTIONAL>
                 {
-                "type": "<The type of the payout transaction, e.g. CallDataEVM.>",
-                "value": {"<The values of the payout transaction, e.g. operation, from, to, value, data, and so on.>"}
-                "proof": "<The transaction hash or other evidence that the payout was made.>",
+                "type": "<The type of the payout transaction, e.g., CallDataEVM, StripePayment, InvoicePayment, OnchainTransaction>",
+                "value": {"<Details specific to the payout type, such as operation, from, to, value, data, and other relevant transaction details>"}
+                "proof": "<Evidence of the payout, such as a transaction hash, payment ID, or a link to verify the payout>",
                 } 
             ]
         }
