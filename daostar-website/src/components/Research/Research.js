@@ -134,6 +134,12 @@ const Research = () => {
       pdfUrl: "/reports/trilemma.pdf",
       date: "April 2024",
     },
+    {
+      title: "The State of DAO Security",
+      description: "An analysis of DAO security vulnerabilities and introducing a security standard.",
+      pdfUrl: "/reports/security.pdf",
+      date: "Dec 2024",
+    },
   ];
 
   return (
