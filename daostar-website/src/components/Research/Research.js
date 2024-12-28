@@ -1,61 +1,8 @@
-import React, { useState, memo } from "react";
+import React, { useState } from "react";
 import { Card, Button, Divider } from "@blueprintjs/core";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
 import './DAOstarResearch.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = "//unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs";
-
-const PDFViewer = memo(({ url, onClose }) => {
-  const [numPages, setNumPages] = useState(null);
-  const [scale, setScale] = useState(2.0);
-
-  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
-
-  return (
-    <div className="pdf-modal">
-      <div className="pdf-modal-content">
-        <button className="close-button" onClick={onClose}>&times;</button>
-        <div className="pdf-controls top-controls">
-          <Button onClick={() => setScale((s) => Math.max(0.5, s - 0.1))} className="zoom-btn">
-            Zoom Out
-          </Button>
-          <span>{Math.round(scale * 100)}%</span>
-          <Button onClick={() => setScale((s) => Math.min(2, s + 0.1))} className="zoom-btn">
-            Zoom In
-          </Button>
-
-          <a href={url} download className="secondary download-btn">
-            <Button>
-              Download
-            </Button>
-          </a>
-        </div>
-        <div className="pdf-document">
-          <Document
-            file={url}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={<div className="loading">Loading PDF...</div>}
-            error={<div className="error">Failed to load PDF. Please try again.</div>}
-          >
-            {Array.from(new Array(numPages), (_, index) => (
-              <Page
-                key={`page_${index + 1}`}
-                pageNumber={index + 1}
-                scale={scale}
-                renderTextLayer
-                renderAnnotationLayer
-              />
-            ))}
-          </Document>
-        </div>
-      </div>
-    </div>
-  );
-});
-
-const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOptions, setLanguage }) => {
+const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage }) => {
   return (
     <Card className="research-card">
       <h3 className="card-title">{title}</h3>
@@ -85,7 +32,7 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
         )}
         <Button
           className="primary view-pdf-btn"
-          onClick={() => onView(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl)}
+          onClick={() => window.open(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl, '_blank')}
         >
           View PDF
         </Button>
@@ -94,10 +41,7 @@ const ResearchCard = ({ title, description, pdfUrl, date, onView, languageOption
   );
 };
 
-
-
 const Research = () => {
-  const [selectedPaper, setSelectedPaper] = useState(null);
   const [taiwanLanguage, setTaiwanLanguage] = useState("Mandarin");
 
   const researchPapers = [
@@ -134,6 +78,12 @@ const Research = () => {
       pdfUrl: "/reports/trilemma.pdf",
       date: "April 2024",
     },
+    {
+      title: "The State of DAO Security",
+      description: "An analysis of DAO security vulnerabilities and introducing a security standard.",
+      pdfUrl: "/reports/security.pdf",
+      date: "Dec 2024",
+    },
   ];
 
   return (
@@ -148,18 +98,11 @@ const Research = () => {
             description={paper.description}
             pdfUrl={paper.pdfUrl}
             date={paper.date}
-            onView={(url) => setSelectedPaper({ pdfUrl: url })}
             languageOptions={paper.pdfUrl.Mandarin ? { current: taiwanLanguage } : null}
             setLanguage={setTaiwanLanguage}
           />
         ))}
       </div>
-      {selectedPaper && (
-        <PDFViewer
-          url={selectedPaper.pdfUrl}
-          onClose={() => setSelectedPaper(null)}
-        />
-      )}
     </div>
   );
 };
