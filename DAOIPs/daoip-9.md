@@ -21,7 +21,11 @@ You can think of legalURI as roughly equivalent to the standard “Terms and Con
 ## Specification
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
-To comply with this specification you MUST publish a daoURI or entityURI following the EIP-4824 / DAOIP-2 DAO JSON LD Schema and add a field called “legalURI”. This URI MAY point anywhere, e.g. to a markdown file with information, a single email address such as legal@communityname.io, a webpage with terms and conditions, an IPFS file, or another smart contract address.
+To comply with this specification, you MUST publish a daoURI or entityURI following the EIP-4824 / DAOIP-2 DAO JSON-LD Schema and include a field called legalURI.
+
+The legalURI MUST include an email field that provides a valid email address (e.g., legal@communityname.io). Email is recognized as a legally binding form of communication in many jurisdictions and ensures a reliable, accessible, and universally accepted channel for legal correspondence.
+
+Additional optional fields, such as a webpage with terms and conditions, an IPFS file URI, or a smart contract address, may be included to supplement the mandatory email field and enhance transparency.
 
 ```json
 {
@@ -29,10 +33,12 @@ To comply with this specification you MUST publish a daoURI or entityURI followi
     "type": "DAO",
     "name": "<name of the DAO>",
     "description": "<description>",
-    "legalURI": "<URI>"
+     "legalURI": {
+        "email": "legal@communityname.io",
+        "legalDocument": <RECOMMENDED: An URI pointing to the legal document of Terms and Conditions>,
+    }
 }
 ```
-
 You MAY point legalURI back to the daoURI address, which would indicate that all data published through daoURI constitutes legally-approved communication.
 
 ## Rationale
