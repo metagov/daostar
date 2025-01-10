@@ -43,6 +43,7 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
 
 const Research = () => {
   const [taiwanLanguage, setTaiwanLanguage] = useState("Mandarin");
+  const [koreaLanguage, setKoreanLanguage] = useState("Korean");
 
   const researchPapers = [
     {
@@ -63,7 +64,10 @@ const Research = () => {
     {
       title: "The State of DAOs in Korea",
       description: "A comprehensive report on the development and challenges of DAOs in Korea.",
-      pdfUrl: "/reports/korea.pdf",
+      pdfUrl: {
+        Korean: "/reports/korea_korean.pdf",
+        English: "/reports/korea_english.pdf",
+      },
       date: "Oct 2024",
     },
     {
@@ -98,8 +102,20 @@ const Research = () => {
             description={paper.description}
             pdfUrl={paper.pdfUrl}
             date={paper.date}
-            languageOptions={paper.pdfUrl.Mandarin ? { current: taiwanLanguage } : null}
-            setLanguage={setTaiwanLanguage}
+            languageOptions={
+              paper.pdfUrl.Mandarin 
+                ? { current: taiwanLanguage }
+                : paper.pdfUrl.Korean
+                ? { current: koreaLanguage }
+                : null
+            }
+            setLanguage={
+              paper.pdfUrl.Mandarin 
+                ? setTaiwanLanguage
+                : paper.pdfUrl.Korean
+                ? setKoreanLanguage
+                : null
+            }
           />
         ))}
       </div>
