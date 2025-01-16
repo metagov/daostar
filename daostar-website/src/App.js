@@ -21,6 +21,7 @@ import axios from "axios";
 import RegistrationLeanPage from "./components/RegistrationPage/RegistrationLeanPage";
 import SchemaPage from "./components/SchemaPage/schemaPage";
 import Research from "./components/Research/Research";
+import GoogleAnalytics from './components/GoogleAnalytics/GoogleAnalytics';
 
 const mainnetOldClient = new ApolloClient({
   link: createHttpLink({
@@ -418,6 +419,7 @@ console.log(mainnetData);
         }}
       >
         <div className="App">
+          <GoogleAnalytics />
           <TopNavigation />
           {/* <Homepage /> */}
 

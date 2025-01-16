@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Card, Button, Divider } from "@blueprintjs/core";
 import './DAOstarResearch.css';
 
+const trackPdfInteraction = (title, language) => {
+  if (window.gtag) {
+    window.gtag('event', 'pdf_open', {
+      event_category: 'Research',
+      event_label: title,
+      language: language || 'default'
+    });
+  }
+};
+
 const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage }) => {
+  const handlePdfClick = useCallback(() => {
+    const currentLanguage = languageOptions ? languageOptions.current : 'default';
+    trackPdfInteraction(title, currentLanguage);
+    window.open(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl, '_blank');
+  }, [title, pdfUrl, languageOptions]);
+
   return (
     <Card className="research-card">
       <h3 className="card-title">{title}</h3>
@@ -32,7 +48,7 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
         )}
         <Button
           className="primary view-pdf-btn"
-          onClick={() => window.open(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl, '_blank')}
+          onClick={handlePdfClick}
         >
           View PDF
         </Button>
