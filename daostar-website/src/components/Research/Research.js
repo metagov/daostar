@@ -5,9 +5,8 @@ import './DAOstarResearch.css';
 const trackPdfInteraction = (title, language) => {
   if (window.gtag) {
     window.gtag('event', 'pdf_open', {
-      event_category: 'Research',
-      event_label: title,
-      language: language || 'default'
+      pdf_title: title,
+      pdf_language: language || 'default'
     });
   }
 };
