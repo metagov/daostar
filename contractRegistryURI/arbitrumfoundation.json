@@ -17,11 +17,6 @@
             "description": "Bridged token on Nova"
         },
         {
-            "id": "arb-goerli:421613:0xF861378B543525ae0C47d33C90C954Dc774Ac1F9",
-            "name": "$ARB Token (testnet)",
-            "description": "Testnet token on Arb Goerli"
-        },
-        {
             "id": "arb-one:42161:0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9",
             "name": "Token Distributor",
             "description": "Contract for distributing tokens on Arb One (self-destructed)"
@@ -50,16 +45,6 @@
             "id": "nova:42170:0xbf544970E6BD77b21C6492C281AB60d0770451F4",
             "name": "$ARB Gateway (Nova)",
             "description": "Gateway contract on Nova"
-        },
-        {
-            "id": "arb-goerli:421613:0x584d4D9bED1bEb39f02bb51dE07F493D3A5CdaA0",
-            "name": "$ARB Gateway (L2 testnet)",
-            "description": "Gateway contract on Arb Goerli"
-        },
-        {
-            "id": "goerli:5:0x33A7991a70AD174822ddfa2618Df9C8f17c04563",
-            "name": "$ARB Gateway (L1 testnet)",
-            "description": "Gateway contract on Goerli"
         },
         {
             "id": "arb-one:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9",
@@ -223,6 +208,3 @@
         }
     ]
 }
-
-
-        
