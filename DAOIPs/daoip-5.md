@@ -257,7 +257,7 @@ Now that Chiyo’s data is published through daoURI, it is indexed through publi
 
 In order for Chiyo to apply for grants, one of two things need to happen: she can apply directly to the grant pool using her profile, OR a grant pool can generate an application for her automatically based on analysis of her profile, grant content, and/or attestations and credentials.
 
-In this case, she manually applies to two grant pools that she finds through Gitcoin’s interface: the Web3 Community grant round, and the Metagov Research grant round. Once she applies, Gitcoin publishes the following information:
+In this case, she manually applies to two grant pools that she finds through Gitcoin’s interface: the Web3 Community grant round, and the Metagov Research grant round. Once she applies, Gitcoin publishes the following information for the Web3 Community grant round as Gitcoin is supplying the funds for the grants and is the grant manager via their platform and Allo protocol:
 
 ```json
 {
@@ -306,6 +306,17 @@ In this case, she manually applies to two grant pools that she finds through Git
                 }
             ]
         },
+```
+Then via DAOIP-3 (Gitcoin is an attested party for both Metagov and Chiyo), Gitcoin publishes the following information for the Metagov Research grant round because the grant system here is Metagov as they are providing the funds while Gitcoin is the grant manager:
+
+```json
+{
+    "@context": ["https://www.w3.org/ns/credentials/v2", "https://www.daostar.org/schemas"],
+        "type": ["VerifiableCredential", "Attestation", "GrantPoolAttestation"],
+    "issuer": "https://explorer.gitcoin.com/attestationIssuers/gitcoin", 
+    "attestationURI": "https://explorer.gitcoin.com/attestations/metagov",
+    "expirationDate": "2024-12-31T23:59:59Z",
+    "grantPools": [
         {
             "type": "GrantPool",
             "id": "eip155:1:0x2345bcde",
@@ -350,8 +361,6 @@ In this case, she manually applies to two grant pools that she finds through Git
     ]
 }
 ```
-
-Further, in the process of applying through Gitcoin, Chiyo likely verified ownership over a Twitter and GitHub account. These serve as credentials that Gitcoin can publish as an issuer on behalf of Chiyo (note `attestationIssuers` above), which can then be used directly within the application systems of other grant pools.
 
 ## Grants system
 A grants system is simply the DAO, foundation, or other organization that governs a grant pool.
