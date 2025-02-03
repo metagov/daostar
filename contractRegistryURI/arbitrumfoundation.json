@@ -205,6 +205,21 @@
             "id": "nova:42170:0x3B68a689c929327224dBfCe31C1bf72Ffd2559Ce",
             "name": "L2 Surplus Fee",
             "description": "L2 surplus fee contract on Nova"
+        },
+        {
+            "id": "arb-sepolia:421614:0xc275B23C035a9d4EC8867b47f55427E0bDCe14cB",
+            "name": "$ARB Token (testnet)",
+            "description": "Testnet token on Arb Sepolia"
+        },
+        {
+            "id": "arb-sepolia:421614:0x6e244cD02BBB8a6dbd7F626f05B2ef82151Ab502",
+            "name": "$ARB Gateway (L2 testnet)",
+            "description": "Gateway contract on Arb Goerli"
+        },
+        {
+            "id": "sepolia:11155111:0x98431DDc27633f7315Aa2c153233529bb241445a",
+            "name": "$ARB Gateway (L1 testnet)",
+            "description": "Gateway contract on Sepolia"
         }
     ]
 }
