@@ -53,13 +53,13 @@ export const NetworkFilterRegistrations = (registration, filterVal = "") => {
 const NetworkButtons = [
   { text: "All", filter: "all" },
   { text: "Arbitrum", filter: "arbitrum-one" },
-  { text: "Arbitrum-Goerli", filter: "arbitrum-goerli" },
+  // { text: "Arbitrum-Goerli", filter: "arbitrum-goerli" },
   { text: "BNB Bruno", filter: "chapel" },
   { text: "Ethereum", filter: "ethereum" },
   { text: "Gnosis", filter: "gnosis" },
   { text: "Juno", filter: "juno" },
   { text: "Optimism", filter: "optimism" },
-  { text: "Optimism-Goerli", filter: "optimism-goerli" },
+  // { text: "Optimism-Goerli", filter: "optimism-goerli" },
   { text: "Osmosis", filter: "osmosis" },
   { text: "Stargaze", filter: "stargaze" },
   { text: "EAS", filter: "easAttestations" },
@@ -168,18 +168,18 @@ const ExplorePage = ({
             <RegistrationCard key={i} {...registration} />
           ));
 
-      case "optimism-goerli":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "optimism-goerli"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
-          ));
-      case "arbitrum-goerli":
-        return registrationInstances
-          .filter((reg) => NetworkFilterRegistrations(reg, "arbitrum-goerli"))
-          .map((registration, i) => (
-            <RegistrationCard key={i} {...registration} />
-          ));
+      // case "optimism-goerli":
+      //   return registrationInstances
+      //     .filter((reg) => NetworkFilterRegistrations(reg, "optimism-goerli"))
+      //     .map((registration, i) => (
+      //       <RegistrationCard key={i} {...registration} />
+      //     ));
+      // case "arbitrum-goerli":
+      //   return registrationInstances
+      //     .filter((reg) => NetworkFilterRegistrations(reg, "arbitrum-goerli"))
+      //     .map((registration, i) => (
+      //       <RegistrationCard key={i} {...registration} />
+      //     ));
       case "easAttestations":
         return easAttestations
           .filter(

@@ -182,14 +182,15 @@ console.log(mainnetData);
     context: { apiName: "goerli" },
     variables: { id: "goerli" },
   });
-  const optimismGoerliRes = useQuery(queries.REGISTRATIONS, {
-    context: { apiName: "optimismGoerli" },
-    variables: { id: "optimism-goerli" },
-  });
-  const arbitrumGoerliRes = useQuery(queries.REGISTRATIONS, {
-    context: { apiName: "arbitrumGoerli" },
-    variables: { id: "arbitrum-goerli" },
-  });
+  // TODO: Replace Goerli with Sepolia
+  // const optimismGoerliRes = useQuery(queries.REGISTRATIONS, {
+  //   context: { apiName: "optimismGoerli" },
+  //   variables: { id: "optimism-goerli" },
+  // });
+  // const arbitrumGoerliRes = useQuery(queries.REGISTRATIONS, {
+  //   context: { apiName: "arbitrumGoerli" },
+  //   variables: { id: "arbitrum-goerli" },
+  // });
   const chapelRes = useQuery(queries.REGISTRATIONS, {
     context: { apiName: "chapel" },
     variables: { id: "chapel" },
@@ -218,16 +219,16 @@ console.log(mainnetData);
     data: optimismData,
   } = optimismRes;
 
-  const {
-    loading: optimismGoerliLoading,
-    error: optimismGoerliError,
-    data: optimismGoerliData,
-  } = optimismGoerliRes;
-  const {
-    loading: arbitrumGoerliLoading,
-    error: arbitrumGoerliError,
-    data: arbitrumGoerliData,
-  } = arbitrumGoerliRes;
+  // const {
+  //   loading: optimismGoerliLoading,
+  //   error: optimismGoerliError,
+  //   data: optimismGoerliData,
+  // } = optimismGoerliRes;
+  // // const {
+  // //   loading: arbitrumGoerliLoading,
+  // //   error: arbitrumGoerliError,
+  // //   data: arbitrumGoerliData,
+  // // } = arbitrumGoerliRes;
   const {
     loading: chapelLoading,
     error: chapelError,
@@ -299,8 +300,8 @@ console.log(mainnetData);
   if (
     error ||
     goerliError ||
-    optimismGoerliError ||
-    arbitrumGoerliError ||
+    // optimismGoerliError ||
+    // arbitrumGoerliError ||
     chapelError ||
     optimismError ||
     mainnetv0Error ||
@@ -309,8 +310,8 @@ console.log(mainnetData);
     console.error("Mainnet Error " + error);
     console.error("Mainnet v0 Error " + mainnetv0Error);
     console.error("Goerli Error " + goerliError);
-    console.error("Optimism Goerli Error " + optimismGoerliError);
-    console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
+    // console.error("Optimism Goerli Error " + optimismGoerliError);
+    // console.error("Arbitrum Goerli Error" + arbitrumGoerliError);
     console.error("Chapel Error" + chapelError);
     console.error("Optimism Error" + optimismError);
     console.error("Arbitrum Error" + arbitrumError);
@@ -320,8 +321,8 @@ console.log(mainnetData);
     loading ||
     goerliLoading ||
     gnosisLoading ||
-    optimismGoerliLoading ||
-    arbitrumGoerliLoading ||
+    // optimismGoerliLoading ||
+    // arbitrumGoerliLoading ||
     chapelLoading ||
     optimismLoading ||
     arbitrumLoading
@@ -333,14 +334,14 @@ console.log(mainnetData);
     mainnetv0Data?.registrationNetwork?.registrations || [];
   const goerliRegistrations =
     goerliData?.registrationNetwork?.registrations || [];
-  const optimismGoerliRegistrations =
-    optimismGoerliData?.registrationNetwork?.registrations || [];
+ // const optimismGoerliRegistrations =
+  //  optimismGoerliData?.registrationNetwork?.registrations || [];
   const optimismRegistrations =
     optimismData?.registrationNetwork?.registrations || [];
   const gnosisRegistrations =
     gnosisData?.registrationNetwork?.registrations  || [];
-  const arbitrumGoerliRegistrations =
-    arbitrumGoerliData?.registrationNetwork?.registrations || [];
+  // const arbitrumGoerliRegistrations =
+  //   arbitrumGoerliData?.registrationNetwork?.registrations || [];
   const arbitrumRegistrations =
     arbitrumData?.registrationNetwork?.registrations || [];
   const chapelRegistrations =
@@ -369,7 +370,7 @@ console.log(mainnetData);
   const allRegistrationInstances = mainnetRegistrations.concat(
     allMainnetV0Registrations,
     goerliRegistrations,
-    arbitrumGoerliRegistrations,
+    //arbitrumGoerliRegistrations,
     optimismRegistrations,
     // arbitrumRegistrations
   );
@@ -391,8 +392,8 @@ console.log(mainnetData);
     mainnetv0Data,
     goerliData,
     gnosisData,
-    optimismGoerliData,
-    arbitrumGoerliData,
+    // optimismGoerliData,
+    // arbitrumGoerliData,
     chapelData,
     arbitrumData,
   });
