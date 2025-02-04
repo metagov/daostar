@@ -43,7 +43,16 @@ const config = createConfig(
       chains: [optimism,mainnet,optimismSepolia,arbitrum,bscTestnet],
     })
 );
-let headers, stargaze_headers;
+// Define headers properly
+const headers = {
+  "Content-Type": "application/json",
+  ...(token && { Authorization: `Bearer ${token}` }),
+};
+
+const stargaze_headers = {
+  "Content-Type": "application/json",
+  ...(stargazeToken && { Authorization: `Bearer ${stargazeToken}` }),
+};
 
 const fetchAndStructureDAOs = async (apiUrl, network) => {
   try {
@@ -111,21 +120,6 @@ function restructureDAOData(daoInstances, networkId) {
 
 function App() {
   //DAODAOINT START
-
-  if (token !== undefined) {
-    headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-  }
-
-  if (stargazeToken !== undefined) {
-    stargaze_headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${stargazeToken}`,
-    };
-  }
-
   const [daodaoInstances, setDaoDaoInstances] = useState([]);
   const [osmosisInstances, setOsmosisInstances] = useState([]);
   const [stargazeInstances, setStargazeInstances] = useState([]);
@@ -133,15 +127,15 @@ function App() {
   useEffect(() => {
     const fetchDAOs = async () => {
       const daodaoData = await fetchAndStructureDAOs(
-        "https://search.daodao.zone/indexes/daos/documents?limit=500",
+        "https://search.indexer.zone/indexes/daos/documents?limit=500",
         "Juno"
       );
       const osmosisData = await fetchAndStructureDAOs(
-        "https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500",
+        "https://search.indexer.zone/indexes/osmosis_daos/documents?limit=500",
         "Osmosis"
       );
       const stargazeData = await fetchAndStructureDAOs(
-        "https://search.daodao.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS&limit=501",
+        "https://search.indexer.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS&limit=501",
         "Stargaze"
       );
 
