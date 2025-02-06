@@ -62,6 +62,18 @@ const Research = () => {
 
   const researchPapers = [
     {
+      title: "The DAO Policy Trilemma",
+      description: "An exploration of the policy challenges faced by DAOs, proposing potential solutions.",
+      pdfUrl: "/reports/trilemma.pdf",
+      date: "April 2024",
+    },
+    {
+      title: "The State of DAOs in Japan",
+      description: "Exploring the unique aspects of DAOs in Japan, including cultural and regulatory impacts.",
+      pdfUrl: "/reports/japan.pdf",
+      date: "April 2024",
+    },
+    {
       title: "The State of DAOs in Singapore",
       description: "An analysis of the DAO ecosystem in Singapore, highlighting regulatory and innovation trends.",
       pdfUrl: "/reports/singapore.pdf",
@@ -86,23 +98,17 @@ const Research = () => {
       date: "Oct 2024",
     },
     {
-      title: "The State of DAOs in Japan",
-      description: "Exploring the unique aspects of DAOs in Japan, including cultural and regulatory impacts.",
-      pdfUrl: "/reports/japan.pdf",
-      date: "April 2024",
-    },
-    {
-      title: "The DAO Policy Trilemma",
-      description: "An exploration of the policy challenges faced by DAOs, proposing potential solutions.",
-      pdfUrl: "/reports/trilemma.pdf",
-      date: "April 2024",
-    },
-    {
       title: "The State of DAO Security",
       description: "An analysis of DAO security vulnerabilities and introducing a security standard.",
       pdfUrl: "/reports/security.pdf",
       date: "Dec 2024",
     },
+    {
+      title: "Delegate Incentives Report",
+      description: "A comprehensive analysis of incentive mechanisms for DAO delegates and their impact on governance.",
+      pdfUrl: "/reports/delegate.pdf",
+      date: "Feb 2025",
+    }
   ];
 
   return (
