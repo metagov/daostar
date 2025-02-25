@@ -182,9 +182,10 @@ console.log(mainnetData);
     context: { apiName: "goerli" },
     variables: { id: "goerli" },
   });
-  const optimismSepoliaRes = useQuery(queries.REGISTRATIONS, {
+  const optimismSepoliaRes = useQuery(queries.SUNRISE_REGISTRATIONS, {
     context: { apiName: "optimismSepolia" },
-    variables: { id: "optimism-sepolia" },
+    variables: { registrationNetworkId: "optimism-sepolia" },
+    fetchPolicy: 'network-only',
   });
   // TODO: Replace Goerli with Sepolia
   // const arbitrumGoerliRes = useQuery(queries.REGISTRATIONS, {

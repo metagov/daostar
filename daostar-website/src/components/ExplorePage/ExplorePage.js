@@ -10,7 +10,7 @@ import RegistrationCard from "../RegistrationCard/RegistrationCard";
 // Filtering logic
 export const filterRegistrations = (registration, filterVal = "") => {
   if (!registration.daoName?.trim()) return false;
-  if (registration.daoAddress?.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") return false;
+  // if (registration.daoAddress?.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") return false;
 
   const daoNameLower = registration.daoName.toLowerCase();
   const filterWords = ["scam", "test", "fuck"];
@@ -25,7 +25,7 @@ export const NetworkFilterRegistrations = (registration, filterVal = "") => {
   if (!registration.registrationNetwork) return false;
   const { id, daoAddress } = registration.registrationNetwork;
 
-  if (daoAddress?.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") return false;
+  // if (daoAddress?.toLowerCase() === "0xdeb9e5915db81011c549799a9ea37ede4d72efba") return false;
   if (id === filterVal) return true;
   if (filterVal === "ethereum" && (id === "ethereum" || id === "mainnet")) return true;
 
@@ -73,7 +73,7 @@ const ExplorePage = ({
 
     return instances
       .filter((reg) => 
-        reg.daoAddress?.toLowerCase() !== "0xdeb9e5915db81011c549799a9ea37ede4d72efba" &&
+        // reg.daoAddress?.toLowerCase() !== "0xdeb9e5915db81011c549799a9ea37ede4d72efba" &&
         isValidDaoURI(reg.daoURI) &&
         (networkFilterValue === "" || reg.registrationNetwork?.id === networkFilterValue)
       )

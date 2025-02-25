@@ -35,7 +35,7 @@ const client = new ApolloClient({
                 gnosis: `https://api.studio.thegraph.com/query/74263/daostar-gnosis/version/latest`,
                 chapel:`https://api.studio.thegraph.com/query/74263/daostar-bnb-bruno/version/latest`, //bnb-bruno
                 optimism: `https://api.studio.thegraph.com/query/74263/daostar-optimism/version/latest`,
-                optimismSepolia: `https://api.studio.thegraph.com/query/74263/daostar-optimism-sepolia/version/latest`,
+                optimismSepolia: `https://api.studio.thegraph.com/query/74263/daostar-optimism-sepolia/v2.1`,
                 ethereum: "https://api.thegraph.com/subgraphs/name/rashmi-278/daostar-ethereum-mainnet-v0",// ToDo: Need to redeploy
                 arbitrum: "https://api.studio.thegraph.com/query/74263/daostar-arbitrum-one/version/latest",
                 easOptimismSepolia:"https://optimism-sepolia.easscan.org/graphql",
