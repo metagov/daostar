@@ -108,6 +108,12 @@ const Research = () => {
       description: "A comprehensive analysis of incentive mechanisms for DAO delegates and their impact on governance.",
       pdfUrl: "/reports/delegate.pdf",
       date: "Feb 2025",
+    },
+    {
+      title: "State of DAO M&A",
+      description: "An in-depth analysis of mergers and acquisitions in the DAO space.",
+      pdfUrl: "/reports/mna.pdf",
+      date: "Feb 2025",
     }
   ];
 
