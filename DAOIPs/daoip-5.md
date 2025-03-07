@@ -62,6 +62,7 @@ Grant Pool JSON-LD Schema
             "id": "<The id of the grant pool, in the format above.>",
             "name": "<The name of the grant pool.>",
             "description": "<A description of the grant pool.>",
+            "grantPoolType" : "<OPTIONAL : A text value indicating the type of funding mechanism used for this grant pool>"
             "isOpen": <OPTIONAL: A Boolean true/false indicating whether the grant pool is open to or seeking new applications.>,
             "closeDate": "<OPTIONAL: The ISO DateTime at which point the grant pool will stop taking new applications.>",
             "applicationsURI": "<A URI pointing to current and past applications received by the grant pool, following the DAOIP-5 Applications JSON-LD Schema.>",
@@ -114,7 +115,7 @@ Projects JSON-LD Schema
         "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
         "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
         }
-        "OpenSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
+        "openSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
         "socials": [ <OPTIONAL>
                 {
                 "name": "<The name of the social platform>",
@@ -160,14 +161,14 @@ Applications JSON-LD Schema
             "openSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
             "isInactive" : "<OPTIONAL: A Boolean value to indicate if the project is inactive>",
             "submissionCompleteRate" : "<OPTIONAL : A Numeric value between 0-100 to indicate the percentage of application completion"
-            "socials": [ <OPTIONAL>
+            "socials": [ 
                 {
-                "name": "<The name of the social platform>",
-                "value":  "<An URI of the social platform profile of the project"
-                } 
-            ]
-            "applicationCompletionRate" : "<A Percentage value of projects completion status of the Grant Application",
-            "fundsAsked": [
+                    "platform": "<Enum value: Twitter | Discord | Telegram | LinkedIn | GitHub | Farcaster | Lens>",
+                    "url": "<The URI of the project's profile on the specified platform>"
+                }
+            ],
+            "applicationCompletionRate" : "<OPTIONAL: A Percentage value of projects completion status of the Grant Application>",
+            "fundsAsked": [ <OPTIONAL>
                 {
                     "amount": "<The amount of funding asked>",
                     "denomination": "<The denomination of currency asked>"
@@ -176,19 +177,16 @@ Applications JSON-LD Schema
             "fundsAskedInUSD": "<OPTIONAL: The amount of funding asked normalized to USD>",
             "fundsApproved": [
                 {
-                    "amount": "<The amount of funding approved normalized to USD>",
+                    "amount": "<The amount of funding approved>",
                     "denomination": "<The denomination of currency approved>"
                 }
             ],
-            "fundsApprovedInUSD": "<OPTIONAL: The amount of funding approved normalized to USD>",
+            "fundsApprovedInUSD": "<The amount of funding approved normalized to USD>",
             "payoutAddress": {
                 "type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
                 "value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
             },
-            "isEligible": <OPTIONAL: A Boolean true/false indicating that an application is eligible (e.g. by fulfilling all required criteria) for consideration by the grant pool.>,
-            "isReviewed": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been reviewed by the grant pool.>,
-            "isApproved": <OPTIONAL: A Boolean true/false indicating that an eligible grant has been approved for funding by the grant pool.>,
-            "isPaid": <OPTIONAL: A Boolean true/false indicating that an approved grant is fully paid, and no additional funds should be expected from the grant pool.>,
+            "status": "<Enum value: pending | in_review | approved | funded | rejected | completed>"
             "payouts": [ <OPTIONAL>
                 {
                 "type": "<The type of the payout transaction, e.g., CallDataEVM, StripePayment, InvoicePayment, OnchainTransaction>",
@@ -307,7 +305,7 @@ In this case, she manually applies to two grant pools that she finds through Git
                     "projectId": "eth:0x1234abcd?proposalId=1",
                     "projectName": "Shoes Protocol",
                     "createdAt": "023-11-14T15:52:25Z",
-                    "contentURI": "https://gitcoin.co/projects/0x000xyz987"
+                    "contentURI": "https://gitcoin.co/projects/0x000xyz987",
                     "discussionsTo": "",
                     "fundsAsked": [
                         {
