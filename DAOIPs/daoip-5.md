@@ -114,6 +114,14 @@ Projects JSON-LD Schema
         "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
         "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
         }
+        "OpenSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
+        "socials": [ <OPTIONAL>
+                {
+                "name": "<The name of the social platform>",
+                "value":  "<An URI of the social platform profile of the project"
+                } 
+            ]
+
     ]
 }
 ```
@@ -149,18 +157,30 @@ Applications JSON-LD Schema
             "createdAt": "<ISO DateTime>",
             "contentURI": "<A URI pointing to the publicly accessible content of the application.>"
             "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stakeholders can discuss the grant.>",
+            "openSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
+            "isInactive" : "<OPTIONAL: A Boolean value to indicate if the project is inactive>",
+            "submissionCompleteRate" : "<OPTIONAL : A Numeric value between 0-100 to indicate the percentage of application completion"
+            "socials": [ <OPTIONAL>
+                {
+                "name": "<The name of the social platform>",
+                "value":  "<An URI of the social platform profile of the project"
+                } 
+            ]
+            "applicationCompletionRate" : "<A Percentage value of projects completion status of the Grant Application",
             "fundsAsked": [
                 {
                     "amount": "<The amount of funding asked>",
                     "denomination": "<The denomination of currency asked>"
                 }
             ],
+            "fundsAskedInUSD": "<OPTIONAL: The amount of funding asked normalized to USD>",
             "fundsApproved": [
                 {
-                    "amount": "<The amount of funding approved>",
+                    "amount": "<The amount of funding approved normalized to USD>",
                     "denomination": "<The denomination of currency approved>"
                 }
             ],
+            "fundsApprovedInUSD": "<OPTIONAL: The amount of funding approved normalized to USD>",
             "payoutAddress": {
                 "type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
                 "value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
@@ -176,6 +196,13 @@ Applications JSON-LD Schema
                 "proof": "<Evidence of the payout, such as a transaction hash, payment ID, or a link to verify the payout>",
                 } 
             ]
+            "totalGrantPoolSize": [ <OPTIONAL>
+                {
+                    "amount": "<The total amount of funding for the grant pool>",
+                    "denomination": "<The denomination of currency>"
+                }
+            ],
+
         }
     ]
 }
