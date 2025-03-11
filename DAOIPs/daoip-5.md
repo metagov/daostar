@@ -114,7 +114,7 @@ Projects JSON-LD Schema
         "relevantTo": "<OPTIONAL: An array of (GrantPool id, GrantPool name) intended to call attention to specific grant pools for which this project is relevant. This does not constitute a formal grant application unless recognized by the grant pool.>",
         "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
         "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>",
-        "openSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
+        "licenseURI": "<OPTIONAL: A URI pointing to the project's open-source license or relevant licensing details>",
         "socials": [
                 {
                 "name": "<The name of the social platform>",
@@ -157,8 +157,8 @@ Applications JSON-LD Schema
                     "projectName": "<The name of the project.>",
                     "createdAt": "<ISO DateTime>",
                     "contentURI": "<A URI pointing to the publicly accessible content of the application.>",
-                    "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g. a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stakeholders can discuss the grant.>",
-                    "openSourceStatus": "<OPTIONAL: A Boolean or Text value indicating the Open-Source Status of the project>",
+                    "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g., a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stakeholders can discuss the grant.>",
+                    "licenseURI": "<OPTIONAL: A URI pointing to the project's open-source license or relevant licensing details>",
                     "isInactive": "<OPTIONAL: A Boolean value to indicate if the project is inactive>",
                     "submissionCompleteRate": "<OPTIONAL: A Numeric value between 0-100 to indicate the percentage of application completion>",
                     "socials": [
@@ -167,7 +167,7 @@ Applications JSON-LD Schema
                             "url": "<The URI of the project's profile on the specified platform>"
                         }
                     ],
-                    "applicationCompletionRate": "<OPTIONAL: A Percentage value of project completion status of the Grant Application>",
+                    "applicationCompletionRate": "<OPTIONAL: A percentage value indicating the completion status of the grant application>",
                     "fundsAsked": [
                         {
                             "amount": "<The amount of funding asked>",
@@ -181,12 +181,18 @@ Applications JSON-LD Schema
                             "denomination": "<The denomination of currency approved>"
                         }
                     ],
-                    "fundsApprovedInUSD": "<The amount of funding approved normalized to USD>",
+                    "fundsApprovedInUSD": "<OPTIONAL: The amount of funding approved normalized to USD>",
                     "payoutAddress": {
                         "type": "<e.g. EthereumAddress, CAIP10Address, IBAN, SWIFT/BIC, etc.>",
                         "value": "<subject's identifier, e.g. their Ethereum address, CAIP-10 address, IBAN, etc.>"
                     },
-                    "status": "<Enum value: pending | in_review | approved | funded | rejected | completed>",
+                    "status": "<RECOMMENDED: The current application status. Enum value: 
+                      'pending' (submitted but not yet reviewed), 
+                      'in_review' (currently being evaluated), 
+                      'approved' (accepted for funding), 
+                      'funded' (funding has been disbursed), 
+                      'rejected' (not selected for funding), 
+                      'completed' (project successfully delivered and grant conditions met)>",
                     "payouts": [
                         {
                             "type": "<The type of the payout transaction, e.g., CallDataEVM, StripePayment, InvoicePayment, OnchainTransaction>",
