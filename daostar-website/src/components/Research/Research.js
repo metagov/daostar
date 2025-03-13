@@ -104,25 +104,30 @@ const Research = () => {
       date: "Dec 2024",
     },
     {
-      title: "Delegate Incentives Report",
-      description: "A comprehensive analysis of incentive mechanisms for DAO delegates and their impact on governance.",
-      pdfUrl: "/reports/delegate.pdf",
-      date: "Feb 2025",
-    },
-    {
       title: "State of DAO M&A",
       description: "An in-depth analysis of mergers and acquisitions in the DAO space.",
       pdfUrl: "/reports/mna.pdf",
       date: "Feb 2025",
+    },
+    {
+      title: "Delegate Incentives Report",
+      description: "A comprehensive analysis of incentive mechanisms for DAO delegates and their impact on governance.",
+      pdfUrl: "/reports/delegate.pdf",
+      date: "Feb 2025",
     }
   ];
+
+  // Sort research papers by date (most recent first)
+  const sortedPapers = [...researchPapers].sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
 
   return (
     <div className="explore-page">
       <h1>Research Reports</h1>
       <p>Explore our latest research and insights on DAOs and decentralized governance.</p>
       <div className="research-card-outlay">
-        {researchPapers.map((paper, index) => (
+        {sortedPapers.map((paper, index) => (
           <ResearchCard
             key={index}
             title={paper.title}
