@@ -62,7 +62,6 @@ Grant Pool JSON-LD Schema
             "id": "<The id of the grant pool, in the format above.>",
             "name": "<The name of the grant pool.>",
             "description": "<A description of the grant pool.>",
-            "grantPoolType" : "<OPTIONAL : A text value indicating the type of funding mechanism used for this grant pool>",
             "grantFundingMechanism": "<Enum: Specifies the grant funding mechanism. One of:
                 - 'Direct Grants': Funds allocated directly based on proposal evaluations.
                 - 'Quadratic Funding': Matching funds distributed based on the number of contributors.
