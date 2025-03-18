@@ -160,14 +160,13 @@ Applications JSON-LD Schema
                     "discussionsTo": "<OPTIONAL: A URI pointing to a fixed channel, e.g., a forum discussion thread or messaging chat, where the granter(s), grantee(s), and other stakeholders can discuss the grant.>",
                     "licenseURI": "<OPTIONAL: A URI pointing to the project's open-source license or relevant licensing details>",
                     "isInactive": "<OPTIONAL: A Boolean value to indicate if the project is inactive>",
-                    "submissionCompleteRate": "<OPTIONAL: A Numeric value between 0-100 to indicate the percentage of application completion>",
+                    "applicationCompletionRate": "<OPTIONAL: A numerical percentage value indicating the completion status of the grant application>",
                     "socials": [
                         {
                             "platform": "<Enum value: Twitter | Discord | Telegram | LinkedIn | GitHub | Farcaster | Lens>",
                             "url": "<The URI of the project's profile on the specified platform>"
                         }
                     ],
-                    "applicationCompletionRate": "<OPTIONAL: A percentage value indicating the completion status of the grant application>",
                     "fundsAsked": [
                         {
                             "amount": "<The amount of funding asked>",
