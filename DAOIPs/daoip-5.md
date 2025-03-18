@@ -62,38 +62,38 @@ Grant Pool JSON-LD Schema
             "id": "<The id of the grant pool, in the format above.>",
             "name": "<The name of the grant pool.>",
             "description": "<A description of the grant pool.>",
-            "grantFundingMechanism": "<Enum: Specifies the grant funding mechanism. One of:
-                - 'Direct Grants': Funds allocated directly based on proposal evaluations.
-                - 'Quadratic Funding': Matching funds distributed based on the number of contributors.
-                - 'Streaming Quadratic Funding': Continuous funding using quadratic funding principles.
-                - 'Retro Funding': Grants awarded retrospectively based on demonstrated impact.
-                - 'Conviction Voting': Allocation determined by sustained community conviction.
-                - 'Self-Curated Registries': Decentralized registry where entities stake and register.
-                - 'Gift Circles': Participatory funding where members allocate funds to each other.
-                - 'Social Media-Based Capital Allocation': Funding based on social engagement metrics.
-                - 'Futarchy': Decisions driven by prediction markets forecasting impact.
-                - 'Assurance Contracts': Grants awarded once a collective support threshold is met.
-                - 'Cookie Jar': Micro-grants released upon community-verified contributions.
-                - 'Impact Attestations': Grants based on attestations verifying impact.
-                - 'Stokvel': Rotating cooperative savings and grant distribution.
-                - 'Request for Proposal': Structured proposals solicited for funding.
-                - 'Delegated Domain Allocation': Experts allocate funds instead of general voting.
-                - 'Evolutionary Grants Games': Competitive funding based on milestones.
-                - 'Direct to Contract Incentives': Funds automatically allocated to smart contracts.
-                - 'Angel Investment': Grants modeled after venture capital investments.
-                - 'Dominant Assurance Contracts': Refunds are provided if funding targets aren’t met.
-                - 'Community Currencies': Grants issued as local or community-based tokens.
-                - 'Universal Basic Income': Recurring grant payments for eligible recipients.
-                - 'Bounties': Funding awarded for task completion or competitions.
-                - 'Gnosis Safe': Multi-signature treasury model for grant disbursement.
-                - 'Waqf': Endowment-style perpetual funding.
-                - 'Ranked Choice Voting': Grants allocated using ranked preference voting.
-                - 'Honour': Funding based on reputation and trust systems.
-                - 'Mutual Aid Networks': Community-driven financial support pools.
-                - 'Bonding Curves': Dynamic allocation of funds using bonding curve mechanisms.
-                - 'Zakat': Islamic finance-based charitable funding model.
-                - 'Decentralized Validators': Grants verified and distributed by decentralized validators.
-                - 'Revnets': Revenue-sharing network that funds collaborative projects.>",
+            "grantFundingMechanism": "<REQUIRED: Specifies the grant funding mechanism used for this pool. Enum value:
+                'Direct Grants' (funds allocated directly based on proposal evaluations), 
+                'Quadratic Funding' (matching funds increase with more contributors, not amount), 
+                'Streaming Quadratic Funding' (continuous quadratic funding over time),
+                'Retro Funding' (grants awarded after impact is demonstrated), 
+                'Conviction Voting' (funds allocated based on sustained community support), 
+                'Self-Curated Registries' (decentralized registry where projects stake to be listed), 
+                'Gift Circles' (participants allocate funds to each other in a mutual aid loop), 
+                'Social Media-Based Capital Allocation' (grants based on engagement metrics from social platforms), 
+                'Futarchy' (funding decisions based on prediction markets), 
+                'Assurance Contracts' (grants activated when a funding threshold is reached), 
+                'Cookie Jar' (small payouts released upon community verification), 
+                'Impact Attestations' (funding based on verified attestations of impact), 
+                'Stokvel' (rotating savings and credit model for funding projects), 
+                'Request for Proposal' (structured grant calls where applicants submit proposals), 
+                'Delegated Domain Allocation' (domain-specific experts allocate funding), 
+                'Evolutionary Grants Games' (competitive milestone-based funding mechanism), 
+                'Direct to Contract Incentives' (grants allocated automatically via smart contracts), 
+                'Angel Investment' (funding modeled after early-stage venture capital), 
+                'Dominant Assurance Contracts' (refunds provided if funding goals are not met), 
+                'Community Currencies' (grants issued in local or community-based tokens), 
+                'Universal Basic Income' (recurring grant payments for all eligible members), 
+                'Bounties' (one-time payments for completing specific tasks), 
+                'Gnosis Safe' (multi-signature treasury model for secure fund management), 
+                'Waqf' (perpetual endowment fund based on Islamic finance), 
+                'Ranked Choice Voting' (funds allocated using ranked preference voting), 
+                'Honour' (grants based on trust and reputation systems), 
+                'Mutual Aid Networks' (community-driven financial support pools), 
+                'Bonding Curves' (dynamic funding based on bonding curve economics), 
+                'Zakat' (charitable funding based on Islamic principles), 
+                'Decentralized Validators' (validators verify and allocate funding), 
+                'Revnets' (revenue-sharing networks funding collaborative projects).>",
             "isOpen": <OPTIONAL: A Boolean true/false indicating whether the grant pool is open to or seeking new applications.>,
             "closeDate": "<OPTIONAL: The ISO DateTime at which point the grant pool will stop taking new applications.>",
             "applicationsURI": "<A URI pointing to current and past applications received by the grant pool, following the DAOIP-5 Applications JSON-LD Schema.>",
