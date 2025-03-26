@@ -50,28 +50,65 @@ A grant pool is a smart contract or other fundable object containing funds with 
 
 Unless otherwise noted, all fields in the Grant Pool JSON-LD Schema are REQUIRED. In particular, a grant pool MUST publish an `applicationsURI` field, which is described in more detail in the Applications section, below. If a grant system operates multiple grant pools, they MAY add additional elements to the array below.
 
+### **Recognized Grant Funding Mechanisms**
+The following is the list of **grant funding mechanisms recognized by this standard**. Each grant pool MUST specify its funding mechanism using one of the following standardized methods:
+
+- **Direct Grants** – Funds allocated directly based on proposal evaluations.
+- **Quadratic Funding** – Matching funds increase with more contributors, not amount.
+- **Streaming Quadratic Funding** – Continuous quadratic funding over time.
+- **Retro Funding** – Grants awarded after impact is demonstrated.
+- **Conviction Voting** – Funds allocated based on sustained community support.
+- **Self-Curated Registries** – Decentralized registry where projects stake to be listed.
+- **Gift Circles** – Participants allocate funds to each other in a mutual aid loop.
+- **Social Media-Based Capital Allocation** – Grants based on engagement metrics from social platforms.
+- **Futarchy** – Funding decisions based on prediction markets.
+- **Assurance Contracts** – Grants activated when a funding threshold is reached.
+- **Cookie Jar** – Small payouts released upon community verification.
+- **Impact Attestations** – Funding based on verified attestations of impact.
+- **Stokvel** – Rotating savings and credit model for funding projects.
+- **Request for Proposal (RFP)** – Structured grant calls where applicants submit proposals.
+- **Delegated Domain Allocation** – Domain-specific experts allocate funding.
+- **Evolutionary Grants Games** – Competitive milestone-based funding mechanism.
+- **Direct to Contract Incentives** – Grants allocated automatically via smart contracts.
+- **Angel Investment** – Funding modeled after early-stage venture capital.
+- **Dominant Assurance Contracts** – Refunds provided if funding goals are not met.
+- **Community Currencies** – Grants issued in local or community-based tokens.
+- **Universal Basic Income (UBI)** – Recurring grant payments for all eligible members.
+- **Bounties** – One-time payments for completing specific tasks.
+- **Gnosis Safe** – Multi-signature treasury model for secure fund management.
+- **Waqf** – Perpetual endowment fund based on Islamic finance.
+- **Ranked Choice Voting** – Funds allocated using ranked preference voting.
+- **Honour** – Grants based on trust and reputation systems.
+- **Mutual Aid Networks** – Community-driven financial support pools.
+- **Bonding Curves** – Dynamic funding based on bonding curve economics.
+- **Zakat** – Charitable funding based on Islamic principles.
+- **Decentralized Validators** – Validators verify and allocate funding.
+- **Revnets** – Revenue-sharing networks funding collaborative projects.
+
 Grant Pool JSON-LD Schema
 ```json
 {
     "@context": "http://www.daostar.org/schemas",
-    "name": "<name of the entity>",
-    "type": "<entity type, e.g. DAO or Foundation>",
+    "name": "<REQUIRED: The name of the entity (DAO, Foundation, etc.).>",
+    "type": "<REQUIRED: The entity type, e.g., 'DAO' or 'Foundation'.>",
     "grantPools": [
         {
             "type": "GrantPool",
-            "id": "<The id of the grant pool, in the format above.>",
-            "name": "<The name of the grant pool.>",
-            "description": "<A description of the grant pool.>",
-            "grantPoolType" : "<OPTIONAL : A text value indicating the type of funding mechanism used for this grant pool>"
-            "isOpen": <OPTIONAL: A Boolean true/false indicating whether the grant pool is open to or seeking new applications.>,
-            "closeDate": "<OPTIONAL: The ISO DateTime at which point the grant pool will stop taking new applications.>",
-            "applicationsURI": "<A URI pointing to current and past applications received by the grant pool, following the DAOIP-5 Applications JSON-LD Schema.>",
-            "governanceURI": "<A URI pointing to additional information about the governance, requirements, and criteria for the grant, which SHOULD be a .md file.>",
-            "attestationIssuersURI": "<RECOMMENDED: A URI pointing to a JSON of trusted issuers of attestations and credentials about the grant pool, following the DAOIP-3 Attestation Issuers JSON-LD Schema.>",
-            "requiredCredentials": ["<RECOMMENDED: An array of attestation types, following DAOIP-3 Attestations for DAOs.>"],
-            "email": "<OPTIONAL: A working email address through which the grant pool can respond to inquiries and requests.>",
-            "image": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a square logo.>",
-            "coverImage": "<RECOMMENDED: A URI pointing to a resource with mime type image/*, typically a large, rectangular background image.>"
+            "id": "<REQUIRED: The ID of the grant pool, typically a CAIP-10 identifier.>",
+            "name": "<REQUIRED: The name of the grant pool.>",
+            "description": "<REQUIRED: A description of the grant pool.>",
+            "grantFundingMechanism": "<REQUIRED: Specifies the grant funding mechanism used for this pool. Enum value: 'Direct Grants', 'Quadratic Funding', 'Streaming Quadratic Funding', 'Retro Funding', 'Conviction Voting', 'Self-Curated Registries', 'Gift Circles', 'Social Media-Based Capital Allocation', 'Futarchy', 'Assurance Contracts', 'Cookie Jar', 'Impact Attestations', 'Stokvel', 'Request for Proposal', 'Delegated Domain Allocation', 'Evolutionary Grants Games', 'Direct to Contract Incentives', 'Angel Investment', 'Dominant Assurance Contracts', 'Community Currencies', 'Universal Basic Income', 'Bounties', 'Gnosis Safe', 'Waqf', 'Ranked Choice Voting', 'Honour', 'Mutual Aid Networks', 'Bonding Curves', 'Zakat', 'Decentralized Validators', 'Revnets'>",
+            "isOpen": "<REQUIRED: Boolean value. 'true' if the grant pool is open to applications, 'false' if closed.>",
+            "closeDate": "<OPTIONAL: The ISO 8601 date-time when the grant pool stops taking applications, e.g., '2025-12-31T23:59:59Z'.>",
+            "applicationsURI": "<RECOMMENDED: A URI pointing to current and past applications received by the grant pool.>",
+            "governanceURI": "<RECOMMENDED: A URI pointing to governance details, requirements, and criteria. Typically a .md file.>",
+            "attestationIssuersURI": "<OPTIONAL: A URI pointing to JSON data listing trusted attestation issuers for the grant pool.>",
+            "requiredCredentials": [
+                "<OPTIONAL: An array of attestation types required for applicants, e.g., 'IdentityVerification', 'DAOContributor'.>"
+            ],
+            "email": "<OPTIONAL: A contact email for inquiries and support, e.g., 'grants@example.com'.>",
+            "image": "<OPTIONAL: A URI pointing to an image resource (e.g., grant pool logo). Typically a square image.>",
+            "coverImage": "<OPTIONAL: A URI pointing to a large background image for the grant pool.>"
         }
     ]
 }
