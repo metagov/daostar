@@ -106,6 +106,12 @@ Grant Pool JSON-LD Schema
             "requiredCredentials": [
                 "<OPTIONAL: An array of attestation types required for applicants, e.g., 'IdentityVerification', 'DAOContributor'.>"
             ],
+            "totalGrantPoolSize": [
+                        {
+                            "amount": "<The total amount of funding for the grant pool>",
+                            "denomination": "<The denomination of currency>"
+                        }
+            ],
             "email": "<OPTIONAL: A contact email for inquiries and support, e.g., 'grants@example.com'.>",
             "image": "<OPTIONAL: A URI pointing to an image resource (e.g., grant pool logo). Typically a square image.>",
             "coverImage": "<OPTIONAL: A URI pointing to a large background image for the grant pool.>"
@@ -238,12 +244,6 @@ Applications JSON-LD Schema
                             "proof": "<Evidence of the payout, such as a transaction hash, payment ID, or a link to verify the payout>"
                         }
                     ],
-                    "totalGrantPoolSize": [
-                        {
-                            "amount": "<The total amount of funding for the grant pool>",
-                            "denomination": "<The denomination of currency>"
-                        }
-                    ]
                 }
             ]
         }
