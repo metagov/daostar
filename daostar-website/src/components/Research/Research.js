@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Card, Button, Divider } from "@blueprintjs/core";
 import './DAOstarResearch.css';
+import EmailSignupModal from "../EmailSignUpModal/emailSignUpModal";
 
 const trackPdfInteraction = (title, language) => {
   if (window.gtag) {
@@ -11,12 +12,10 @@ const trackPdfInteraction = (title, language) => {
   }
 };
 
-const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage }) => {
+const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage, onRequestAccess }) => {
   const handlePdfClick = useCallback(() => {
-    const currentLanguage = languageOptions ? languageOptions.current : 'default';
-    trackPdfInteraction(title, currentLanguage);
-    window.open(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl, '_blank');
-  }, [title, pdfUrl, languageOptions]);
+    onRequestAccess(title, pdfUrl, languageOptions ? languageOptions.current : null);
+  }, [title, pdfUrl, languageOptions, onRequestAccess]);
 
   return (
     <Card className="research-card">
@@ -59,6 +58,27 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
 const Research = () => {
   const [taiwanLanguage, setTaiwanLanguage] = useState("Mandarin");
   const [koreaLanguage, setKoreanLanguage] = useState("Korean");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedReport, setSelectedReport] = useState(null);
+
+  const handleRequestAccess = (title, pdfUrl, language) => {
+    setSelectedReport({ title, pdfUrl, language });
+    setModalOpen(true);
+  };
+
+  const handleModalSubmit = (email) => {
+    // Simulate sending the report link to the user's email
+    console.log(`Sending report "${selectedReport.title}" to email: ${email}`);
+    setModalOpen(false);
+
+    // Optionally, you can integrate an API call here to send the email
+    // Example:
+    // fetch('/api/send-report', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ email, report: selectedReport })
+    // });
+  };
 
   const researchPapers = [
     {
@@ -148,9 +168,16 @@ const Research = () => {
                 ? setKoreanLanguage
                 : null
             }
+            onRequestAccess={handleRequestAccess}
           />
         ))}
       </div>
+      <EmailSignupModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleModalSubmit}
+        reportTitle={selectedReport?.title}
+      />
     </div>
   );
 };
