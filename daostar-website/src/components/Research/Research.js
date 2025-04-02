@@ -67,17 +67,32 @@ const Research = () => {
   };
 
   const handleModalSubmit = (email) => {
-    // Simulate sending the report link to the user's email
-    console.log(`Sending report "${selectedReport.title}" to email: ${email}`);
-    setModalOpen(false);
+    if (!selectedReport) return;
 
-    // Optionally, you can integrate an API call here to send the email
-    // Example:
-    // fetch('/api/send-report', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, report: selectedReport })
-    // });
+    fetch("http://localhost:53644/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        title: selectedReport.title,
+        pdfUrl: selectedReport.pdfUrl[selectedReport.language] || selectedReport.pdfUrl,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Email sent successfully!");
+          alert("The report has been sent to your email.");
+        } else {
+          console.error("Failed to send email.");
+          alert("Failed to send the email. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again.");
+      });
+
+    setModalOpen(false);
   };
 
   const researchPapers = [
