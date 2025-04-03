@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@8.15.4",
   "engines": {
-    "node": "16.13.1"
+  "node": "16.17.0"
   },
   "proxy": "https://api.daostar.org/",
   "homepage": "http://daostar.org",
