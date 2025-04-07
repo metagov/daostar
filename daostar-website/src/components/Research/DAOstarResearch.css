@@ -159,7 +159,64 @@
   margin: 0px 40px;
 }
 
-/* Adjustments for responsiveness */
+/* Email Signup Modal Styling */
+.email-signup-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: black!;
+  width: 400px;
+  max-width: 90%;
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.email-signup-modal .bp4-dialog-body {
+  margin-bottom: 16px;
+}
+
+.email-signup-modal h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.email-signup-modal p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.email-signup-modal .bp4-input-group {
+  margin-bottom: 16px;
+}
+
+.email-signup-modal .bp4-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.email-signup-modal .bp4-button {
+  padding: 8px 16px;
+}
+
+.email-signup-modal .bp4-button.bp4-intent-primary {
+  background-color: rgba(66, 142, 255, 1);
+  color:yellow;
+  border-color: rgba(66, 142, 255, 1);
+}
+
+.email-signup-modal .bp4-button:hover {
+  background-color: rgba(212, 221, 235, 0.9);
+}
+
+/* Responsive adjustments for smaller screens */
 @media (max-width: 950px) {
   .explore-page {
       max-width: 80%;
@@ -178,5 +235,18 @@
 
   .research-card-outlay {
       grid-template-columns: 1fr;
+  }
+
+  .email-signup-modal {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .email-signup-modal h2 {
+    font-size: 18px;
+  }
+
+  .email-signup-modal p {
+    font-size: 13px;
   }
 }
