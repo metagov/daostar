@@ -62,6 +62,12 @@ const Research = () => {
 
   const researchPapers = [
     {
+      title: "Towards a DAO ID",
+      description: "An exploration of extending the daoURI identity model to a more robust model based on daoID.",
+      pdfUrl: "/reports/daoid.pdf",
+      date: "April 2024",
+    },
+    {
       title: "The DAO Policy Trilemma",
       description: "An exploration of the policy challenges faced by DAOs, proposing potential solutions.",
       pdfUrl: "/reports/trilemma.pdf",
