@@ -21,6 +21,9 @@
     "create-react-app": "^5.0.1"
   },
   "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "mailgun-js": "^0.22.0",
     "pdfjs-dist": "^4.9.155",
     "react-pdf": "^9.1.1"
   }

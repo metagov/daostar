@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Card, Button, Divider } from "@blueprintjs/core";
 import './DAOstarResearch.css';
+import EmailSignupModal from "../EmailSignUpModal/emailSignUpModal";
 
 const trackPdfInteraction = (title, language) => {
   if (window.gtag) {
@@ -11,12 +12,10 @@ const trackPdfInteraction = (title, language) => {
   }
 };
 
-const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage }) => {
+const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLanguage, onRequestAccess }) => {
   const handlePdfClick = useCallback(() => {
-    const currentLanguage = languageOptions ? languageOptions.current : 'default';
-    trackPdfInteraction(title, currentLanguage);
-    window.open(languageOptions ? pdfUrl[languageOptions.current] : pdfUrl, '_blank');
-  }, [title, pdfUrl, languageOptions]);
+    onRequestAccess(title, pdfUrl, languageOptions ? languageOptions.current : null);
+  }, [title, pdfUrl, languageOptions, onRequestAccess]);
 
   return (
     <Card className="research-card">
@@ -59,6 +58,42 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
 const Research = () => {
   const [taiwanLanguage, setTaiwanLanguage] = useState("Mandarin");
   const [koreaLanguage, setKoreanLanguage] = useState("Korean");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedReport, setSelectedReport] = useState(null);
+
+  const handleRequestAccess = (title, pdfUrl, language) => {
+    setSelectedReport({ title, pdfUrl, language });
+    setModalOpen(true);
+  };
+
+  const handleModalSubmit = (email) => {
+    if (!selectedReport) return;
+
+    fetch("http://localhost:53644/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        title: selectedReport.title,
+        pdfUrl: selectedReport.pdfUrl[selectedReport.language] || selectedReport.pdfUrl,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Email sent successfully!");
+          alert("The report has been sent to your email.");
+        } else {
+          console.error("Failed to send email.");
+          alert("Failed to send the email. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again.");
+      });
+
+    setModalOpen(false);
+  };
 
   const researchPapers = [
     {
@@ -154,9 +189,16 @@ const Research = () => {
                 ? setKoreanLanguage
                 : null
             }
+            onRequestAccess={handleRequestAccess}
           />
         ))}
       </div>
+      <EmailSignupModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={handleModalSubmit}
+        reportTitle={selectedReport?.title}
+      />
     </div>
   );
 };
