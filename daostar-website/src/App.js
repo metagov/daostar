@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RegistrationLeanPage from "./components/RegistrationPage/RegistrationLeanPage";
 import SchemaPage from "./components/SchemaPage/schemaPage";
-import Research from "./components/Research/Research";
+import Research from "./components/ResearchPage/researchPage";
 import GoogleAnalytics from './components/GoogleAnalytics/GoogleAnalytics';
 
 const mainnetOldClient = new ApolloClient({
