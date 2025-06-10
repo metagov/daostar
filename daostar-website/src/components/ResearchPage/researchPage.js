@@ -302,6 +302,19 @@ const ProgramsSection = () => {
 // Fellows Section
 // ===============================
 
+const SeasonDescription = ({ season, dateRange, theme, description }) => {
+  return (
+    <div className="season-description">
+      <h3 className="season-title">{season}</h3>
+      <div className="season-info">
+        <p className="season-date">{dateRange}</p>
+        <p className="season-theme">{theme}</p>
+      </div>
+      <p className="season-description-text">{description}</p>
+    </div>
+  );
+};
+
 const FellowCard = ({ name, imagePath }) => {
   return (
     <Card className="fellow-card">
@@ -330,7 +343,12 @@ const FellowsSection = () => {
       <h1>Our Researchers</h1>
       <p>Meet our talented Researchers who are driving innovation in DAO governance and decentralized systems.</p>
 
-      <h3 className="season-title">Season 1 Research Fellows</h3>
+      <SeasonDescription 
+        season="DAOstar Fellowship Season 1"
+        dateRange="April – July 2025"
+        theme="DAO Governance and Social Dynamics"
+        description="This fellowship supported a cohort of researchers exploring the evolving nature of DAOs — from token unlock mechanisms and contributor stratification to legal recognition and regional DAO developments. The program highlighted DAOs as social, legal, and economic experiments, with fellows contributing original research to inform the future of digital governance."
+      />
       <div className="fellows-grid">
         {season1Fellows.map((fellow, index) => (
           <FellowCard 
@@ -341,7 +359,12 @@ const FellowsSection = () => {
         ))}
       </div>
       
-      <h3 className="season-title">Season 0 Research Fellows</h3>
+      <SeasonDescription 
+        season="DAOstar Fellowship Season 0"
+        dateRange="April – December 2024"
+        theme="The State of DAOs in Asia"
+        description="This inaugural research fellowship focused on understanding the unique cultural, regulatory, and social dynamics shaping DAO ecosystems across Asia. The series featured region-specific reports authored by local experts and aimed to deepen global insight into decentralized governance in countries like Japan, Singapore, Taiwan, and Korea."
+      />
       <div className="fellows-grid">
         {season0Fellows.map((fellow, index) => (
           <FellowCard 

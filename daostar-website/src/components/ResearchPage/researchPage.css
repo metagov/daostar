@@ -48,8 +48,40 @@
   line-height: 2em;
   font-weight: 500;
   text-transform: uppercase;
-  margin: 32px 0 16px;
+  margin: 32px 0 8px;
   text-align: left;
+}
+
+/* Season Description Styling */
+.season-description {
+  margin-bottom: 24px;
+}
+
+.season-info {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.season-date {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  margin-right: 16px;
+}
+
+.season-theme {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--clr-light);
+}
+
+.season-description-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  color: var(--clr-light);
+  max-width: 90%;
 }
 
 @media (max-width: 950px) {
