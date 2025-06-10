@@ -6,6 +6,46 @@ import './researchPage.css';
 // Data
 // ===============================
 
+// Research Programs Data
+const researchPrograms = [
+  {
+    title: "Research Collaborator",
+    description: "Join our inclusive community of researchers working on DAO-related topics",
+    bulletPoints: [
+      "Join our Slack community",
+      "Participate in regular research collaboration calls",
+      "Share ideas and collaborate with other researchers"
+    ],
+    buttonText: "Join DAOstar Slack",
+    buttonLink: "https://join.slack.com/t/daostar/shared_invite/zt-33cyohbj4-Tk0COtKWTl7I3pu~YmHepw",
+    disabled: false
+  },
+  {
+    title: "Research Contributor",
+    description: "Earn recognition for your research by publishing with DAOstar",
+    bulletPoints: [
+      "Submit and publish research papers",
+      "Get recognized as a DAOstar Research Contributor",
+      "Join a network of DAO researchers and practitioners"
+    ],
+    buttonText: "Submit Contributor Application",
+    buttonLink: "https://forms.gle/cLZXbWKkufRKJEMX7",
+    disabled: false
+  },
+  {
+    title: "Research Fellow",
+    description: "Our intensive fellowship program for researchers who want to shape the future of DAO research",
+    bulletPoints: [
+      "Participate in a dedicated fellowship program",
+      "Collaborate with other fellows on research",
+      "Publish research with DAOstar"
+    ],
+    buttonText: "Next Season Coming Soo!",
+    buttonLink: "#",
+    disabled: true
+  }
+];
+
 // Research Papers Data
 const researchPapers = [
   {
@@ -85,7 +125,7 @@ const season1Fellows = [
   { name: "Ben Biedermann", imagePath: "/researchers/ben.jpg" },
   { name: "Jillian Grennan", imagePath: "/researchers/jillian.png" },
   { name: "Ryan Peters", imagePath: "/researchers/ryan.png" },
-  { name: "Teije Hidde Donker (7Cedars)", imagePath: "/researchers/teije.jpg" },
+  { name: "Teije Hidde Donker", imagePath: "/researchers/teije.jpg" },
   { name: "Marcus Khoo", imagePath: "/researchers/marcus.jpg" },
   { name: "Sneha Vijayan", imagePath: "/researchers/sneha.jpg" }
 ];
@@ -195,6 +235,70 @@ const ReportsSection = () => {
 };
 
 // ===============================
+// Research Programs Section
+// ===============================
+
+const ProgramCard = ({ title, description, bulletPoints, buttonText, buttonLink, disabled }) => {
+  const handleButtonClick = useCallback(() => {
+    if (!disabled && buttonLink) {
+      window.open(buttonLink, '_blank');
+    }
+  }, [buttonLink, disabled]);
+
+  return (
+    <Card className="research-card program-card">
+      <h3 className="card-title">{title}</h3>
+      <Divider />
+      <div className="card-content">
+        <div className="card-description-container">
+          <p className="card-description">{description}</p>
+          <ul className="program-bullet-points">
+            {bulletPoints.map((point, index) => (
+              <li key={index}>{point}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <Divider />
+      <div className="action-buttons">
+        {disabled ? (
+          <div className="coming-soon-text">Coming Soon</div>
+        ) : (
+          <Button
+            className="primary view-pdf-btn"
+            onClick={handleButtonClick}
+          >
+            {buttonText}
+          </Button>
+        )}
+      </div>
+    </Card>
+  );
+};
+
+const ProgramsSection = () => {
+  return (
+    <div className="programs-section">
+      <h1>Research Programs</h1>
+      <p>Join our research community and contribute to the advancement of DAO knowledge and practices.</p>
+      <div className="research-card-outlay">
+        {researchPrograms.map((program, index) => (
+          <ProgramCard
+            key={index}
+            title={program.title}
+            description={program.description}
+            bulletPoints={program.bulletPoints}
+            buttonText={program.buttonText}
+            buttonLink={program.buttonLink}
+            disabled={program.disabled}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ===============================
 // Fellows Section
 // ===============================
 
@@ -259,6 +363,8 @@ const Research = () => {
   return (
     <div className="explore-page">
       <ReportsSection />
+      <Divider className="section-divider" />
+      <ProgramsSection />
       <Divider className="section-divider" />
       <FellowsSection />
     </div>
