@@ -17,13 +17,15 @@
 }
 
 .reports-section,
-.fellows-section {
+.fellows-section,
+.programs-section {
   width: 100%;
   margin-top: 40px;
 }
 
 .reports-section h1,
-.fellows-section h1 {
+.fellows-section h1,
+.programs-section h1 {
   font-size: 2.5rem;
   line-height: 2.5rem;
   font-weight: normal;
@@ -32,7 +34,8 @@
 }
 
 .reports-section > p,
-.fellows-section > p {
+.fellows-section > p,
+.programs-section > p {
   font-size: 1.2rem;
   line-height: 2rem;
   text-align: center;
@@ -45,8 +48,40 @@
   line-height: 2em;
   font-weight: 500;
   text-transform: uppercase;
-  margin: 32px 0 16px;
+  margin: 32px 0 8px;
   text-align: left;
+}
+
+/* Season Description Styling */
+.season-description {
+  margin-bottom: 24px;
+}
+
+.season-info {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.season-date {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  margin-right: 16px;
+}
+
+.season-theme {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--clr-light);
+}
+
+.season-description-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  color: var(--clr-light);
+  max-width: 90%;
 }
 
 @media (max-width: 950px) {
@@ -70,6 +105,35 @@
   justify-content: space-between;
   padding: 16px;
   overflow: hidden;
+  position: relative;
+}
+
+.clickable-card-area {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 4px;
+}
+
+.clickable-card-area:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.clickable-card-area::after {
+  content: "→";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.clickable-card-area:hover::after {
+  color: rgba(66, 142, 255, 1);
+  transform: translateX(3px);
 }
 
 .card-title {
@@ -106,10 +170,31 @@
   max-height: 4.8em; /* Approximate height for 4 lines */
 }
 
+.secondary {
+  border: 2px solid rgba(66, 142, 255, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: rgba(66, 142, 255, 0.3);
+}
+
 .secondary.active {
-  background-color:  rgba(66, 142, 255, 1);
+  background-color: rgba(66, 142, 255, 1);
   color: white;
   border-color: rgba(66, 142, 255, 1);
+  box-shadow: 0 2px 8px rgba(66, 142, 255, 0.5);
+}
+
+.secondary.active:hover {
+  background-color: rgba(77, 153, 255, 1); /* Slightly lighter blue */
+  box-shadow: 0 4px 10px rgba(66, 142, 255, 0.7);
+  transform: translateY(-2px);
 }
 
 .bp4-text-small {
@@ -130,20 +215,49 @@
 .button-group {
   display: flex;
   gap: 8px;
+  z-index: 5;
+  position: relative;
 }
 
 .action-buttons {
   display: flex;
-  justify-content: space-between; /* Space between language buttons and View PDF button */
+  justify-content: center; /* Center buttons horizontally */
   align-items: center; /* Align buttons vertically */
   margin-top: 16px;
+  position: relative;
 }
+
 
 .view-pdf-btn {
   padding: 8px 16px;
-  margin-left: auto; /* Push the View PDF button to the far right */
 }
 
+/* Program Card Styling */
+.program-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.program-bullet-points {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 12px 0 0 0;
+}
+
+.program-bullet-points li {
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.coming-soon-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  text-align: center;
+  padding: 8px 16px;
+}
 
 /* Modal styling for PDF viewer */
 .pdf-modal {
