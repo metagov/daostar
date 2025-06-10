@@ -156,14 +156,16 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
 
   return (
     <Card className="research-card">
-      <h3 className="card-title">{title}</h3>
-      <Divider />
-      <div className="card-content">
-        <div className="card-description-container">
-          <p className="card-description">{description}</p>
-          <p className="bp4-text-small">
-            <span className="bp4-text-muted">Published: </span>{date}
-          </p>
+      <div className="clickable-card-area" onClick={handlePdfClick}>
+        <h3 className="card-title">{title}</h3>
+        <Divider />
+        <div className="card-content">
+          <div className="card-description-container">
+            <p className="card-description">{description}</p>
+            <p className="bp4-text-small">
+              <span className="bp4-text-muted">Published: </span>{date}
+            </p>
+          </div>
         </div>
       </div>
       <Divider />
@@ -174,19 +176,16 @@ const ResearchCard = ({ title, description, pdfUrl, date, languageOptions, setLa
               <Button
                 key={lang}
                 className={`secondary ${languageOptions.current === lang ? "active" : ""}`}
-                onClick={() => setLanguage(lang)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent card click when language button is clicked
+                  setLanguage(lang);
+                }}
               >
                 {lang}
               </Button>
             ))}
           </div>
         )}
-        <Button
-          className="primary view-pdf-btn"
-          onClick={handlePdfClick}
-        >
-          View PDF
-        </Button>
       </div>
     </Card>
   );
