@@ -7,6 +7,7 @@ import hand from '../../img/hand_final.png';
 import cube from '../../img/cube.png';
 import metagovSVG from '../../img/metagov.svg';
 import MemberLogos from './MemberLogos/MemberLogos';
+import SEO from '../SEO/SEO';
 
 import Eye from './Eye/Eye';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,12 @@ const Homepage = ({registrationInstances}) => {
         })
 
     return (
-        <div>				
+        <div>
+            <SEO 
+                title="DAOstar | The DAO Standard"
+                description="DAOstar defines a common interface for DAOs, making them easier to discover, more legible to members, and more compatible with future tooling."
+                image="https://daostar.org/img/daostar.png"
+            />
             <div className="parallax--wrapper">
                 <div id="mesh" className="parallax parallax--minus2"><img src={mesh}/></div>
                 <div id="hand" className="parallax parallax--minus1"><img src={hand} /></div>
@@ -266,4 +272,3 @@ const Homepage = ({registrationInstances}) => {
 }
 
 export default Homepage;
-

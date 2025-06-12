@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RegistrationLeanCard from '../RegistrationCard/RegistrationLeanCard';
 import queries from '../ExplorePage/queries/registrations';
+import SEO from '../SEO/SEO';
 
 const RegistrationLeanPage = () => {
     const { regID } = useParams();
@@ -48,6 +49,11 @@ const RegistrationLeanPage = () => {
 
     return (
         <div className="centered-wizard">
+            <SEO 
+                title={`${dataRegInstance.registrationInstance.daoName || 'DAO Registration'} | DAOstar`}
+                description={dataRegInstance.registrationInstance.daoDescription || 'View details about this DAO registration on DAOstar.'}
+                image="https://daostar.org/img/daostar.png"
+            />
             <RegistrationLeanCard
                 contractAddress={dataRegInstance.registrationInstance.daoAddress}
                 standalone={true}

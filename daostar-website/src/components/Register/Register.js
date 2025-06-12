@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '@blueprintjs/core';
 import RegistrationForm from './RegistrationForm/RegistrationForm';
 import RegistrationReceived from './RegistrationReceived/RegistrationReceived';
+import SEO from '../SEO/SEO';
 import './Register.css';
 
 const mockRegistrationData = {
@@ -27,6 +28,11 @@ const Register = (props) => {
 
     return (
         <div>
+            <SEO 
+                title="Register Your DAO | DAOstar"
+                description="Register your DAO with the DAOstar standard to make it more discoverable and compatible with the broader DAO ecosystem."
+                image="https://daostar.org/img/daostar.png"
+            />
             <div className='centered-wizard'>
                 <Card className='wizard-card'>
                     {registrationScreen === 'REGISTER' && (

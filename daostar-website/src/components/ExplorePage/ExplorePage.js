@@ -6,6 +6,7 @@ import "./ExplorePage.css";
 import { InputGroup, Button } from "@blueprintjs/core";
 import { filterEASbyAttester, filterEASbyId } from "../FilterRegistrations/Filter_Registrations_By_Id";
 import RegistrationCard from "../RegistrationCard/RegistrationCard";
+import SEO from "../SEO/SEO";
 
 // Prelimnary check filter, if a DAO has no name, it won't be displayed
 export const filterRegistrations = (registration, filterVal = "") => {
@@ -255,6 +256,11 @@ const ExplorePage = ({
 
   return (
     <div className="explore-page">
+      <SEO 
+        title="Explore DAOs | DAOstar"
+        description="Explore DAOs from various networks that implement the DAOstar standard, making them easier to discover and interact with."
+        image="https://daostar.org/img/daostar.png"
+      />
       <div className="filter">
         <InputGroup
           large

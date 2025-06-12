@@ -7,6 +7,7 @@ import ExplorePage from "./components/ExplorePage/ExplorePage";
 import { WagmiConfig,createConfig } from "wagmi";
 import { mainnet, optimism, sepolia, optimismSepolia, arbitrum, bscTestnet } from "wagmi/chains";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { HelmetProvider } from "react-helmet-async";
 import { useQuery } from "@apollo/client";
 import registrationIdsToFilter from "./components/FilterRegistrations/Filter_Registrations_By_Id";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
@@ -413,7 +414,8 @@ console.log(mainnetData);
           hideQuestionMarkCTA: true,
         }}
       >
-        <div className="App">
+        <HelmetProvider>
+          <div className="App">
           <GoogleAnalytics />
           <TopNavigation />
           {/* <Homepage /> */}
@@ -455,7 +457,8 @@ console.log(mainnetData);
               }}
             />
           </Routes>
-        </div>
+          </div>
+        </HelmetProvider>
       </ConnectKitProvider>
     </WagmiConfig>
   );
