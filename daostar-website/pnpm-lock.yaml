@@ -104,6 +104,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.3.1(react@18.3.1)
+  react-helmet-async:
+    specifier: ^2.0.5
+    version: 2.0.5(react@18.3.1)
   react-is:
     specifier: ^19.0.0
     version: 19.0.0
@@ -3764,8 +3767,8 @@ packages:
       zustand: 3.7.2(react@18.3.1)
     dev: false
 
-  /@react-three/fiber@9.1.1(@types/react@18.3.14)(react-dom@18.3.1)(react@18.3.1)(three@0.148.0):
-    resolution: {integrity: sha512-S0De6e7xnlZd2QmnBm2rZVXxlknynCSAoCW1M8fF2yH93Q/cra3xwH8rAq4CMqNARsotbZSU/eNPGY/rdQaAhA==}
+  /@react-three/fiber@9.1.2(@types/react@18.3.14)(react-dom@18.3.1)(react@18.3.1)(three@0.148.0):
+    resolution: {integrity: sha512-k8FR9yVHV9kIF3iuOD0ds5hVymXYXfgdKklqziBVod9ZEJ8uk05Zjw29J/omU3IKeUfLNAIHfxneN3TUYM4I2w==}
     peerDependencies:
       expo: '>=43.0'
       expo-asset: '>=8.4'
@@ -10773,6 +10776,12 @@ packages:
       hasown: 2.0.2
       side-channel: 1.0.6
 
+  /invariant@2.2.4:
+    resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
   /io-ts@1.10.4:
     resolution: {integrity: sha512-b23PteSnYXSONJ6JQXRAlvJhuw8KOtkqa87W4wDtvMrud/DTJd5X+NpOOI+O/zZwVq6v0VLAaJ+1EDViKEuN9g==}
     dependencies:
@@ -15007,6 +15016,17 @@ packages:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
     dev: false
 
+  /react-helmet-async@2.0.5(react@18.3.1):
+    resolution: {integrity: sha512-rYUYHeus+i27MvFE+Jaa4WsyBKGkL6qVgbJvSBoX8mbsWoABJXdEO0bZyi0F6i+4f0NuIb8AvqPMj3iXFHkMwg==}
+    peerDependencies:
+      react: ^16.6.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      invariant: 2.2.4
+      react: 18.3.1
+      react-fast-compare: 3.2.2
+      shallowequal: 1.1.0
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -15266,7 +15286,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@react-three/fiber': 9.1.1(@types/react@18.3.14)(react-dom@18.3.1)(react@18.3.1)(three@0.148.0)
+      '@react-three/fiber': 9.1.2(@types/react@18.3.14)(react-dom@18.3.1)(react@18.3.1)(three@0.148.0)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       three: 0.148.0

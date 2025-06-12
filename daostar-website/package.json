@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@8.15.4",
   "engines": {
-  "node": "16.17.0"
+    "node": "16.17.0"
   },
   "proxy": "https://api.daostar.org/",
   "homepage": "http://daostar.org",
@@ -42,6 +42,7 @@
     "pdfjs-dist": "^3.4.120",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
     "react-is": "^19.0.0",
     "react-pdf": "^9.1.1",
     "react-router-dom": "^6.4.2",

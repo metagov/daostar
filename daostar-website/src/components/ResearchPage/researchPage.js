@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Card, Button, Divider } from "@blueprintjs/core";
+import SEO from "../SEO/SEO";
 import './researchPage.css';
 
 // ===============================
@@ -384,6 +385,11 @@ const FellowsSection = () => {
 const Research = () => {
   return (
     <div className="explore-page">
+      <SEO 
+        title="Research | DAOstar"
+        description="Explore DAOstar's research reports, programs, and meet our researchers who are driving innovation in DAO governance and decentralized systems."
+        image="https://daostar.org/img/daostar.png"
+      />
       <ReportsSection />
       <Divider className="section-divider" />
       <ProgramsSection />
