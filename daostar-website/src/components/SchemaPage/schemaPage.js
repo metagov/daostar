@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Button } from '@blueprintjs/core';
-import SEO from '../SEO/SEO';
 import './schemaPage.css';
 const SchemaPage = (props) => {
 
     return (
         <div>
-            <SEO 
-                title="DAO Schemas | DAOstar"
-                description="DAOIP Schemas standardize metadata for DAOs, making it easier to manage governance, activity logs, and proposals in a transparent and interoperable manner."
-                image="https://daostar.org/img/daostar.png"
-            />
             {/* Schema Card */}
             <div className='centered-wizard'>
                 <Card className='wizard-card' >

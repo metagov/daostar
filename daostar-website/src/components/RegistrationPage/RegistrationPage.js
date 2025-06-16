@@ -4,7 +4,6 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import RegistrationCard from '../RegistrationCard/RegistrationCard'
 import queries from '../ExplorePage/queries/registrations'
-import SEO from '../SEO/SEO'
 
 const RegistrationPage = ({}) => {
     const { regID } = useParams()
@@ -32,11 +31,6 @@ const RegistrationPage = ({}) => {
 
     return (
         <div className="centered-wizard">
-            <SEO 
-                title={`${data.registrationInstance.daoName || 'DAO Registration'} | DAOstar`}
-                description={data.registrationInstance.daoDescription || 'View details about this DAO registration on DAOstar.'}
-                image="https://daostar.org/img/daostar.png"
-            />
             <RegistrationCard contractAddress={data.registrationInstance.daoAddress} standalone={true} {...data.registrationInstance} />
             <div
                 className="wizard-center"

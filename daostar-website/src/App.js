@@ -414,7 +414,6 @@ console.log(mainnetData);
           hideQuestionMarkCTA: true,
         }}
       >
-        <HelmetProvider>
           <div className="App">
           <GoogleAnalytics />
           <TopNavigation />
@@ -458,7 +457,6 @@ console.log(mainnetData);
             />
           </Routes>
           </div>
-        </HelmetProvider>
       </ConnectKitProvider>
     </WagmiConfig>
   );
