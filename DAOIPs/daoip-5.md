@@ -34,8 +34,11 @@ While eligibility and compliance flows (including KYC) are important in grants s
 ![](https://green-beautiful-basilisk-157.mypinata.cloud/ipfs/QmUJWUd25iybU3qXxM6ATAnXmvv3pGQ6bEPLubuLDYqoh3)
 
 ### Extensions Field
-All DAOIP-5 schema components support an optional extensions field for implementation-specific metadata, experimental features, and custom data that extends beyond the core specification. This field enables platform-specific innovations while maintaining interoperability.
+All DAOIP-5 schema components support an optional extensions field for implementation-specific metadata, experimental features, and custom data that extends beyond the core specification. 
+This field enables platform-specific innovations while maintaining interoperability.
+
 The extensions field MUST be a JSON object when present and SHOULD follow established naming conventions (vendor-specific prefixes, experimental x- prefixes) to avoid conflicts. Extension fields MUST NOT override core DAOIP-5 fields.
+
 For detailed guidelines, naming conventions, examples, and security considerations, see the [DAOIP-5 Extensions Field Specification](x-daoip-5.md)
 
 ## Grants systems
