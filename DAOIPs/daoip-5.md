@@ -33,6 +33,11 @@ While eligibility and compliance flows (including KYC) are important in grants s
 
 ![](https://green-beautiful-basilisk-157.mypinata.cloud/ipfs/QmUJWUd25iybU3qXxM6ATAnXmvv3pGQ6bEPLubuLDYqoh3)
 
+### Extensions Field
+All DAOIP-5 schema components support an optional extensions field for implementation-specific metadata, experimental features, and custom data that extends beyond the core specification. This field enables platform-specific innovations while maintaining interoperability.
+The extensions field MUST be a JSON object when present and SHOULD follow established naming conventions (vendor-specific prefixes, experimental x- prefixes) to avoid conflicts. Extension fields MUST NOT override core DAOIP-5 fields.
+For detailed guidelines, naming conventions, examples, and security considerations, see the (DAOIP-5 Extensions Field Specification)[./x-daoip-5.md]
+
 ## Grants systems
 A grants system represents the top-level governance or administration of a grant pool or grant program, typically identified as an organization such as a foundation or DAO. All organizations and entities adopting DAOIP-5, even those not deployed or organized as DAOs, MUST publish a daoURI with the additional field `grantPoolsURI` either via DAOIP-2 or through a trusted issuer via DAOIP-3. This bootstraps indexing and discovery of grant pools via the existing on-chain indexing infrastructure for daoURI.
 
@@ -42,6 +47,7 @@ A grants system represents the top-level governance or administration of a grant
     "name": "<The name of the entity.>",
     "type": "<The entity type, e.g. DAO or Foundation.>",
     "grantPoolsURI": "<A URI pointing to a JSON declaring any grant pools maintained by the entity, following the DAOIP-5 Grant Pool JSON-LD Schema.>",
+    "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
 }
 ```
 
@@ -115,6 +121,7 @@ Grant Pool JSON-LD Schema
             "email": "<OPTIONAL: A contact email for inquiries and support, e.g., 'grants@example.com'.>",
             "image": "<OPTIONAL: A URI pointing to an image resource (e.g., grant pool logo). Typically a square image.>",
             "coverImage": "<OPTIONAL: A URI pointing to a large background image for the grant pool.>"
+            "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
         }
     ]
 }
@@ -164,6 +171,7 @@ Projects JSON-LD Schema
                 "value":  "<An URI of the social platform profile of the project"
                 } 
             ]
+        "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
         }
     ]
 }
@@ -244,6 +252,8 @@ Applications JSON-LD Schema
                             "proof": "<Evidence of the payout, such as a transaction hash, payment ID, or a link to verify the payout>"
                         }
                     ],
+                    "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
+
                 }
             ]
         }
