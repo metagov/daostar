@@ -6,7 +6,7 @@ discussions-to: https://github.com/metagov/daostar/discussions/51
 status: Draft
 type: 
 category: 
-author: Joshua Tan <josh@metagov.org>, Tyler Sullberg <tysullberg@gmail.com>, Eugene Leventhal <eugene@metagov.org>, Kevin Olsen <kevinolsen@gitcoin.co>, Riccardo Lamanna
+author: Joshua Tan <josh@metagov.org>, Tyler Sullberg <tysullberg@gmail.com>, Eugene Leventhal <eugene@metagov.org>, Kevin Olsen <kevinolsen@gitcoin.co>, Riccardo Lamanna , Rashmi V Abbigeri <rashmi@metagov.org>
 created: 2023-11-14
 ---
 
