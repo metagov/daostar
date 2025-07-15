@@ -118,11 +118,17 @@ Members JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement 
 
 For example, for an address on Ethereum Mainnet, the [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/ad0cfebc45a4b8368628340bf22aefb2a5edcab7/CAIPs/caip-10.md) address would be of the form `eip155:1:0x1234abcd`, while the DID address would be of the form `did:ethr:0x1234abcd`.
 
+In case that Member ID is of alphanumeric or integer type, translate the member ID to the format:
+`daoip-2:<DAO Name>:member:<member ID>`
+
 ### Proposals
 
 Proposals JSON-LD Schema. Every contract implementing this DAOIP SHOULD implement a proposalsURI pointing to a JSON object satisfying this schema.
 
 In particular, any on-chain proposal MUST be associated to an id of the form CAIP10_ADDRESS + “?proposalId=” + PROPOSAL_COUNTER, where CAIP10_ADDRESS is an address following the CAIP-10 standard and PROPOSAL_COUNTER is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain proposals MAY use a similar id format where CAIP10_ADDRESS is replaced with an appropriate URI or URL.
+
+In case that the Proposal is of alphanumeric or integer type, translate the proposal ID to the format:
+`daoip-2:<DAO Name>:proposal:<proposal ID>`
 
 ```json
 {
