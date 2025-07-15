@@ -6,7 +6,7 @@ discussions-to: https://github.com/metagov/daostar/discussions/51
 status: Draft
 type: 
 category: 
-author: Joshua Tan <josh@metagov.org>, Tyler Sullberg <tysullberg@gmail.com>, Eugene Leventhal <eugene@metagov.org>, Kevin Olsen <kevinolsen@gitcoin.co>, Riccardo Lamanna
+author: Joshua Tan <josh@metagov.org>, Tyler Sullberg <tysullberg@gmail.com>, Eugene Leventhal <eugene@metagov.org>, Kevin Olsen <kevinolsen@gitcoin.co>, Riccardo Lamanna , Rashmi V Abbigeri <rashmi@metagov.org>
 created: 2023-11-14
 ---
 
@@ -33,6 +33,14 @@ While eligibility and compliance flows (including KYC) are important in grants s
 
 ![](https://green-beautiful-basilisk-157.mypinata.cloud/ipfs/QmUJWUd25iybU3qXxM6ATAnXmvv3pGQ6bEPLubuLDYqoh3)
 
+### Extensions Field
+All DAOIP-5 schema components support an optional extensions field for implementation-specific metadata, experimental features, and custom data that extends beyond the core specification. 
+This field enables platform-specific innovations while maintaining interoperability.
+
+The extensions field MUST be a JSON object when present and SHOULD follow established naming conventions (vendor-specific prefixes, experimental x- prefixes) to avoid conflicts. Extension fields MUST NOT override core DAOIP-5 fields.
+
+For detailed guidelines, naming conventions, examples, and security considerations, see the [DAOIP-5 Extensions Field Specification](x-daoip-5.md)
+
 ## Grants systems
 A grants system represents the top-level governance or administration of a grant pool or grant program, typically identified as an organization such as a foundation or DAO. All organizations and entities adopting DAOIP-5, even those not deployed or organized as DAOs, MUST publish a daoURI with the additional field `grantPoolsURI` either via DAOIP-2 or through a trusted issuer via DAOIP-3. This bootstraps indexing and discovery of grant pools via the existing on-chain indexing infrastructure for daoURI.
 
@@ -42,11 +50,15 @@ A grants system represents the top-level governance or administration of a grant
     "name": "<The name of the entity.>",
     "type": "<The entity type, e.g. DAO or Foundation.>",
     "grantPoolsURI": "<A URI pointing to a JSON declaring any grant pools maintained by the entity, following the DAOIP-5 Grant Pool JSON-LD Schema.>",
+    "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
 }
 ```
 
 ## Grant pools
 A grant pool is a smart contract or other fundable object containing funds with the intention of being used to pay out grants. In this specification, a grant pool is defined to be a subtype of a contract in the sense of [DAOIP-2](daoip-2.md). This means that on-chain grant pools MUST publish an id of the form `CAIP10_ADDRESS + "?contractId=" + CONTRACT_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the grant system and `CONTRACT_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain grant pools MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL. 
+
+In case that Grant Pool ID is of alphanumeric or integer type, translate the Grant Pool ID to the format:
+`daoip-5:<Grant System Name>:grantPool:<Grant Pool ID>`
 
 Unless otherwise noted, all fields in the Grant Pool JSON-LD Schema are REQUIRED. In particular, a grant pool MUST publish an `applicationsURI` field, which is described in more detail in the Applications section, below. If a grant system operates multiple grant pools, they MAY add additional elements to the array below.
 
@@ -115,6 +127,7 @@ Grant Pool JSON-LD Schema
             "email": "<OPTIONAL: A contact email for inquiries and support, e.g., 'grants@example.com'.>",
             "image": "<OPTIONAL: A URI pointing to an image resource (e.g., grant pool logo). Typically a square image.>",
             "coverImage": "<OPTIONAL: A URI pointing to a large background image for the grant pool.>"
+            "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
         }
     ]
 }
@@ -135,6 +148,9 @@ For efficient indexing, all projects adopting DAOIP-5, even individuals and team
 ```
 
 In this specification, a project is a subtype of a proposal in the sense of [DAOIP-2](DAOIP-2.md). This means that on-chain projects MUST publish an id of the form `CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER`, where `CAIP10_ADDRESS` is the CAIP-10 address of the proposing team or individual and `PROPOSAL_COUNTER` is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Off-chain projects MAY use a similar id format where `CAIP10_ADDRESS` is replaced with an appropriate URI or URL. 
+
+In case that Project ID is of alphanumeric or integer type, translate the Project ID to the format:
+`daoip-5:<Grant System Name>:project:<project ID>`
 
 Unless otherwise noted, all fields in the Projects JSON-LD Schema are REQUIRED.
 
@@ -164,6 +180,7 @@ Projects JSON-LD Schema
                 "value":  "<An URI of the social platform profile of the project"
                 } 
             ]
+        "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
         }
     ]
 }
@@ -175,6 +192,9 @@ Following [DAOIP-3](DAOIP-3.md), a project, just like a DAO, SHOULD name a numbe
 When a project applies for a grant from a particular grant pool or when a grant pool records a project for funding consideration, it is called a grant application or application to that pool.
 
 In this specification, an application is a subtype of `Proposal` in the sense of [DAOIP-2: Common Interfaces for DAOs](DAOIP-2.md). This means that on-chain applications MUST publish an id of the form CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER, where CAIP10_ADDRESS is the CAIP-10 address of the grant pool and PROPOSAL_COUNTER is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Note that applications to the grant pool MAY count as proposals to the larger entity maintaining the grants system; if so, that choice SHOULD be reflected in the design of PROPOSAL_COUNTER. Off-chain proposals MAY use a similar id format where CAIP10_ADDRESS is replaced with an appropriate URI or URL.
+
+In case that the Application ID is of alphanumeric or integer type, translate the Application ID to the format:
+`daoip-5:<Grant System Name>:grantApplication:<Application ID>`
 
 Every grant system and grant pool adopting DAOIP-5 MUST publish an applicationsURI which returns the id, name, and description of all pending and past applications to the grant pool, following the schema below. Other application data MAY be published by the grant pool or system.
 
@@ -244,6 +264,8 @@ Applications JSON-LD Schema
                             "proof": "<Evidence of the payout, such as a transaction hash, payment ID, or a link to verify the payout>"
                         }
                     ],
+                    "extensions": "<OPTIONAL: Implementation-specific extensions and additional metadata>"
+
                 }
             ]
         }
