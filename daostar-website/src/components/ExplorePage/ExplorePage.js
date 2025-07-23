@@ -57,11 +57,9 @@ const NetworkButtons = [
   { text: "BNB Bruno", filter: "chapel" },
   { text: "Ethereum", filter: "ethereum" },
   { text: "Gnosis", filter: "gnosis" },
-  { text: "Juno", filter: "juno" },
+  // { text: "Juno", filter: "juno" },
   { text: "Optimism", filter: "optimism" },
   // { text: "Optimism-Goerli", filter: "optimism-goerli" },
-  { text: "Osmosis", filter: "osmosis" },
-  { text: "Stargaze", filter: "stargaze" },
   { text: "EAS", filter: "easAttestations" },
   { text: "ENS", filter: "ensTextRecords" },
 ];
@@ -70,9 +68,7 @@ NetworkButtons.sort((a, b) => a.text.localeCompare(b.text));
 
 const ExplorePage = ({
   registrationInstances,
-  junosInstances,
-  osmosisInstances,
-  stargazeInstances,
+
   easAttestations,
   ENSTextRecords,
   sunriseInstances,
@@ -85,18 +81,7 @@ const ExplorePage = ({
   console.log("Sunrise Instances");
   console.log(sunriseInstances);
 
-  // Network Filter for Juno, Stargaze and Osmosis
-  const filteredRegistrations = (instances) => {
-    return instances
-      .flatMap((network) =>
-        network.registrationNetwork.registrations.filter((reg) =>
-          filterRegistrations(reg, filterVal)
-        )
-      )
-      .map((registration, i) => (
-        <RegistrationCard key={i} {...registration} displayWithoutEdit={true} standalone={true} />
-      ));
-  };
+
 
   const isValidDaoURI = (daoURI) => {
     // Ensure daoURI is a valid IPFS URI (ipfs:// or https://ipfs.io/ipfs/)
@@ -135,12 +120,6 @@ const ExplorePage = ({
 
   const renderCards = () => {
     switch (networkFilter) {
-      case "juno":
-        return filteredRegistrations(junosInstances);
-      case "osmosis":
-        return filteredRegistrations(osmosisInstances);
-      case "stargaze":
-        return filteredRegistrations(stargazeInstances);
       case "arbitrum-one":
         return filteredRegistrationsSunrise(sunriseNetworkInstances, "arbitrum-one")
       case "chapel":
@@ -200,11 +179,6 @@ const ExplorePage = ({
           <>
             <div className="dao-cards">{daoCards}</div>
             <br></br>
-            <div className="dao-cards">{daodaoCards}</div>
-            <br></br>
-            <div className="dao-cards">{osmosisDaoCards}</div>
-            <br></br>
-            <div className="dao-cards">{stargazeDaoCards}</div>
           </>
         );
     }
@@ -217,42 +191,7 @@ const ExplorePage = ({
       return <RegistrationCard key={i} {...registration} />;
     });
 
-  // Handle Juno DAOs
-  const daodaoCards = junosInstances
-    .flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return <RegistrationCard key={i} {...registration} standalone={true}
-        displayWithoutEdit={true} />;
-    });
-
-  // Handle Stargaze DAOs
-  const stargazeDaoCards = stargazeInstances
-    ?.flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return <RegistrationCard key={i} {...registration} standalone={true}
-        displayWithoutEdit={true} />;
-    });
-
-  // Handle Osmosis DAOs
-  const osmosisDaoCards = osmosisInstances
-    ?.flatMap((network) =>
-      network.registrationNetwork.registrations.filter((reg) =>
-        filterRegistrations(reg, filterVal)
-      )
-    )
-    .map((registration, i) => {
-      return <RegistrationCard key={i} {...registration} standalone={true}
-        displayWithoutEdit={true} />;
-    });
-
+ 
   return (
     <div className="explore-page">
       <div className="filter">
