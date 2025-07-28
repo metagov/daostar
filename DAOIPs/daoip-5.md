@@ -153,8 +153,8 @@ In case that Project ID is of alphanumeric or integer type, translate the Projec
 `daoip-5:<Grant System Name>:project:<project ID>`
 In case that Project ID is of `nan` type, translate the Project ID to the format:
 `daoip-5:<Grant System Name>:project:<Project Name>`
-With the condition that `<Grant System Name>` and `<Project Name>` are both added in (OSS-Directory)[https://github.com/opensource-observer/oss-directory/tree/main/data/projects] 
-Here's (How to add your project)[https://docs.opensource.observer/docs/projects/]
+With the condition that `<Grant System Name>` and `<Project Name>` are both added in [OSS-Directory](https://github.com/opensource-observer/oss-directory/tree/main/data/projects)
+Here's [How to add your project](https://docs.opensource.observer/docs/projects/)
 
 Unless otherwise noted, all fields in the Projects JSON-LD Schema are REQUIRED.
 
