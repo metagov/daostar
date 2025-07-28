@@ -201,7 +201,7 @@ When a project applies for a grant from a particular grant pool or when a grant 
 In this specification, an application is a subtype of `Proposal` in the sense of [DAOIP-2: Common Interfaces for DAOs](DAOIP-2.md). This means that on-chain applications MUST publish an id of the form CAIP10_ADDRESS + "?proposalId=" + PROPOSAL_COUNTER, where CAIP10_ADDRESS is the CAIP-10 address of the grant pool and PROPOSAL_COUNTER is an arbitrary identifier such as a uint256 counter or a hash that is locally unique per CAIP-10 address. Note that applications to the grant pool MAY count as proposals to the larger entity maintaining the grants system; if so, that choice SHOULD be reflected in the design of PROPOSAL_COUNTER. Off-chain proposals MAY use a similar id format where CAIP10_ADDRESS is replaced with an appropriate URI or URL.
 
 In case that the Application ID is of alphanumeric or integer type, translate the Application ID to the format:
-`daoip-5:<Grant System Name>:grantApplication:<Application ID>`
+`daoip-5:<Grant System Name>:grantPool:<Grant Pool ID>grantApplication:<Application ID>`
 
 Every grant system and grant pool adopting DAOIP-5 MUST publish an applicationsURI which returns the id, name, and description of all pending and past applications to the grant pool, following the schema below. Other application data MAY be published by the grant pool or system.
 
