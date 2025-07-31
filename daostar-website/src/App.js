@@ -128,15 +128,15 @@ function App() {
   useEffect(() => {
     const fetchDAOs = async () => {
       const daodaoData = await fetchAndStructureDAOs(
-        "https://search.indexer.zone/indexes/daos/documents?limit=500",
+        "https://search.indexer.zone/indexes/juno-1_daos/documents?limit=500",
         "Juno"
       );
       const osmosisData = await fetchAndStructureDAOs(
-        "https://search.indexer.zone/indexes/osmosis_daos/documents?limit=500",
+        "https://search.indexer.zone/indexes/osmosis-1_daos/documents?limit=500",
         "Osmosis"
       );
       const stargazeData = await fetchAndStructureDAOs(
-        "https://search.indexer.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS&limit=501",
+        "https://search.indexer.zone/indexes/stargaze-1_daos/search?filter=value.config.name%20EXISTS&limit=501",
         "Stargaze"
       );
 
