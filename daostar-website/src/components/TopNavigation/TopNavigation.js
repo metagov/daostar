@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import logo from '../../img/logo_dao.png';
-import ConnectWallet from './ConnectWallet/ConnectWallet';
 import './TopNavigation.css';
 
 const TopNavigation = ({
@@ -16,11 +15,11 @@ const TopNavigation = ({
             </Link>
             
             <nav className="menu">
-                <HashLink to='/#spec'>Specification</HashLink>
+                <HashLink to='/#spec'>Home</HashLink>
                 <a href='/register'>Register</a>
                 <Link to='/explore'>Explore</Link>
-                <a href='https://docs.daostar.org/'>Docs</a>
-                <a href='https://daostar.substack.com'>Universe</a>
+                {/* <a href='https://docs.daostar.org/'>Docs</a>
+                <a href='https://daostar.substack.com'>Universe</a> */}
             </nav>
         </header>
     )
