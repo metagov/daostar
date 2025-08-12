@@ -33,7 +33,7 @@ const Homepage = ({registrationInstances}) => {
                     <section id="title">
                         <div>
                             <h1 className="title">
-                                The DAO standard,<br />
+                                The DAO Metadata Specification,<br />
                                 <span>built by </span>
                                 <Typewriter 
                                     options={{
@@ -78,13 +78,13 @@ const Homepage = ({registrationInstances}) => {
                                 >
                                     EIP-4824: Common Interfaces for DAOs
                                 </a>
-                                <a 
+                                {/* <a 
                                     href="#roundtable" 
                                     className="btn"
                                     target="_blank"
                                 >
                                     Attestations for DAOs
-                                </a>
+                                </a> */}
                                 <a 
                                     className="btn secondary"
                                     href="https://github.com/metagov/daostar/tree/main/DAOIPs" 
@@ -99,7 +99,7 @@ const Homepage = ({registrationInstances}) => {
                         </div>
                         <Link to='/explore' className="btn">Explore DAOs</Link>
                     </section>
-
+{/*       
                     <Eye />
             
                     <section id="intro">
@@ -170,7 +170,7 @@ const Homepage = ({registrationInstances}) => {
                         </div>
                     </section>
                 
-{/*                 
+          
                     <section id="standard">
                         
                         <h2>The DAO Standard</h2>
@@ -228,14 +228,14 @@ const Homepage = ({registrationInstances}) => {
                             </div>
                         </div>
 
-                    </section> */}
+                    </section>
 
 
                     <section id="roundtable">
                         <h2>Governed by DAOstar One</h2>
                         <p><a href="https://daostar.one">DAOstar One</a> is a roundtable of key organizations in the DAO ecosystem.</p>
                         <MemberLogos />
-                    </section>
+                    </section>  */}
 
                     <footer>
                         <div className="bottom">

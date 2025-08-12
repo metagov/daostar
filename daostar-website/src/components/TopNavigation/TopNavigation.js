@@ -16,13 +16,11 @@ const TopNavigation = ({
             </Link>
             
             <nav className="menu">
-                <HashLink to='/#standard'>Standard</HashLink>
+                <HashLink to='/#spec'>Specification</HashLink>
                 <a href='/register'>Register</a>
                 <Link to='/explore'>Explore</Link>
-                <Link to='/research'>Research</Link>
                 <a href='https://docs.daostar.org/'>Docs</a>
                 <a href='https://daostar.substack.com'>Universe</a>
-                <ConnectWallet />
             </nav>
         </header>
     )
