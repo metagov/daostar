@@ -124,7 +124,7 @@ Grant Pool JSON-LD Schema
                             "denomination": "<The denomination of currency>"
                         }
             ],
-            "totalGrantPoolSizeInUSD": "<The total amount of funding for the grant pool in USD>",
+            "totalGrantPoolSizeInUSD": "<REQUIRED: The total amount of funding for the grant pool in USD>",
             "email": "<OPTIONAL: A contact email for inquiries and support, e.g., 'grants@example.com'.>",
             "image": "<OPTIONAL: A URI pointing to an image resource (e.g., grant pool logo). Typically a square image.>",
             "coverImage": "<OPTIONAL: A URI pointing to a large background image for the grant pool.>"
